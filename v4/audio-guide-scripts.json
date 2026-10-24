@@ -1,0 +1,53 @@
+{
+  "version": 1,
+  "items": [
+    {
+      "id": "brick",
+      "ru": "Перед вами кирпичный чай — один из самых удобных способов перевозить чай на большие расстояния. Чайные листья прессовали в плотные брикеты, которые было проще укладывать и защищать в дороге. Для торговцев Великого чайного пути такая упаковка была особенно практичной.",
+      "zh": "您眼前的是砖茶。把茶叶压制成紧实的茶砖，更方便包装、保存，也更适合长途运输。沿着万里茶道，茶砖成为连接产茶地区与北方市场的重要商品。",
+      "en": "In front of you is brick tea. Compressing tea leaves into dense blocks made them easier to pack and carry over long distances. This practical form of tea became an important part of trade along the Great Tea Road."
+    },
+    {
+      "id": "teaset",
+      "ru": "А теперь посмотрите на китайский чайный сервиз. Небольшой чайник и чашки напоминают, что чай был не только товаром. За чаепитием разговаривали, принимали гостей и уделяли внимание вкусу и аромату напитка. Здесь показана современная трёхмерная модель, а не подтверждённый исторический музейный предмет.",
+      "zh": "现在请看这组中国茶具。茶壶和茶杯提醒我们，茶不仅是商品，也是待客与交流的一部分。品茶时，人们会细细体会茶汤的香气与滋味。这里展示的是三维模型，并非经过文物鉴定的原件。",
+      "en": "Now take a closer look at the Chinese tea set. Tea was more than a commodity: sharing a cup could welcome a guest or begin a conversation. People also paid close attention to aroma and flavour. This is a three-dimensional model, not an authenticated historical artefact."
+    },
+    {
+      "id": "camel",
+      "ru": "Перед вами двугорбый верблюд — животное, хорошо приспособленное к суровому климату Центральной Азии. На протяжении долгого времени караваны перевозили через степи и пустынные районы чай, ткани и другие товары. Эта модель помогает представить, насколько тяжёлым мог быть путь между торговыми городами.",
+      "zh": "眼前是一只双峰驼。双峰驼能够适应中亚地区寒冷而干燥的气候，因此曾是长途商队的重要役畜。茶叶、布匹和其他货物随着商队穿越草原与荒漠。这个模型让我们更容易想象旅途的艰辛。",
+      "en": "Here is a Bactrian camel, an animal well suited to the demanding climate of Central Asia. For generations, caravans carried tea, textiles and other goods across long stretches of steppe and desert. This model helps us imagine the effort behind every journey."
+    },
+    {
+      "id": "crates",
+      "ru": "В этих деревянных ящиках легко узнать торговую упаковку. В долгой дороге груз нужно было защитить от ударов и непогоды, а затем пересчитать и передать следующему купцу. Такие предметы напоминают: история торговли — это ещё и история упаковки, складов и повседневного труда.",
+      "zh": "这些木箱代表了商贸运输中的包装工具。长途运输中，货物需要防潮、防撞，还要便于清点和交接。木箱这样的普通物品，能让我们看到贸易背后繁忙的仓储与运输工作。",
+      "en": "These wooden crates represent a practical side of long-distance trade. Merchants needed to protect goods from damage and weather, count them carefully, and hand them over at the next stop. Such ordinary objects reveal the everyday work behind the famous trade routes."
+    },
+    {
+      "id": "shop",
+      "ru": "Мы оказались у торговой лавки. В подобных местах товары не только продавали: здесь знакомились, договаривались о цене и обменивались новостями. На русско-китайской границе торговля создавала пространство для постоянного общения людей разных языков и привычек. Перед вами художественная реконструкция.",
+      "zh": "我们来到一间边境商铺。商人不仅在这里买卖茶叶，还会商谈价格、交换消息、结识伙伴。中俄边境的贸易促成了不同语言与习俗之间的交流。眼前的商铺是艺术化的场景重建。",
+      "en": "We have arrived at a merchant's shop. Places like this were not only for buying and selling goods. Traders negotiated prices, exchanged news and built relationships. Along the Russo-Chinese border, commerce brought together people with different languages and customs. This scene is an artistic reconstruction."
+    },
+    {
+      "id": "gate",
+      "ru": "Эти ворота символизируют пограничные торговые поселения и прежде всего Кяхту и Маймачен. Здесь сходились маршруты, люди и товары. Граница могла разделять государства, но торговля связывала соседние сообщества. Обратите внимание: это условный архитектурный образ, а не точная копия исторических ворот.",
+      "zh": "这座城门象征着恰克图与买卖城一带的边境商贸环境。道路、货物和来自不同地区的人们在这里相遇。国境线划分了行政区域，贸易却促进了交流。请注意，这是一件象征性的艺术重建，而非历史城门的精确复制。",
+      "en": "This gateway symbolises the border trading settlements of Kyakhta and Maimaichen. Routes, goods and people converged here. A political border separated states, but commerce connected neighbouring communities. The gate is an interpretive reconstruction, not an exact copy of a historical building."
+    },
+    {
+      "id": "samovar",
+      "ru": "Перед вами русский самовар. Он стал узнаваемым символом домашнего чаепития, когда чай постепенно вошёл в повседневную жизнь многих семей. Горячую воду наливали из самовара, а крепкий чай могли разводить по вкусу. Здесь используется отдельная трёхмерная модель самовара, а не скан конкретного музейного экспоната.",
+      "zh": "眼前是俄罗斯茶炊，也就是萨莫瓦尔。随着饮茶逐渐融入俄罗斯人的生活，茶炊成为家庭聚会和待客文化中很有代表性的器具。人们用它供应热水，再按自己的喜好冲调茶汤。这里展示的是三维模型，并非某件馆藏文物的扫描件。",
+      "en": "In front of you is a Russian samovar. As tea became part of everyday life, the samovar grew into a familiar symbol of hospitality and family gatherings. It provided hot water for tea, which could be prepared to each person's taste. The exhibit is a separate 3D model, not a scan of a specific museum object."
+    },
+    {
+      "id": "desk",
+      "ru": "Этот купеческий стол напоминает о другой стороне чайной торговли — подсчётах, письмах и договорах. За подобной работой стояли маршруты, цены, сроки и доверие между партнёрами. Великий чайный путь был не только дорогой для караванов, но и сложной системой человеческих отношений.",
+      "zh": "这张商人桌案让我们想到茶叶贸易中的另一面：账目、书信与契约。漫长的商路需要安排运输时间、计算价格，也离不开合作伙伴之间的信任。万里茶道不仅连接城市，也连接人们的生活。",
+      "en": "This merchant's desk represents another side of the tea trade: accounts, letters and agreements. Behind each caravan were schedules, prices and relationships built on trust. The Great Tea Road was not simply a route for goods; it was also a network of people."
+    }
+  ]
+}
