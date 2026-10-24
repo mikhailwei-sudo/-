@@ -113,7 +113,7 @@ async function obtainGLTFLoader(){
         else if(m.name&&/HZ116/i.test(m.name)){m.map=hallTexture;m.needsUpdate=true}
       }
     });
-    fitImported(model,[11.3,5.8,10.8],[0,2.8,-.3]);lobbyGroup.add(model);lobbyLoaded=true;assetStatus.hall='ready';reportLoad();
+    fitImported(model,[11.3,5.8,10.8],[0,2.8,-.3]);lobbyGroup.add(model);lobbyLoaded=true;assetStatus.hall='ready';reportLoad();scheduleMuseumPrefetch();
    }catch(e){console.warn('Hall fitting failed',e);assetStatus.hall='failed';reportLoad()}
   },undefined,e=>{console.warn('Chinese hall FBX could not load',e);assetStatus.hall='failed';reportLoad()});
  }catch(e){console.warn('FBXLoader unavailable',e);assetStatus.hall='failed';reportLoad()}
@@ -123,29 +123,29 @@ async function loadTeaSet(){
  assetStatus.teaSet='loading';reportLoad();
  try{
   const GLTFLoader=await obtainGLTFLoader();
-  new GLTFLoader().load('./assets/models/teaset.glb',gltf=>{
-   try{const p=artifacts[1],model=gltf.scene;fitImported(model,[1.8,1.4,1.2],[0,1.83,0]);p.add(model);for(const child of p.children){if(child!==model)child.visible=false}assetStatus.teaSet='ready';reportLoad()}
-   catch(e){console.warn('Tea set invalid',e);assetStatus.teaSet='failed';reportLoad()}
-  },undefined,e=>{console.warn('Tea set loading failed',e);assetStatus.teaSet='failed';reportLoad()});
- }catch(e){console.warn('GLTFLoader unavailable',e);assetStatus.teaSet='failed';reportLoad()}
+  // loadAsync resolves only when embedded GLB images/materials are prepared.
+  const model=(await new GLTFLoader().loadAsync('./assets/models/teaset.glb')).scene;
+  fitImported(model,[1.8,1.4,1.2],[0,1.83,0]);
+  artifacts[1].add(model);assetStatus.teaSet='ready';reportLoad();
+ }catch(e){console.warn('Tea set loading failed',e);assetStatus.teaSet='failed';reportLoad()}
 }
 async function loadCrates(){
  if(assetStatus.crate!=='pending'&&assetStatus.crate!=='failed')return;
  assetStatus.crate='loading';reportLoad();
  try{
-  const {ColladaLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/ColladaLoader.js');
-  new ColladaLoader().load('./assets/models/crate/model.dae',data=>{
-   try{
-    const p=artifacts[3],model=data.scene;
-    const timber=new THREE.TextureLoader().load('./assets/models/crate/textures/DefaultMaterial_albedo.jpg');timber.colorSpace=THREE.SRGBColorSpace;
-    const woodMaterial=new THREE.MeshStandardMaterial({map:timber,roughness:.82,side:THREE.DoubleSide});
-    model.traverse(o=>{if(o.isMesh){o.material=woodMaterial}});
-    fitImported(model,[1.65,1.35,1.35],[0,1.82,0]);p.add(model);for(const child of p.children){if(child!==model)child.visible=false}assetStatus.crate='ready';reportLoad();
-   }catch(e){console.warn('Crate fitting failed',e);assetStatus.crate='failed';reportLoad()}
-  },undefined,e=>{console.warn('Crate Collada loading failed',e);assetStatus.crate='failed';reportLoad()});
- }catch(e){console.warn('ColladaLoader unavailable',e);assetStatus.crate='failed';reportLoad()}
+  const [{ColladaLoader},timber]=await Promise.all([
+   import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/ColladaLoader.js'),
+   new THREE.TextureLoader().loadAsync('./assets/models/crate/textures/DefaultMaterial_albedo.jpg')
+  ]);
+  timber.colorSpace=THREE.SRGBColorSpace;
+  const data=await new ColladaLoader().loadAsync('./assets/models/crate/model.dae');
+  const model=data.scene;
+  const woodMaterial=new THREE.MeshStandardMaterial({map:timber,roughness:.82,side:THREE.DoubleSide});
+  model.traverse(o=>{if(o.isMesh)o.material=woodMaterial});
+  fitImported(model,[1.65,1.35,1.35],[0,1.82,0]);
+  artifacts[3].add(model);assetStatus.crate='ready';reportLoad();
+ }catch(e){console.warn('Crate loading failed',e);assetStatus.crate='failed';reportLoad()}
 }
-
 // Actual user-supplied Sketchfab GLB assets. They load from this project, not external embeds.
 const realModelsLoaded=new Set();
 const realModelsLoading=new Set();
@@ -186,16 +186,32 @@ async function loadRealModel(index){
   });
   parent.add(object);
   parent.userData.realModel=object;
-  // Hide only the temporary fallback after the actual model has loaded.
-  for(const child of parent.children){if(child!==object)child.visible=false}
   realModelsLoaded.add(index);assetStatus[entry.status]='ready';reportLoad();
  }catch(error){console.error('Failed to import '+entry.path,error);
-  // Preserve a visible exhibit if the binary model or its textures fail to load.
-  const parent=artifacts[index];
-  for(const child of parent.children)child.visible=true;
   assetStatus[entry.status]='failed';reportLoad();
  }finally{realModelsLoading.delete(index)}
 }
+// Pre-fetch real exhibits once the Chinese hall is already visible. A single
+// background lane avoids four big downloads competing for the first frame.
+let prefetchScheduled=false;
+function scheduleMuseumPrefetch(){
+ if(prefetchScheduled)return;
+ prefetchScheduled=true;
+ const start=()=>{
+  (async()=>{
+   await loadTeaSet();
+   await loadRealModel(2);
+   await loadCrates();
+   await loadRealModel(6);
+  })().catch(e=>console.warn('Museum background prefetch failed',e));
+ };
+ if('requestIdleCallback' in window)requestIdleCallback(start,{timeout:1600});
+ else setTimeout(start,700);
+}
+// If the hall FBX cannot load, still prefetch the actual exhibits.
+window.addEventListener('load',()=>{
+ if(!prefetchScheduled)setTimeout(scheduleMuseumPrefetch,1500);
+},{once:true});
 // Request models only when their room becomes visible. Heavy textures no longer
 // compete with the Chinese hall on initial page load.
 document.addEventListener('museum-room-enter',e=>{
@@ -205,12 +221,10 @@ document.addEventListener('museum-room-enter',e=>{
 });
 // 0 - brick tea
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
-// 1 - tea press
-{const p=artifacts[1];box(p,1.52,.12,1.08,0,1.12,0,M.wood);for(let x of [-.54,.54])box(p,.16,1.42,.16,x,1.83,0,M.wood);box(p,1.55,.18,.4,0,2.49,0,M.woodLight);cy(p,.13,.13,.57,0,2.17,0,M.metal);box(p,.84,.16,.65,0,1.82,0,M.woodLight);box(p,.95,.24,.76,0,1.37,0,M.tea);tube(p,[[0,2.44,0],[.42,2.48,0],[.9,2.56,0]],.045,M.metal)}
+// 1 - authentic Chinese tea set, no temporary model.
 // 2 - actual imported Bactrian camel (lazy-loaded on entering room 2).
 // The plinth is intentionally kept clear while the GLB is loading.
-// 3 - crates
-{const p=artifacts[3];for(let k=0;k<2;k++){let x=k===0?-.48:.43;let h=k===0?.67:.91;box(p,.79,h,.74,x,1.10+h/2,0,M.wood);for(let y of [-h*.3,0,h*.3]){box(p,.82,.038,.77,x,1.10+h/2+y,0,M.gold)}for(let z of [-.375,.375])box(p,.06,h+.03,.06,x-.31,1.10+h/2,z,M.metal);box(p,.41,.25,.014,x,1.10+h/2,.39,M.paper);box(p,.10,.14,.016,x,1.10+h/2,.4,M.tea)}}
+// 3 - authentic wooden crate, no temporary model.
 // 4 - tea merchant's shop / lavka
 {const p=artifacts[4];
  box(p,2.12,.12,1.22,0,1.05,0,M.wood);
@@ -241,14 +255,7 @@ document.addEventListener('museum-room-enter',e=>{
  for(const x of [-1.02,1.02]){box(p,.20,.58,.20,x,1.28,.34,M.stone);ball(p,.08,x,1.62,.34,M.gold)}
  box(p,1.34,.06,.18,0,1.12,.18,M.stone);box(p,1.04,.05,.12,0,1.20,-.18,M.wood);
 }
-// 6 — temporary placeholder (automatically hidden once the provided GLB loads).
-{const p=artifacts[6];const brass=new THREE.MeshStandardMaterial({color:'#ad8b4d',metalness:.62,roughness:.32});
- cy(p,.36,.42,.82,0,1.69,0,brass);cy(p,.42,.45,.11,0,1.22,0,brass);
- cy(p,.25,.29,.15,0,2.18,0,brass);cy(p,.14,.18,.10,0,2.33,0,brass);
- for(const x of [-.52,.52]){cy(p,.09,.09,.48,x,1.83,0,M.wood);box(p,.21,.09,.10,x,2.06,0,brass)}
- tube(p,[[.24,1.60,.32],[.55,1.59,.38],[.65,1.51,.38]],.055,brass);
- cy(p,.11,.13,.11,.68,1.49,.38,M.wood);
-}
+// 6 - authentic samovar GLB, no temporary model.
 // 7 - merchant table / writing table
 {const p=artifacts[7];
  box(p,1.96,.12,1.08,0,1.50,0,M.wood);
