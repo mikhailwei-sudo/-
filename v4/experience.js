@@ -128,6 +128,22 @@ reportLoad();
 })();
 
 // Actual user-supplied Sketchfab GLB assets. They load from this project, not external embeds.
+// Start downloading original assets immediately; room entry must never wait for a click.
+const loaderRetrySources=[
+ 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js',
+ 'https://unpkg.com/three@0.170.0/examples/jsm/loaders/GLTFLoader.js'
+];
+let commonGLTFLoaderPromise;
+async function obtainGLTFLoader(){
+ if(!commonGLTFLoaderPromise)commonGLTFLoaderPromise=(async()=>{
+  let lastError;
+  for(const source of loaderRetrySources){
+   try{return (await import(source)).GLTFLoader}catch(error){lastError=error;console.warn('3D asset loader CDN unavailable',source,error)}
+  }
+  throw lastError||new Error('3D asset loader unavailable');
+ })();
+ return commonGLTFLoaderPromise;
+}
 const realModelsLoaded=new Set();
 const realModelsLoading=new Set();
 const realModelInfo={
@@ -139,7 +155,7 @@ async function loadRealModel(index){
  if(!entry||realModelsLoaded.has(index)||realModelsLoading.has(index))return;
  realModelsLoading.add(index);assetStatus[entry.status]='loading';reportLoad();
  try{
-  const {GLTFLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js');
+  const GLTFLoader=await obtainGLTFLoader();
   const loader=new GLTFLoader();
   const gltf=await loader.loadAsync(entry.path);
   const parent=artifacts[index],object=gltf.scene;
@@ -181,8 +197,9 @@ document.addEventListener('museum-room-enter',e=>{
  if(e.detail===1)loadRealModel(2); // room 2: caravan
  if(e.detail===3)loadRealModel(6); // room 4: Russian tea
 });
-// Preload these two critical exhibits in the background; room navigation remains usable.
-window.addEventListener('load',()=>{loadRealModel(2);loadRealModel(6)},{once:true});
+// Begin loading before window.onload (which can be late on mobile).
+loadRealModel(2);
+loadRealModel(6);
 // 0 - brick tea
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
 // 1 - tea press
@@ -221,7 +238,7 @@ window.addEventListener('load',()=>{loadRealModel(2);loadRealModel(6)},{once:tru
  for(const x of [-1.02,1.02]){box(p,.20,.58,.20,x,1.28,.34,M.stone);ball(p,.08,x,1.62,.34,M.gold)}
  box(p,1.34,.06,.18,0,1.12,.18,M.stone);box(p,1.04,.05,.12,0,1.20,-.18,M.wood);
 }
-// 6 — low-detail fallback is visible only if the real GLB cannot load.
+// 6 — temporary placeholder (automatically hidden once the provided GLB loads).
 {const p=artifacts[6];const brass=new THREE.MeshStandardMaterial({color:'#ad8b4d',metalness:.62,roughness:.32});
  cy(p,.36,.42,.82,0,1.69,0,brass);cy(p,.42,.45,.11,0,1.22,0,brass);
  cy(p,.25,.29,.15,0,2.18,0,brass);cy(p,.14,.18,.10,0,2.33,0,brass);
