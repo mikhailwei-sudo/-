@@ -102,9 +102,9 @@ reportLoad();
  }catch(e){console.warn('FBXLoader unavailable',e);assetStatus.hall='failed';reportLoad()}
 })();
 (async()=>{
- await new Promise(resolve=>{document.addEventListener('museum-room-enter',e=>{if(e.detail===0){assetStatus.teaSet='loading';reportLoad();resolve()}},{once:false})});
+ assetStatus.teaSet='loading';reportLoad();
  try{
-  const {GLTFLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js');
+  const GLTFLoader=await obtainGLTFLoader();
   new GLTFLoader().load('./assets/models/teaset.glb',gltf=>{
    try{const p=artifacts[1],model=gltf.scene;fitImported(model,[1.8,1.4,1.2],[0,1.83,0]);p.add(model);for(const child of p.children){if(child!==model)child.visible=false}assetStatus.teaSet='ready';reportLoad()}
    catch(e){console.warn('Tea set invalid',e);assetStatus.teaSet='failed';reportLoad()}
@@ -112,7 +112,7 @@ reportLoad();
  }catch(e){console.warn('GLTFLoader unavailable',e);assetStatus.teaSet='failed';reportLoad()}
 })();
 (async()=>{
- await new Promise(resolve=>{document.addEventListener('museum-room-enter',e=>{if(e.detail===1){assetStatus.crate='loading';reportLoad();resolve()}},{once:false})});
+ assetStatus.crate='loading';reportLoad();
  try{
   const {ColladaLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/ColladaLoader.js');
   new ColladaLoader().load('./assets/models/crate/model.dae',data=>{
