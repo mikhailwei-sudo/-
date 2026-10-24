@@ -28,6 +28,7 @@ class MuseumNarrator{
   this.speaking=false;
   this.paused=false;
   this.currentAudio=null;
+  this.audioCache=new Map();
   this.waitTimer=null;
   this.currentTrack=null;
   this.pendingPlay=null;
@@ -41,6 +42,11 @@ class MuseumNarrator{
   this.buildControls();
   this.dataReady=false;
   this.dataPromise=this.loadData();
+  this.dataPromise.then(()=>this.prefetch(this.options.getItem?.()??0,this.options.getLang?.()||'ru'));
+  window.addEventListener('museum-narration-focus',event=>{
+   const {item,lang}=event.detail||{};
+   if(Number.isInteger(item)&&lang)this.prefetch(item,lang);
+  });
   this.refreshVoices();
   if(window.speechSynthesis){
    window.speechSynthesis.addEventListener?.('voiceschanged',()=>this.refreshVoices());
@@ -130,6 +136,26 @@ class MuseumNarrator{
   })();
   try{await this._loadingData}finally{this._loadingData=null}
  }
+ prefetch(item,lang){
+  const clip=this.manifest?.[lang]?.[item];
+  if(!clip)return;
+  const key=lang+':'+item;
+  if(this.audioCache.has(key))return;
+  try{
+   const audio=new Audio();
+   audio.preload='auto';
+   audio.src=clip;
+   audio.load();
+   this.audioCache.set(key,audio);
+   // Limit cached media elements: the browser can retain decoded audio in memory.
+   while(this.audioCache.size>3){
+    const [oldKey,old]=this.audioCache.entries().next().value;
+    if(old===this.currentAudio)break;
+    this.audioCache.delete(oldKey);
+    old.pause();old.removeAttribute('src');old.load();
+   }
+  }catch(e){console.debug('Narration preload deferred',e)}
+ }
  chooseVoice(lang){
   const list=this.voices.filter(v=>v.lang.toLowerCase().startsWith(LANG_PREFIX[lang]));
   const desired=this.voiceSelect?.value||this.selectedVoice[lang]||'';
@@ -153,7 +179,7 @@ class MuseumNarrator{
   this.paused=false;
   if(audio){
    audio.onended=null;audio.onerror=null;audio.onplaying=null;audio.onpause=null;
-   try{audio.pause();audio.currentTime=0;audio.removeAttribute('src');audio.load();}catch(e){console.debug('Audio cleanup',e);}
+   try{audio.pause();audio.currentTime=0;}catch(e){console.debug('Audio cleanup',e);}
   }
   window.speechSynthesis?.cancel();
   this.info('','idle');
@@ -173,7 +199,7 @@ class MuseumNarrator{
      }
      return;
     }
-    if(!this.isCurrent(serial,audio)){audio.pause();return;}
+    if(!this.isCurrent(serial,audio)){if(audio!==this.currentAudio)audio.pause();return;}
    }else if(window.speechSynthesis){
     window.speechSynthesis.resume();
     if(this.speechContinue && !window.speechSynthesis.speaking){
@@ -205,9 +231,12 @@ class MuseumNarrator{
    await this.loadData();
   }
   if(!this.isCurrent(serial))return;
+  this.prefetch(item,lang);
   const clip=this.manifest?.[lang]?.[item];
   if(clip){
-   const audio=new Audio(clip);
+   const key=lang+':'+item;
+   const audio=this.audioCache.get(key)||new Audio(clip);
+   try{audio.pause();audio.currentTime=0;}catch(e){}
    this.currentAudio=audio;
    audio.volume=volume;
    let didFallback=false;
@@ -216,6 +245,7 @@ class MuseumNarrator{
     didFallback=true;
     audio.onended=null;audio.onerror=null;
     try{audio.pause();audio.removeAttribute('src');audio.load();}catch(e){}
+    this.audioCache.delete(key);
     this.currentAudio=null;
     this.speakBrowser(item,lang,volume,onEnd,serial);
    };
@@ -227,7 +257,7 @@ class MuseumNarrator{
     const request=audio.play();
     this.pendingPlay=request;
     await request;
-    if(!this.isCurrent(serial,audio)){audio.pause();return;}
+    if(!this.isCurrent(serial,audio)){if(audio!==this.currentAudio)audio.pause();return;}
     this.pendingPlay=null;
     if(this.paused){
      audio.pause();
