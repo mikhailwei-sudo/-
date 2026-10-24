@@ -25,13 +25,66 @@ const el=id=>document.getElementById(id);
 function words(){const t=UI[lang]; const lobby={ru:['Главный холл','Добро пожаловать в музей','Перед вами китайский архитектурный холл. Выберите один из четырёх залов или начните экскурсию.','Начать осмотр ↗'],zh:['中央大厅','欢迎来到万里茶道博物馆','这里是中国风格的中央大厅。请选择展厅或开启导览。','开始参观 ↗'],en:['Entrance hall','Welcome to the museum','You are in the Chinese-style entrance hall. Choose one of four galleries or start the tour.','Start exploring ↗']}[lang];for(let [id,v] of [['lobbyLabel',lobby[0]],['lobbyTitle',lobby[1]],['lobbyDesc',lobby[2]],['lobbyBegin',lobby[3]]]){if(el(id))el(id).textContent=v;}document.documentElement.lang=lang;for(const [id,val] of Object.entries(t)){if(!el(id))continue;if(['heroTitle','heroCta','footerTitle'].includes(id))el(id).innerHTML=val;else el(id).textContent=val;}document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===lang)));el('playLabel').textContent=t.play;el('tourStart').textContent=t.tourStart;el('tourStop').textContent=t.tourStop;el('roomCards').replaceChildren(...ROOMS.map((r,i)=>{let b=document.createElement('button');b.className='roomCard';b.innerHTML=`<span class="num">0${i+1} / 04</span><span><span class="cardTitle">${r[lang].title}</span><span class="cardText">${r[lang].short}</span></span><span class="arrow">↗</span>`;b.onclick=()=>{changeRoom(i);el('museum').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'})};return b}));roomWords();localStorage.setItem('gtr-lang',lang)}
 function roomWords(){const r=ROOMS[currentRoom],u=UI[lang],ids=r.items;el('roomNumber').textContent=`${u.roomNumber} 0${currentRoom+1} / 04`;el('stageHall').textContent=`0${currentRoom+1} / 04`;el('roomName').textContent=r[lang].title;el('roomStory').textContent=r[lang].desc;el('roomTabs').replaceChildren(...ROOMS.map((rr,i)=>{const b=document.createElement('button');b.textContent=rr[lang].title;b.setAttribute('role','tab');b.setAttribute('aria-selected',String(i===currentRoom));b.onclick=()=>changeRoom(i);return b}));el('objectCards').replaceChildren(...ids.map((idx,j)=>{const b=document.createElement('button');b.innerHTML=`<span>0${j+1} / 02</span>${ITEMS[idx][lang].title}`;b.setAttribute('aria-pressed',String(idx===currentItem));b.onclick=()=>selectItem(idx);return b}));itemWords()}
 function itemWords(){const i=ITEMS[currentItem],u=UI[lang];el('itemName').textContent=i[lang].title;el('itemDesc').textContent=i[lang].detail;el('itemSource').textContent=u.source;el('itemSource').href=i.url;el('objectCounter').textContent=`0${ROOMS[currentRoom].items.indexOf(currentItem)+1} / 02`;el('guideNote').textContent=u.guideNote;document.querySelectorAll('#objectCards button').forEach((b,j)=>b.setAttribute('aria-pressed',String(ROOMS[currentRoom].items[j]===currentItem)))}
-function changeRoom(i){if(tourTimer&&!tourAdvancing)stopTour();currentRoom=(i+4)%4;currentItem=ROOMS[currentRoom].items[0];roomWords();window.museumChangeRoom?.(currentRoom,currentItem);stopAudio()}
-function selectItem(i){if(tourTimer&&!tourAdvancing)stopTour();currentItem=i;itemWords();window.museumSelectItem?.(i);stopAudio()}
-const speechAvailable='speechSynthesis' in window;let activeUtterance=null,isPaused=false;
-function stopAudio(){if(speechAvailable)window.speechSynthesis.cancel();activeUtterance=null;isPaused=false;el('guideState').textContent='○'}
-function playAudio(){if(!speechAvailable){el('guideNote').textContent=lang==='zh'?'浏览器不支持语音合成。':lang==='en'?'This browser does not support speech synthesis.':'Синтез речи не поддерживается этим браузером.';return}window.speechSynthesis.cancel();const r=ROOMS[currentRoom][lang],i=ITEMS[currentItem][lang];const message=`${r.title}. ${r.desc}. ${i.title}. ${i.detail}`;const utter=new SpeechSynthesisUtterance(message);utter.lang={ru:'ru-RU',en:'en-US',zh:'zh-CN'}[lang];const available=window.speechSynthesis.getVoices();const v=available.find(v=>v.lang.toLowerCase()===utter.lang.toLowerCase())||available.find(v=>v.lang.toLowerCase().startsWith(lang==='zh'?'zh':lang));if(v)utter.voice=v;utter.rate=.95;utter.volume=Number(el('audioVolume').value);utter.onend=()=>{el('guideState').textContent='○';activeUtterance=null};utter.onerror=()=>{el('guideState').textContent='!';activeUtterance=null};activeUtterance=utter;isPaused=false;window.speechSynthesis.speak(utter);el('guideState').textContent='◉'}
-function pauseAudio(){if(!speechAvailable)return;if(window.speechSynthesis.paused){window.speechSynthesis.resume();isPaused=false;el('guideState').textContent='◉'}else if(window.speechSynthesis.speaking){window.speechSynthesis.pause();isPaused=true;el('guideState').textContent='Ⅱ'}}
-let tourTimer=null,tourAdvancing=false;function stopTour(){if(tourTimer)clearInterval(tourTimer);tourTimer=null;el('tourStatus').textContent='';stopAudio()}function advanceTour(){tourAdvancing=true;const nxt=(currentItem+1)%ITEMS.length;if(ITEMS[nxt].room!==currentRoom)changeRoom(ITEMS[nxt].room);selectItem(nxt);tourAdvancing=false;playAudio()}el('tourStart').onclick=()=>{stopTour();el('tourStatus').textContent=UI[lang].tourActive;playAudio();tourTimer=setInterval(advanceTour,24000)};el('tourStop').onclick=stopTour;el('audioPlay').onclick=playAudio;el('audioPause').onclick=pauseAudio;el('audioStop').onclick=stopAudio;el('prevRoom').onclick=()=>changeRoom(currentRoom-1);el('nextRoom').onclick=()=>changeRoom(currentRoom+1);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words()});window.addEventListener('pagehide',stopTour);
+function changeRoom(i){if(tourActive&&!tourAdvancing)stopTour();currentRoom=(i+4)%4;currentItem=ROOMS[currentRoom].items[0];roomWords();window.museumChangeRoom?.(currentRoom,currentItem);stopAudio()}
+function selectItem(i){if(tourActive&&!tourAdvancing)stopTour();currentItem=i;itemWords();window.museumSelectItem?.(i);stopAudio()}
+// Independent free audio guide, with platform voices and optional Piper recordings.
+const museumNarrator=new window.MuseumNarrator({
+ getLang:()=>lang,
+ onStatus:({text,state})=>{
+  el('guideState').textContent=state==='playing'?'◉':state==='paused'?'Ⅱ':state==='error'?'!':'○';
+  if(text)el('guideNote').textContent=text;
+  else el('guideNote').textContent=UI[lang].guideNote;
+ }
+});
+let tourActive=false;
+let tourAdvancing=false;
+let nextTourTimer=null;
+function stopAudio(){museumNarrator.stop()}
+function playAudio(){
+ const narrationItem=currentItem;
+ const narrationLang=lang;
+ museumNarrator.play({
+  item:narrationItem,
+  lang:narrationLang,
+  volume:Number(el('audioVolume').value),
+  onEnd:()=>{
+   if(tourActive){
+    nextTourTimer=setTimeout(()=>{
+     nextTourTimer=null;
+     if(tourActive)advanceTour();
+    },900);
+   }
+  }
+ });
+}
+function pauseAudio(){museumNarrator.togglePause()}
+function stopTour(){
+ tourActive=false;
+ if(nextTourTimer){clearTimeout(nextTourTimer);nextTourTimer=null}
+ el('tourStatus').textContent='';
+ stopAudio();
+}
+function advanceTour(){
+ if(!tourActive)return;
+ const next=currentItem+1;
+ if(next>=ITEMS.length){stopTour();return}
+ tourAdvancing=true;
+ if(ITEMS[next].room!==currentRoom)changeRoom(ITEMS[next].room);
+ selectItem(next);
+ tourAdvancing=false;
+ playAudio();
+}
+el('tourStart').onclick=()=>{
+ stopTour();
+ tourActive=true;
+ el('tourStatus').textContent=UI[lang].tourActive;
+ playAudio();
+};
+el('tourStop').onclick=stopTour;
+el('audioPlay').onclick=()=>{stopTour();playAudio()};
+el('audioPause').onclick=pauseAudio;
+el('audioStop').onclick=stopTour;
+el('prevRoom').onclick=()=>changeRoom(currentRoom-1);el('nextRoom').onclick=()=>changeRoom(currentRoom+1);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words();museumNarrator.refreshVoices()});window.addEventListener('pagehide',stopTour);
 words();
 
 // Original 3D meshes are not museum scans. Imported assets are credited in ASSET_CREDITS.md.
