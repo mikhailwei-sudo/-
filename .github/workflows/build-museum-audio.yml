@@ -5,6 +5,8 @@ on:
     paths:
       - '.github/workflows/build-museum-audio.yml'
       - 'v4/tools/download_selected_voices.py'
+      - 'v4/tools/generate_audio.py'
+      - 'v4/audio-guide-scripts.json'
 permissions:
   contents: write
 concurrency:
@@ -24,11 +26,13 @@ jobs:
       - name: Install Piper and MP3 encoding
         run: |
           python -m pip install --upgrade pip
-          python -m pip install piper-tts==1.3.0
+          python -m pip install 'piper-tts[zh]==1.8.0'
           sudo apt-get update -qq
           sudo apt-get install -y -qq ffmpeg
       - name: Download selected licensed Piper models
-        run: python v4/tools/download_selected_voices.py --output v4/voices
+        run: |
+          python v4/tools/download_selected_voices.py --output v4/voices
+          cat v4/voices/selected-voices.txt
       - name: Synthesize each narrated exhibit in three languages
         shell: bash
         run: |
