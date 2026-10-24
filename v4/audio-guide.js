@@ -29,6 +29,18 @@ class MuseumNarrator{
   this.paused=false;
   this.currentAudio=null;
   this.audioCache=new Map();
+  this.tabId=String(Date.now())+'-'+Math.random().toString(36).slice(2);
+  this.channel=typeof BroadcastChannel==='function'?new BroadcastChannel('great-tea-road-narration-v2'):null;
+  this.channel?.addEventListener('message',event=>{
+   if(event.data?.type==='start'&&event.data.owner!==this.tabId)this.stop();
+  });
+  window.addEventListener('storage',event=>{
+   if(event.key==='gtr-narration-active'&&event.newValue){
+    try{if(JSON.parse(event.newValue).owner!==this.tabId)this.stop();}catch(e){}
+   }
+  });
+  // Never let a hidden background tab continue a tour over the active tab.
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)this.stop();});
   this.waitTimer=null;
   this.currentTrack=null;
   this.activeUtterance=null;
@@ -234,6 +246,10 @@ class MuseumNarrator{
    await this.loadData();
   }
   if(!this.isCurrent(serial))return;
+  // One narrator per browser profile: ask any other museum tabs to stop.
+  const claim={type:'start',owner:this.tabId,at:Date.now()};
+  this.channel?.postMessage(claim);
+  try{localStorage.setItem('gtr-narration-active',JSON.stringify(claim));}catch(e){}
   this.prefetch(item,lang);
   const clip=this.manifest?.[lang]?.[item];
   if(clip){
@@ -246,19 +262,22 @@ class MuseumNarrator{
    audio.playbackRate=this.rate;
    if('preservesPitch' in audio)audio.preservesPitch=true;
    let didFallback=false;
-   const fallback=()=>{
+   const failAudio=()=>{
     if(!this.isCurrent(serial,audio)||didFallback)return;
     didFallback=true;
     audio.onended=null;audio.onerror=null;
     try{audio.pause();audio.removeAttribute('src');audio.load();}catch(e){}
     this.audioCache.delete(key);
     this.currentAudio=null;
-    this.speakBrowser(item,lang,volume,onEnd,serial);
+    this.speaking=false;
+    this.currentTrack=null;
+    // Never replace an available recorded narration with robotic browser TTS.
+    this.info(this.translate('error'),'error');
    };
    audio.onended=()=>{
     if(this.isCurrent(serial,audio))this.finish(serial,onEnd);
    };
-   audio.onerror=fallback;
+   audio.onerror=failAudio;
    try{
     const request=audio.play();
     this.pendingPlay=request;
@@ -273,7 +292,7 @@ class MuseumNarrator{
    }catch(err){
     if(!this.isCurrent(serial,audio))return; // stale rejected play: NEVER start TTS
     this.pendingPlay=null;
-    fallback();
+    failAudio();
     return;
    }
   }
