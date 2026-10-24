@@ -60,9 +60,16 @@ function fitImported(model,dim,center){
  model.position.add(new THREE.Vector3(...center).sub(mid));model.updateMatrixWorld(true);
  return model;
 }
-const assetStatus={hall:'loading',teaSet:'pending',crate:'pending'};
+const assetStatus={hall:'loading',teaSet:'pending',crate:'pending',camel:'pending',samovar:'pending'};
 const loaderBanner=document.createElement('div');loaderBanner.className='assetBanner';loaderBanner.style.cssText='position:absolute;top:54px;left:15px;padding:8px 12px;background:#0d1a15bc;border-radius:10px;font:11px system-ui;color:#eee;pointer-events:none;z-index:4';holder.parentElement.append(loaderBanner);
-function reportLoad(){const l={ru:['Холл','Сервиз','Ящики'],zh:['大厅','茶具','木箱'],en:['Hall','Tea set','Crates']}[document.documentElement.lang]||['Hall','Tea set','Crates'];const states=[assetStatus.hall,assetStatus.teaSet,assetStatus.crate];loaderBanner.textContent=l.map((v,i)=>v+': '+(states[i]==='ready'?'✓':states[i]==='failed'?'!':states[i]==='pending'?'–':'…')).join(' · ');setTimeout(()=>{if(states.every(s=>s!=='loading')&&!states.includes('failed'))loaderBanner.style.display='none'},6000)}reportLoad();
+function reportLoad(){
+ const dic={ru:['Холл','Сервиз','Ящики','Верблюд','Самовар'],zh:['大厅','茶具','木箱','骆驼','茶炊'],en:['Hall','Tea set','Crates','Camel','Samovar']};
+ const labels=dic[document.documentElement.lang]||dic.en;
+ const states=['hall','teaSet','crate','camel','samovar'].map(k=>assetStatus[k]);
+ loaderBanner.textContent=labels.map((l,i)=>l+': '+(states[i]==='ready'?'✓':states[i]==='failed'?'⚠':states[i]==='pending'?'–':'…')).join(' · ');
+ loaderBanner.style.display=states.every(v=>v==='ready'||v==='pending')?'none':'block';
+}
+reportLoad();
 (async()=>{
  try{
   const {FBXLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/FBXLoader.js');
@@ -107,49 +114,59 @@ function reportLoad(){const l={ru:['Холл','Сервиз','Ящики'],zh:['
  }catch(e){console.warn('ColladaLoader unavailable',e);assetStatus.crate='failed';reportLoad()}
 })();
 
+// Actual user-supplied Sketchfab GLB assets. They load from this project, not external embeds.
+const realModelsLoaded=new Set();
+const realModelsLoading=new Set();
+const realModelInfo={
+ 2:{path:'./assets/models/camel-authentic.glb',status:'camel',max:[1.80,1.55,1.27],center:[0,1.93,0]},
+ 6:{path:'./assets/models/samovar-authentic.glb',status:'samovar',max:[1.64,1.59,1.28],center:[0,1.94,0]}
+};
+async function loadRealModel(index){
+ const entry=realModelInfo[index];
+ if(!entry||realModelsLoaded.has(index)||realModelsLoading.has(index))return;
+ realModelsLoading.add(index);assetStatus[entry.status]='loading';reportLoad();
+ try{
+  const {GLTFLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js');
+  const loader=new GLTFLoader();
+  const gltf=await loader.loadAsync(entry.path);
+  const parent=artifacts[index],object=gltf.scene;
+  // Fit in all three axes, with safety margin from glass and railing.
+  fitImported(object,entry.max,entry.center);
+  object.traverse(child=>{if(child.isMesh){child.castShadow=false;child.receiveShadow=false;}});
+  parent.add(object);
+  parent.userData.realModel=object;
+  realModelsLoaded.add(index);assetStatus[entry.status]='ready';reportLoad();
+ }catch(error){console.error('Failed to import '+entry.path,error);
+  assetStatus[entry.status]='failed';reportLoad();
+ }finally{realModelsLoading.delete(index)}
+}
+document.addEventListener('museum-room-enter',e=>{
+ if(e.detail===1)loadRealModel(2); // room 2: caravan
+ if(e.detail===3)loadRealModel(6); // room 4: Russian tea
+});
 // 0 - brick tea
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
 // 1 - tea press
 {const p=artifacts[1];box(p,1.52,.12,1.08,0,1.12,0,M.wood);for(let x of [-.54,.54])box(p,.16,1.42,.16,x,1.83,0,M.wood);box(p,1.55,.18,.4,0,2.49,0,M.woodLight);cy(p,.13,.13,.57,0,2.17,0,M.metal);box(p,.84,.16,.65,0,1.82,0,M.woodLight);box(p,.95,.24,.76,0,1.37,0,M.tea);tube(p,[[0,2.44,0],[.42,2.48,0],[.9,2.56,0]],.045,M.metal)}
-// 2 — recognisable Bactrian camel study: two distinct humps, long bent neck,
- // sculpted muzzle, cloven feet and camel-coloured body (temporary reconstruction
- // until owner's original camel.blend is properly converted to glTF).
-{const p=artifacts[2]; const fur=new THREE.MeshStandardMaterial({color:'#ac8459',roughness:1});
- const darkFur=new THREE.MeshStandardMaterial({color:'#5c4634',roughness:1});
- function animal(offset,scale){
-  const g=new THREE.Group();g.position.set(offset,1.20,0);g.scale.setScalar(scale);p.add(g);
-  function ell(x,y,z,sx,sy,sz,mat=fur){const o=ball(g,1,x,y,z,mat);o.scale.set(sx,sy,sz);return o}
-  // Long oval torso in the direction of travel (+X).
-  ell(-.11,.33,0,.55,.30,.29);
-  // The two distinctly separated humps sit above the shoulder and rump.
-  ell(-.37,.64,0,.23,.33,.22);
-  ell(.13,.66,0,.21,.36,.20);
-  // Sloping neck, with a narrow head and elongated muzzle.
-  tube(g,[[.28,.35,.03],[.49,.57,.03],[.57,.90,.03],[.67,1.02,.02]],.105,fur);
-  ell(.76,1.02,0,.20,.125,.12);
-  ell(.94,.96,0,.15,.082,.10,darkFur);
-  for(const z of [-.085,.085]){ell(.73,1.15,z,.042,.085,.035,darkFur);ell(.83,1.045,z,.026,.024,.025,darkFur)}
-  // Distinctly four legs with angled lower sections and broad feet.
-  for(const x of [-.43,.29])for(const z of [-.20,.20]){
-   tube(g,[[x,.22,z],[x+(x<0?-.04:.05),-.10,z],[x+(x<0?.04:-.02),-.43,z]],.068,fur);
-   ell(x+.05,-.44,z+.015,.135,.055,.095,darkFur)
-  }
-  tube(g,[[-.60,.44,0],[-.75,.20,0],[-.78,.04,.01]],.027,darkFur);
-  // Harness and bundles read visually as caravan equipment.
-  box(g,.72,.055,.67,-.13,.73,0,M.red);
-  for(const z of [-.40,.40]){box(g,.37,.27,.26,-.22,.46,z,M.wood);
-    box(g,.41,.045,.29,-.22,.60,z,M.gold)}
-  tube(g,[[-.47,.65,-.39],[-.44,.86,0],[.28,.80,.37]],.018,M.wood);
- }
- animal(-.60,.68);animal(.64,.62);
-}
+// 2 - actual imported Bactrian camel (lazy-loaded on entering room 2).
+// The plinth is intentionally kept clear while the GLB is loading.
+// 3 - crates
+{const p=artifacts[3];for(let k=0;k<2;k++){let x=k===0?-.48:.43;let h=k===0?.67:.91;box(p,.79,h,.74,x,1.10+h/2,0,M.wood);for(let y of [-h*.3,0,h*.3]){box(p,.82,.038,.77,x,1.10+h/2+y,0,M.gold)}for(let z of [-.375,.375])box(p,.06,h+.03,.06,x-.31,1.10+h/2,z,M.metal);box(p,.41,.25,.014,x,1.10+h/2,.39,M.paper);box(p,.10,.14,.016,x,1.10+h/2,.4,M.tea)}}
+// 4 - shop
+{const p=artifacts[4];box(p,1.72,.1,.92,0,1.17,0,M.wood);box(p,1.65,.90,.68,0,1.68,-.15,M.wood);box(p,2.1,.18,1.10,0,2.26,-.08,M.red);for(let x of [-.80,.80])cy(p,.075,.075,1.25,x,1.67,.46,M.gold);box(p,1.65,.10,.65,0,1.30,.30,M.woodLight);for(let x of [-.5,0,.5]){box(p,.34,.35,.32,x,1.54,.30,M.linen);box(p,.23,.18,.01,x,1.59,.48,M.paper)}plaque(p,'茶',0,2.09,.56)}
+// 5 frontier gateway
+{const p=artifacts[5];for(let x of [-.65,.65]){box(p,.25,1.57,.31,x,1.89,0,M.stone);box(p,.41,.13,.43,x,2.68,0,M.gold)}box(p,1.71,.16,.43,0,2.7,0,M.stone);box(p,1.63,.1,.28,0,2.82,0,M.gold);box(p,.65,.17,.25,0,1.32,.23,M.red);plaque(p,'茶路',0,2.55,.235)}
+// 6 - actual imported antique samovar (lazy-loaded on entering room 4).
+// No fabricated replacement is shown if the real file cannot load.
+// 7 desk
+{const p=artifacts[7];box(p,1.84,.13,1.20,0,1.52,0,M.wood);for(let x of [-.71,.71])for(let z of [-.39,.39])box(p,.10,.54,.12,x,1.22,z,M.woodLight);box(p,1.06,.018,.75,-.22,1.62,0,M.paper);for(let n=0;n<4;n++)tube(p,[[-.70+n*.21,1.635,-.22],[-.49+n*.20,1.635,0],[-.28+n*.21,1.635,.24]],.009,n%2?M.red:M.metal);cy(p,.13,.16,.21,.60,1.76,-.22,M.metal);cone(p,.12,.22,.60,2.02,-.22,M.metal);box(p,.44,.31,.30,.57,1.75,.35,M.woodLight)}
 // Camera with smooth motion between connected halls.
 const state={room:0,item:0,targetX:0,lookX:0,yaw:0,tyaw:0,pitch:.06,tpitch:.06,zoom:9.5,tzoom:9.5};
 function goRoom(room,item){state.room=room;state.item=item;state.targetX=room*regionSpacing;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
 function goItem(item){state.item=item;const local=item%2===0?-2.45:2.45;state.targetX=state.room*regionSpacing+local*.72;state.tyaw=local<0?-.12:.12;state.tzoom=6.3;highlight()}
 function highlight(){artifacts.forEach((o,i)=>o.scale.setScalar(i===state.item?1.08:1));}
 let inLobby=true;
-function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=10.5;state.tpitch=.09; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
+function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=9.5;state.tpitch=.08; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
 function leaveLobby(){inLobby=false;if(lobbyOverlay)lobbyOverlay.hidden=true;lobbyButton?.setAttribute('aria-pressed','false');}
 const roomGo=goRoom;goRoom=function(room,item){leaveLobby();roomGo(room,item);document.dispatchEvent(new CustomEvent('museum-room-enter',{detail:room}))};
 const itemGo=goItem;goItem=function(item){leaveLobby();itemGo(item)};
