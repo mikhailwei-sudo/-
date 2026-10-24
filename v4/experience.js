@@ -82,7 +82,28 @@ reportLoad();
   const fbx=new FBXLoader(manager);
   fbx.load('./assets/models/chinese-hall.fbx',model=>{
    try{
-    model.traverse(o=>{if(o.isMesh){o.castShadow=false;o.receiveShadow=false;if(o.material){const mats=Array.isArray(o.material)?o.material:[o.material];mats.forEach(m=>{m.side=THREE.DoubleSide;if(m.map)m.map.colorSpace=THREE.SRGBColorSpace})}}});
+    // FBX references a .tga image; browsers do not natively load it. Apply the
+    // exported JPEG explicitly instead of relying on the FBXLoader TGA handler.
+    const hallTexture=new THREE.TextureLoader().load(
+      './assets/textures/hall/HZ116_Color.tga.jpg',
+      ()=>{hallTexture.colorSpace=THREE.SRGBColorSpace;hallTexture.needsUpdate=true;},
+      undefined,
+      err=>console.warn('Hall diffuse texture missing',err)
+    );
+    hallTexture.colorSpace=THREE.SRGBColorSpace;
+    model.traverse(o=>{
+      if(!o.isMesh)return;
+      o.castShadow=false;o.receiveShadow=false;
+      const original=Array.isArray(o.material)?o.material:[o.material];
+      const fixed=original.map(m=>{
+        const v=new THREE.MeshStandardMaterial({
+          map:hallTexture,color:0xffffff,roughness:.81,metalness:0,
+          side:THREE.DoubleSide
+        });
+        return v;
+      });
+      o.material=Array.isArray(o.material)?fixed:fixed[0];
+    });
     fitImported(model,[11.3,5.8,10.8],[0,2.8,-.3]);lobbyGroup.add(model);lobbyLoaded=true;assetStatus.hall='ready';reportLoad();
    }catch(e){console.warn('Hall fitting failed',e);assetStatus.hall='failed';reportLoad()}
   },undefined,e=>{console.warn('Chinese hall FBX could not load',e);assetStatus.hall='failed';reportLoad()});
@@ -132,7 +153,26 @@ async function loadRealModel(index){
   const parent=artifacts[index],object=gltf.scene;
   // Fit in all three axes, with safety margin from glass and railing.
   fitImported(object,entry.max,entry.center);
-  object.traverse(child=>{if(child.isMesh){child.castShadow=false;child.receiveShadow=false;}});
+  object.traverse(child=>{
+    if(!child.isMesh)return;
+    child.castShadow=false;child.receiveShadow=false;
+    const materials=Array.isArray(child.material)?child.material:[child.material];
+    for(const material of materials){
+      if(!material)continue;
+      // Keep the embedded GLB colour, normal and PBR textures intact.
+      if(material.map)material.map.colorSpace=THREE.SRGBColorSpace;
+      if(material.emissiveMap)material.emissiveMap.colorSpace=THREE.SRGBColorSpace;
+      if(entry.status==='samovar'){
+        // Source GLB marks the entire antique metal model as translucent and
+        // fully emissive, washing out its texture under museum lighting.
+        material.transparent=false;material.opacity=1;material.depthWrite=true;
+        material.emissive?.setRGB(0,0,0);material.emissiveIntensity=0;
+        material.metalness=Math.min(material.metalness??.7,.72);
+        material.roughness=Math.max(material.roughness??.3,.28);
+      }
+      material.needsUpdate=true;
+    }
+  });
   parent.add(object);
   parent.userData.realModel=object;
   realModelsLoaded.add(index);assetStatus[entry.status]='ready';reportLoad();
