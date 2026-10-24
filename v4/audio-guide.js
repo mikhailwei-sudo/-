@@ -144,7 +144,7 @@ class MuseumNarrator{
    for(const [i,item] of json.items.entries())this.scripts[i]=item;
   }catch(e){console.warn('Museum narration scripts failed to load',e);}
   try{
-   const resp=await fetch('./audio-guide-manifest.json?v=1');
+   const resp=await fetch('./audio-guide-manifest.json?v=2-recordings',{cache:'no-store'});
    if(resp.ok)this.manifest=await resp.json();
   }catch(e){/* No optional prerecorded tracks */ }
   this.dataReady=true;
@@ -204,6 +204,9 @@ class MuseumNarrator{
   const serial=this.serial;
   if(this.paused){
    this.paused=false;
+   const claim={type:'start',owner:this.tabId,at:Date.now()};
+   this.channel?.postMessage(claim);
+   try{localStorage.setItem('gtr-narration-active',JSON.stringify(claim));}catch(e){}
    if(this.currentAudio){
     const audio=this.currentAudio;
     try{await audio.play();}
