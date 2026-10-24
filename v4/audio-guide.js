@@ -29,6 +29,9 @@ class MuseumNarrator{
   this.paused=false;
   this.currentAudio=null;
   this.waitTimer=null;
+  this.currentTrack=null;
+  this.pendingPlay=null;
+  this.speechContinue=null;
   this.scripts={};
   this.manifest={};
   this.voices=[];
@@ -36,7 +39,8 @@ class MuseumNarrator{
   this.rate=Number(localStorage.getItem('gtr-voice-rate')||'1');
   this.rate=Number.isFinite(this.rate)?Math.min(1.2,Math.max(.8,this.rate)):1;
   this.buildControls();
-  this.loadData();
+  this.dataReady=false;
+  this.dataPromise=this.loadData();
   this.refreshVoices();
   if(window.speechSynthesis){
    window.speechSynthesis.addEventListener?.('voiceschanged',()=>this.refreshVoices());
@@ -109,6 +113,9 @@ class MuseumNarrator{
   this.refreshLabels();
  }
  async loadData(){
+  if(this.dataReady)return;
+  if(this._loadingData)return this._loadingData;
+  this._loadingData=(async()=>{
   try{
    const resp=await fetch('./audio-guide-scripts.json?v=1');
    if(!resp.ok)throw Error('HTTP '+resp.status);
@@ -119,6 +126,9 @@ class MuseumNarrator{
    const resp=await fetch('./audio-guide-manifest.json?v=1');
    if(resp.ok)this.manifest=await resp.json();
   }catch(e){/* No optional prerecorded tracks */ }
+  this.dataReady=true;
+  })();
+  try{await this._loadingData}finally{this._loadingData=null}
  }
  chooseVoice(lang){
   const list=this.voices.filter(v=>v.lang.toLowerCase().startsWith(LANG_PREFIX[lang]));
@@ -128,47 +138,110 @@ class MuseumNarrator{
  info(message,state){
   this.options.onStatus?.({text:message,state:state||'idle'});
  }
+ isCurrent(serial,audio){
+  return serial===this.serial && (!audio || this.currentAudio===audio);
+ }
  stop(){
-  ++this.serial;
+  ++this.serial; // invalidate *all* pending audio.play(), fetches, and callbacks
   if(this.waitTimer){clearTimeout(this.waitTimer);this.waitTimer=null;}
-  this.currentAudio?.pause();this.currentAudio=null;
+  const audio=this.currentAudio;
+  this.currentAudio=null;
+  this.currentTrack=null;
+  this.pendingPlay=null;
+  this.speechContinue=null;
+  this.speaking=false;
+  this.paused=false;
+  if(audio){
+   audio.onended=null;audio.onerror=null;audio.onplaying=null;audio.onpause=null;
+   try{audio.pause();audio.currentTime=0;audio.removeAttribute('src');audio.load();}catch(e){console.debug('Audio cleanup',e);}
+  }
   window.speechSynthesis?.cancel();
-  this.speaking=false;this.paused=false;
   this.info('','idle');
  }
- togglePause(){
+ async togglePause(){
   if(!this.speaking)return;
-  if(this.currentAudio){
-   if(this.paused)this.currentAudio.play().catch(()=>{});else this.currentAudio.pause();
-  }else if(window.speechSynthesis){
-   if(this.paused)window.speechSynthesis.resume();else window.speechSynthesis.pause();
+  const serial=this.serial;
+  if(this.paused){
+   this.paused=false;
+   if(this.currentAudio){
+    const audio=this.currentAudio;
+    try{await audio.play();}
+    catch(err){
+     if(this.isCurrent(serial,audio)){
+      this.paused=true;
+      this.info(this.translate('error'),'error');
+     }
+     return;
+    }
+    if(!this.isCurrent(serial,audio)){audio.pause();return;}
+   }else if(window.speechSynthesis){
+    window.speechSynthesis.resume();
+    if(this.speechContinue && !window.speechSynthesis.speaking){
+     const continueSpeech=this.speechContinue;
+     this.speechContinue=null;
+     continueSpeech();
+    }
+   }
+   if(this.isCurrent(serial))this.info(this.translate('playing'),'playing');
+  }else{
+   this.paused=true;
+   if(this.currentAudio)this.currentAudio.pause();
+   else if(window.speechSynthesis)window.speechSynthesis.pause();
+   this.info(this.translate('paused'),'paused');
   }
-  this.paused=!this.paused;
-  this.info(this.translate(this.paused?'paused':'playing'),this.paused?'paused':'playing');
  }
  async play({item,lang,volume=1,onEnd}){
+  // Repeated Play must never create simultaneous audio instances.
+  if(this.speaking&&this.currentTrack?.item===item&&this.currentTrack?.lang===lang){
+   if(this.paused)await this.togglePause();
+   return;
+  }
   this.stop();
   const serial=this.serial;
+  this.currentTrack={item,lang};
   this.speaking=true;
   this.info(this.translate('loading'),'loading');
-  // Start only following a user tap. Downloaded Piper recordings are optional.
-  if(!this.scripts[item])await this.loadData();
-  if(serial!==this.serial)return;
+  if(!this.scripts[item] || !this.dataReady){
+   await this.loadData();
+  }
+  if(!this.isCurrent(serial))return;
   const clip=this.manifest?.[lang]?.[item];
   if(clip){
    const audio=new Audio(clip);
    this.currentAudio=audio;
    audio.volume=volume;
-   audio.onended=()=>this.finish(serial,onEnd);
-   audio.onerror=()=>{if(serial===this.serial){this.currentAudio=null;this.speakBrowser(item,lang,volume,onEnd,serial);}};
-   try{
-    await audio.play();
-    if(serial===this.serial)this.info(this.translate('natural'),'playing');
-    return;
-   }catch(e){
+   let didFallback=false;
+   const fallback=()=>{
+    if(!this.isCurrent(serial,audio)||didFallback)return;
+    didFallback=true;
+    audio.onended=null;audio.onerror=null;
+    try{audio.pause();audio.removeAttribute('src');audio.load();}catch(e){}
     this.currentAudio=null;
+    this.speakBrowser(item,lang,volume,onEnd,serial);
+   };
+   audio.onended=()=>{
+    if(this.isCurrent(serial,audio))this.finish(serial,onEnd);
+   };
+   audio.onerror=fallback;
+   try{
+    const request=audio.play();
+    this.pendingPlay=request;
+    await request;
+    if(!this.isCurrent(serial,audio)){audio.pause();return;}
+    this.pendingPlay=null;
+    if(this.paused){
+     audio.pause();
+     this.info(this.translate('paused'),'paused');
+    }else this.info(this.translate('natural'),'playing');
+    return;
+   }catch(err){
+    if(!this.isCurrent(serial,audio))return; // stale rejected play: NEVER start TTS
+    this.pendingPlay=null;
+    fallback();
+    return;
    }
   }
+  if(!this.isCurrent(serial))return;
   this.speakBrowser(item,lang,volume,onEnd,serial);
  }
  speakBrowser(item,lang,volume,onEnd,serial){
@@ -181,7 +254,9 @@ class MuseumNarrator{
   const parts=(txt.match(/[^.!?。！？]+[.!?。！？]?/g)||[txt]).map(x=>x.trim()).filter(Boolean);
   let cursor=0;
   const speakNext=()=>{
-   if(serial!==this.serial||this.paused)return;
+   if(serial!==this.serial)return;
+   if(this.paused){this.speechContinue=speakNext;return;}
+   this.speechContinue=null;
    if(cursor>=parts.length){this.finish(serial,onEnd);return;}
    const utterance=new SpeechSynthesisUtterance(parts[cursor++]);
    utterance.lang=LOCALES[lang];
@@ -204,7 +279,8 @@ class MuseumNarrator{
  }
  finish(serial,onEnd){
   if(serial!==this.serial)return;
-  this.speaking=false;this.paused=false;this.currentAudio=null;
+  this.speaking=false;this.paused=false;this.currentAudio=null;this.currentTrack=null;
+  this.speechContinue=null;
   this.info('','idle');
   onEnd?.();
  }
