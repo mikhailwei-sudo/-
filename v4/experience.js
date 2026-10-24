@@ -7,7 +7,7 @@ try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
 if(THREE){try{
 const scene=new THREE.Scene();scene.background=new THREE.Color('#0c1711');scene.fog=new THREE.Fog('#17271e',12,65);
 const camera=new THREE.PerspectiveCamera(54,1,.1,120);
-const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(devicePixelRatio||1,innerWidth<700?1.25:1.7));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;holder.replaceChildren(renderer.domElement);
+const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,innerWidth<700?1.1:1.25));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;holder.replaceChildren(renderer.domElement);
 const C=(v,rough=.8,metal=0)=>new THREE.MeshStandardMaterial({color:v,roughness:rough,metalness:metal,side:THREE.DoubleSide});
 const fabricCanvas=document.createElement('canvas');fabricCanvas.width=fabricCanvas.height=256;const f=fabricCanvas.getContext('2d');f.fillStyle='#aa875b';f.fillRect(0,0,256,256);f.strokeStyle='#d7ae7a44';for(let i=0;i<256;i+=6){f.beginPath();f.moveTo(i,0);f.lineTo(i,256);f.moveTo(0,i);f.lineTo(256,i);f.stroke()}const ft=new THREE.CanvasTexture(fabricCanvas);ft.wrapS=ft.wrapT=THREE.RepeatWrapping;ft.colorSpace=THREE.SRGBColorSpace;
 let tx=document.createElement('canvas');tx.width=tx.height=256;let tc=tx.getContext('2d');tc.fillStyle='#75543a';tc.fillRect(0,0,256,256);for(let i=0;i<2300;i++){tc.fillStyle=`rgba(${95+Math.random()*65},${65+Math.random()*45},${38+Math.random()*30},${.09+Math.random()*.13})`;tc.fillRect(Math.random()*256,Math.random()*256,1+Math.random()*4,1+Math.random()*3)}const teaMap=new THREE.CanvasTexture(tx);teaMap.colorSpace=THREE.SRGBColorSpace;
@@ -118,7 +118,8 @@ async function obtainGLTFLoader(){
   },undefined,e=>{console.warn('Chinese hall FBX could not load',e);assetStatus.hall='failed';reportLoad()});
  }catch(e){console.warn('FBXLoader unavailable',e);assetStatus.hall='failed';reportLoad()}
 })();
-(async()=>{
+async function loadTeaSet(){
+ if(assetStatus.teaSet!=='pending'&&assetStatus.teaSet!=='failed')return;
  assetStatus.teaSet='loading';reportLoad();
  try{
   const GLTFLoader=await obtainGLTFLoader();
@@ -127,8 +128,9 @@ async function obtainGLTFLoader(){
    catch(e){console.warn('Tea set invalid',e);assetStatus.teaSet='failed';reportLoad()}
   },undefined,e=>{console.warn('Tea set loading failed',e);assetStatus.teaSet='failed';reportLoad()});
  }catch(e){console.warn('GLTFLoader unavailable',e);assetStatus.teaSet='failed';reportLoad()}
-})();
-(async()=>{
+}
+async function loadCrates(){
+ if(assetStatus.crate!=='pending'&&assetStatus.crate!=='failed')return;
  assetStatus.crate='loading';reportLoad();
  try{
   const {ColladaLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/ColladaLoader.js');
@@ -142,7 +144,7 @@ async function obtainGLTFLoader(){
    }catch(e){console.warn('Crate fitting failed',e);assetStatus.crate='failed';reportLoad()}
   },undefined,e=>{console.warn('Crate Collada loading failed',e);assetStatus.crate='failed';reportLoad()});
  }catch(e){console.warn('ColladaLoader unavailable',e);assetStatus.crate='failed';reportLoad()}
-})();
+}
 
 // Actual user-supplied Sketchfab GLB assets. They load from this project, not external embeds.
 const realModelsLoaded=new Set();
@@ -194,13 +196,13 @@ async function loadRealModel(index){
   assetStatus[entry.status]='failed';reportLoad();
  }finally{realModelsLoading.delete(index)}
 }
+// Request models only when their room becomes visible. Heavy textures no longer
+// compete with the Chinese hall on initial page load.
 document.addEventListener('museum-room-enter',e=>{
- if(e.detail===1)loadRealModel(2); // room 2: caravan
- if(e.detail===3)loadRealModel(6); // room 4: Russian tea
+ if(e.detail===0)loadTeaSet();
+ if(e.detail===1){loadRealModel(2);loadCrates();}
+ if(e.detail===3)loadRealModel(6);
 });
-// Begin loading before window.onload (which can be late on mobile).
-loadRealModel(2);
-loadRealModel(6);
 // 0 - brick tea
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
 // 1 - tea press
@@ -269,7 +271,10 @@ let inLobby=true;
 function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=9.5;state.tpitch=.08; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
 function leaveLobby(){inLobby=false;if(lobbyOverlay)lobbyOverlay.hidden=true;lobbyButton?.setAttribute('aria-pressed','false');}
 const roomGo=goRoom;goRoom=function(room,item){leaveLobby();roomGo(room,item);document.dispatchEvent(new CustomEvent('museum-room-enter',{detail:room}))};
-const itemGo=goItem;goItem=function(item){leaveLobby();itemGo(item)};
+const itemGo=goItem;goItem=function(item){leaveLobby();itemGo(item);
+ const exhibitRoom=Math.floor(item/2);
+ document.dispatchEvent(new CustomEvent('museum-room-enter',{detail:exhibitRoom}));
+};
 window.museumGoLobby=showLobby;
 lobbyButton?.addEventListener('click',showLobby);
 document.getElementById('lobbyMini')?.addEventListener('click',showLobby);
