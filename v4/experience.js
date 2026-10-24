@@ -82,27 +82,19 @@ reportLoad();
   const fbx=new FBXLoader(manager);
   fbx.load('./assets/models/chinese-hall.fbx',model=>{
    try{
-    // FBX references a .tga image; browsers do not natively load it. Apply the
-    // exported JPEG explicitly instead of relying on the FBXLoader TGA handler.
-    const hallTexture=new THREE.TextureLoader().load(
-      './assets/textures/hall/HZ116_Color.tga.jpg',
-      ()=>{hallTexture.colorSpace=THREE.SRGBColorSpace;hallTexture.needsUpdate=true;},
-      undefined,
-      err=>console.warn('Hall diffuse texture missing',err)
-    );
+    // Keep FBX material slots and per-part colours. Only fix missing diffuse maps.
+    const hallTexture=new THREE.TextureLoader().load('./assets/textures/hall/HZ116_Color.tga.jpg');
     hallTexture.colorSpace=THREE.SRGBColorSpace;
     model.traverse(o=>{
       if(!o.isMesh)return;
       o.castShadow=false;o.receiveShadow=false;
-      const original=Array.isArray(o.material)?o.material:[o.material];
-      const fixed=original.map(m=>{
-        const v=new THREE.MeshStandardMaterial({
-          map:hallTexture,color:0xffffff,roughness:.81,metalness:0,
-          side:THREE.DoubleSide
-        });
-        return v;
-      });
-      o.material=Array.isArray(o.material)?fixed:fixed[0];
+      const mats=Array.isArray(o.material)?o.material:[o.material];
+      for(const m of mats){
+        if(!m)continue;
+        m.side=THREE.DoubleSide;
+        if(m.map){m.map.colorSpace=THREE.SRGBColorSpace}
+        else if(m.name&&/HZ116/i.test(m.name)){m.map=hallTexture;m.needsUpdate=true}
+      }
     });
     fitImported(model,[11.3,5.8,10.8],[0,2.8,-.3]);lobbyGroup.add(model);lobbyLoaded=true;assetStatus.hall='ready';reportLoad();
    }catch(e){console.warn('Hall fitting failed',e);assetStatus.hall='failed';reportLoad()}
@@ -175,8 +167,13 @@ async function loadRealModel(index){
   });
   parent.add(object);
   parent.userData.realModel=object;
+  // Hide only the temporary fallback after the actual model has loaded.
+  for(const child of parent.children){if(child!==object)child.visible=false}
   realModelsLoaded.add(index);assetStatus[entry.status]='ready';reportLoad();
  }catch(error){console.error('Failed to import '+entry.path,error);
+  // Preserve a visible exhibit if the binary model or its textures fail to load.
+  const parent=artifacts[index];
+  for(const child of parent.children)child.visible=true;
   assetStatus[entry.status]='failed';reportLoad();
  }finally{realModelsLoading.delete(index)}
 }
@@ -184,6 +181,8 @@ document.addEventListener('museum-room-enter',e=>{
  if(e.detail===1)loadRealModel(2); // room 2: caravan
  if(e.detail===3)loadRealModel(6); // room 4: Russian tea
 });
+// Preload these two critical exhibits in the background; room navigation remains usable.
+window.addEventListener('load',()=>{loadRealModel(2);loadRealModel(6)},{once:true});
 // 0 - brick tea
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
 // 1 - tea press
@@ -196,8 +195,14 @@ document.addEventListener('museum-room-enter',e=>{
 {const p=artifacts[4];box(p,1.72,.1,.92,0,1.17,0,M.wood);box(p,1.65,.90,.68,0,1.68,-.15,M.wood);box(p,2.1,.18,1.10,0,2.26,-.08,M.red);for(let x of [-.80,.80])cy(p,.075,.075,1.25,x,1.67,.46,M.gold);box(p,1.65,.10,.65,0,1.30,.30,M.woodLight);for(let x of [-.5,0,.5]){box(p,.34,.35,.32,x,1.54,.30,M.linen);box(p,.23,.18,.01,x,1.59,.48,M.paper)}plaque(p,'茶',0,2.09,.56)}
 // 5 frontier gateway
 {const p=artifacts[5];for(let x of [-.65,.65]){box(p,.25,1.57,.31,x,1.89,0,M.stone);box(p,.41,.13,.43,x,2.68,0,M.gold)}box(p,1.71,.16,.43,0,2.7,0,M.stone);box(p,1.63,.1,.28,0,2.82,0,M.gold);box(p,.65,.17,.25,0,1.32,.23,M.red);plaque(p,'茶路',0,2.55,.235)}
-// 6 - actual imported antique samovar (lazy-loaded on entering room 4).
-// No fabricated replacement is shown if the real file cannot load.
+// 6 — low-detail fallback is visible only if the real GLB cannot load.
+{const p=artifacts[6];const brass=new THREE.MeshStandardMaterial({color:'#ad8b4d',metalness:.62,roughness:.32});
+ cy(p,.36,.42,.82,0,1.69,0,brass);cy(p,.42,.45,.11,0,1.22,0,brass);
+ cy(p,.25,.29,.15,0,2.18,0,brass);cy(p,.14,.18,.10,0,2.33,0,brass);
+ for(const x of [-.52,.52]){cy(p,.09,.09,.48,x,1.83,0,M.wood);box(p,.21,.09,.10,x,2.06,0,brass)}
+ tube(p,[[.24,1.60,.32],[.55,1.59,.38],[.65,1.51,.38]],.055,brass);
+ cy(p,.11,.13,.11,.68,1.49,.38,M.wood);
+}
 // 7 desk
 {const p=artifacts[7];box(p,1.84,.13,1.20,0,1.52,0,M.wood);for(let x of [-.71,.71])for(let z of [-.39,.39])box(p,.10,.54,.12,x,1.22,z,M.woodLight);box(p,1.06,.018,.75,-.22,1.62,0,M.paper);for(let n=0;n<4;n++)tube(p,[[-.70+n*.21,1.635,-.22],[-.49+n*.20,1.635,0],[-.28+n*.21,1.635,.24]],.009,n%2?M.red:M.metal);cy(p,.13,.16,.21,.60,1.76,-.22,M.metal);cone(p,.12,.22,.60,2.02,-.22,M.metal);box(p,.44,.31,.30,.57,1.75,.35,M.woodLight)}
 // Camera with smooth motion between connected halls.
