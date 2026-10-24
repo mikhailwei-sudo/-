@@ -139,7 +139,7 @@
    const token=this.serial;
    try{
     await this.audio.play();
-    if(token!==this.serial){this.audio.pause();return;}
+    if(token!==this.serial)return;
     this.status(this.t('play'),'playing');
    }catch(e){if(token===this.serial){this.paused=true;this.status(this.t('error'),'error');}}
   }
