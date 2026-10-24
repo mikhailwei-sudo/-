@@ -1,0 +1,66 @@
+name: Install Great Tea Road 4.1
+
+on:
+  push:
+    paths:
+      - 'GTR41.part01'
+      - 'GTR41.part02'
+      - 'GTR41.part03'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gtr41-installer
+  cancel-in-progress: false
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Check upload, restore and install museum
+        shell: bash
+        run: |
+          set -euo pipefail
+          for part in GTR41.part01 GTR41.part02 GTR41.part03; do
+            test -s "$part" || { echo "::error::Missing $part. Upload all three parts in one commit."; exit 1; }
+          done
+          cat GTR41.part01 GTR41.part02 GTR41.part03 > /tmp/gtr41.zip
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          p=Path('/tmp/gtr41.zip')
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None, 'ZIP is corrupt'
+              files=z.namelist()
+              root='Great_Tea_Road_4_1_Real_Exhibits/'
+              assert files and all(f.startswith(root) and '..' not in Path(f).parts for f in files)
+              for model in ['assets/models/camel-authentic.glb','assets/models/samovar-authentic.glb','assets/models/teaset.glb']:
+                  info=z.getinfo(root+model)
+                  assert info.file_size > 1000000, f'Model empty or missing: {model}'
+              z.extractall('/tmp/gtr41')
+          PY
+          test -f /tmp/gtr41/Great_Tea_Road_4_1_Real_Exhibits/experience.html
+          mkdir -p v4
+          cp -a /tmp/gtr41/Great_Tea_Road_4_1_Real_Exhibits/. v4/
+          test -s v4/assets/models/camel-authentic.glb
+          test -s v4/assets/models/samovar-authentic.glb
+          rm GTR41.part01 GTR41.part02 GTR41.part03
+      - name: Commit installed files
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A v4 GTR41.part01 GTR41.part02 GTR41.part03
+          if git diff --cached --quiet; then
+            echo 'Already installed'
+            exit 0
+          fi
+          git commit -m 'Deploy Great Tea Road 4.1 with authentic camel and samovar GLB models'
+          git push
