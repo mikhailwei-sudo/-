@@ -61,13 +61,55 @@ function fitImported(model,dim,center){
  return model;
 }
 const assetStatus={hall:'loading',teaSet:'pending',crate:'pending',camel:'pending',samovar:'pending'};
-const loaderBanner=document.createElement('div');loaderBanner.className='assetBanner';loaderBanner.style.cssText='position:absolute;top:54px;left:15px;padding:8px 12px;background:#0d1a15bc;border-radius:10px;font:11px system-ui;color:#eee;pointer-events:none;z-index:4';holder.parentElement.append(loaderBanner);
+const assetPercent={hall:null,teaSet:null,crate:null,camel:null,samovar:null};
+const assetKeys=['hall','teaSet','camel','crate','samovar'];
+const loaderBanner=document.createElement('div');
+loaderBanner.className='assetBanner';
+loaderBanner.setAttribute('role','status');
+loaderBanner.setAttribute('aria-live','polite');
+loaderBanner.style.cssText='position:absolute;top:55px;left:15px;width:min(320px,calc(100% - 30px));padding:13px 15px;background:rgba(13,26,21,.94);border:1px solid rgba(220,190,130,.34);border-radius:14px;font:13px/1.4 system-ui;color:#f7edd4;pointer-events:none;z-index:9;box-shadow:0 10px 36px #0007;backdrop-filter:blur(8px)';
+const spinnerStyle=document.createElement('style');
+spinnerStyle.textContent='@keyframes teaSpin{to{transform:rotate(360deg)}}.teaLoadingSpin{width:19px;height:19px;flex:none;border:2px solid #a4ac9260;border-top-color:#e9c98e;border-radius:50%;animation:teaSpin .85s linear infinite}@media(prefers-reduced-motion:reduce){.teaLoadingSpin{animation:none;border-color:#e9c98e}}';
+document.head.append(spinnerStyle);
+loaderBanner.innerHTML='<div style="display:flex;align-items:center;gap:11px"><span class="teaLoadingSpin" aria-hidden="true"></span><div style="min-width:0;flex:1"><div id="teaLoadHeading" style="font-weight:650">Загрузка музея</div><div id="teaLoadDetail" style="font-size:11px;opacity:.78;margin-top:2px">Подготавливаем текстуры…</div></div><strong id="teaLoadPercent" style="font-size:13px;font-variant-numeric:tabular-nums">…</strong></div><div style="height:4px;border-radius:8px;background:#ffffff25;overflow:hidden;margin-top:11px"><div id="teaLoadBar" style="width:4%;height:100%;background:linear-gradient(90deg,#ab956c,#f5d99c);border-radius:8px;transition:width .25s ease"></div></div>';
+holder.parentElement.append(loaderBanner);
+const loadHeading=loaderBanner.querySelector('#teaLoadHeading');
+const loadDetail=loaderBanner.querySelector('#teaLoadDetail');
+const loadPercent=loaderBanner.querySelector('#teaLoadPercent');
+const loadBar=loaderBanner.querySelector('#teaLoadBar');
+let displayedLoaderKey='';
 function reportLoad(){
- const dic={ru:['Холл','Сервиз','Ящики','Верблюд','Самовар'],zh:['大厅','茶具','木箱','骆驼','茶炊'],en:['Hall','Tea set','Crates','Camel','Samovar']};
- const labels=dic[document.documentElement.lang]||dic.en;
- const states=['hall','teaSet','crate','camel','samovar'].map(k=>assetStatus[k]);
- loaderBanner.textContent=labels.map((l,i)=>l+': '+(states[i]==='ready'?'✓':states[i]==='failed'?'⚠':states[i]==='pending'?'–':'…')).join(' · ');
- loaderBanner.style.display=states.every(v=>v==='ready'||v==='pending')?'none':'block';
+ const dic={ru:{hall:'Китайский холл',teaSet:'Чайный сервиз',camel:'Верблюд',crate:'Торговые ящики',samovar:'Самовар',loading:'Загрузка 3D-модели',preparing:'Подготовка текстур…',done:'Все экспонаты готовы',failed:'Не удалось загрузить'},zh:{hall:'中国大厅',teaSet:'茶具',camel:'骆驼',crate:'木箱',samovar:'茶炊',loading:'正在加载三维模型',preparing:'正在处理纹理…',done:'展品已加载',failed:'加载失败'},en:{hall:'Chinese hall',teaSet:'Tea set',camel:'Camel',crate:'Shipping crates',samovar:'Samovar',loading:'Loading 3D model',preparing:'Preparing textures…',done:'All exhibits loaded',failed:'Failed to load'}};
+ const labels=dic[document.documentElement.lang]||dic.ru;
+ const loading=assetKeys.filter(k=>assetStatus[k]==='loading');
+ const failed=assetKeys.filter(k=>assetStatus[k]==='failed');
+ const ready=assetKeys.filter(k=>assetStatus[k]==='ready').length;
+ if(loading.length===0){
+  // Show a warning if a file failed; otherwise keep the UI completely unobstructed.
+  loaderBanner.style.display=failed.length?'block':'none';
+  if(failed.length){
+   loadHeading.textContent=labels.failed;
+   loadDetail.textContent=failed.map(k=>labels[k]).join(', ');
+   loadPercent.textContent='!';
+   loadBar.style.width='100%';
+   loaderBanner.querySelector('.teaLoadingSpin').style.animation='none';
+  }
+  return;
+ }
+ const key=loading.includes(displayedLoaderKey)?displayedLoaderKey:loading[0];
+ displayedLoaderKey=key;
+ const progress=assetPercent[key];
+ const percent=Number.isFinite(progress)?Math.max(0,Math.min(99,Math.floor(progress))):null;
+ loadHeading.textContent=labels.loading+': '+labels[key];
+ loadDetail.textContent=labels.preparing+' · '+ready+'/'+assetKeys.length;
+ loadPercent.textContent=percent===null?'…':percent+'%';
+ loadBar.style.width=(percent===null?5:Math.max(5,percent))+'%';
+ loaderBanner.querySelector('.teaLoadingSpin').style.animation='';
+ loaderBanner.style.display='block';
+}
+function modelProgress(key,event){
+ if(event?.lengthComputable&&event.total>0) assetPercent[key]=Math.min(99,100*event.loaded/event.total);
+ reportLoad();
 }
 reportLoad();
 // Start downloading original assets immediately; room entry must never wait for a click.
@@ -115,7 +157,7 @@ async function obtainGLTFLoader(){
     });
     fitImported(model,[11.3,5.8,10.8],[0,2.8,-.3]);lobbyGroup.add(model);lobbyLoaded=true;assetStatus.hall='ready';reportLoad();scheduleMuseumPrefetch();
    }catch(e){console.warn('Hall fitting failed',e);assetStatus.hall='failed';reportLoad()}
-  },undefined,e=>{console.warn('Chinese hall FBX could not load',e);assetStatus.hall='failed';reportLoad()});
+  },e=>modelProgress('hall',e),e=>{console.warn('Chinese hall FBX could not load',e);assetStatus.hall='failed';reportLoad()});
  }catch(e){console.warn('FBXLoader unavailable',e);assetStatus.hall='failed';reportLoad()}
 })();
 async function loadTeaSet(){
@@ -124,7 +166,7 @@ async function loadTeaSet(){
  try{
   const GLTFLoader=await obtainGLTFLoader();
   // loadAsync resolves only when embedded GLB images/materials are prepared.
-  const model=(await new GLTFLoader().loadAsync('./assets/models/teaset.glb')).scene;
+  const model=(await new GLTFLoader().loadAsync('./assets/models/teaset.glb',e=>modelProgress('teaSet',e))).scene;
   fitImported(model,[1.8,1.4,1.2],[0,1.83,0]);
   artifacts[1].add(model);assetStatus.teaSet='ready';reportLoad();
  }catch(e){console.warn('Tea set loading failed',e);assetStatus.teaSet='failed';reportLoad()}
@@ -138,7 +180,7 @@ async function loadCrates(){
    new THREE.TextureLoader().loadAsync('./assets/models/crate/textures/DefaultMaterial_albedo.jpg')
   ]);
   timber.colorSpace=THREE.SRGBColorSpace;
-  const data=await new ColladaLoader().loadAsync('./assets/models/crate/model.dae');
+  const data=await new ColladaLoader().loadAsync('./assets/models/crate/model.dae',e=>modelProgress('crate',e));
   const model=data.scene;
   const woodMaterial=new THREE.MeshStandardMaterial({map:timber,roughness:.82,side:THREE.DoubleSide});
   model.traverse(o=>{if(o.isMesh)o.material=woodMaterial});
@@ -160,7 +202,7 @@ async function loadRealModel(index){
  try{
   const GLTFLoader=await obtainGLTFLoader();
   const loader=new GLTFLoader();
-  const gltf=await loader.loadAsync(entry.path);
+  const gltf=await loader.loadAsync(entry.path,e=>modelProgress(entry.status,e));
   const parent=artifacts[index],object=gltf.scene;
   // Fit in all three axes, with safety margin from glass and railing.
   fitImported(object,entry.max,entry.center);
