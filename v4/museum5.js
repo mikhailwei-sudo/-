@@ -106,7 +106,24 @@ function fixMaterials(obj,e){
    const tex=new THREE.TextureLoader().load('./assets/models/crate/textures/DefaultMaterial_albedo.jpg');
    tex.colorSpace=THREE.SRGBColorSpace;
    obj.traverse(o=>{if(o.isMesh)o.material=new THREE.MeshStandardMaterial({map:tex,roughness:.75,side:THREE.DoubleSide})});
- }else obj.traverse(o=>{if(!o.isMesh)return;for(const m of Array.isArray(o.material)?o.material:[o.material]){if(m?.map)m.map.colorSpace=THREE.SRGBColorSpace;if(m?.emissiveMap)m.emissiveMap.colorSpace=THREE.SRGBColorSpace;}});
+ }else obj.traverse(o=>{
+  if(!o.isMesh)return;
+  for(const m of Array.isArray(o.material)?o.material:[o.material]){
+   if(!m)continue;
+   if(m.map)m.map.colorSpace=THREE.SRGBColorSpace;
+   if(m.emissiveMap)m.emissiveMap.colorSpace=THREE.SRGBColorSpace;
+   if(e.id==='samovar'){
+    // The supplied GLB uses a fully emissive transparent checker material.
+    // Keep its genuine image maps, but render the metal opaque and lit normally.
+    m.transparent=false;m.opacity=1;m.depthWrite=true;
+    if(m.emissive)m.emissive.setRGB(0,0,0);
+    m.emissiveIntensity=0;m.emissiveMap=null;
+    m.roughness=Math.max(.32,m.roughness||0);
+    m.metalness=Math.min(.72,m.metalness??.7);
+   }
+   m.needsUpdate=true;
+  }
+ });
 }
 const gltfLoader=new GLTFLoader();
 const colladaLoader=new ColladaLoader();
