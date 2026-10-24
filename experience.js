@@ -53,13 +53,22 @@ scene.add(new THREE.HemisphereLight(0xf6f5e9,0x434e43,2.2));const dl=new THREE.D
    if(!gltf.scene)return;
    const p=artifacts[2];
    const model=gltf.scene;
-   const b0=new THREE.Box3().setFromObject(model), size=b0.getSize(new THREE.Vector3());
-   const longest=Math.max(size.x,size.y,size.z);
-   if(!Number.isFinite(longest)||longest<.00001)throw new Error('Invalid model bounds');
-   model.scale.multiplyScalar(1.9/longest);
-   const b=new THREE.Box3().setFromObject(model);
-   const c=b.getCenter(new THREE.Vector3());
-   model.position.set(-c.x,1.11-b.min.y,-c.z);
+   // Fit *each* dimension inside the vitrine, not just the longest axis.
+   // The display volume is approx. x [-1.27,1.27], y [.99,2.91],
+   // z [-.96,.96]. These smaller dimensions leave safety margins.
+   model.updateMatrixWorld(true);
+   const bounds=new THREE.Box3().setFromObject(model);
+   const size=bounds.getSize(new THREE.Vector3());
+   if(![size.x,size.y,size.z].every(v=>Number.isFinite(v)&&v>1e-5))
+    throw new Error('Invalid camel model bounds');
+   const scale=Math.min(1.80/size.x,1.38/size.y,1.25/size.z);
+   model.scale.multiplyScalar(scale);
+   model.updateMatrixWorld(true);
+   const fitted=new THREE.Box3().setFromObject(model);
+   const center=fitted.getCenter(new THREE.Vector3());
+   const desiredCenter=new THREE.Vector3(0,1.88,0);
+   model.position.add(desiredCenter.sub(center));
+   model.updateMatrixWorld(true);
    // Preserve the original two-hump reconstruction alongside the imported camel
    // until the camel has been visually checked to be historically appropriate.
    const old=p.children.filter(o=>o!==model);
