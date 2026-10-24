@@ -42,6 +42,33 @@ scene.add(new THREE.HemisphereLight(0xf6f5e9,0x434e43,2.2));const dl=new THREE.D
 {const p=artifacts[1];box(p,1.52,.12,1.08,0,1.12,0,M.wood);for(let x of [-.54,.54])box(p,.16,1.42,.16,x,1.83,0,M.wood);box(p,1.55,.18,.4,0,2.49,0,M.woodLight);cy(p,.13,.13,.57,0,2.17,0,M.metal);box(p,.84,.16,.65,0,1.82,0,M.woodLight);box(p,.95,.24,.76,0,1.37,0,M.tea);tube(p,[[0,2.44,0],[.42,2.48,0],[.9,2.56,0]],.045,M.metal)}
 // 2 - camels
 {const p=artifacts[2];function camel(x,s){const g=new THREE.Group();g.position.set(x,1.12,0);g.scale.setScalar(s);p.add(g);ball(g,.29,-.07,.34,0,M.linen);ball(g,.17,-.12,.71,0,M.linen);ball(g,.19,.20,.66,0,M.linen);tube(g,[[.19,.61,0],[.33,.95,0],[.48,1.05,0]],.10,M.linen);ball(g,.14,.59,1.06,0,M.linen);for(let lx of [-.22,.19])for(let z of [-.17,.17]){let leg=cy(g,.045,.05,.61,lx,-.05,z,M.woodLight);leg.rotation.z=lx<0?.1:-.1}for(let z of [-.36,.36])box(g,.40,.35,.30,-.05,.56,z,M.wood);box(g,.60,.10,.74,0,.82,0,M.red);tube(g,[[-.4,.73,-.25],[-.25,.88,0],[.34,.75,.3]],.025,M.wood)}camel(-.52,.83);camel(.56,.75)}
+// Imported CC-BY 3.0 camel asset. The original procedural Bactrian reconstruction
+// remains visible until the GLB finishes loading or whenever loading fails.
+// Source: Poly Pizza, model by jeremy, republished in billcookie/Pax-Atlas.
+(async()=>{
+ try{
+  const {GLTFLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js');
+  const loader=new GLTFLoader();
+  loader.load('./assets/models/camel-poly-pizza.glb',gltf=>{
+   if(!gltf.scene)return;
+   const p=artifacts[2];
+   const model=gltf.scene;
+   const b0=new THREE.Box3().setFromObject(model), size=b0.getSize(new THREE.Vector3());
+   const longest=Math.max(size.x,size.y,size.z);
+   if(!Number.isFinite(longest)||longest<.00001)throw new Error('Invalid model bounds');
+   model.scale.multiplyScalar(1.9/longest);
+   const b=new THREE.Box3().setFromObject(model);
+   const c=b.getCenter(new THREE.Vector3());
+   model.position.set(-c.x,1.11-b.min.y,-c.z);
+   // Preserve the original two-hump reconstruction alongside the imported camel
+   // until the camel has been visually checked to be historically appropriate.
+   const old=p.children.filter(o=>o!==model);
+   old.forEach(o=>{o.visible=false});
+   p.add(model);
+   p.userData.importedModel=true;
+  },undefined,e=>console.warn('Camel GLB failed to load; using the original reconstruction:',e));
+ }catch(e){console.warn('GLTFLoader unavailable: retained original camel',e)}
+})();
 // 3 - crates
 {const p=artifacts[3];for(let k=0;k<2;k++){let x=k===0?-.48:.43;let h=k===0?.67:.91;box(p,.79,h,.74,x,1.10+h/2,0,M.wood);for(let y of [-h*.3,0,h*.3]){box(p,.82,.038,.77,x,1.10+h/2+y,0,M.gold)}for(let z of [-.375,.375])box(p,.06,h+.03,.06,x-.31,1.10+h/2,z,M.metal);box(p,.41,.25,.014,x,1.10+h/2,.39,M.paper);box(p,.10,.14,.016,x,1.10+h/2,.4,M.tea)}}
 // 4 - shop
