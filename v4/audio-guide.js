@@ -31,6 +31,7 @@ class MuseumNarrator{
   this.audioCache=new Map();
   this.waitTimer=null;
   this.currentTrack=null;
+  this.activeUtterance=null;
   this.pendingPlay=null;
   this.speechContinue=null;
   this.scripts={};
@@ -38,7 +39,7 @@ class MuseumNarrator{
   this.voices=[];
   this.selectedVoice={};
   this.rate=Number(localStorage.getItem('gtr-voice-rate')||'1');
-  this.rate=Number.isFinite(this.rate)?Math.min(1.2,Math.max(.8,this.rate)):1;
+  this.rate=Number.isFinite(this.rate)?Math.min(1.5,Math.max(.75,this.rate)):1;
   this.buildControls();
   this.dataReady=false;
   this.dataPromise=this.loadData();
@@ -74,7 +75,7 @@ class MuseumNarrator{
   this.rateText=rateTitle;
   this.rateSlider=document.createElement('input');
   this.rateSlider.type='range';
-  this.rateSlider.min='0.8';this.rateSlider.max='1.2';this.rateSlider.step='.05';this.rateSlider.value=String(this.rate);
+  this.rateSlider.min='0.75';this.rateSlider.max='1.5';this.rateSlider.step='.05';this.rateSlider.value=String(this.rate);
   this.rateSlider.style.cssText='width:100%;accent-color:#c7a56d';
   rateLabel.append(rateTitle,this.rateSlider);
   wrap.append(voiceLabel,rateLabel);
@@ -86,6 +87,8 @@ class MuseumNarrator{
   });
   this.rateSlider.addEventListener('input',()=>{
    this.rate=Number(this.rateSlider.value);
+   if(this.currentAudio){this.currentAudio.playbackRate=this.rate;this.currentAudio.defaultPlaybackRate=this.rate;}
+   if(this.activeUtterance)this.activeUtterance.rate=defaults[this.currentTrack?.lang||'ru']*this.rate;
    localStorage.setItem('gtr-voice-rate',String(this.rate));
    this.refreshLabels();
   });
@@ -239,6 +242,9 @@ class MuseumNarrator{
    try{audio.pause();audio.currentTime=0;}catch(e){}
    this.currentAudio=audio;
    audio.volume=volume;
+   audio.defaultPlaybackRate=this.rate;
+   audio.playbackRate=this.rate;
+   if('preservesPitch' in audio)audio.preservesPitch=true;
    let didFallback=false;
    const fallback=()=>{
     if(!this.isCurrent(serial,audio)||didFallback)return;
@@ -292,10 +298,12 @@ class MuseumNarrator{
    utterance.lang=LOCALES[lang];
    const voice=this.chooseVoice(lang);if(voice)utterance.voice=voice;
    utterance.rate=defaults[lang]*this.rate;
+   this.activeUtterance=utterance;
    utterance.pitch=1;utterance.volume=volume;
    utterance.onstart=()=>{if(serial===this.serial)this.info(this.translate('progress')+' · '+cursor+'/'+parts.length,'playing');};
    utterance.onend=()=>{
     if(serial!==this.serial)return;
+    this.activeUtterance=null;
     this.waitTimer=setTimeout(()=>{this.waitTimer=null;speakNext();},lang==='zh'?190:250);
    };
    utterance.onerror=e=>{
