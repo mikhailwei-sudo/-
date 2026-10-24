@@ -1,1 +1,32 @@
-{}
+{
+  "ru": {
+    "0": "./audio/ru/0.mp3",
+    "1": "./audio/ru/1.mp3",
+    "2": "./audio/ru/2.mp3",
+    "3": "./audio/ru/3.mp3",
+    "4": "./audio/ru/4.mp3",
+    "5": "./audio/ru/5.mp3",
+    "6": "./audio/ru/6.mp3",
+    "7": "./audio/ru/7.mp3"
+  },
+  "zh": {
+    "0": "./audio/zh/0.mp3",
+    "1": "./audio/zh/1.mp3",
+    "2": "./audio/zh/2.mp3",
+    "3": "./audio/zh/3.mp3",
+    "4": "./audio/zh/4.mp3",
+    "5": "./audio/zh/5.mp3",
+    "6": "./audio/zh/6.mp3",
+    "7": "./audio/zh/7.mp3"
+  },
+  "en": {
+    "0": "./audio/en/0.mp3",
+    "1": "./audio/en/1.mp3",
+    "2": "./audio/en/2.mp3",
+    "3": "./audio/en/3.mp3",
+    "4": "./audio/en/4.mp3",
+    "5": "./audio/en/5.mp3",
+    "6": "./audio/en/6.mp3",
+    "7": "./audio/en/7.mp3"
+  }
+}
