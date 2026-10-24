@@ -70,6 +70,23 @@ function reportLoad(){
  loaderBanner.style.display=states.every(v=>v==='ready'||v==='pending')?'none':'block';
 }
 reportLoad();
+// Start downloading original assets immediately; room entry must never wait for a click.
+const loaderRetrySources=[
+ 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js',
+ 'https://unpkg.com/three@0.170.0/examples/jsm/loaders/GLTFLoader.js'
+];
+let commonGLTFLoaderPromise;
+async function obtainGLTFLoader(){
+ if(!commonGLTFLoaderPromise)commonGLTFLoaderPromise=(async()=>{
+  let lastError;
+  for(const source of loaderRetrySources){
+   try{return (await import(source)).GLTFLoader}catch(error){lastError=error;console.warn('3D asset loader CDN unavailable',source,error)}
+  }
+  throw lastError||new Error('3D asset loader unavailable');
+ })();
+ return commonGLTFLoaderPromise;
+}
+
 (async()=>{
  try{
   const {FBXLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/FBXLoader.js');
@@ -128,22 +145,6 @@ reportLoad();
 })();
 
 // Actual user-supplied Sketchfab GLB assets. They load from this project, not external embeds.
-// Start downloading original assets immediately; room entry must never wait for a click.
-const loaderRetrySources=[
- 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js',
- 'https://unpkg.com/three@0.170.0/examples/jsm/loaders/GLTFLoader.js'
-];
-let commonGLTFLoaderPromise;
-async function obtainGLTFLoader(){
- if(!commonGLTFLoaderPromise)commonGLTFLoaderPromise=(async()=>{
-  let lastError;
-  for(const source of loaderRetrySources){
-   try{return (await import(source)).GLTFLoader}catch(error){lastError=error;console.warn('3D asset loader CDN unavailable',source,error)}
-  }
-  throw lastError||new Error('3D asset loader unavailable');
- })();
- return commonGLTFLoaderPromise;
-}
 const realModelsLoaded=new Set();
 const realModelsLoading=new Set();
 const realModelInfo={
