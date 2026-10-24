@@ -81,7 +81,7 @@ el('tourStart').onclick=()=>{
  playAudio();
 };
 el('tourStop').onclick=stopTour;
-el('audioPlay').onclick=()=>{stopTour();playAudio()};
+el('audioPlay').onclick=()=>{if(tourActive)stopTour();playAudio()};
 el('audioPause').onclick=pauseAudio;
 el('audioStop').onclick=stopTour;
 el('prevRoom').onclick=()=>changeRoom(currentRoom-1);el('nextRoom').onclick=()=>changeRoom(currentRoom+1);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words();museumNarrator.refreshVoices()});window.addEventListener('pagehide',stopTour);
