@@ -3,7 +3,18 @@ const holder=document.getElementById('renderStage');
 const lobbyOverlay=document.getElementById('lobbyOverlay');
 const lobbyButton=document.getElementById('enterLobby');
 let THREE;
-try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js')}catch(err){document.getElementById('fallbackText').textContent=UI[lang].unavailable;console.warn('Three.js library could not be loaded',err)}
+for(const source of [
+ 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js',
+ 'https://unpkg.com/three@0.170.0/build/three.module.js',
+ 'https://esm.sh/three@0.170.0'
+]){
+ try{THREE=await import(source);break}
+ catch(err){console.warn('3D engine source unavailable:',source,err)}
+}
+if(!THREE){
+ const fallback=document.getElementById('fallbackText');
+ if(fallback)fallback.textContent=(UI[lang].unavailable||'3D не загрузилось')+' · Проверьте соединение и обновите страницу.';
+}
 if(THREE){try{
 const scene=new THREE.Scene();scene.background=new THREE.Color('#0c1711');scene.fog=new THREE.Fog('#17271e',12,65);
 const camera=new THREE.PerspectiveCamera(54,1,.1,120);
@@ -362,4 +373,12 @@ let onScreen=true;new IntersectionObserver(es=>onScreen=!!es[0]?.isIntersecting,
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function draw(t){requestAnimationFrame(draw);if(document.hidden||!onScreen){prev=t;return}const dt=Math.min(.05,(t-prev)/1000);prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
 showLobby();
-}catch(err){console.error(err);document.getElementById('fallbackText').textContent=UI[lang].unavailable;holder.replaceChildren(document.getElementById('renderFallback')||Object.assign(document.createElement('div'),{className:'renderFallback',textContent:UI[lang].unavailable}))}}
+}catch(err){
+ console.error('3D scene initialisation failed',err);
+ const fallback=document.getElementById('renderFallback')||Object.assign(document.createElement('div'),{className:'renderFallback'});
+ const t=document.getElementById('fallbackText');
+ const message=(UI[lang]?.unavailable||'Не удалось открыть 3D-музей')+'. Обновите страницу или проверьте подключение.';
+ if(t)t.textContent=message;
+ else fallback.textContent=message;
+ holder.replaceChildren(fallback);
+}}
