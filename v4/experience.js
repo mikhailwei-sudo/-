@@ -62,7 +62,7 @@ function fitImported(model,dim,center){
 }
 const assetStatus={hall:'loading',teaSet:'pending',crate:'pending'};
 const loaderBanner=document.createElement('div');loaderBanner.className='assetBanner';loaderBanner.style.cssText='position:absolute;top:54px;left:15px;padding:8px 12px;background:#0d1a15bc;border-radius:10px;font:11px system-ui;color:#eee;pointer-events:none;z-index:4';holder.parentElement.append(loaderBanner);
-function reportLoad(){const l={ru:['Холл','Сервиз','Ящики'],zh:['大厅','茶具','木箱'],en:['Hall','Tea set','Crates']}[document.documentElement.lang]||['Hall','Tea set','Crates'];const states=[assetStatus.hall,assetStatus.teaSet,assetStatus.crate];loaderBanner.textContent=l.map((v,i)=>v+': '+(states[i]==='ready'?'✓':states[i]==='failed'?'!':states[i]==='pending'?'–':'…')).join(' · ');setTimeout(()=>{if(states.every(s=>s!=='loading'))loaderBanner.style.display='none'},6000)}reportLoad();
+function reportLoad(){const l={ru:['Холл','Сервиз','Ящики'],zh:['大厅','茶具','木箱'],en:['Hall','Tea set','Crates']}[document.documentElement.lang]||['Hall','Tea set','Crates'];const states=[assetStatus.hall,assetStatus.teaSet,assetStatus.crate];loaderBanner.textContent=l.map((v,i)=>v+': '+(states[i]==='ready'?'✓':states[i]==='failed'?'!':states[i]==='pending'?'–':'…')).join(' · ');setTimeout(()=>{if(states.every(s=>s!=='loading')&&!states.includes('failed'))loaderBanner.style.display='none'},6000)}reportLoad();
 (async()=>{
  try{
   const {FBXLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/FBXLoader.js');
@@ -111,25 +111,45 @@ function reportLoad(){const l={ru:['Холл','Сервиз','Ящики'],zh:['
 {const p=artifacts[0];for(let a=0;a<3;a++){box(p,1.35,.18,.72,0,1.15+a*.21,0,M.tea);for(let j=0;j<11;j++)box(p,.018,.018,.016,-.52+j*.10,1.25+a*.21,.37,M.woodLight)}for(let x of [-.43,.43])box(p,.12,.67,.73,x,1.36,0,M.linen);plaque(p,'茶',0,1.8,.4)}
 // 1 - tea press
 {const p=artifacts[1];box(p,1.52,.12,1.08,0,1.12,0,M.wood);for(let x of [-.54,.54])box(p,.16,1.42,.16,x,1.83,0,M.wood);box(p,1.55,.18,.4,0,2.49,0,M.woodLight);cy(p,.13,.13,.57,0,2.17,0,M.metal);box(p,.84,.16,.65,0,1.82,0,M.woodLight);box(p,.95,.24,.76,0,1.37,0,M.tea);tube(p,[[0,2.44,0],[.42,2.48,0],[.9,2.56,0]],.045,M.metal)}
-// 2 - camels
-{const p=artifacts[2];function camel(x,s){const g=new THREE.Group();g.position.set(x,1.12,0);g.scale.setScalar(s);p.add(g);ball(g,.29,-.07,.34,0,M.linen);ball(g,.17,-.12,.71,0,M.linen);ball(g,.19,.20,.66,0,M.linen);tube(g,[[.19,.61,0],[.33,.95,0],[.48,1.05,0]],.10,M.linen);ball(g,.14,.59,1.06,0,M.linen);for(let lx of [-.22,.19])for(let z of [-.17,.17]){let leg=cy(g,.045,.05,.61,lx,-.05,z,M.woodLight);leg.rotation.z=lx<0?.1:-.1}for(let z of [-.36,.36])box(g,.40,.35,.30,-.05,.56,z,M.wood);box(g,.60,.10,.74,0,.82,0,M.red);tube(g,[[-.4,.73,-.25],[-.25,.88,0],[.34,.75,.3]],.025,M.wood)}camel(-.52,.83);camel(.56,.75)}
-// 3 - crates
-{const p=artifacts[3];for(let k=0;k<2;k++){let x=k===0?-.48:.43;let h=k===0?.67:.91;box(p,.79,h,.74,x,1.10+h/2,0,M.wood);for(let y of [-h*.3,0,h*.3]){box(p,.82,.038,.77,x,1.10+h/2+y,0,M.gold)}for(let z of [-.375,.375])box(p,.06,h+.03,.06,x-.31,1.10+h/2,z,M.metal);box(p,.41,.25,.014,x,1.10+h/2,.39,M.paper);box(p,.10,.14,.016,x,1.10+h/2,.4,M.tea)}}
-// 4 - shop
-{const p=artifacts[4];box(p,1.72,.1,.92,0,1.17,0,M.wood);box(p,1.65,.90,.68,0,1.68,-.15,M.wood);box(p,2.1,.18,1.10,0,2.26,-.08,M.red);for(let x of [-.80,.80])cy(p,.075,.075,1.25,x,1.67,.46,M.gold);box(p,1.65,.10,.65,0,1.30,.30,M.woodLight);for(let x of [-.5,0,.5]){box(p,.34,.35,.32,x,1.54,.30,M.linen);box(p,.23,.18,.01,x,1.59,.48,M.paper)}plaque(p,'茶',0,2.09,.56)}
-// 5 frontier gateway
-{const p=artifacts[5];for(let x of [-.65,.65]){box(p,.25,1.57,.31,x,1.89,0,M.stone);box(p,.41,.13,.43,x,2.68,0,M.gold)}box(p,1.71,.16,.43,0,2.7,0,M.stone);box(p,1.63,.1,.28,0,2.82,0,M.gold);box(p,.65,.17,.25,0,1.32,.23,M.red);plaque(p,'茶路',0,2.55,.235)}
-// 6 samovar
-{const p=artifacts[6];lathe(p,[[.14,0],[.26,.11],[.28,.63],[.24,.92],[.16,1.22],[.11,1.35],[.08,1.44]],0,1.10,0,M.gold);cy(p,.32,.29,.09,0,1.08,0,M.gold);cy(p,.17,.17,.1,0,2.57,0,M.gold);cy(p,.045,.045,.21,0,2.68,0,M.gold);for(let x of [-.43,.43]){let h=ring(p,.22,.04,x,1.97,0,M.gold);h.rotation.y=Math.PI/2}tube(p,[[0,1.35,.2],[0,1.35,.49],[0,1.21,.67]],.055,M.gold);ball(p,.08,0,1.20,.72,M.gold);for(let x of [-.67,.68]){cy(p,.13,.10,.16,x,1.17,.45,M.porcelain);let h=ring(p,.085,.02,x+.16,1.17,.45,M.porcelain);h.rotation.y=Math.PI/2}}
-// 7 desk
-{const p=artifacts[7];box(p,1.84,.13,1.20,0,1.52,0,M.wood);for(let x of [-.71,.71])for(let z of [-.39,.39])box(p,.10,.54,.12,x,1.22,z,M.woodLight);box(p,1.06,.018,.75,-.22,1.62,0,M.paper);for(let n=0;n<4;n++)tube(p,[[-.70+n*.21,1.635,-.22],[-.49+n*.20,1.635,0],[-.28+n*.21,1.635,.24]],.009,n%2?M.red:M.metal);cy(p,.13,.16,.21,.60,1.76,-.22,M.metal);cone(p,.12,.22,.60,2.02,-.22,M.metal);box(p,.44,.31,.30,.57,1.75,.35,M.woodLight)}
+// 2 — recognisable Bactrian camel study: two distinct humps, long bent neck,
+ // sculpted muzzle, cloven feet and camel-coloured body (temporary reconstruction
+ // until owner's original camel.blend is properly converted to glTF).
+{const p=artifacts[2]; const fur=new THREE.MeshStandardMaterial({color:'#ac8459',roughness:1});
+ const darkFur=new THREE.MeshStandardMaterial({color:'#5c4634',roughness:1});
+ function animal(offset,scale){
+  const g=new THREE.Group();g.position.set(offset,1.20,0);g.scale.setScalar(scale);p.add(g);
+  function ell(x,y,z,sx,sy,sz,mat=fur){const o=ball(g,1,x,y,z,mat);o.scale.set(sx,sy,sz);return o}
+  // Long oval torso in the direction of travel (+X).
+  ell(-.11,.33,0,.55,.30,.29);
+  // The two distinctly separated humps sit above the shoulder and rump.
+  ell(-.37,.64,0,.23,.33,.22);
+  ell(.13,.66,0,.21,.36,.20);
+  // Sloping neck, with a narrow head and elongated muzzle.
+  tube(g,[[.28,.35,.03],[.49,.57,.03],[.57,.90,.03],[.67,1.02,.02]],.105,fur);
+  ell(.76,1.02,0,.20,.125,.12);
+  ell(.94,.96,0,.15,.082,.10,darkFur);
+  for(const z of [-.085,.085]){ell(.73,1.15,z,.042,.085,.035,darkFur);ell(.83,1.045,z,.026,.024,.025,darkFur)}
+  // Distinctly four legs with angled lower sections and broad feet.
+  for(const x of [-.43,.29])for(const z of [-.20,.20]){
+   tube(g,[[x,.22,z],[x+(x<0?-.04:.05),-.10,z],[x+(x<0?.04:-.02),-.43,z]],.068,fur);
+   ell(x+.05,-.44,z+.015,.135,.055,.095,darkFur)
+  }
+  tube(g,[[-.60,.44,0],[-.75,.20,0],[-.78,.04,.01]],.027,darkFur);
+  // Harness and bundles read visually as caravan equipment.
+  box(g,.72,.055,.67,-.13,.73,0,M.red);
+  for(const z of [-.40,.40]){box(g,.37,.27,.26,-.22,.46,z,M.wood);
+    box(g,.41,.045,.29,-.22,.60,z,M.gold)}
+  tube(g,[[-.47,.65,-.39],[-.44,.86,0],[.28,.80,.37]],.018,M.wood);
+ }
+ animal(-.60,.68);animal(.64,.62);
+}
 // Camera with smooth motion between connected halls.
 const state={room:0,item:0,targetX:0,lookX:0,yaw:0,tyaw:0,pitch:.06,tpitch:.06,zoom:9.5,tzoom:9.5};
 function goRoom(room,item){state.room=room;state.item=item;state.targetX=room*regionSpacing;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
 function goItem(item){state.item=item;const local=item%2===0?-2.45:2.45;state.targetX=state.room*regionSpacing+local*.72;state.tyaw=local<0?-.12:.12;state.tzoom=6.3;highlight()}
 function highlight(){artifacts.forEach((o,i)=>o.scale.setScalar(i===state.item?1.08:1));}
 let inLobby=true;
-function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=9.5;state.tpitch=.08; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
+function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=10.5;state.tpitch=.09; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
 function leaveLobby(){inLobby=false;if(lobbyOverlay)lobbyOverlay.hidden=true;lobbyButton?.setAttribute('aria-pressed','false');}
 const roomGo=goRoom;goRoom=function(room,item){leaveLobby();roomGo(room,item);document.dispatchEvent(new CustomEvent('museum-room-enter',{detail:room}))};
 const itemGo=goItem;goItem=function(item){leaveLobby();itemGo(item)};
@@ -166,7 +186,7 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();state.tzoom=clamp(state.t
 document.getElementById('zoomIn').onclick=()=>state.tzoom=clamp(state.tzoom-.7,4.1,13.5);
 document.getElementById('zoomOut').onclick=()=>state.tzoom=clamp(state.tzoom+.7,4.1,13.5);
 document.getElementById('resetCam').onclick=()=>goRoom(currentRoom,currentItem);
-let prev=performance.now(),camX=0,zoom=9.5,yaw=0,pitch=.06;
+let prev=performance.now(),camX=-19,zoom=9.5,yaw=0,pitch=.06;
 let onScreen=true;new IntersectionObserver(es=>onScreen=!!es[0]?.isIntersecting,{threshold:.02}).observe(holder);
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function draw(t){requestAnimationFrame(draw);if(document.hidden||!onScreen){prev=t;return}const dt=Math.min(.05,(t-prev)/1000);prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
