@@ -18,7 +18,7 @@ en:{kicker:"Virtual exhibition · Hall 01",title:"Step into history",intro:"Expl
 };
 let lang=localStorage.getItem("gtr-lang")||"ru";if(!translations[lang])lang="ru";let selected=0;const $=id=>document.getElementById(id);
 function render(){const d=translations[lang];document.documentElement.lang=lang;for(const [id,key] of Object.entries({kicker:"kicker",title:"title",intro:"intro",sceneLabel:"label",hint:"hint",reset:"reset",detailKicker:"kicker",footer:"footer",disclaimer:"disclaimer",detailSource:"source"}))$(id).textContent=d[key];$("stations").replaceChildren(...d.stations.map((s,i)=>{const b=document.createElement("button");b.textContent=s[0];b.setAttribute("aria-pressed",String(i===selected));b.onclick=()=>choose(i);return b}));$("detailTitle").textContent=d.stations[selected][0];$("detailText").textContent=d.stations[selected][1];$("detailSource").href=d.stations[selected][2];document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.lang===lang)));localStorage.setItem("gtr-lang",lang)}
-function choose(i){selected=i;render();if(window.focusExhibit)window.focusExhibit(i)}
+function choose(i){selected=i;render();if(window.focusExhibit)window.focusExhibit(i)}window.chooseMuseumExhibit=choose;
 document.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>{lang=b.dataset.lang;render()});render();
 window.onMuseumReady=()=>{$("status").textContent=translations[lang].hint};window.onMuseumError=()=>{$("status").textContent=lang==="ru"?"3D недоступен: можно изучить экспонаты кнопками ниже.":lang==="zh"?"3D不可用，可使用下方按钮查看介绍。":"3D unavailable; use the buttons below to read the exhibits."};
 </script><script type="module" src="./museum3d.js"></script></body></html>
