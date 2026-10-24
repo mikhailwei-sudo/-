@@ -1,0 +1,54 @@
+name: Install Great Tea Road 4.0
+on:
+  push:
+    paths:
+      - 'Great_Tea_Road_4_0_Chinese_Hall.zip'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Extract uploaded museum archive into v4
+        shell: bash
+        run: |
+          set -euo pipefail
+          ZIP="Great_Tea_Road_4_0_Chinese_Hall.zip"
+          test -f "$ZIP" || { echo "Upload $ZIP first"; exit 1; }
+          mkdir -p /tmp/gtr4-unpack
+          python3 - <<'PY'
+          import zipfile, pathlib
+          z=zipfile.ZipFile("Great_Tea_Road_4_0_Chinese_Hall.zip")
+          members=z.namelist()
+          assert members and all(x.startswith("Great_Tea_Road_4_0_Chinese_Hall/") for x in members), "Unexpected ZIP structure"
+          assert all(not any(p == '..' for p in pathlib.PurePosixPath(x).parts) for x in members), "Unsafe path"
+          z.extractall("/tmp/gtr4-unpack")
+          PY
+          test -f /tmp/gtr4-unpack/Great_Tea_Road_4_0_Chinese_Hall/experience.html
+          test -f /tmp/gtr4-unpack/Great_Tea_Road_4_0_Chinese_Hall/assets/models/teaset.glb
+          mkdir -p v4
+          cp -a /tmp/gtr4-unpack/Great_Tea_Road_4_0_Chinese_Hall/. v4/
+          python3 - <<'PY'
+          from pathlib import Path
+          from hashlib import sha256
+          p=Path("v4/assets/models/teaset.glb")
+          print("GLB bytes:",p.stat().st_size,"SHA256:",sha256(p.read_bytes()).hexdigest())
+          assert p.stat().st_size > 1000000
+          PY
+          rm -- "$ZIP"
+      - name: Commit installed 3D museum
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v4/ Great_Tea_Road_4_0_Chinese_Hall.zip
+          if ! git diff --cached --quiet; then
+            git commit -m "Install Great Tea Road 4.0 Chinese Hall in /v4"
+            git push
+          fi
