@@ -191,10 +191,36 @@ window.addEventListener('load',()=>{loadRealModel(2);loadRealModel(6)},{once:tru
 // The plinth is intentionally kept clear while the GLB is loading.
 // 3 - crates
 {const p=artifacts[3];for(let k=0;k<2;k++){let x=k===0?-.48:.43;let h=k===0?.67:.91;box(p,.79,h,.74,x,1.10+h/2,0,M.wood);for(let y of [-h*.3,0,h*.3]){box(p,.82,.038,.77,x,1.10+h/2+y,0,M.gold)}for(let z of [-.375,.375])box(p,.06,h+.03,.06,x-.31,1.10+h/2,z,M.metal);box(p,.41,.25,.014,x,1.10+h/2,.39,M.paper);box(p,.10,.14,.016,x,1.10+h/2,.4,M.tea)}}
-// 4 - shop
-{const p=artifacts[4];box(p,1.72,.1,.92,0,1.17,0,M.wood);box(p,1.65,.90,.68,0,1.68,-.15,M.wood);box(p,2.1,.18,1.10,0,2.26,-.08,M.red);for(let x of [-.80,.80])cy(p,.075,.075,1.25,x,1.67,.46,M.gold);box(p,1.65,.10,.65,0,1.30,.30,M.woodLight);for(let x of [-.5,0,.5]){box(p,.34,.35,.32,x,1.54,.30,M.linen);box(p,.23,.18,.01,x,1.59,.48,M.paper)}plaque(p,'茶',0,2.09,.56)}
-// 5 frontier gateway
-{const p=artifacts[5];for(let x of [-.65,.65]){box(p,.25,1.57,.31,x,1.89,0,M.stone);box(p,.41,.13,.43,x,2.68,0,M.gold)}box(p,1.71,.16,.43,0,2.7,0,M.stone);box(p,1.63,.1,.28,0,2.82,0,M.gold);box(p,.65,.17,.25,0,1.32,.23,M.red);plaque(p,'茶路',0,2.55,.235)}
+// 4 - tea merchant's shop / lavka
+{const p=artifacts[4];
+ box(p,2.12,.12,1.22,0,1.05,0,M.wood);
+ box(p,1.92,.78,.54,0,1.46,.27,M.woodLight);
+ box(p,1.62,.08,.20,0,1.88,.46,M.wood);
+ for(const x of [-.86,.86]){cy(p,.08,.08,1.76,x,1.93,.38,M.gold);cy(p,.06,.06,1.55,x,1.80,-.32,M.woodLight)}
+ box(p,2.34,.08,1.34,0,2.58,0,M.red);box(p,2.12,.08,1.08,0,2.46,-.05,M.red);
+ for(const x of [-.92,.92])box(p,.24,.10,.24,x,2.66,0,M.gold);
+ plaque(p,'茶庄',0,2.32,.56);
+ for(const x of [-.72,.72]){cy(p,.03,.03,.18,x,2.28,.48,M.gold);ball(p,.11,x,2.11,.48,M.red);cy(p,.08,.08,.18,x,1.96,.48,M.red);cone(p,.055,.09,x,1.82,.48,M.gold)}
+ box(p,1.74,.08,.18,0,1.53,-.34,M.wood);box(p,1.74,.08,.18,0,1.85,-.34,M.wood);
+ for(const x of [-.82,0,.82])box(p,.08,.82,.12,x,1.69,-.34,M.wood);
+ for(const x of [-.58,0,.58]){box(p,.34,.40,.26,x,1.28,.42,M.linen);box(p,.26,.08,.12,x,1.52,.43,M.paper)}
+ for(const x of [-.58,0,.58]){cy(p,.11,.13,.30,x,1.70,-.28,M.porcelain);ring(p,.10,.015,x,1.84,-.28,M.gold)}
+ for(const x of [-.42,.04]){box(p,.34,.12,.20,x,1.98,-.30,M.tea);box(p,.16,.06,.01,x,2.05,-.18,M.paper)}
+ box(p,.24,.24,.24,.66,1.96,-.28,M.wood);box(p,.14,.18,.16,.66,2.20,-.28,M.linen);
+ for(const x of [-.48,-.12,.24])cy(p,.09,.09,.28,x,1.42,.48,M.linen);
+ cy(p,.10,.10,.28,.56,1.42,.48,M.red);
+}
+// 5 - ceremonial frontier gate
+{const p=artifacts[5];
+ for(const x of [-.72,.72]){box(p,.38,.20,.42,x,1.02,0,M.stone);box(p,.24,1.74,.28,x,1.99,0,M.woodLight);box(p,.34,.10,.36,x,2.87,0,M.gold)}
+ box(p,1.96,.12,.34,0,2.76,0,M.woodLight);box(p,1.76,.08,.24,0,2.98,0,M.gold);
+ box(p,2.34,.08,.74,0,3.18,0,M.red);box(p,2.02,.08,.54,0,3.08,-.02,M.red);
+ for(const x of [-.98,.98])cone(p,.14,.20,x,3.16,0,M.gold);
+ box(p,.80,.24,.10,0,2.48,.18,M.dark);plaque(p,'恰克图',0,2.48,.24);
+ for(const x of [-.30,.30]){cy(p,.018,.018,.18,x,2.20,.18,M.gold);cone(p,.035,.08,x,2.06,.18,M.red)}
+ for(const x of [-1.02,1.02]){box(p,.20,.58,.20,x,1.28,.34,M.stone);ball(p,.08,x,1.62,.34,M.gold)}
+ box(p,1.34,.06,.18,0,1.12,.18,M.stone);box(p,1.04,.05,.12,0,1.20,-.18,M.wood);
+}
 // 6 — low-detail fallback is visible only if the real GLB cannot load.
 {const p=artifacts[6];const brass=new THREE.MeshStandardMaterial({color:'#ad8b4d',metalness:.62,roughness:.32});
  cy(p,.36,.42,.82,0,1.69,0,brass);cy(p,.42,.45,.11,0,1.22,0,brass);
@@ -203,8 +229,19 @@ window.addEventListener('load',()=>{loadRealModel(2);loadRealModel(6)},{once:tru
  tube(p,[[.24,1.60,.32],[.55,1.59,.38],[.65,1.51,.38]],.055,brass);
  cy(p,.11,.13,.11,.68,1.49,.38,M.wood);
 }
-// 7 desk
-{const p=artifacts[7];box(p,1.84,.13,1.20,0,1.52,0,M.wood);for(let x of [-.71,.71])for(let z of [-.39,.39])box(p,.10,.54,.12,x,1.22,z,M.woodLight);box(p,1.06,.018,.75,-.22,1.62,0,M.paper);for(let n=0;n<4;n++)tube(p,[[-.70+n*.21,1.635,-.22],[-.49+n*.20,1.635,0],[-.28+n*.21,1.635,.24]],.009,n%2?M.red:M.metal);cy(p,.13,.16,.21,.60,1.76,-.22,M.metal);cone(p,.12,.22,.60,2.02,-.22,M.metal);box(p,.44,.31,.30,.57,1.75,.35,M.woodLight)}
+// 7 - merchant table / writing table
+{const p=artifacts[7];
+ box(p,1.96,.12,1.08,0,1.50,0,M.wood);
+ for(const x of [-.76,.76])for(const z of [-.40,.40])box(p,.10,.58,.12,x,1.17,z,M.woodLight);
+ box(p,1.64,.09,.16,0,1.36,.46,M.woodLight);box(p,1.64,.09,.16,0,1.36,-.46,M.woodLight);
+ box(p,.16,.09,.84,-.82,1.36,0,M.woodLight);box(p,.16,.09,.84,.82,1.36,0,M.woodLight);
+ box(p,1.18,.02,.72,-.10,1.58,0,M.paper);
+ for(let n=0;n<5;n++)tube(p,[[-.68+n*.22,1.595,-.18],[-.52+n*.22,1.595,.02],[-.36+n*.22,1.595,.22]],.010,n%2?M.red:M.metal);
+ box(p,.16,.05,.16,.56,1.61,-.24,M.red);cy(p,.07,.08,.14,.62,1.67,.12,M.metal);
+ for(const x of [.56,.63,.70])tube(p,[[x,1.72,.12],[x+.02,1.86,.12],[x+.03,1.96,.12]],.009,M.dark);
+ box(p,.38,.03,.24,.42,1.60,.34,M.paper);box(p,.34,.02,.18,.44,1.63,.35,M.linen);
+ box(p,.42,.03,.26,-.62,1.58,.28,M.woodLight);for(const x of [-.72,-.58]){cy(p,.055,.048,.08,x,1.64,.28,M.porcelain);ring(p,.035,.008,x+.03,1.68,.28,M.porcelain)}
+}
 // Camera with smooth motion between connected halls.
 const state={room:0,item:0,targetX:0,lookX:0,yaw:0,tyaw:0,pitch:.06,tpitch:.06,zoom:9.5,tzoom:9.5};
 function goRoom(room,item){state.room=room;state.item=item;state.targetX=room*regionSpacing;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
