@@ -152,7 +152,7 @@ class MuseumNarrator{
   try{await this._loadingData}finally{this._loadingData=null}
  }
  prefetch(item,lang){
-  const clip=this.manifest?.[lang]?.[item];
+  const clip=this.manifest?.[lang]?.[item] || ((['ru','zh','en'].includes(lang)&&Number.isInteger(item)&&item>=0&&item<8)?'./audio/'+lang+'/'+item+'.mp3':null);
   if(!clip)return;
   const key=lang+':'+item;
   if(this.audioCache.has(key))return;
@@ -254,7 +254,7 @@ class MuseumNarrator{
   this.channel?.postMessage(claim);
   try{localStorage.setItem('gtr-narration-active',JSON.stringify(claim));}catch(e){}
   this.prefetch(item,lang);
-  const clip=this.manifest?.[lang]?.[item];
+  const clip=this.manifest?.[lang]?.[item] || ((['ru','zh','en'].includes(lang)&&Number.isInteger(item)&&item>=0&&item<8)?'./audio/'+lang+'/'+item+'.mp3':null);
   if(clip){
    const key=lang+':'+item;
    const audio=this.audioCache.get(key)||new Audio(clip);
