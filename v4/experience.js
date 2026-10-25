@@ -826,7 +826,7 @@ if(new URLSearchParams(location.search).has('diagnostics')){
  const header=document.createElement('div');header.textContent='GTR · WebGL / mobile QA';header.style.fontWeight='bold';
  const actions=document.createElement('div');actions.style.cssText='display:flex;flex-wrap:wrap;gap:5px;margin:8px 0';
  const log=document.createElement('pre');log.style.cssText='max-height:185px;overflow:auto;white-space:pre-wrap;font:11px/1.4 ui-monospace,monospace';
- const buttons=[['Холл',-1],['Зал 1',0],['Зал 2',1],['Зал 3',2],['Зал 4',3]];
+ const buttons=[['Холл',-1],['Китай',0],['Караваны',1],['География',4],['Кяхта',2],['Россия',3],['Купцы',5],['Культуры',6]];
  for(const [label,index] of buttons){
   const button=document.createElement('button');button.textContent=label;button.style.cssText='background:#294c3b;color:white;border:1px solid #a18e66;border-radius:6px;padding:5px;cursor:pointer';
   button.addEventListener('click',()=>{
