@@ -94,7 +94,9 @@ function galleryObject7(group,index,x,build){
  const item=new THREE.Group();item.userData.itemIndex=index;ped.add(item);artifacts[index]=item;
  build(item);
  // Open museum plinths instead of glass to keep texts and diagrams readable.
- box(ped,2.48,.055,.48,0,1.13,.80,C('#d6c8a9',.9));
+ // The old plaque base stood in front of models at display height.
+ // Mount a low label ledge on the front face of the plinth instead.
+ box(ped,2.45,.025,.18,0,.98,1.13,C('#d6c8a9',.9));
  return item;
 }
 for(let ri=4;ri<7;ri++){
@@ -127,7 +129,7 @@ for(let ri=4;ri<7;ri++){
   galleryObject7(g,id,-2.5,ob=>{
    // Stylised route panel: a concept map, not georeferenced cartography.
    box(ob,2.20,.11,1.36,0,1.18,0,C('#d8cfb9'));
-   museumSign7(ob,['武夷山 → 张家口','库伦 → 恰克图 → 俄罗斯'],2.08,.97,0,1.45,0.73);
+   museumSign7(ob,['武夷山 → 张家口','库伦 → 恰克图 → 俄罗斯'],2.04,.29,0,.98,1.17);
    for(let j=0;j<5;j++){const xx=-.87+j*.43;ball(ob,.085,xx,1.33,-.15+Math.sin(j)*.3,M.gold)}
    tube(ob,[[-.87,1.38,-.15],[-.44,1.38,.10],[0,1.38,-.15],[.44,1.38,.10],[.87,1.38,-.15]],.024,M.red);
   });
@@ -135,7 +137,7 @@ for(let ri=4;ri<7;ri++){
    for(let j=0;j<5;j++){
     box(ob,.33,.30,.33,-.86+j*.43,1.12,-.06,C(['#947d68','#958f7a','#718c77'][j%3]));
    }
-   museumSign7(ob,['商贸节点','TRADE NETWORK'],2.1,.85,0,1.65,.55);
+   museumSign7(ob,['商贸节点','TRADE NETWORK'],2.04,.29,0,.98,1.17);
   });
   museumSign7(g,['示意路线 / SCHEMATIC ROUTE','茶路并非单一固定道路'],6.6,1.5,0,2.9,-4.8);
  }else if(ri===5){
@@ -152,7 +154,7 @@ for(let ri=4;ri<7;ri++){
     box(ob,.60,.6,.73,-.68+j*.70,1.23,-.18,M.wood);
     box(ob,.52,.055,.75,-.68+j*.70,1.59,-.18,M.gold);
    }
-   museumSign7(ob,['包装 · 称量','PACKING & ACCOUNTING'],2.10,.72,0,1.65,.66);
+   museumSign7(ob,['包装 · 称量','PACKING & ACCOUNTING'],2.04,.29,0,.98,1.17);
   });
   museumSign7(g,['商人、货物与信息','MERCHANTS AND EXCHANGE'],6.6,1.3,0,2.9,-4.8);
  }else{
@@ -161,13 +163,13 @@ for(let ri=4;ri<7;ri++){
     cy(ob,.22,.23,.16,-.7+j*.7,1.1,0,M.porcelain);
     cy(ob,.06,.12,.08,-.7+j*.7,1.20,0,M.gold);
    }
-   museumSign7(ob,['中国 · 俄罗斯 · 蒙古','TEA CUSTOMS'],2.13,.83,0,1.63,.70);
+   museumSign7(ob,['中国 · 俄罗斯 · 蒙古','TEA CUSTOMS'],2.04,.29,0,.98,1.17);
   });
   galleryObject7(g,id+1,2.5,ob=>{
    const pedestal=cy(ob,.59,.72,.2,0,1.05,0,M.woodLight);
    for(let j=0;j<3;j++)ball(ob,.26,Math.cos(j*2.1)*.40,1.40,Math.sin(j*2.1)*.30,
     [M.porcelain,M.gold,M.red][j]);
-   museumSign7(ob,['一片茶叶','连接不同文明'],2.15,.87,0,1.70,.68);
+   museumSign7(ob,['一片茶叶','连接不同文明'],2.04,.29,0,.98,1.17);
   });
   museumSign7(g,['一片茶叶，连接不同文明','ONE LEAF · MANY CULTURES'],6.6,1.38,0,2.9,-4.8);
  }
