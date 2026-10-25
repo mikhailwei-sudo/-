@@ -69,14 +69,14 @@ const INTERIOR_EXHIBITS=[
   source:'https://wellcomecollection.org/works/qv74uhng',
   note:{ru:'Сушка чая. Историческая иллюстрация, не фото кирпичного чая.',zh:'茶叶烘干历史绘画，并非砖茶成品照片。',en:'Historical illustration of tea drying; not a finished brick.'}},
  {name:{ru:'Караван через степь',zh:'草原商队与双峰驼',en:'The caravan across the steppe'},
-  section:'CARAVANS · THE STEPPE',image:'https://iiif.wellcomecollection.org/image/V0020910EL/full/600,/0/default.jpg',
-  attribution:'W. Warwick after T. Brown & N. Marechal · Wellcome Collection · PDM 1.0',
-  source:'https://wellcomecollection.org/works/kbf4jemm',
+  section:'CARAVANS · THE STEPPE',image:'https://images.metmuseum.org/CRDImages/an/original/DP-14200-001.jpg',
+  attribution:'Ancient Bactrian camel sculpture · The Met · CC0 1.0',
+  source:'https://www.metmuseum.org/art/collection/search/324256',
   note:{ru:'Иллюстрация двугорбого и одногорбого верблюдов, не фото чайного каравана.',zh:'双峰驼与单峰驼类型图，并非茶路驼队的照片。',en:'Camel type illustration, not a Tea Road caravan photograph.'}},
  {name:{ru:'Города пограничной торговли',zh:'边境商贸与建筑',en:'Border trading towns'},
-  section:'KYAKHTA · TRADE',image:'https://iiif.wellcomecollection.org/image/V0037634/full/600,/0/default.jpg',
-  attribution:'Felice Beato · Beijing, 1860 · Wellcome Collection · PDM 1.0',
-  source:'https://wellcomecollection.org/works/zbmdafc9',
+  section:'KYAKHTA · TRADE',image:'https://iiif.wellcomecollection.org/image/L0056273/full/800,/0/default.jpg',
+  attribution:'John Thomson · Xiamen, ca. 1870 · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/qsb8zx5a',
   note:{ru:'Магазин в Пекине: архитектурный аналог, не снимок Кяхты.',zh:'北京商铺建筑类型参照，并非恰克图实景。',en:'Beijing shop architecture; not a photograph of Kyakhta.'}},
  {name:{ru:'Самовар и чайная культура',zh:'俄罗斯茶炊与饮茶文化',en:'Samovar and tea culture'},
   section:'RUSSIA · TEA CULTURE',image:'https://collections.smvk.se/carlotta-em/web/image/zoom/1208586/2005.02.0015.A-C.jpg',
@@ -87,12 +87,12 @@ const INTERIOR_EXHIBITS=[
 const museumPanels=[];
 const museumSecondaryPanels=[];
 const extraArchiveImages=[
- {image:'https://iiif.wellcomecollection.org/image/V0018604/full/600,/0/default.jpg',
-  attribution:'Tea steaming, ca. 1850 · Wellcome Collection · PDM 1.0',
-  source:'https://wellcomecollection.org/works/s946ptrq',label:'蒸茶 · TEA STEAMING'},
- {image:'https://images.metmuseum.org/CRDImages/an/original/DP-14200-001.jpg',
-  attribution:'Bactrian camel sculpture · The Met · CC0 1.0',
-  source:'https://www.metmuseum.org/art/collection/search/324256',label:'双峰驼 · TYPE REFERENCE'},
+ {image:'https://openaccess-cdn.clevelandart.org/1955.299/1955.299_print.jpg',
+  attribution:'Yixing tea pot, Qing period · Cleveland Museum of Art · CC0 1.0',
+  source:'https://www.clevelandart.org/art/1955.299',label:'宜兴紫砂壶 · YIXING TEAPOT'},
+ {image:'https://images.metmuseum.org/CRDImages/as/original/2002_201_83_O1.jpg',
+  attribution:'Camel rider plaque · The Met · CC0 1.0',
+  source:'https://www.metmuseum.org/art/collection/search/59505',label:'骑驼纹 · TYPE REFERENCE'},
  {image:'https://iiif.wellcomecollection.org/image/V0037627/full/600,/0/default.jpg',
   attribution:'Felice Beato, Beijing, 1860 · Wellcome Collection · PDM 1.0',
   source:'https://wellcomecollection.org/works/eg29s8qh',label:'城门 · TYPE REFERENCE'},
@@ -182,16 +182,15 @@ const museumPhotoLoaded=new Set();
 // Historical art is always shown at its original aspect ratio inside
 // the frame. Images load on room entry; remote failures never block WebGL.
 const museumPhotoFiles={
- 'V0018603':'r1-brick-01.jpg','V0018604':'r1-brick-02.jpg',
- '1955.299_print':'r1-teaset-01.jpg',
- 'V0020910EL':'r2-camel-02.jpg','DP-14200-001':'r2-camel-01.jpg',
- 'V0037634':'r3-shop-02.jpg','V0037627':'r3-gate-01.jpg',
+ 'V0018603':'r1-brick-01.jpg','1955.299_print':'r1-teaset-01.jpg',
+ 'DP-14200-001':'r2-camel-01.jpg','2002_201_83_O1':'r2-packsaddle-01.jpg',
+ 'L0056273':'r3-shop-01.jpg','V0037627':'r3-gate-01.jpg',
  '2005.02.0015.A-C':'r4-samovar-01.jpg',
  'V0040178':'r4-desk-01.jpg'
 };
 // The public site does not yet contain the archived JPEG assets. Skip guaranteed
 // 404 requests; keep the collection URLs as non-blocking fallbacks.
-const LOCAL_ARCHIVE_READY=false;
+const LOCAL_ARCHIVE_READY=true;
 const imageLoader=new THREE.TextureLoader();
 function loadMuseumImage(url,display){
  if(!url||!display)return;
@@ -695,6 +694,7 @@ const audit={
   return {
    version:'5.1-QA',
    viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},
+   camera:{x:camera.position.x,y:camera.position.y,z:camera.position.z,targetX:state.targetX,onScreen},
    webgl:{drawingBufferWidth:canvas.width,drawingBufferHeight:canvas.height,
       geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,
       calls:renderer.info.render.calls,triangles:renderer.info.render.triangles},
