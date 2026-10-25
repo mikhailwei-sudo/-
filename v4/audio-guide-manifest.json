@@ -7,7 +7,13 @@
     "4": "./audio/ru/4.mp3",
     "5": "./audio/ru/5.mp3",
     "6": "./audio/ru/6.mp3",
-    "7": "./audio/ru/7.mp3"
+    "7": "./audio/ru/7.mp3",
+    "8": "./audio/ru/8.mp3",
+    "9": "./audio/ru/9.mp3",
+    "10": "./audio/ru/10.mp3",
+    "11": "./audio/ru/11.mp3",
+    "12": "./audio/ru/12.mp3",
+    "13": "./audio/ru/13.mp3"
   },
   "zh": {
     "0": "./audio/zh/0.mp3",
@@ -17,7 +23,13 @@
     "4": "./audio/zh/4.mp3",
     "5": "./audio/zh/5.mp3",
     "6": "./audio/zh/6.mp3",
-    "7": "./audio/zh/7.mp3"
+    "7": "./audio/zh/7.mp3",
+    "8": "./audio/zh/8.mp3",
+    "9": "./audio/zh/9.mp3",
+    "10": "./audio/zh/10.mp3",
+    "11": "./audio/zh/11.mp3",
+    "12": "./audio/zh/12.mp3",
+    "13": "./audio/zh/13.mp3"
   },
   "en": {
     "0": "./audio/en/0.mp3",
@@ -27,6 +39,12 @@
     "4": "./audio/en/4.mp3",
     "5": "./audio/en/5.mp3",
     "6": "./audio/en/6.mp3",
-    "7": "./audio/en/7.mp3"
+    "7": "./audio/en/7.mp3",
+    "8": "./audio/en/8.mp3",
+    "9": "./audio/en/9.mp3",
+    "10": "./audio/en/10.mp3",
+    "11": "./audio/en/11.mp3",
+    "12": "./audio/en/12.mp3",
+    "13": "./audio/en/13.mp3"
   }
 }
