@@ -45,7 +45,7 @@ for(const x of [-3.15,3.15])addArch(g,x);
 // Gallery floor runners and architectural island
 box(g,8,.018,2.55,0,.008,1.5,C(['#644c37','#7c573f','#315e52','#773b32'][i],.98));
 for(const side of [-1,1]){box(g,.38,1.85,.65,side*5.6,.95,-.4,trim);box(g,.85,.17,1.0,side*5.6,1.92,-.4,M.gold)}
-let spot1=new THREE.SpotLight(0xffebc3,45,13,Math.PI/3,.65,1.5);spot1.position.set(-2.9,4.8,1.1);spot1.target.position.set(-2.4,1.7,-1);g.add(spot1,spot1.target);let spot2=new THREE.SpotLight(0xffebc3,45,13,Math.PI/3,.65,1.5);spot2.position.set(2.9,4.8,1.1);spot2.target.position.set(2.4,1.7,-1);g.add(spot2,spot2.target);
+let spot1=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot1.position.set(-2.9,4.8,1.1);spot1.target.position.set(-2.4,1.7,-1);g.add(spot1,spot1.target);let spot2=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot2.position.set(2.9,4.8,1.1);spot2.target.position.set(2.4,1.7,-1);g.add(spot2,spot2.target);
 for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THREE.Group();pedestal.position.set(x,0,-1);g.add(pedestal);box(pedestal,2.65,.9,2.0,0,.45,0,C('#d6c6a8',.85));box(pedestal,2.78,.10,2.14,0,.95,0,M.gold);box(pedestal,2.62,.08,2.05,0,2.91,0,M.gold);for(let xx of [-1.27,1.27])for(let zz of [-.96,.96])box(pedestal,.055,1.93,.055,xx,1.96,zz,M.gold);for(let xx of [-1.26,1.26])box(pedestal,.035,1.86,1.90,xx,1.95,0,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,-.96,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,.96,M.glass);const item=new THREE.Group();item.userData.itemIndex=idx;pedestal.add(item);artifacts[idx]=item;box(pedestal,1.52,.06,.35,0,1.08,.7,C('#465a49'));}
 }
 
@@ -74,6 +74,22 @@ const INTERIOR_EXHIBITS=[
   note:{ru:'Музейный предмет для сопоставления с современной 3D-моделью.',zh:'馆藏实物，与现代三维模型进行形态对照。',en:'Collection object for comparison with a modern 3D model.'}}
 ];
 const museumPanels=[];
+const museumSecondaryPanels=[];
+const extraArchiveImages=[
+ {image:'https://iiif.wellcomecollection.org/image/V0018604/full/600,/0/default.jpg',
+  attribution:'Tea steaming, ca. 1850 · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/s946ptrq',label:'蒸茶 · TEA STEAMING'},
+ {image:'https://images.metmuseum.org/CRDImages/an/original/DP-14200-001.jpg',
+  attribution:'Bactrian camel sculpture · The Met · CC0 1.0',
+  source:'https://www.metmuseum.org/art/collection/search/324256',label:'双峰驼 · TYPE REFERENCE'},
+ {image:'https://iiif.wellcomecollection.org/image/V0037627/full/600,/0/default.jpg',
+  attribution:'Felice Beato, Beijing, 1860 · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/eg29s8qh',label:'城门 · TYPE REFERENCE'},
+ {image:'https://iiif.wellcomecollection.org/image/V0040178/full/600,/0/default.jpg',
+  attribution:'G. Hunt after M. Egerton · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/fffkc9mv',label:'茶桌 · TYPE REFERENCE'}
+];
+
 function museumLetterBoard(parent,text,w,h,x,y,z,fontSize=46){
  const board=document.createElement('canvas');board.width=1024;board.height=256;
  const ctx=board.getContext('2d');
@@ -139,6 +155,12 @@ for(let n=0;n<4;n++){
  const art=framedPhoto(room,2.45,1.64,0,3.49,-4.73);
  const label=museumLetterBoard(room,INTERIOR_EXHIBITS[n].section,3.2,.62,0,4.53,-4.57,46);
  museumPanels.push(art.userData.photo);
+ const sideArt=framedPhoto(room,1.77,1.35,4.83,3.12,-4.55);
+ museumSecondaryPanels.push(sideArt.userData.photo);
+ museumLetterBoard(room,extraArchiveImages[n].label,2.15,.34,4.83,2.20,-4.49,34);
+ museumLetterBoard(room,['原始史料 · PDM','类型参照 · CC0','类型参照 · PDM','类型参照 · PDM'][n],
+   2.16,.32,4.83,1.93,-4.48,33);
+ museumLetterBoard(room,INTERIOR_EXHIBITS[n].attribution,3.35,.32,0,2.27,-4.52,25);
  // Wall plaques connect the 3D room to its collection, without inventing an artefact.
  museumLetterBoard(room,['中国茶叶工艺 · CHINA','茶路商队 · CARAVANS',
    '恰克图贸易 · BORDER','俄罗斯饮茶文化 · RUSSIA'][n],3.9,.63,0,4.94,-4.48,43);
@@ -146,17 +168,26 @@ for(let n=0;n<4;n++){
 const museumPhotoLoaded=new Set();
 // Accessible image captions remain in the surrounding HTML archive;
 // these paintings are typological references, not scans of the 3D exhibits.
+function loadMuseumImage(url,display){
+ if(!url||!display)return;
+ // Only fetch when the corresponding room is visited. We never load photos
+ // with uncertain provenance or restricted rights.
+ new THREE.TextureLoader().load(url,tex=>{
+  tex.colorSpace=THREE.SRGBColorSpace;
+  tex.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
+  const last=display.material;
+  display.material=new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,toneMapped:false});
+  last?.dispose();
+ },undefined,e=>{
+  // Keep the neutral paper backing rather than a broken image or a fake photo.
+  console.warn('Museum archival photo unavailable',url,e);
+ });
+}
 function loadMuseumWallPhoto(i){
  if(museumPhotoLoaded.has(i)||i<0||i>3)return;
  museumPhotoLoaded.add(i);
- const fallback=()=>{ /* neutral paper panel with attribution remains if source is blocked */ };
- new THREE.TextureLoader().load(INTERIOR_EXHIBITS[i].image,tex=>{
-  tex.colorSpace=THREE.SRGBColorSpace;
-  const display=museumPanels[i];
-  if(!display)return;
-  display.material.dispose();
-  display.material=new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide});
- },undefined,fallback);
+ loadMuseumImage(INTERIOR_EXHIBITS[i].image,museumPanels[i]);
+ loadMuseumImage(extraArchiveImages[i].image,museumSecondaryPanels[i]);
 }
 document.addEventListener('museum-room-enter',e=>loadMuseumWallPhoto(e.detail));
 window.addEventListener('museum-phase2-room',e=>loadMuseumWallPhoto(e.detail));
