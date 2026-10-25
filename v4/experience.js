@@ -173,6 +173,10 @@ for(let ri=4;ri<7;ri++){
  }
 }
 
+// Physical arrangement follows the visitor narrative rather than internal room IDs.
+const roomSequence=[0,1,4,2,3,5,6];
+roomSequence.forEach((roomIndex,ordinal)=>{rooms[roomIndex].position.x=ordinal*regionSpacing;});
+
 // Phase II: museum interior architecture. Every addition is decorative and does
 // not move or replace the existing four galleries, showcases, or imported models.
 const INTERIOR_EXHIBITS=[
@@ -745,8 +749,8 @@ document.addEventListener('museum-room-enter',e=>{
 }
 // Camera with smooth motion between connected halls.
 const state={room:0,item:0,targetX:0,lookX:0,yaw:0,tyaw:0,pitch:.06,tpitch:.06,zoom:9.5,tzoom:9.5};
-function goRoom(room,item){state.room=room;state.item=item;state.targetX=room*regionSpacing;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
-function goItem(item){state.item=item;const local=item%2===0?-2.45:2.45;state.targetX=state.room*regionSpacing+local*.72;state.tyaw=local<0?-.12:.12;state.tzoom=6.3;highlight()}
+function goRoom(room,item){state.room=room;state.item=item;state.targetX=rooms[room].position.x;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
+function goItem(item){state.item=item;const local=item%2===0?-2.45:2.45;state.targetX=rooms[state.room].position.x+local*.72;state.tyaw=local<0?-.12:.12;state.tzoom=6.3;highlight()}
 function highlight(){
  artifacts.forEach((object,i)=>object.scale.setScalar(i===state.item?1.035:1));
  // Guide the visitor's attention through real spotlights, not exaggerated
