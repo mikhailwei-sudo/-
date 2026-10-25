@@ -694,7 +694,7 @@ const audit={
   return {
    version:'5.1-QA',
    viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},
-   camera:{x:camera.position.x,y:camera.position.y,z:camera.position.z,targetX:state.targetX,onScreen},
+   camera:{x:camera.position.x,y:camera.position.y,z:camera.position.z,targetX:state.targetX},
    webgl:{drawingBufferWidth:canvas.width,drawingBufferHeight:canvas.height,
       geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,
       calls:renderer.info.render.calls,triangles:renderer.info.render.triangles},
