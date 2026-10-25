@@ -32,7 +32,7 @@ const tube=(p,pts,r,m)=>{const curve=new THREE.CatmullRomCurve3(pts.map(a=>new T
 const ring=(p,r,t,x,y,z,m)=>mk(p,new THREE.TorusGeometry(r,t,10,24),m,x,y,z);
 function lathe(p,pts,x,y,z,m){return mk(p,new THREE.LatheGeometry(pts.map(q=>new THREE.Vector2(...q)),32),m,x,y,z)}
 function addArch(p,x){box(p,.21,3.5,.55,x-1.5,2.25,-4.75,M.woodLight);box(p,.21,3.5,.55,x+1.5,2.25,-4.75,M.woodLight);box(p,3.20,.22,.65,x,4.14,-4.75,M.gold);let curved=mk(p,new THREE.TorusGeometry(1.5,.10,8,28,Math.PI),M.gold,x,3.80,-4.73);}
-function plaque(p,str,x,y,z){const c=document.createElement('canvas');c.width=512;c.height=128;const ct=c.getContext('2d');ct.fillStyle='#e2cfab';ct.fillRect(0,0,512,128);ct.fillStyle='#243a2a';ct.textAlign='center';ct.font='bold 42px Georgia,serif';ct.fillText(str,256,81);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;const o=mk(p,new THREE.PlaneGeometry(1.6,.4),new THREE.MeshBasicMaterial({map:t,transparent:true}),x,y,z);return o}
+function plaque(p,str,x,y,z){const c=document.createElement('canvas');c.width=512;c.height=128;const ct=c.getContext('2d');ct.fillStyle='#e2cfab';ct.fillRect(0,0,512,128);ct.fillStyle='#243a2a';ct.textAlign='center';ct.font='bold 42px system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif';ct.fillText(str,256,81,480);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;const o=mk(p,new THREE.PlaneGeometry(1.6,.4),new THREE.MeshBasicMaterial({map:t,transparent:true}),x,y,z);return o}
 const rooms=[];const artifacts=[];const exhibitLights=[];const regionSpacing=19;
 for(let i=0;i<4;i++){
 const g=new THREE.Group();g.position.x=i*regionSpacing;scene.add(g);rooms.push(g);
@@ -84,10 +84,22 @@ function galleryCanvas(lines,color='#25382e'){
  const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;return tx;
 }
 function museumSign7(group,lines,w,h,x,y,z){
- const tex=galleryCanvas(lines);
- if(tex)mk(group,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
-}
-function galleryObject7(group,index,x,build){
+  const isSmallLabel=h<0.5;
+  const tex=galleryCanvas(lines);
+  if(!tex)return;
+  if(isSmallLabel){
+    // Freestanding museum label beside the display, never across its front.
+    const stand=new THREE.Group();
+    stand.position.set(x+1.58,0,0.83);
+    group.add(stand);
+    box(stand,.48,.045,.34,0,.055,0,M.metal);
+    box(stand,.045,1.24,.045,0,.69,0,M.metal);
+    box(stand,1.26,.42,.055,0,1.36,0,M.wood);
+    mk(stand,new THREE.PlaneGeometry(1.19,.35),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),0,1.36,.033);
+    return;
+  }
+  mk(group,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
+} function galleryObject7(group,index,x,build){
  const ped=new THREE.Group();ped.position.set(x,0,-1.1);group.add(ped);
  box(ped,2.66,.85,2.15,0,.425,0,C('#9b927d',.8));
  box(ped,2.70,.075,2.18,0,.9,0,M.gold);
@@ -96,7 +108,7 @@ function galleryObject7(group,index,x,build){
  // Open museum plinths instead of glass to keep texts and diagrams readable.
  // The old plaque base stood in front of models at display height.
  // Mount a low label ledge on the front face of the plinth instead.
- box(ped,2.45,.025,.18,0,.98,1.13,C('#d6c8a9',.9));
+ // Floor-standing labels are installed separately beside each exhibit.
  return item;
 }
 for(let ri=4;ri<7;ri++){
