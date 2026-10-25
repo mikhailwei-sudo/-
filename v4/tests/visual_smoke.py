@@ -40,7 +40,14 @@ try:
      btn.click(timeout=12000)
      page.wait_for_timeout(2700)
      filename=f"{mode}-{name}.png"
+     # The diagnostic HUD must not cover real artefacts in review screenshots.
+     page.evaluate("""() => {
+       for(const el of document.querySelectorAll('.stageCol > div, .stage > div')) {
+         if(el.textContent?.includes('GTR · WebGL / mobile QA')) el.style.visibility='hidden';
+       }
+     }""")
      page.locator(".stage").screenshot(path=str(OUT/filename),animations="disabled",timeout=30000)
+     page.evaluate("""() => {for(const el of document.querySelectorAll('.stageCol > div')) if(el.textContent?.includes('GTR · WebGL / mobile QA')) el.style.visibility='visible'}""")
      audit=page.evaluate("window.__GTR_MUSEUM_AUDIT__.getReport()")
      expected='lobby' if index==0 else index
      if audit["selectedRoom"]!=expected:
