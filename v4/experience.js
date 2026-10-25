@@ -257,6 +257,44 @@ const lobbyFill=new THREE.PointLight(0xd4e3d1,20,16);lobbyFill.position.set(-4,4
 const hallBase=box(lobbyGroup,12,.20,12,0,-.10,0,C('#75583c',.7));
 box(lobbyGroup,9,.09,2.4,0,.03,1.9,C('#522f25',.98));
 const hallName=plaque(lobbyGroup,'万里茶道 · 茶之路',0,2.85,-3.2);
+// Museum entrance: a separate, lightweight architectural presentation layer.
+// The original Chinese-hall FBX remains underneath and is not modified.
+const lobbyFinish=new THREE.Group();lobbyGroup.add(lobbyFinish);
+const marble=C('#bcb29b',.79),darkTimber=C('#5f4231',.73),metalTrim=C('#c5a679',.32,.49);
+box(lobbyFinish,11.7,.045,11.7,0,-.01,0,marble);
+for(const side of [-1,1]){
+ box(lobbyFinish,.20,4.7,10.9,side*5.78,2.37,-.1,darkTimber);
+ box(lobbyFinish,.12,.12,10.9,side*5.67,4.61,-.1,metalTrim);
+ box(lobbyFinish,.12,.12,10.9,side*5.67,.35,-.1,metalTrim);
+ for(const z of [-3.85,0,3.85]){
+  box(lobbyFinish,.36,4.45,.36,side*5.45,2.45,z,darkTimber);
+  box(lobbyFinish,.51,.12,.53,side*5.45,4.67,z,metalTrim);
+ }
+}
+box(lobbyFinish,11.4,.18,.4,0,5.02,-4.85,darkTimber);
+box(lobbyFinish,11.4,.06,.43,0,4.93,-4.82,metalTrim);
+for(const x of [-4.5,-2.25,0,2.25,4.5]){
+ box(lobbyFinish,.09,.07,9.5,x,5.03,-.15,metalTrim);
+}
+// A small museum reception desk occupies the near-right side, out of the
+// central sightline to the imported historical hall.
+box(lobbyFinish,2.50,1.03,.76,3.85,.52,3.40,darkTimber);
+box(lobbyFinish,2.74,.10,1.05,3.85,1.10,3.40,marble);
+box(lobbyFinish,2.44,.09,.12,3.85,.62,3.85,metalTrim);
+// Central monolithic introduction plinth with a bilingual museum sign.
+box(lobbyFinish,2.6,.30,1.38,0,.15,2.6,darkTimber);
+box(lobbyFinish,2.46,.84,1.20,0,.72,2.6,marble);
+box(lobbyFinish,2.67,.09,1.42,0,1.20,2.6,metalTrim);
+const entranceTitle=museumLetterBoard(lobbyFinish,'万里茶道 · GREAT TEA ROAD',4.70,.85,0,4.36,-4.48,52);
+// Tour directions are museum architecture, not functional buttons; the
+// existing hall navigation remains the only actionable control.
+const entranceDirections=['01  中国茶叶工艺','02  茶路商队','03  恰克图贸易','04  俄罗斯茶文化'];
+for(let k=0;k<4;k++){
+ const x=k%2===0?-3.38:3.38,z=k<2?-.48:1.34;
+ box(lobbyFinish,2.6,1.03,.16,x,1.65,z,darkTimber);
+ museumLetterBoard(lobbyFinish,entranceDirections[k],2.46,.61,x,1.83,z+.12,42);
+}
+
 function fitImported(model,dim,center){
  model.updateMatrixWorld(true);
  const bound=new THREE.Box3().setFromObject(model),span=bound.getSize(new THREE.Vector3());
