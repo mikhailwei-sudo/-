@@ -60,4 +60,13 @@ jobs:
             exit 0
           fi
           git commit -m "Archive verified open-licence museum reference photography"
-          git push
+          # The site changes often during development. Rebase this generated
+          # binary-only commit rather than dropping all downloaded photographs.
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          echo "Could not publish archived images after retries" >&2
+          exit 1
