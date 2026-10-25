@@ -4,6 +4,7 @@ Run from repo root: python v4/tests/visual_smoke.py
 Produces screenshots and machine-readable evidence. No model API keys.
 """
 import json
+import base64
 import pathlib
 import subprocess
 import sys
@@ -25,6 +26,7 @@ try:
    config['viewport']={'width':config.pop('width'),'height':config.pop('height')}
    ctx=browser.new_context(**config)
    page=ctx.new_page()
+   cdp=ctx.new_cdp_session(page)
    page.set_default_timeout(25000)
    errors=[]
    page.on("pageerror",lambda e:errors.append("JS: "+str(e)))
@@ -41,7 +43,15 @@ try:
      page.wait_for_timeout(2700)
      filename=f"{mode}-{name}.png"
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='hidden'")
-     page.locator("#renderStage canvas").screenshot(path=str(OUT/filename),animations="disabled",timeout=12000)
+     # The WebGL stage continuously animates; Playwright's element screenshot
+     # waits for a stable layout indefinitely on desktop. Capture the rendered
+     # viewport through Chromium directly, without that stability prerequisite.
+     page.evaluate("""() => document.getElementById('renderStage').scrollIntoView({
+         behavior:'instant',block:'center',inline:'nearest'
+     })""")
+     page.wait_for_timeout(500)
+     shot=cdp.send("Page.captureScreenshot",{"format":"png","captureBeyondViewport":False})
+     (OUT/filename).write_bytes(base64.b64decode(shot["data"]))
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='visible'")
      audit=page.evaluate("window.__GTR_MUSEUM_AUDIT__.getReport()")
      if audit["selectedRoom"]!=expected:
