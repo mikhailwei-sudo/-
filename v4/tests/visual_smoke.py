@@ -40,7 +40,10 @@ try:
     for index,(name,caption,expected) in enumerate([("lobby","Холл","lobby"),("china","Китай",1),("caravans","Караваны",2),("geography","География",5),("kyakhta","Кяхта",3),("russia","Россия",4),("merchants","Купцы",6),("cultures","Культуры",7)]):
      btn=page.get_by_role("button",name=caption,exact=True)
      btn.click(timeout=12000)
-     page.wait_for_timeout(2700)
+     page.wait_for_function(
+      "() => {const r=window.__GTR_MUSEUM_AUDIT__.getReport();return Math.abs(r.camera.x-r.camera.targetX)<0.8}",
+      timeout=30000)
+     page.wait_for_timeout(350)
      filename=f"{mode}-{name}.png"
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='hidden'")
      # The WebGL stage continuously animates; Playwright's element screenshot
