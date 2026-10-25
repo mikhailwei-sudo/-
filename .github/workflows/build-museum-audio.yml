@@ -46,12 +46,12 @@ jobs:
           import json
           root=Path("v4")
           manifest=json.loads((root/"audio-guide-manifest.json").read_text())
-          assert all(len(manifest.get(l,{}))==8 for l in ("ru","zh","en")), "Incomplete audio guide"
+          assert all(len(manifest.get(l,{}))==14 for l in ("ru","zh","en")), "Incomplete audio guide"
           for files in manifest.values():
               for path in files.values():
                   p=root/path.removeprefix("./")
                   assert p.is_file() and p.stat().st_size>2000, f"Bad audio: {p}"
-          print("Verified 24 nonempty narrated audio tracks")
+          print("Verified 42 nonempty narrated audio tracks")
           PY
       - name: Commit only compressed audio and manifest
         run: |
@@ -63,4 +63,11 @@ jobs:
             exit 0
           fi
           git commit -m "Publish free Piper narration: Dmitri Chaowen Kristin"
-          git push
+          for attempt in 1 2 3 4 5; do
+            git fetch origin main
+            git rebase origin/main
+            if git push origin HEAD:main; then exit 0; fi
+            sleep 3
+          done
+          echo 'Could not publish generated audio' >&2
+          exit 1
