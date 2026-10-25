@@ -75,13 +75,18 @@ const new7Labels=[
  [['中俄茶礼','茶与文化交流'],['Традиции чаепития','Культурные связи'],['Tea traditions','Cultural exchange']]
 ];
 function galleryCanvas(lines,color='#25382e'){
- const c=document.createElement('canvas');c.width=1024;c.height=512;const t=c.getContext('2d');if(!t)return null;
- t.fillStyle=color;t.fillRect(0,0,1024,512);
- t.strokeStyle='#e2c995';t.lineWidth=5;t.strokeRect(22,22,980,468);
- t.textAlign='center';t.fillStyle='#f7e8c1';
+ const c=document.createElement('canvas');c.width=2048;c.height=1024;
+ const t=c.getContext('2d');if(!t)return null;
+ t.fillStyle=color;t.fillRect(0,0,2048,1024);
+ t.strokeStyle='#e2c995';t.lineWidth=10;t.strokeRect(40,40,1968,944);
+ t.textAlign='center';t.textBaseline='middle';t.fillStyle='#f7e8c1';
  const list=Array.isArray(lines)?lines:[lines];
- list.forEach((txt,i)=>{t.font=(i===0?'bold 44px':'32px')+' "Noto Sans SC",system-ui,sans-serif';t.fillText(txt,512,145+i*87,920)});
- const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;return tx;
+ list.forEach((txt,i)=>{
+  t.font=(i===0?'bold 112px':'80px')+' system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif';
+  t.fillText(String(txt),1024,list.length===1?512:360+i*240,1880);
+ });
+ const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;
+ tx.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());return tx;
 }
 function museumSign7(group,lines,w,h,x,y,z){
   // Labels attached to exhibit meshes are intentionally suppressed.
@@ -96,30 +101,30 @@ function galleryObject7(group,index,x,build){
  box(ped,2.70,.075,2.18,0,.9,0,M.gold);
  const item=new THREE.Group();item.userData.itemIndex=index;ped.add(item);artifacts[index]=item;
  build(item);
- // A separate floor-standing museum caption OUTSIDE the plinth footprint.
  const labels=new7Labels[Math.floor(index/2)-4];
  if(labels){
-  const col=index%2;
-  const labelLines=[labels[0][col],labels[1][col]];
-  const canvas=document.createElement('canvas');
-  canvas.width=1024;canvas.height=512;
+  const col=index%2,labelLines=[labels[0][col],labels[1][col]];
+  const canvas=document.createElement('canvas');canvas.width=2048;canvas.height=1024;
   const ctx=canvas.getContext('2d');
-  ctx.fillStyle='#f0e6d2';ctx.fillRect(0,0,1024,512);
-  ctx.strokeStyle='#a28757';ctx.lineWidth=12;ctx.strokeRect(16,16,992,480);
-  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#1d3429';
-  ctx.font='bold 90px system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif';
-  ctx.fillText(labelLines[0],512,174,910);
-  ctx.font='bold 58px system-ui,"Noto Sans",Arial,sans-serif';
-  ctx.fillText(labelLines[1],512,325,910);
-  const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;
-  tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
-  const stand=new THREE.Group();
-  stand.position.set(x+(x<0?-1.78:1.78),0,0.55);
-  group.add(stand);
-  box(stand,.54,.045,.42,0,.045,0,M.metal);
-  box(stand,.055,1.16,.055,0,.64,0,M.metal);
-  box(stand,1.33,.65,.065,0,1.31,0,M.wood);
-  mk(stand,new THREE.PlaneGeometry(1.26,.59),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,depthWrite:true}),0,1.31,.038);
+  if(ctx){
+   ctx.fillStyle='#f0e6d2';ctx.fillRect(0,0,2048,1024);
+   ctx.strokeStyle='#a28757';ctx.lineWidth=18;ctx.strokeRect(30,30,1988,964);
+   ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#1d3429';
+   ctx.font='bold 156px system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif';
+   ctx.fillText(labelLines[0],1024,345,1820);
+   ctx.font='bold 92px system-ui,"Noto Sans",Arial,sans-serif';
+   ctx.fillText(labelLines[1],1024,620,1820);
+   const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;
+   tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+   const stand=new THREE.Group();
+   stand.position.set(x+(x<0?-2:2),0,1.1);
+   stand.rotation.y=x<0?.22:-.22;
+   group.add(stand);
+   box(stand,.72,.05,.52,0,.03,0,M.metal);
+   box(stand,.07,1.34,.07,0,.72,0,M.metal);
+   box(stand,1.78,.86,.07,0,1.56,0,M.wood);
+   mk(stand,new THREE.PlaneGeometry(1.62,.74),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),0,1.56,.045);
+  }
  }
  return item;
 }
