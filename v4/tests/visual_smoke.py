@@ -35,8 +35,8 @@ try:
     page.wait_for_function("Boolean(window.__GTR_MUSEUM_AUDIT__)",timeout=75000)
     page.wait_for_timeout(1600)
     screenshots=[]
-    for index,name in enumerate(["lobby","china","caravans","kyakhta","russia"]):
-     btn=page.get_by_role("button",name=["Холл","Зал 1","Зал 2","Зал 3","Зал 4"][index],exact=True)
+    for index,(name,caption,expected) in enumerate([("lobby","Холл","lobby"),("china","Китай",1),("caravans","Караваны",2),("geography","География",5),("kyakhta","Кяхта",3),("russia","Россия",4),("merchants","Купцы",6),("cultures","Культуры",7)]):
+     btn=page.get_by_role("button",name=caption,exact=True)
      btn.click(timeout=12000)
      page.wait_for_timeout(2700)
      filename=f"{mode}-{name}.png"
@@ -44,7 +44,6 @@ try:
      page.locator(".stage").screenshot(path=str(OUT/filename),animations="disabled",timeout=30000)
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='visible'")
      audit=page.evaluate("window.__GTR_MUSEUM_AUDIT__.getReport()")
-     expected='lobby' if index==0 else index
      if audit["selectedRoom"]!=expected:
       errors.append(f"Wrong room: expected {expected}, got {audit['selectedRoom']}")
      if audit["webgl"]["calls"]<1:
