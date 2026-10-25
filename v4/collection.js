@@ -44,6 +44,16 @@ const items=[
   desc:{ru:'Чай связывал разные способы приготовления и гостеприимства в Китае, Монголии и России. Здесь пока показан русский самовар; китайские и монгольские сопоставления добавим только после проверки соответствующих источников.',zh:'茶在中国、蒙古和俄罗斯形成了不同的饮用与待客传统。本展位暂以俄式茶炊作例，其余图像将待来源核实后补充。',en:'Tea acquired distinct traditions of preparation and hospitality in China, Mongolia and Russia. This display currently highlights the Russian samovar; further comparisons will follow source verification.'},
   image:'https://collections.smvk.se/carlotta-em/web/image/zoom/1208586/2005.02.0015.A-C.jpg',source:'https://collections.smvk.se/carlotta-em/web/object/1208565',credit:'Samovar · Museum of Ethnography, Sweden',license:'CC0 1.0',qual:'historical'}
 ];
+// Only these items are confirmed as open-licence in the supplied source register.
+// Historical photographs marked internal-only are never included here.
+const LOCAL_IMAGES={
+ 'r1-brick':'r1-brick-01.jpg','r1-teaset':'r1-teaset-01.jpg',
+ 'r1-chest':'r1-chest-01.jpg','r2-camel':'r2-camel-01.jpg',
+ 'r2-packsaddle':'r2-packsaddle-01.jpg','r3-shop':'r3-shop-01.jpg',
+ 'r3-gate':'r3-gate-01.jpg','r3-documents':'r3-documents-01.jpg',
+ 'r4-samovar':'r4-samovar-01.jpg','r4-desk':'r4-desk-01.jpg',
+ 'r4-threetea':'r4-samovar-01.jpg'
+};
 const COPY={
  ru:{eyebrow:'ИСТОРИЧЕСКИЙ АРХИВ · ЦИФРОВАЯ ЭКСПОЗИЦИЯ',heading:'История, за которой стоят источники.',intro:'Двенадцать экспозиций: от технологии изготовления чая до караванных маршрутов, Кяхты и русских чайных традиций. Здесь исторические музейные изображения отделены от современных 3D-реконструкций.',m1:'экспозиций',m2:'исторических раздела',m3:'три языка',notice:'Мы публикуем только изображения с указанными открытыми лицензиями. Материалы с неподтверждённым происхождением и ограниченными правами исключены. Исторические аналогии не доказывают происхождения наших 3D-моделей.',all:'Все',search:'Поиск по экспозиции…',count:'Найдено экспозиций: ',source:'Открыть источник',empty:'Иллюстрация пока не опубликована',analogy:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',history:'ИСТОРИЧЕСКИЙ ИСТОЧНИК',pending:'ИСТОЧНИК ПРОВЕРЯЕТСЯ',methodHeading:'О достоверности',method:'Все 3D-модели нашего проекта — художественные реконструкции или типовые модели, а не сканы коллекционных предметов. Иллюстрации снабжены ссылками, лицензиями и авторством. Неподтверждённые материалы остаются за пределами публичной экспозиции.',footer:'Историческая коллекция · первый этап расширения музея',home:'Главная',museum:'3D-музей'},
  zh:{eyebrow:'历史文献 · 数字展陈',heading:'让每一个展品都有据可查。',intro:'十二个主题展位，涵盖茶叶制作、草原商队、恰克图边贸以及俄罗斯茶文化。历史图像与现代三维复原明确区分。',m1:'个展位',m2:'个主题展厅',m3:'三种语言',notice:'公开页面仅使用标注开放许可的图片。出处不明或版权受限的材料不公开。历史类型参照不等于三维模型的原件证明。',all:'全部',search:'搜索展品…',count:'展位数量：',source:'查看馆藏来源',empty:'图像尚未公开',analogy:'类型参照',history:'历史图像',pending:'来源待核实',methodHeading:'真实性与来源说明',method:'项目中的三维模型均为示意复原或类型模型，并非馆藏实物的三维扫描。历史图片附有来源页、许可与署名。出处不明的资料仅供内部研究。',footer:'史料图版馆 · 第一阶段扩展',home:'首页',museum:'三维展馆'},
@@ -73,8 +83,14 @@ function display(){
   const card=document.createElement('article');card.className='entry';
   const image=document.createElement('div');image.className='picture';image.dataset.tag=({type:t.analogy,historical:t.history,pending:t.pending})[e.qual]||t.history;
   if(e.image){
-   const img=document.createElement('img');img.src=e.image;img.loading='lazy';img.decoding='async';img.alt=e.name[lang];img.referrerPolicy='no-referrer';
-   img.onerror=()=>{img.remove();const fallback=document.createElement('span');fallback.className='empty';fallback.textContent='文';image.append(fallback);};
+   const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.alt=e.name[lang];img.referrerPolicy='no-referrer';
+   const local=LOCAL_IMAGES[e.id];
+   img.src=local?'./assets/refs/'+local:e.image;
+   let usedRemote=false;
+   img.onerror=()=>{
+    if(!usedRemote&&local){usedRemote=true;img.src=e.image;return;}
+    img.remove();const fallback=document.createElement('span');fallback.className='empty';fallback.textContent='文';image.append(fallback);
+   };
    image.append(img);
   }else{const p=document.createElement('span');p.className='empty';p.textContent='文';image.append(p)}
   const meta=document.createElement('div');meta.className='meta';
