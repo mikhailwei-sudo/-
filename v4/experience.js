@@ -17,7 +17,7 @@ if(!THREE){
 }
 if(THREE){try{
 const scene=new THREE.Scene();scene.background=new THREE.Color('#0c1711');scene.fog=new THREE.Fog('#17271e',12,65);
-const camera=new THREE.PerspectiveCamera(54,1,.1,120);
+const camera=new THREE.PerspectiveCamera(54,1,.1,220);
 const renderer=new THREE.WebGLRenderer({antialias:true,powerPreference:'high-performance'});renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,innerWidth<700?1.1:1.25));renderer.outputColorSpace=THREE.SRGBColorSpace;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.55;holder.replaceChildren(renderer.domElement);
 const C=(v,rough=.8,metal=0)=>new THREE.MeshStandardMaterial({color:v,roughness:rough,metalness:metal,side:THREE.DoubleSide});
 const fabricCanvas=document.createElement('canvas');fabricCanvas.width=fabricCanvas.height=256;const f=fabricCanvas.getContext('2d');f.fillStyle='#aa875b';f.fillRect(0,0,256,256);f.strokeStyle='#d7ae7a44';for(let i=0;i<256;i+=6){f.beginPath();f.moveTo(i,0);f.lineTo(i,256);f.moveTo(0,i);f.lineTo(256,i);f.stroke()}const ft=new THREE.CanvasTexture(fabricCanvas);ft.wrapS=ft.wrapT=THREE.RepeatWrapping;ft.colorSpace=THREE.SRGBColorSpace;
@@ -58,6 +58,119 @@ for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THR
  box(pedestal,2.3,.045,1.69,0,1.032,0,C('#303a30',.91));
  const item=new THREE.Group();item.userData.itemIndex=idx;pedestal.add(item);artifacts[idx]=item;
  box(pedestal,1.52,.06,.35,0,1.08,.7,C('#465a49'));}
+}
+
+
+/* Expansion to seven halls. Existing rooms 0–3 remain unchanged; new halls
+   4=geography, 5=merchant trade, 6=cultural dialogue. The visitor route is
+   [0,1,4,2,3,5,6]. All labels are interpretive, not facsimiles of artefacts. */
+const hall7Theme=[
+ {title:'万里茶道地理 · ROUTE GEOGRAPHY',wall:'#24443f',floor:'#53645c'},
+ {title:'商人与贸易 · MERCHANTS & TRADE',wall:'#504032',floor:'#796956'},
+ {title:'跨文化交流 · CULTURAL DIALOGUE',wall:'#3e364a',floor:'#6f5b65'}
+];
+const new7Labels=[
+ [['路线示意','贸易节点'],['Схема маршрута','Торговые города'],['Route overview','Trading cities']],
+ [['贸易账册','运输与计量'],['Торговые записи','Транспорт и расчёты'],['Trade records','Cargo and accounts']],
+ [['中俄茶礼','茶与文化交流'],['Традиции чаепития','Культурные связи'],['Tea traditions','Cultural exchange']]
+];
+function galleryCanvas(lines,color='#25382e'){
+ const c=document.createElement('canvas');c.width=1024;c.height=512;const t=c.getContext('2d');if(!t)return null;
+ t.fillStyle=color;t.fillRect(0,0,1024,512);
+ t.strokeStyle='#e2c995';t.lineWidth=5;t.strokeRect(22,22,980,468);
+ t.textAlign='center';t.fillStyle='#f7e8c1';
+ const list=Array.isArray(lines)?lines:[lines];
+ list.forEach((txt,i)=>{t.font=(i===0?'bold 44px':'32px')+' "Noto Sans SC",system-ui,sans-serif';t.fillText(txt,512,145+i*87,920)});
+ const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;return tx;
+}
+function museumSign7(group,lines,w,h,x,y,z){
+ const tex=galleryCanvas(lines);
+ if(tex)mk(group,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
+}
+function galleryObject7(group,index,x,build){
+ const ped=new THREE.Group();ped.position.set(x,0,-1.1);group.add(ped);
+ box(ped,2.66,.85,2.15,0,.425,0,C('#9b927d',.8));
+ box(ped,2.70,.075,2.18,0,.9,0,M.gold);
+ const item=new THREE.Group();item.userData.itemIndex=index;ped.add(item);artifacts[index]=item;
+ build(item);
+ // Open museum plinths instead of glass to keep texts and diagrams readable.
+ box(ped,2.48,.055,.48,0,1.13,.80,C('#d6c8a9',.9));
+ return item;
+}
+for(let ri=4;ri<7;ri++){
+ const t=hall7Theme[ri-4],g=new THREE.Group();g.position.x=ri*regionSpacing;scene.add(g);rooms.push(g);
+ const wall=C(t.wall),stone=C(t.floor),timber=C('#806746');
+ box(g,14,.30,13,0,-.16,0,stone);
+ box(g,14,5.5,.3,0,2.65,-5.15,wall);
+ box(g,14,.15,12,0,5.47,.0,C('#b9aa90'));
+ for(const x of [-6.85,6.85]){
+  box(g,.24,5.2,11.5,x,2.62,0,wall);
+  box(g,.18,4.6,.22,x,2.7,-4.5,M.gold);
+ }
+ box(g,13.3,.12,.15,0,.5,-4.92,M.gold);
+ box(g,13.3,.12,.15,0,4.93,-4.92,M.gold);
+ for(const x of [-5.5,-3.6,3.6,5.5])box(g,.17,4.5,.30,x,2.69,-4.97,timber);
+ for(const zz of [-3.6,.2,4]){
+  box(g,12.5,.1,.25,0,5.15,zz,timber);
+ }
+ museumSign7(g,[t.title],7.8,.75,0,4.48,-4.94);
+ box(g,8.7,.025,2.6,0,.03,2.78,C('#958064'));
+ const warm=new THREE.PointLight(0xffe0b6,7,13,2);warm.position.set(0,4.8,1.4);g.add(warm);
+ for(let i=0;i<2;i++){
+  const x=i===0?-2.5:2.5;
+  const spot=new THREE.SpotLight(0xffe4be,10,11,Math.PI/4,.75,2);
+  spot.position.set(x,4.9,1.8);spot.target.position.set(x,1.4,-1.1);
+  g.add(spot,spot.target);exhibitLights.push(spot);
+ }
+ const id=8+(ri-4)*2;
+ if(ri===4){
+  galleryObject7(g,id,-2.5,ob=>{
+   // Stylised route panel: a concept map, not georeferenced cartography.
+   box(ob,2.20,.11,1.36,0,1.18,0,C('#d8cfb9'));
+   museumSign7(ob,['武夷山 → 张家口','库伦 → 恰克图 → 俄罗斯'],2.08,.97,0,1.45,0.73);
+   for(let j=0;j<5;j++){const xx=-.87+j*.43;ball(ob,.085,xx,1.33,-.15+Math.sin(j)*.3,M.gold)}
+   tube(ob,[[-.87,1.38,-.15],[-.44,1.38,.10],[0,1.38,-.15],[.44,1.38,.10],[.87,1.38,-.15]],.024,M.red);
+  });
+  galleryObject7(g,id+1,2.5,ob=>{
+   for(let j=0;j<5;j++){
+    box(ob,.33,.30,.33,-.86+j*.43,1.12,-.06,C(['#947d68','#958f7a','#718c77'][j%3]));
+   }
+   museumSign7(ob,['商贸节点','TRADE NETWORK'],2.1,.85,0,1.65,.55);
+  });
+  museumSign7(g,['示意路线 / SCHEMATIC ROUTE','茶路并非单一固定道路'],6.6,1.5,0,2.9,-4.8);
+ }else if(ri===5){
+  galleryObject7(g,id,-2.5,ob=>{
+   box(ob,2.20,.18,1.2,0,1.14,0,timber);
+   for(let j=0;j<3;j++){
+    const xx=-.64+j*.61;box(ob,.45,.025,.65,xx,1.26,0,M.paper);
+    for(let line=0;line<4;line++)box(ob,.29,.007,.012,xx,1.28,.25-line*.13,M.wood);
+   }
+   cy(ob,.13,.11,.25,.84,1.35,.21,M.metal);
+  });
+  galleryObject7(g,id+1,2.5,ob=>{
+   for(let j=0;j<3;j++){
+    box(ob,.60,.6,.73,-.68+j*.70,1.23,-.18,M.wood);
+    box(ob,.52,.055,.75,-.68+j*.70,1.59,-.18,M.gold);
+   }
+   museumSign7(ob,['包装 · 称量','PACKING & ACCOUNTING'],2.10,.72,0,1.65,.66);
+  });
+  museumSign7(g,['商人、货物与信息','MERCHANTS AND EXCHANGE'],6.6,1.3,0,2.9,-4.8);
+ }else{
+  galleryObject7(g,id,-2.5,ob=>{
+   for(let j=0;j<3;j++){
+    cy(ob,.22,.23,.16,-.7+j*.7,1.1,0,M.porcelain);
+    cy(ob,.06,.12,.08,-.7+j*.7,1.20,0,M.gold);
+   }
+   museumSign7(ob,['中国 · 俄罗斯 · 蒙古','TEA CUSTOMS'],2.13,.83,0,1.63,.70);
+  });
+  galleryObject7(g,id+1,2.5,ob=>{
+   const pedestal=cy(ob,.59,.72,.2,0,1.05,0,M.woodLight);
+   for(let j=0;j<3;j++)ball(ob,.26,Math.cos(j*2.1)*.40,1.40,Math.sin(j*2.1)*.30,
+    [M.porcelain,M.gold,M.red][j]);
+   museumSign7(ob,['一片茶叶','连接不同文明'],2.15,.87,0,1.70,.68);
+  });
+  museumSign7(g,['一片茶叶，连接不同文明','ONE LEAF · MANY CULTURES'],6.6,1.38,0,2.9,-4.8);
+ }
 }
 
 // Phase II: museum interior architecture. Every addition is decorative and does
