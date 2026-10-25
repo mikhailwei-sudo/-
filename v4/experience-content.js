@@ -85,7 +85,7 @@ el('tourStop').onclick=stopTour;
 el('audioPlay').onclick=()=>{if(tourActive)stopTour();playAudio()};
 el('audioPause').onclick=pauseAudio;
 el('audioStop').onclick=stopTour;
-el('prevRoom').onclick=()=>changeRoom(currentRoom-1);el('nextRoom').onclick=()=>changeRoom(currentRoom+1);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words();museumNarrator.refreshVoices()});window.addEventListener('pagehide',stopTour);
+el('prevRoom').onclick=()=>changeRoom(currentRoom-1);el('nextRoom').onclick=()=>changeRoom(currentRoom+1);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words();window.dispatchEvent(new CustomEvent('museum-language-changed',{detail:{lang}}));museumNarrator.refreshVoices()});window.addEventListener('pagehide',stopTour);
 words();
 
 // Original 3D meshes are not museum scans. Imported assets are credited in ASSET_CREDITS.md.
