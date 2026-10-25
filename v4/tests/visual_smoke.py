@@ -21,8 +21,11 @@ try:
   browser=p.chromium.launch(headless=True,args=["--no-sandbox","--enable-webgl","--use-gl=angle","--use-angle=swiftshader"])
   for mode,size in [("desktop",{"width":1440,"height":900,"device_scale_factor":1}),
                     ("mobile",{"width":390,"height":844,"device_scale_factor":1,"is_mobile":True,"has_touch":True})]:
-   ctx=browser.new_context(**size)
+   config=dict(size)
+   config['viewport']={'width':config.pop('width'),'height':config.pop('height')}
+   ctx=browser.new_context(**config)
    page=ctx.new_page()
+   page.set_default_timeout(25000)
    errors=[]
    page.on("pageerror",lambda e:errors.append("JS: "+str(e)))
    page.on("console",lambda m:errors.append("Console: "+m.text) if m.type=="error" else None)
