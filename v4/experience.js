@@ -116,9 +116,10 @@ for(let n=0;n<4;n++){
  for(const zz of [-4.0,-1,2,5]){
   box(room,12.0,.10,.24,0,5.32,zz,M.woodLight);
   for(const x of [-4.6,0,4.6]){
-   const fixture=box(room,.70,.04,.23,x,5.20,zz,M.gold);
-   const light=new THREE.PointLight(0xffe9bc,1.4,6,2);
-   light.position.set(x,5.06,zz);room.add(light);
+   // Architectural light strips, with a single real fill light per hall.
+   box(room,.70,.04,.23,x,5.20,zz,new THREE.MeshStandardMaterial({
+    color:'#e4c58b',emissive:'#b79354',emissiveIntensity:.52,roughness:.75
+   }));
   }
  }
  // Visitor circulation strip and gallery bench, away from showcases.
@@ -133,6 +134,8 @@ for(let n=0;n<4;n++){
  for(const left of [-4.25,1]){
   tube(room,[[left,.59,1.12],[left+1.6,.49,1.18],[left+3.25,.59,1.12]],.022,M.red);
  }
+ const roomFill=new THREE.PointLight(0xffe4b3,9,13,2);
+ roomFill.position.set(0,4.95,2.6);room.add(roomFill);
  const art=framedPhoto(room,2.45,1.64,0,3.49,-4.73);
  const label=museumLetterBoard(room,INTERIOR_EXHIBITS[n].section,3.2,.62,0,4.53,-4.57,46);
  museumPanels.push(art.userData.photo);
@@ -141,6 +144,8 @@ for(let n=0;n<4;n++){
    '恰克图贸易 · BORDER','俄罗斯饮茶文化 · RUSSIA'][n],3.9,.63,0,4.94,-4.48,43);
 }
 const museumPhotoLoaded=new Set();
+// Accessible image captions remain in the surrounding HTML archive;
+// these paintings are typological references, not scans of the 3D exhibits.
 function loadMuseumWallPhoto(i){
  if(museumPhotoLoaded.has(i)||i<0||i>3)return;
  museumPhotoLoaded.add(i);
