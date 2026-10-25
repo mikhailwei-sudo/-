@@ -1,5 +1,5 @@
 {
-  "version": 1,
+  "version": 2,
   "items": [
     {
       "id": "brick",
@@ -48,6 +48,42 @@
       "ru": "Этот купеческий стол напоминает о другой стороне чайной торговли — подсчётах, письмах и договорах. За подобной работой стояли маршруты, цены, сроки и доверие между партнёрами. Великий чайный путь был не только дорогой для караванов, но и сложной системой человеческих отношений.",
       "zh": "这张商人桌案让我们想到茶叶贸易中的另一面：账目、书信与契约。漫长的商路需要安排运输时间、计算价格，也离不开合作伙伴之间的信任。万里茶道不仅连接城市，也连接人们的生活。",
       "en": "This merchant's desk represents another side of the tea trade: accounts, letters and agreements. Behind each caravan were schedules, prices and relationships built on trust. The Great Tea Road was not simply a route for goods; it was also a network of people."
+    },
+    {
+      "id": "route-map",
+      "ru": "Перед вами схема Великого чайного пути. Из районов производства чая в Китае товары направлялись к торговым узлам Северного Китая, через Монголию и к Кяхте, а затем на российские рынки. Пути менялись в разные эпохи. Здесь показано историческое направление связей, а не точная карта всех дорог.",
+      "zh": "您看到的是万里茶道的示意路线。茶叶从中国的产茶地区出发，经过华北贸易节点、蒙古草原和恰克图，继续运往俄罗斯市场。不同时期的运输路线并不完全相同。这里展示的是贸易联系的方向，而不是所有道路的精确地图。",
+      "en": "This is a schematic map of the Great Tea Road. Tea travelled from Chinese growing regions through trading centres in northern China, across Mongolia and towards Kyakhta, before reaching Russian markets. Routes changed over time. This map shows the connections, not a precise trace of every road."
+    },
+    {
+      "id": "trade-towns",
+      "ru": "Важнейшую роль на чайном пути играли торговые города. В них меняли способы перевозки, собирали караваны, заключали сделки и получали известия. Среди известных узлов маршрута называют Чжанцзякоу, Ургу и Кяхту. Наши миниатюры обозначают эти места условно и не являются архитектурными реконструкциями.",
+      "zh": "贸易城市是万里茶道的重要节点。人们在这里组织商队、调整运输方式、交换商品和信息。张家口、库伦和恰克图都是重要的贸易地点。展品中的微型建筑只是城市的象征，并非真实历史建筑的复原。",
+      "en": "Trading cities were essential to the Tea Road. Merchants organised caravans, negotiated exchanges and received news there. Zhangjiakou, Urga and Kyakhta were among the important hubs. The miniature buildings you see are symbols, not reconstructions of specific historic structures."
+    },
+    {
+      "id": "merchant-records",
+      "ru": "Международная торговля требовала точных записей. Купцы учитывали товары, расходы, платежи и договорённости с партнёрами. Перед вами художественная реконструкция купеческого стола с условными бумагами. Она помогает представить повседневную работу торговцев, но не воспроизводит подлинный архивный документ.",
+      "zh": "跨境贸易需要细致的记录。商人通过账册记录货物、费用、支付情况和交易约定。您看到的是商人桌案的示意复原，桌上的纸张并非真实档案原件。它帮助我们理解商人的日常工作。",
+      "en": "Long-distance trade depended on careful records. Merchants tracked goods, costs, payments and agreements. The desk in front of you is an interpretive reconstruction with illustrative papers. It helps us imagine merchants at work but does not reproduce an original archival document."
+    },
+    {
+      "id": "merchant-cargo",
+      "ru": "Чайные ящики и мешки должны были выдерживать долгий путь и частые перегрузки. Купцам приходилось учитывать вес товара, стоимость перевозки и условия хранения. Эта композиция показывает принципы упаковки и расчётов без привязки к конкретному историческому складу.",
+      "zh": "茶箱和包装需要经受漫长旅途和多次装卸。商人还要考虑货物重量、运输费用与保存条件。这组场景介绍包装和结算的基本过程，并非某个真实历史仓库的复原。",
+      "en": "Tea chests and bundles had to endure long journeys and frequent handling. Traders accounted for the weight of cargo, transport costs and storage conditions. This display illustrates packing and accounting rather than a particular historic warehouse."
+    },
+    {
+      "id": "three-tea-traditions",
+      "ru": "Чай стал частью повседневной культуры разных народов. В Китае, Монголии и России способы приготовления и подачи чая развивались по-разному. На них влияли местные продукты, климат и обычаи гостеприимства. Здесь показано сравнение традиций, а не одна универсальная чайная церемония.",
+      "zh": "茶叶融入了不同地区的日常生活。中国、蒙古和俄罗斯逐渐形成了各具特色的制茶、饮茶和待客习俗。这些传统受到当地饮食、气候和生活方式的影响。展厅展示的是文化比较，而不是一种统一的茶礼。",
+      "en": "Tea became part of everyday life across different societies. China, Mongolia and Russia developed distinct ways of preparing and serving it, shaped by local food, climate and hospitality. This display compares those traditions rather than presenting one universal tea ceremony."
+    },
+    {
+      "id": "cultural-bridge",
+      "ru": "Наша экскурсия заканчивается мыслью: один чайный лист может связывать разные культуры. Вместе с торговыми товарами путешествовали люди, знания, слова и привычки. Великий чайный путь напоминает о долгой истории контактов между Китаем, Монголией и Россией. Спасибо, что посетили наш цифровой музей.",
+      "zh": "我们的参观以这样一句话结束：一片茶叶，也能连接不同的文明。随着商品流动的，还有人、知识、语言和生活习惯。万里茶道见证了中国、蒙古与俄罗斯之间长期的交流。感谢您参观我们的数字博物馆。",
+      "en": "Our visit ends with a simple idea: one tea leaf can connect different cultures. Alongside goods, people carried knowledge, words and habits. The Great Tea Road is part of a long history of connections among China, Mongolia and Russia. Thank you for visiting our digital museum."
     }
   ]
 }
