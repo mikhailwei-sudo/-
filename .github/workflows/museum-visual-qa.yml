@@ -1,0 +1,37 @@
+name: Museum visual QA — desktop and mobile
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/museum-visual-qa.yml'
+      - 'v4/tests/visual_smoke.py'
+      - 'v4/experience.js'
+      - 'v4/experience.html'
+      - 'v4/experience.css'
+      - 'v4/experience-content.js'
+permissions:
+  contents: read
+jobs:
+  visual-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install headless browser and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run five-gallery desktop and mobile visual test
+        run: python v4/tests/visual_smoke.py
+      - name: Upload evidence and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: museum-desktop-mobile-screenshots
+          path: v4/test-results/
+          if-no-files-found: warn
+          retention-days: 14
