@@ -10,3 +10,19 @@
 .lobbyMini{font-size:11px;cursor:pointer}.stage{touch-action:pan-y}.renderStage canvas{touch-action:none}
 @media(max-width:740px){.navRail{display:flex;flex-wrap:wrap;padding:9px}.lobbyButton{width:100%;text-align:center}.roomTabs{display:flex;overflow-x:auto;scrollbar-width:thin;gap:7px}.roomTabs button{flex:0 0 auto;min-width:115px;font-size:12px}.stage{height:min(56svh,540px);min-height:340px}.lobbyOverlay{top:46%}.lobbyOverlay p{font-size:12px}}
 @media(max-width:420px){.stage{height:49svh;min-height:330px}.lobbyOverlay{padding:16px}.lobbyOverlay h3{font-size:23px}.lobbyOverlay p{line-height:1.55}.stageTop{gap:4px}}
+
+/* Museum interiors stage II — archivally attributed interpretation gallery */
+.museumArchiveRail{max-width:1650px;margin:auto;padding:46px clamp(18px,4vw,70px) 105px}
+.museumArchiveHeader{display:flex;justify-content:space-between;align-items:end;gap:32px;margin-bottom:25px}
+.museumArchiveHeader h2{font:400 clamp(2.1rem,4vw,4rem)/1.12 Georgia,'Noto Serif SC',serif;margin:12px 0 0;letter-spacing:-.035em}
+.museumArchiveHeader p{max-width:450px;color:#bfcac1;line-height:1.75;font-size:.9rem}
+.museumArchiveCards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.museumArchiveCards article{background:linear-gradient(155deg,#23382d,#172720);border:1px solid #d7bb8445;border-radius:14px;padding:22px 19px;display:flex;flex-direction:column;gap:10px}
+.museumArchiveIndex{color:#dabd81;font-size:.69rem;letter-spacing:.15em}
+.museumArchiveCards h3{font:400 clamp(1.23rem,2vw,1.75rem)/1.25 Georgia,'Noto Serif SC',serif;margin:8px 0 0}
+.museumArchiveCards p{font-size:.83rem;color:#cbd4c9;line-height:1.75;margin:0}
+.museumArchiveCards small{color:#9bada0;font-size:.72rem;margin-top:auto}
+.museumArchiveCards a{color:#f0d299;font-size:.78rem;text-decoration:underline;text-underline-offset:4px}
+.museumArchiveMore{text-align:right;padding-top:21px;color:#e9ce92;font-size:.9rem}
+@media(max-width:1100px){.museumArchiveCards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:680px){.museumArchiveHeader{display:block}.museumArchiveCards{grid-template-columns:1fr}.museumArchiveRail{padding-bottom:55px}.museumArchiveCards article{padding:20px}}
