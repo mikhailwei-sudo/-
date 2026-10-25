@@ -865,7 +865,8 @@ function draw(t){
   const rect=holder.getBoundingClientRect();renderer.setSize(rect.width,rect.height,false);
   slowFrames=0;
  }else if(elapsed<=38)slowFrames=Math.max(0,slowFrames-2);
- const dt=Math.min(.05,(t-prev)/1000);prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
+ // Time-based camera motion should advance by actual elapsed time even on slow GPUs.
+const dt=Math.min(.35,Math.max(0,(t-prev)/1000));prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
 showLobby();
 }catch(err){
  console.error('3D scene initialisation failed',err);
