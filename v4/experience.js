@@ -84,31 +84,43 @@ function galleryCanvas(lines,color='#25382e'){
  const tx=new THREE.CanvasTexture(c);tx.colorSpace=THREE.SRGBColorSpace;return tx;
 }
 function museumSign7(group,lines,w,h,x,y,z){
-  const isSmallLabel=h<0.5;
+  // Labels attached to exhibit meshes are intentionally suppressed.
+  // Freestanding captions are built by galleryObject7 outside the exhibit.
+  if(h<0.5)return;
   const tex=galleryCanvas(lines);
-  if(!tex)return;
-  if(isSmallLabel){
-    // Freestanding museum label beside the display, never across its front.
-    const stand=new THREE.Group();
-    stand.position.set(x+1.58,0,0.83);
-    group.add(stand);
-    box(stand,.48,.045,.34,0,.055,0,M.metal);
-    box(stand,.045,1.24,.045,0,.69,0,M.metal);
-    box(stand,1.26,.42,.055,0,1.36,0,M.wood);
-    mk(stand,new THREE.PlaneGeometry(1.19,.35),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),0,1.36,.033);
-    return;
-  }
-  mk(group,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
-} function galleryObject7(group,index,x,build){
+  if(tex)mk(group,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
+}
+function galleryObject7(group,index,x,build){
  const ped=new THREE.Group();ped.position.set(x,0,-1.1);group.add(ped);
  box(ped,2.66,.85,2.15,0,.425,0,C('#9b927d',.8));
  box(ped,2.70,.075,2.18,0,.9,0,M.gold);
  const item=new THREE.Group();item.userData.itemIndex=index;ped.add(item);artifacts[index]=item;
  build(item);
- // Open museum plinths instead of glass to keep texts and diagrams readable.
- // The old plaque base stood in front of models at display height.
- // Mount a low label ledge on the front face of the plinth instead.
- // Floor-standing labels are installed separately beside each exhibit.
+ // A separate floor-standing museum caption OUTSIDE the plinth footprint.
+ const labels=new7Labels[Math.floor(index/2)-4];
+ if(labels){
+  const col=index%2;
+  const labelLines=[labels[0][col],labels[1][col]];
+  const canvas=document.createElement('canvas');
+  canvas.width=1024;canvas.height=512;
+  const ctx=canvas.getContext('2d');
+  ctx.fillStyle='#f0e6d2';ctx.fillRect(0,0,1024,512);
+  ctx.strokeStyle='#a28757';ctx.lineWidth=12;ctx.strokeRect(16,16,992,480);
+  ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillStyle='#1d3429';
+  ctx.font='bold 90px system-ui,"Noto Sans CJK SC","Microsoft YaHei",sans-serif';
+  ctx.fillText(labelLines[0],512,174,910);
+  ctx.font='bold 58px system-ui,"Noto Sans",Arial,sans-serif';
+  ctx.fillText(labelLines[1],512,325,910);
+  const tex=new THREE.CanvasTexture(canvas);tex.colorSpace=THREE.SRGBColorSpace;
+  tex.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+  const stand=new THREE.Group();
+  stand.position.set(x+(x<0?-1.78:1.78),0,0.55);
+  group.add(stand);
+  box(stand,.54,.045,.42,0,.045,0,M.metal);
+  box(stand,.055,1.16,.055,0,.64,0,M.metal);
+  box(stand,1.33,.65,.065,0,1.31,0,M.wood);
+  mk(stand,new THREE.PlaneGeometry(1.26,.59),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,depthWrite:true}),0,1.31,.038);
+ }
  return item;
 }
 for(let ri=4;ri<7;ri++){
