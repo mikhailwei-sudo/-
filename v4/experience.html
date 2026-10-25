@@ -1,5 +1,13 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0d1511"><meta name="description" content="Интерактивный трёхъязычный 3D-музей Великого чайного пути — от китайских чайных мастерских через караваны до Кяхты."><title>Музей | Великий чайный путь · Great Tea Road</title><link rel="stylesheet" href="experience.css"></head>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0d1511"><meta name="description" content="Интерактивный трёхъязычный 3D-музей Великого чайного пути — от китайских чайных мастерских через караваны до Кяхты."><title>Музей | Великий чайный путь · Great Tea Road</title><link rel="stylesheet" href="experience.css"><style>
+/* Native HTML exhibit lettering: remains sharp on phones regardless of 3D texture filtering. */
+.mobileExhibitCaption{display:none}
+@media(max-width:760px){
+ .mobileExhibitCaption{display:flex;flex-direction:column;gap:5px;margin:12px 0 4px;padding:14px 17px;background:#f1e6cc;border:1px solid #c5a875;border-radius:13px;color:#20382b;box-shadow:0 8px 25px #0003}
+ .mobileExhibitCaption span{font:600 13px/1.45 system-ui,"Noto Sans CJK SC",sans-serif;letter-spacing:.04em;opacity:.8}
+ .mobileExhibitCaption strong{font:700 clamp(18px,4.5vw,24px)/1.4 system-ui,"Noto Sans CJK SC",sans-serif;overflow-wrap:anywhere}
+}
+</style></head>
 <body>
 <header class="topbar"><a class="logo" href="index.html" aria-label="Great Tea Road Home"><span class="logoMark">茶</span><span>GREAT TEA ROAD <small>万里茶道</small></span></a><nav class="topnav"><a href="index.html" id="navHome">Главная</a><a href="#rooms" id="navRooms">Залы</a><a href="#museum" id="navMuseum">3D-музей</a><a href="collection.html" class="archiveNavLink">史料 · Архив</a></nav><div class="languages" role="group" aria-label="Language"><button data-lang="ru">RU</button><button data-lang="zh">中</button><button data-lang="en">EN</button></div></header>
 <main>
@@ -7,6 +15,7 @@
 <section id="rooms" class="chapters"><div class="sectionTop"><div><div class="eyebrow" id="roomsKicker">СЕМЬ ГЛАВ ОДНОЙ ИСТОРИИ</div><h2 id="roomsTitle">Путешествие по залам</h2></div><p id="roomsDesc">Выберите главу, чтобы перейти в соответствующий зал музея.</p></div><div id="roomCards" class="roomCards"></div></section>
 <section id="museum" class="museumWrap"><div class="sectionTop"><div><div class="eyebrow" id="museumKicker">НАСТОЯЩАЯ WEBGL-СЦЕНА · THREE.JS</div><h2 id="museumTitle">Ваш личный музей</h2></div><p id="museumDesc">Выберите зал и экспонат. Камера переместится к нему плавно — без резких переходов.</p></div>
 <div class="museumApp"><div class="stageCol"><div class="stage"><div id="renderStage" class="renderStage"><div id="renderFallback" class="renderFallback"><span>◇</span><p id="fallbackText">Загрузка 3D-пространства…</p></div></div><div class="stageTop"><button class="glassPill lobbyMini" id="lobbyMini" type="button">⌂ Холл</button><span class="glassPill" id="stageHall">01 / 07</span><span class="liveLabel"><b></b><span id="liveText">ИНТЕРАКТИВНЫЙ ЗАЛ</span></span></div><div class="lobbyOverlay" id="lobbyOverlay"><div class="lobbyKicker" id="lobbyKicker">万里茶道 · GREAT TEA ROAD</div><h3 id="lobbyTitle">Добро пожаловать в музей</h3><p id="lobbyDesc">Перед вами китайский архитектурный холл. Выберите один из семи залов или начните экскурсию.</p><button type="button" id="lobbyBegin">Начать осмотр ↗</button></div><div class="stageBottom"><div class="stageHint" id="stageHint">Перетащите, чтобы повернуть обзор · колесо для масштаба</div><div class="stageButtons"><button id="zoomIn" aria-label="Zoom in">＋</button><button id="zoomOut" aria-label="Zoom out">－</button><button id="resetCam" aria-label="Reset view">↺</button></div></div></div>
+<div class="mobileExhibitCaption" id="mobileExhibitCaption" aria-live="polite" aria-atomic="true"><span id="mobileCaptionRoom">Зал музея</span><strong id="mobileCaptionItem">Выберите экспонат</strong></div>
 <div class="navRail"><button id="enterLobby" class="lobbyButton" type="button">⌂ <span id="lobbyLabel">Главный холл</span></button><button id="prevRoom" class="arrowBtn" aria-label="Previous room">←</button><div id="roomTabs" class="roomTabs" role="tablist" aria-label="Museum halls"></div><button id="nextRoom" class="arrowBtn" aria-label="Next room">→</button></div></div>
 <div class="infoCol"><div class="roomMeta"><div class="eyebrow" id="roomNumber">ЗАЛ 01 / 07</div><h3 id="roomName">Китай. Истоки чая</h3><p id="roomStory">История производства чайного кирпича.</p></div><div class="objectHead"><span id="objectLabel">ЭКСПОНАТЫ ЗАЛА</span><span id="objectCounter">01 / 02</span></div><div id="objectCards" class="objectCards"></div><div class="activeDetail"><div class="detailOverline" id="detailOverline">ВЫБРАННЫЙ ОБЪЕКТ</div><h4 id="itemName"></h4><p id="itemDesc"></p><a id="itemSource" href="#" target="_blank" rel="noopener noreferrer">Музейный источник ↗</a><p class="reconstruction" id="reconstruction">Авторская реконструкция, не 3D-скан подлинного музейного предмета.</p></div><div class="guide"><div class="guideTop"><div class="guideIcon">♫</div><div><strong id="guideHeading">Аудиогид</strong><p id="guideSub">Озвучка средствами браузера</p></div><span id="guideState" class="guideState">○</span></div><div class="guideControls"><button class="guidePlay" id="audioPlay">▶ <span id="playLabel">Слушать</span></button><button id="audioPause">Ⅱ</button><button id="audioStop">■</button><label class="volumeLabel" aria-label="Volume"><span>◖))</span><input id="audioVolume" type="range" min="0" max="1" step="0.1" value="0.9"></label></div><div class="tourControls"><button type="button" id="tourStart">▶ Guided tour</button><button type="button" id="tourStop">■ Stop tour</button><span id="tourStatus"></span></div><div class="guideNote" id="guideNote">Озвучка из готовых MP3 · Дмитрий, Chaowen и Kristin</div></div></div></div>
 </section>
@@ -31,7 +40,7 @@
 </section>
 <section class="endNote"><div class="eyebrow" id="footerKicker">ИСТОРИЯ + ТЕХНОЛОГИИ</div><h2 id="footerTitle">Торговый путь, который<br>стал культурным мостом.</h2><p id="footerDesc">Виртуальные модели — авторские интерпретации исторических предметов. Первоисточники указаны в карточках. Точные 3D-сканы музейных артефактов и исторические фотографии ими не подменяются.</p><a href="index.html" id="footerBack">← На главную</a></section></main>
 <footer class="siteFooter"><span>© Great Tea Road 4.2 · 万里茶道</span><span>RU · 中文 · EN</span><span id="footerTech">Three.js · Piper MP3 audio</span></footer>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script><script src="audio-guide.js?v=2.2-fourteen-exhibits"></script><script src="experience-content.js?v=5.5-seven-room-route"></script><script type="module" src="experience.js?v=5.7-unobstructed-exhibits"></script>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js"}}</script><script src="audio-guide.js?v=2.2-fourteen-exhibits"></script><script src="experience-content.js?v=5.5-seven-room-route"></script><script type="module" src="experience.js?v=5.8-readable-captions"></script>
 <script>
 // Remove the experimental museum worker while we diagnose 3D startup on phones.
 // No autoplay; cached files from previous visits remain in ordinary HTTP cache.
@@ -43,4 +52,27 @@ if('serviceWorker' in navigator){
  }).catch(()=>{});
 }
 </script>
-</body></html>
+<script>
+/* Read existing multilingual labels instead of re-translating or rasterizing them. */
+(function(){
+ const target=document.getElementById('mobileExhibitCaption');
+ const room=document.getElementById('roomName');
+ const item=document.getElementById('itemName');
+ const top=document.getElementById('mobileCaptionRoom');
+ const name=document.getElementById('mobileCaptionItem');
+ if(!target||!room||!item||!top||!name)return;
+ let pending=false;
+ function refresh(){
+  pending=false;
+  top.textContent=(room.textContent||'').trim();
+  name.textContent=(item.textContent||'').trim()||(room.textContent||'').trim();
+ }
+ function queue(){if(!pending){pending=true;requestAnimationFrame(refresh)}}
+ const observer=new MutationObserver(queue);
+ observer.observe(room,{childList:true,characterData:true,subtree:true});
+ observer.observe(item,{childList:true,characterData:true,subtree:true});
+ document.addEventListener('museum-room-enter',queue);
+ document.querySelectorAll('[data-lang]').forEach(button=>button.addEventListener('click',queue));
+ queue();
+})();
+</script></body></html>
