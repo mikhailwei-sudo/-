@@ -103,7 +103,7 @@
   }
   refreshVoices(){this.refreshLabels();}
   prefetch(item,lang){
-   if(!LANG[lang]||!Number.isInteger(item)||item<0||item>7)return;
+   if(!LANG[lang]||!Number.isInteger(item)||item<0||item>13)return;
    const key=lang+':'+item;
    if(this._prefetched.has(key))return;
    this._prefetched.add(key);
@@ -144,7 +144,7 @@
    }catch(e){if(token===this.serial){this.paused=true;this.status(this.t('error'),'error');}}
   }
   async play({item,lang,volume=1,onEnd}){
-   if(!LANG[lang]||!Number.isInteger(item)||item<0||item>7){this.fail();return;}
+   if(!LANG[lang]||!Number.isInteger(item)||item<0||item>13){this.fail();return;}
    if(this.speaking&&this.currentTrack?.item===item&&this.currentTrack?.lang===lang){
     if(this.paused)await this.togglePause();
     return; // Same item: never create or restart another audio track.
