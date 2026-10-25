@@ -1,0 +1,63 @@
+name: Archive openly licensed museum reference images
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/archive-museum-images.yml'
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download verified open-licence image references
+        run: |
+          python - <<'PY'
+          import pathlib, urllib.request, time, imghdr
+          folder=pathlib.Path('v4/assets/refs')
+          folder.mkdir(parents=True,exist_ok=True)
+          references={
+            'r1-brick-01.jpg':'https://iiif.wellcomecollection.org/image/V0018603/full/800,/0/default.jpg',
+            'r1-teaset-01.jpg':'https://openaccess-cdn.clevelandart.org/1955.299/1955.299_print.jpg',
+            'r1-chest-01.jpg':'https://iiif.wellcomecollection.org/image/V0046754/full/800,/0/default.jpg',
+            'r2-camel-01.jpg':'https://images.metmuseum.org/CRDImages/an/original/DP-14200-001.jpg',
+            'r2-packsaddle-01.jpg':'https://images.metmuseum.org/CRDImages/as/original/2002_201_83_O1.jpg',
+            'r3-shop-01.jpg':'https://iiif.wellcomecollection.org/image/L0056273/full/800,/0/default.jpg',
+            'r3-gate-01.jpg':'https://iiif.wellcomecollection.org/image/V0037627/full/800,/0/default.jpg',
+            'r3-documents-01.jpg':'https://images.metmuseum.org/CRDImages/gr/original/DP121459.jpg',
+            'r4-samovar-01.jpg':'https://collections.smvk.se/carlotta-em/web/image/zoom/1208586/2005.02.0015.A-C.jpg',
+            'r4-desk-01.jpg':'https://iiif.wellcomecollection.org/image/V0040178/full/600,/0/default.jpg',
+          }
+          count=0
+          for name,url in references.items():
+            dest=folder/name
+            if dest.is_file() and dest.stat().st_size>8000:count+=1;continue
+            for attempt in range(3):
+              try:
+                req=urllib.request.Request(url,headers={'User-Agent':'Mozilla/5.0 (compatible; GreatTeaRoad/1.0)'})
+                with urllib.request.urlopen(req,timeout=25) as response:
+                  data=response.read(8_000_000)
+                if len(data)<8000 or imghdr.what(None,data) not in ('jpeg','png'):
+                  raise ValueError('Received response is not a full image')
+                dest.write_bytes(data)
+                count+=1
+                print('Saved',name,len(data))
+                break
+              except Exception as e:
+                print('Download failed',name,'attempt',attempt+1,repr(e))
+                time.sleep(2+attempt*2)
+          print('Open-licence images present',count,'of',len(references))
+          PY
+      - name: Publish successful downloads only
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add v4/assets/refs/
+          if git diff --cached --quiet; then
+            echo "No new downloaded images"
+            exit 0
+          fi
+          git commit -m "Archive verified open-licence museum reference photography"
+          git push
