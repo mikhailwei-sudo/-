@@ -41,7 +41,7 @@ try:
      page.wait_for_timeout(2700)
      filename=f"{mode}-{name}.png"
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='hidden'")
-     page.locator(".stage").screenshot(path=str(OUT/filename),animations="disabled",timeout=30000)
+     page.locator("#renderStage canvas").screenshot(path=str(OUT/filename),animations="disabled",timeout=12000)
      page.locator(".museum-qa-overlay").evaluate("(el) => el.style.visibility='visible'")
      audit=page.evaluate("window.__GTR_MUSEUM_AUDIT__.getReport()")
      if audit["selectedRoom"]!=expected:
@@ -52,7 +52,10 @@ try:
     results[mode]={"pass":not any(e.startswith(("Wrong room","No WebGL")) for e in errors),
                    "screenshots":screenshots,"errors":errors}
    except Exception as exc:
-    page.screenshot(path=str(OUT/f"{mode}-failure.png"),full_page=True)
+    try:
+     page.screenshot(path=str(OUT/f"{mode}-failure.png"),full_page=False,timeout=5000,animations="disabled")
+    except Exception as screenshot_error:
+     errors.append("Failure screenshot unavailable: "+str(screenshot_error)[:180])
     results[mode]={"pass":False,"error":str(exc),"errors":errors}
    finally:ctx.close()
   browser.close()
