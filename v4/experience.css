@@ -28,3 +28,10 @@
 @media(max-width:680px){.museumArchiveHeader{display:block}.museumArchiveCards{grid-template-columns:1fr}.museumArchiveRail{padding-bottom:55px}.museumArchiveCards article{padding:20px}}
 
 .archiveFootnotes{margin-top:22px;padding:20px;border:1px solid #d6b68440;border-radius:15px;background:#172820}.archiveFootnotes>strong{font-size:.78rem;color:#e6cb98}.archiveFootnoteGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 25px;margin-top:12px}.archiveFootnoteGrid p{margin:0;color:#c4d1c7;line-height:1.7;font-size:.76rem}.archiveFootnoteGrid span{color:#e7d19f;font-weight:700}.archiveFootnoteGrid a{color:#ebc889;text-decoration:underline}@media(max-width:720px){.archiveFootnoteGrid{grid-template-columns:1fr}}
+
+/* Seven-hall navigation: four cards desktop, adaptive scrollable tabs */
+@media(min-width:980px){.roomCards{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:700px) and (max-width:979px){.roomCards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:699px){.roomCards{grid-template-columns:1fr}.roomCard{min-height:245px}}
+.roomTabs{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+.roomTabs button{white-space:nowrap}
