@@ -189,6 +189,9 @@ const museumPhotoFiles={
  '2005.02.0015.A-C':'r4-samovar-01.jpg',
  'V0040178':'r4-desk-01.jpg'
 };
+// The public site does not yet contain the archived JPEG assets. Skip guaranteed
+// 404 requests; keep the collection URLs as non-blocking fallbacks.
+const LOCAL_ARCHIVE_READY=false;
 const imageLoader=new THREE.TextureLoader();
 function loadMuseumImage(url,display){
  if(!url||!display)return;
@@ -217,7 +220,7 @@ function loadMuseumImage(url,display){
   previous?.dispose();
  };
  const fail=error=>console.warn('Archival image unavailable; museum label retained',url,error);
- if(local){
+ if(local&&LOCAL_ARCHIVE_READY){
   imageLoader.load(local,present,undefined,()=>imageLoader.load(url,present,undefined,fail));
  }else{
   imageLoader.load(url,present,undefined,fail);
@@ -682,10 +685,69 @@ canvas.addEventListener('wheel',e=>{e.preventDefault();state.tzoom=clamp(state.t
 document.getElementById('zoomIn').onclick=()=>state.tzoom=clamp(state.tzoom-.7,4.1,13.5);
 document.getElementById('zoomOut').onclick=()=>state.tzoom=clamp(state.tzoom+.7,4.1,13.5);
 document.getElementById('resetCam').onclick=()=>goRoom(currentRoom,currentItem);
+// Live WebGL and resource diagnostics for reproducible mobile/desktop QA.
+// Activated only by ?diagnostics=1; ordinary museum visitors see no new UI.
+const audit={
+ startedAt:performance.now(),
+ getReport(){
+  const canvas=renderer.domElement;
+  const statuses=Object.fromEntries(Object.entries(assetStatus).map(([k,v])=>[k,{status:v,progress:assetPercent[k]}]));
+  return {
+   version:'5.1-QA',
+   viewport:{width:innerWidth,height:innerHeight,dpr:devicePixelRatio},
+   webgl:{drawingBufferWidth:canvas.width,drawingBufferHeight:canvas.height,
+      geometries:renderer.info.memory.geometries,textures:renderer.info.memory.textures,
+      calls:renderer.info.render.calls,triangles:renderer.info.render.triangles},
+   selectedRoom:inLobby?'lobby':state.room+1,selectedExhibit:state.item+1,
+   photosAttempted:museumPhotoLoaded.size,
+   models:statuses,
+   secondsSinceStart:Math.round((performance.now()-this.startedAt)/100)/10
+  };
+ }
+};
+window.__GTR_MUSEUM_AUDIT__=audit;
+if(new URLSearchParams(location.search).has('diagnostics')){
+ const wrapper=document.createElement('div');
+ wrapper.style.cssText='position:absolute;right:14px;bottom:65px;z-index:20;max-width:min(360px,90vw);background:rgba(10,24,18,.95);color:#f5ecd8;padding:14px;border:1px solid #c6aa70;border-radius:14px;font:12px/1.5 system-ui;box-shadow:0 15px 30px #0007';
+ const header=document.createElement('div');header.textContent='GTR · WebGL / mobile QA';header.style.fontWeight='bold';
+ const actions=document.createElement('div');actions.style.cssText='display:flex;flex-wrap:wrap;gap:5px;margin:8px 0';
+ const log=document.createElement('pre');log.style.cssText='max-height:185px;overflow:auto;white-space:pre-wrap;font:11px/1.4 ui-monospace,monospace';
+ const buttons=[['Холл',-1],['Зал 1',0],['Зал 2',1],['Зал 3',2],['Зал 4',3]];
+ for(const [label,index] of buttons){
+  const button=document.createElement('button');button.textContent=label;button.style.cssText='background:#294c3b;color:white;border:1px solid #a18e66;border-radius:6px;padding:5px;cursor:pointer';
+  button.addEventListener('click',()=>{
+   if(index<0)showLobby();
+   else goRoom(index,index*2);
+   if(index>=0)document.dispatchEvent(new CustomEvent('museum-room-enter',{detail:index}));
+   updateAudit();
+  });
+  actions.append(button);
+ }
+ function updateAudit(){log.textContent=JSON.stringify(audit.getReport(),null,2)}
+ const copy=document.createElement('button');copy.textContent='Копировать отчёт';copy.style.cssText='color:#1c2a21;background:#e9d2a0;border:0;border-radius:7px;padding:7px;cursor:pointer';
+ copy.addEventListener('click',()=>{const value=JSON.stringify(audit.getReport(),null,2);navigator.clipboard?.writeText(value).catch(()=>{});});
+ wrapper.append(header,actions,log,copy);
+ holder.parentElement.append(wrapper);
+ setInterval(updateAudit,1300);updateAudit();
+}
+
 let prev=performance.now(),camX=-19,zoom=9.5,yaw=0,pitch=.06;
 let onScreen=true;new IntersectionObserver(es=>onScreen=!!es[0]?.isIntersecting,{threshold:.02}).observe(holder);
 const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-function draw(t){requestAnimationFrame(draw);if(document.hidden||!onScreen){prev=t;return}const dt=Math.min(.05,(t-prev)/1000);prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
+// Mobile devices may struggle with a full continuous 60fps scene.
+let lastRendered=0,slowFrames=0;
+const targetFrameMs=innerWidth<700?1000/40:1000/60;
+function draw(t){
+ requestAnimationFrame(draw);
+ if(document.hidden||!onScreen){prev=t;lastRendered=t;return}
+ if(lastRendered&&t-lastRendered<targetFrameMs)return;
+ const elapsed=t-lastRendered;lastRendered=t;
+ if(elapsed>38&&renderer.getPixelRatio()>1&&++slowFrames>70){
+  renderer.setPixelRatio(Math.max(1,renderer.getPixelRatio()-.15));
+  const rect=holder.getBoundingClientRect();renderer.setSize(rect.width,rect.height,false);
+  slowFrames=0;
+ }else if(elapsed<=38)slowFrames=Math.max(0,slowFrames-2);
+ const dt=Math.min(.05,(t-prev)/1000);prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
 showLobby();
 }catch(err){
  console.error('3D scene initialisation failed',err);
