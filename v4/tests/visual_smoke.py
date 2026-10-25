@@ -18,7 +18,7 @@ results={}
 try:
  time.sleep(2)
  with sync_playwright() as p:
-  browser=p.chromium.launch(headless=True,args=["--no-sandbox","--enable-webgl","--use-gl=angle","--use-angle=swiftshader","--disable-web-security"])
+  browser=p.chromium.launch(headless=True,args=["--no-sandbox","--enable-webgl","--use-gl=angle","--use-angle=swiftshader"])
   for mode,size in [("desktop",{"width":1440,"height":900,"device_scale_factor":1}),
                     ("mobile",{"width":390,"height":844,"device_scale_factor":1,"is_mobile":True,"has_touch":True})]:
    ctx=browser.new_context(**size)
@@ -39,8 +39,14 @@ try:
      filename=f"{mode}-{name}.png"
      page.locator(".stage").screenshot(path=str(OUT/filename),animations="disabled",timeout=30000)
      audit=page.evaluate("window.__GTR_MUSEUM_AUDIT__.getReport()")
+     expected='lobby' if index==0 else index
+     if audit["selectedRoom"]!=expected:
+      errors.append(f"Wrong room: expected {expected}, got {audit['selectedRoom']}")
+     if audit["webgl"]["calls"]<1:
+      errors.append(f"No WebGL draw calls in {name}")
      screenshots.append({"room":name,"screenshot":filename,"audit":audit})
-    results[mode]={"pass":True,"screenshots":screenshots,"errors":errors}
+    results[mode]={"pass":not any(e.startswith(("Wrong room","No WebGL")) for e in errors),
+                   "screenshots":screenshots,"errors":errors}
    except Exception as exc:
     page.screenshot(path=str(OUT/f"{mode}-failure.png"),full_page=True)
     results[mode]={"pass":False,"error":str(exc),"errors":errors}
