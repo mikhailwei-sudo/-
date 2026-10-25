@@ -708,6 +708,7 @@ const audit={
 window.__GTR_MUSEUM_AUDIT__=audit;
 if(new URLSearchParams(location.search).has('diagnostics')){
  const wrapper=document.createElement('div');
+ wrapper.className='museum-qa-overlay';
  wrapper.style.cssText='position:absolute;right:14px;bottom:65px;z-index:20;max-width:min(360px,90vw);background:rgba(10,24,18,.95);color:#f5ecd8;padding:14px;border:1px solid #c6aa70;border-radius:14px;font:12px/1.5 system-ui;box-shadow:0 15px 30px #0007';
  const header=document.createElement('div');header.textContent='GTR · WebGL / mobile QA';header.style.fontWeight='bold';
  const actions=document.createElement('div');actions.style.cssText='display:flex;flex-wrap:wrap;gap:5px;margin:8px 0';
