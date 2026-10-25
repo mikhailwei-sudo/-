@@ -46,7 +46,17 @@ for(const x of [-3.15,3.15])addArch(g,x);
 box(g,8,.018,2.55,0,.008,1.5,C(['#644c37','#7c573f','#315e52','#773b32'][i],.98));
 for(const side of [-1,1]){box(g,.38,1.85,.65,side*5.6,.95,-.4,trim);box(g,.85,.17,1.0,side*5.6,1.92,-.4,M.gold)}
 let spot1=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot1.position.set(-2.9,4.8,1.1);spot1.target.position.set(-2.4,1.7,-1);g.add(spot1,spot1.target);let spot2=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot2.position.set(2.9,4.8,1.1);spot2.target.position.set(2.4,1.7,-1);g.add(spot2,spot2.target);
-for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THREE.Group();pedestal.position.set(x,0,-1);g.add(pedestal);box(pedestal,2.65,.9,2.0,0,.45,0,C('#d6c6a8',.85));box(pedestal,2.78,.10,2.14,0,.95,0,M.gold);box(pedestal,2.62,.08,2.05,0,2.91,0,M.gold);for(let xx of [-1.27,1.27])for(let zz of [-.96,.96])box(pedestal,.055,1.93,.055,xx,1.96,zz,M.gold);for(let xx of [-1.26,1.26])box(pedestal,.035,1.86,1.90,xx,1.95,0,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,-.96,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,.96,M.glass);const item=new THREE.Group();item.userData.itemIndex=idx;pedestal.add(item);artifacts[idx]=item;box(pedestal,1.52,.06,.35,0,1.08,.7,C('#465a49'));}
+for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THREE.Group();pedestal.position.set(x,0,-1);g.add(pedestal);box(pedestal,2.65,.9,2.0,0,.45,0,C('#d6c6a8',.85));box(pedestal,2.78,.10,2.14,0,.95,0,M.gold);box(pedestal,2.62,.08,2.05,0,2.91,0,M.gold);for(let xx of [-1.27,1.27])for(let zz of [-.96,.96])box(pedestal,.055,1.93,.055,xx,1.96,zz,M.gold);for(let xx of [-1.26,1.26])box(pedestal,.035,1.86,1.90,xx,1.95,0,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,-.96,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,.96,M.glass);// Diffused case lighting: emissive strips, not eight new expensive spotlights.
+ const softStrip=new THREE.MeshStandardMaterial({
+  color:'#fff0d0',emissive:'#fff0d0',emissiveIntensity:.82,roughness:.78,
+  side:THREE.DoubleSide
+ });
+ box(pedestal,1.9,.027,.065,0,2.85,-.82,softStrip);
+ box(pedestal,1.9,.027,.065,0,2.85,.82,softStrip);
+ // Dark inset plinth provides visual separation from the marble display base.
+ box(pedestal,2.3,.045,1.69,0,1.032,0,C('#303a30',.91));
+ const item=new THREE.Group();item.userData.itemIndex=idx;pedestal.add(item);artifacts[idx]=item;
+ box(pedestal,1.52,.06,.35,0,1.08,.7,C('#465a49'));}
 }
 
 // Phase II: museum interior architecture. Every addition is decorative and does
