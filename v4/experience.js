@@ -48,6 +48,114 @@ for(const side of [-1,1]){box(g,.38,1.85,.65,side*5.6,.95,-.4,trim);box(g,.85,.1
 let spot1=new THREE.SpotLight(0xffebc3,45,13,Math.PI/3,.65,1.5);spot1.position.set(-2.9,4.8,1.1);spot1.target.position.set(-2.4,1.7,-1);g.add(spot1,spot1.target);let spot2=new THREE.SpotLight(0xffebc3,45,13,Math.PI/3,.65,1.5);spot2.position.set(2.9,4.8,1.1);spot2.target.position.set(2.4,1.7,-1);g.add(spot2,spot2.target);
 for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THREE.Group();pedestal.position.set(x,0,-1);g.add(pedestal);box(pedestal,2.65,.9,2.0,0,.45,0,C('#d6c6a8',.85));box(pedestal,2.78,.10,2.14,0,.95,0,M.gold);box(pedestal,2.62,.08,2.05,0,2.91,0,M.gold);for(let xx of [-1.27,1.27])for(let zz of [-.96,.96])box(pedestal,.055,1.93,.055,xx,1.96,zz,M.gold);for(let xx of [-1.26,1.26])box(pedestal,.035,1.86,1.90,xx,1.95,0,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,-.96,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,.96,M.glass);const item=new THREE.Group();item.userData.itemIndex=idx;pedestal.add(item);artifacts[idx]=item;box(pedestal,1.52,.06,.35,0,1.08,.7,C('#465a49'));}
 }
+
+// Phase II: museum interior architecture. Every addition is decorative and does
+// not move or replace the existing four galleries, showcases, or imported models.
+const INTERIOR_EXHIBITS=[
+ {name:{ru:'От чайного листа — к чайному кирпичу',zh:'茶叶加工与紧压',en:'From leaves to pressed tea'},
+  section:'CHINA · TEA CRAFT',image:'https://iiif.wellcomecollection.org/image/V0018603/full/600,/0/default.jpg',
+  attribution:'Chinese artist, ca. 1850 · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/qv74uhng',
+  note:{ru:'Сушка чая. Историческая иллюстрация, не фото кирпичного чая.',zh:'茶叶烘干历史绘画，并非砖茶成品照片。',en:'Historical illustration of tea drying; not a finished brick.'}},
+ {name:{ru:'Караван через степь',zh:'草原商队与双峰驼',en:'The caravan across the steppe'},
+  section:'CARAVANS · THE STEPPE',image:'https://iiif.wellcomecollection.org/image/V0020910EL/full/600,/0/default.jpg',
+  attribution:'W. Warwick after T. Brown & N. Marechal · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/kbf4jemm',
+  note:{ru:'Иллюстрация двугорбого и одногорбого верблюдов, не фото чайного каравана.',zh:'双峰驼与单峰驼类型图，并非茶路驼队的照片。',en:'Camel type illustration, not a Tea Road caravan photograph.'}},
+ {name:{ru:'Города пограничной торговли',zh:'边境商贸与建筑',en:'Border trading towns'},
+  section:'KYAKHTA · TRADE',image:'https://iiif.wellcomecollection.org/image/V0037634/full/600,/0/default.jpg',
+  attribution:'Felice Beato · Beijing, 1860 · Wellcome Collection · PDM 1.0',
+  source:'https://wellcomecollection.org/works/zbmdafc9',
+  note:{ru:'Магазин в Пекине: архитектурный аналог, не снимок Кяхты.',zh:'北京商铺建筑类型参照，并非恰克图实景。',en:'Beijing shop architecture; not a photograph of Kyakhta.'}},
+ {name:{ru:'Самовар и чайная культура',zh:'俄罗斯茶炊与饮茶文化',en:'Samovar and tea culture'},
+  section:'RUSSIA · TEA CULTURE',image:'https://collections.smvk.se/carlotta-em/web/image/zoom/1208586/2005.02.0015.A-C.jpg',
+  attribution:'Samovar · Museum of Ethnography, Sweden · CC0 1.0',
+  source:'https://collections.smvk.se/carlotta-em/web/object/1208565',
+  note:{ru:'Музейный предмет для сопоставления с современной 3D-моделью.',zh:'馆藏实物，与现代三维模型进行形态对照。',en:'Collection object for comparison with a modern 3D model.'}}
+];
+const museumPanels=[];
+function museumLetterBoard(parent,text,w,h,x,y,z,fontSize=46){
+ const board=document.createElement('canvas');board.width=1024;board.height=256;
+ const ctx=board.getContext('2d');
+ if(!ctx)return null;
+ ctx.fillStyle='#182921';ctx.fillRect(0,0,1024,256);
+ ctx.strokeStyle='#cbb484';ctx.lineWidth=6;ctx.strokeRect(13,13,998,230);
+ ctx.fillStyle='#f7ebce';ctx.textAlign='center';
+ ctx.font='500 '+fontSize+'px "Noto Sans SC",system-ui,sans-serif';
+ ctx.fillText(text,512,151,970);
+ const tex=new THREE.CanvasTexture(board);tex.colorSpace=THREE.SRGBColorSpace;
+ return mk(parent,new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide}),x,y,z);
+}
+function framedPhoto(parent,w,h,x,y,z){
+ const group=new THREE.Group();group.position.set(x,y,z);parent.add(group);
+ box(group,w+.16,h+.16,.09,0,0,0,M.woodLight);
+ box(group,w+.10,h+.10,.065,0,0,.06,M.gold);
+ box(group,w,h,.06,0,0,.11,M.paper);
+ const imageMesh=mk(group,new THREE.PlaneGeometry(w-.14,h-.14),
+   new THREE.MeshBasicMaterial({color:'#a6a18d',side:THREE.DoubleSide}),0,0,.154);
+ group.userData.photo=imageMesh;
+ return group;
+}
+for(let n=0;n<4;n++){
+ const room=rooms[n];
+ const trim=C(['#a38e70','#a78a61','#749b91','#bb8473'][n],.66);
+ const plaster=C(['#c7c0aa','#b6a899','#a7b7ad','#c7aaa0'][n],.93);
+ const darkFloor=C(['#51483a','#4e4235','#344940','#513b37'][n],.86);
+ // A slightly raised perimeter and inset exhibit floor.
+ box(room,13.4,.055,11.7,0,-.001,.05,darkFloor);
+ for(const side of [-1,1]){
+  box(room,.10,4.6,11.1,side*6.83,2.43,-.1,plaster);
+  box(room,.13,.18,11.1,side*6.78,.47,-.1,trim);
+  box(room,.13,.18,11.1,side*6.78,4.96,-.1,trim);
+  for(const z of [-4.4,-2.2,0,2.2,4.4]){
+   box(room,.17,4.37,.16,side*6.72,2.71,z,trim);
+  }
+ }
+ // Museum display walls: upper architrave, relief panels and subtle ceiling.
+ box(room,13.55,.18,.37,0,5.30,-4.75,trim);
+ for(const zz of [-4.0,-1,2,5]){
+  box(room,12.0,.10,.24,0,5.32,zz,M.woodLight);
+  for(const x of [-4.6,0,4.6]){
+   const fixture=box(room,.70,.04,.23,x,5.20,zz,M.gold);
+   const light=new THREE.PointLight(0xffe9bc,1.4,6,2);
+   light.position.set(x,5.06,zz);room.add(light);
+  }
+ }
+ // Visitor circulation strip and gallery bench, away from showcases.
+ box(room,8.8,.015,1.25,0,.038,3.48,C('#c0ad86',.95));
+ box(room,2.15,.14,.52,0,.55,4.45,M.woodLight);
+ for(const x of [-.8,.8])box(room,.14,.48,.40,x,.26,4.45,M.wood);
+ // Discreet ropes and brass stanchions in front of the glass cases.
+ for(const x of [-4.25,-1.0,1.0,4.25]){
+  cy(room,.042,.085,.68,x,.35,1.12,M.gold,12);
+  cy(room,.10,.10,.045,x,.70,1.12,M.gold,12);
+ }
+ for(const left of [-4.25,1]){
+  tube(room,[[left,.59,1.12],[left+1.6,.49,1.18],[left+3.25,.59,1.12]],.022,M.red);
+ }
+ const art=framedPhoto(room,2.45,1.64,0,3.49,-4.73);
+ const label=museumLetterBoard(room,INTERIOR_EXHIBITS[n].section,3.2,.62,0,4.53,-4.57,46);
+ museumPanels.push(art.userData.photo);
+ // Wall plaques connect the 3D room to its collection, without inventing an artefact.
+ museumLetterBoard(room,['中国茶叶工艺 · CHINA','茶路商队 · CARAVANS',
+   '恰克图贸易 · BORDER','俄罗斯饮茶文化 · RUSSIA'][n],3.9,.63,0,4.94,-4.48,43);
+}
+const museumPhotoLoaded=new Set();
+function loadMuseumWallPhoto(i){
+ if(museumPhotoLoaded.has(i)||i<0||i>3)return;
+ museumPhotoLoaded.add(i);
+ const fallback=()=>{ /* neutral paper panel with attribution remains if source is blocked */ };
+ new THREE.TextureLoader().load(INTERIOR_EXHIBITS[i].image,tex=>{
+  tex.colorSpace=THREE.SRGBColorSpace;
+  const display=museumPanels[i];
+  if(!display)return;
+  display.material.dispose();
+  display.material=new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide});
+ },undefined,fallback);
+}
+document.addEventListener('museum-room-enter',e=>loadMuseumWallPhoto(e.detail));
+window.addEventListener('museum-phase2-room',e=>loadMuseumWallPhoto(e.detail));
+
 scene.add(new THREE.HemisphereLight(0xf6f5e9,0x434e43,2.2));const dl=new THREE.DirectionalLight(0xffe4b9,2.5);dl.position.set(-10,11,8);scene.add(dl);
 
 // Imported architecture and exhibits supplied by the project owner.
