@@ -33,7 +33,7 @@ const ring=(p,r,t,x,y,z,m)=>mk(p,new THREE.TorusGeometry(r,t,10,24),m,x,y,z);
 function lathe(p,pts,x,y,z,m){return mk(p,new THREE.LatheGeometry(pts.map(q=>new THREE.Vector2(...q)),32),m,x,y,z)}
 function addArch(p,x){box(p,.21,3.5,.55,x-1.5,2.25,-4.75,M.woodLight);box(p,.21,3.5,.55,x+1.5,2.25,-4.75,M.woodLight);box(p,3.20,.22,.65,x,4.14,-4.75,M.gold);let curved=mk(p,new THREE.TorusGeometry(1.5,.10,8,28,Math.PI),M.gold,x,3.80,-4.73);}
 function plaque(p,str,x,y,z){const c=document.createElement('canvas');c.width=512;c.height=128;const ct=c.getContext('2d');ct.fillStyle='#e2cfab';ct.fillRect(0,0,512,128);ct.fillStyle='#243a2a';ct.textAlign='center';ct.font='bold 42px Georgia,serif';ct.fillText(str,256,81);const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;const o=mk(p,new THREE.PlaneGeometry(1.6,.4),new THREE.MeshBasicMaterial({map:t,transparent:true}),x,y,z);return o}
-const rooms=[];const artifacts=[];const regionSpacing=19;
+const rooms=[];const artifacts=[];const exhibitLights=[];const regionSpacing=19;
 for(let i=0;i<4;i++){
 const g=new THREE.Group();g.position.x=i*regionSpacing;scene.add(g);rooms.push(g);
 const palette=['#263b30','#45392d','#2c4440','#492f2a'][i];const wall=C(palette),trim=C(['#d3b98d','#d9b786','#a4c6b8','#ddaf93'][i],.55);
@@ -46,6 +46,7 @@ for(const x of [-3.15,3.15])addArch(g,x);
 box(g,8,.018,2.55,0,.008,1.5,C(['#644c37','#7c573f','#315e52','#773b32'][i],.98));
 for(const side of [-1,1]){box(g,.38,1.85,.65,side*5.6,.95,-.4,trim);box(g,.85,.17,1.0,side*5.6,1.92,-.4,M.gold)}
 let spot1=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot1.position.set(-2.9,4.8,1.1);spot1.target.position.set(-2.4,1.7,-1);g.add(spot1,spot1.target);let spot2=new THREE.SpotLight(0xffe9c5,14,11,Math.PI/4,.62,1.4);spot2.position.set(2.9,4.8,1.1);spot2.target.position.set(2.4,1.7,-1);g.add(spot2,spot2.target);
+exhibitLights.push(spot1,spot2);
 for(let j=0;j<2;j++){const idx=i*2+j;let x=j===0?-2.45:2.45;let pedestal=new THREE.Group();pedestal.position.set(x,0,-1);g.add(pedestal);box(pedestal,2.65,.9,2.0,0,.45,0,C('#d6c6a8',.85));box(pedestal,2.78,.10,2.14,0,.95,0,M.gold);box(pedestal,2.62,.08,2.05,0,2.91,0,M.gold);for(let xx of [-1.27,1.27])for(let zz of [-.96,.96])box(pedestal,.055,1.93,.055,xx,1.96,zz,M.gold);for(let xx of [-1.26,1.26])box(pedestal,.035,1.86,1.90,xx,1.95,0,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,-.96,M.glass);box(pedestal,2.55,1.86,.035,0,1.95,.96,M.glass);// Diffused case lighting: emissive strips, not eight new expensive spotlights.
  const softStrip=new THREE.MeshStandardMaterial({
   color:'#fff0d0',emissive:'#fff0d0',emissiveIntensity:.82,roughness:.78,
@@ -631,7 +632,15 @@ document.addEventListener('museum-room-enter',e=>{
 const state={room:0,item:0,targetX:0,lookX:0,yaw:0,tyaw:0,pitch:.06,tpitch:.06,zoom:9.5,tzoom:9.5};
 function goRoom(room,item){state.room=room;state.item=item;state.targetX=room*regionSpacing;state.tyaw=0;state.tzoom=9.5;state.tpitch=.06;highlight()}
 function goItem(item){state.item=item;const local=item%2===0?-2.45:2.45;state.targetX=state.room*regionSpacing+local*.72;state.tyaw=local<0?-.12:.12;state.tzoom=6.3;highlight()}
-function highlight(){artifacts.forEach((o,i)=>o.scale.setScalar(i===state.item?1.08:1));}
+function highlight(){
+ artifacts.forEach((object,i)=>object.scale.setScalar(i===state.item?1.035:1));
+ // Guide the visitor's attention through real spotlights, not exaggerated
+ // scaling of the artefact that could clip the glass enclosure.
+ exhibitLights.forEach((lamp,i)=>{
+  lamp.intensity=i===state.item?18:9;
+  lamp.color.setHex(i===state.item?0xfff0d0:0xffdfb2);
+ });
+}
 let inLobby=true;
 function showLobby(){inLobby=true;state.room=-1;state.targetX=-19;state.tyaw=0;state.tzoom=9.5;state.tpitch=.08; if(lobbyOverlay)lobbyOverlay.hidden=false; lobbyButton?.setAttribute('aria-pressed','true');}
 function leaveLobby(){inLobby=false;if(lobbyOverlay)lobbyOverlay.hidden=true;lobbyButton?.setAttribute('aria-pressed','false');}
