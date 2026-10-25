@@ -178,20 +178,49 @@ for(let n=0;n<4;n++){
 const museumPhotoLoaded=new Set();
 // Accessible image captions remain in the surrounding HTML archive;
 // these paintings are typological references, not scans of the 3D exhibits.
+// Historical art is always shown at its original aspect ratio inside
+// the frame. Images load on room entry; remote failures never block WebGL.
+const museumPhotoFiles={
+ 'V0018603':'r1-brick-01.jpg','V0018604':'r1-brick-02.jpg',
+ '1955.299_print':'r1-teaset-01.jpg',
+ 'V0020910EL':'r2-camel-02.jpg','DP-14200-001':'r2-camel-01.jpg',
+ 'V0037634':'r3-shop-02.jpg','V0037627':'r3-gate-01.jpg',
+ '2005.02.0015.A-C':'r4-samovar-01.jpg',
+ 'V0040178':'r4-desk-01.jpg'
+};
+const imageLoader=new THREE.TextureLoader();
 function loadMuseumImage(url,display){
  if(!url||!display)return;
- // Only fetch when the corresponding room is visited. We never load photos
- // with uncertain provenance or restricted rights.
- new THREE.TextureLoader().load(url,tex=>{
+ const code=Object.keys(museumPhotoFiles).find(key=>url.includes(key));
+ const local=code?'./assets/refs/'+museumPhotoFiles[code]:null;
+ const present=tex=>{
   tex.colorSpace=THREE.SRGBColorSpace;
   tex.anisotropy=Math.min(4,renderer.capabilities.getMaxAnisotropy());
-  const last=display.material;
+  const image=tex.image;
+  const w=image?.naturalWidth||image?.videoWidth||image?.width||1;
+  const h=image?.naturalHeight||image?.videoHeight||image?.height||1;
+  const geom=display.geometry?.parameters||{width:1,height:1};
+  const frameAspect=geom.width/geom.height;
+  const textureAspect=w/h;
+  // Centre crop rather than stretching a historical painting or photograph.
+  if(textureAspect>frameAspect){
+   tex.repeat.set(frameAspect/textureAspect,1);
+   tex.offset.set((1-tex.repeat.x)/2,0);
+  }else{
+   tex.repeat.set(1,textureAspect/frameAspect);
+   tex.offset.set(0,(1-tex.repeat.y)/2);
+  }
+  tex.needsUpdate=true;
+  const previous=display.material;
   display.material=new THREE.MeshBasicMaterial({map:tex,side:THREE.DoubleSide,toneMapped:false});
-  last?.dispose();
- },undefined,e=>{
-  // Keep the neutral paper backing rather than a broken image or a fake photo.
-  console.warn('Museum archival photo unavailable',url,e);
- });
+  previous?.dispose();
+ };
+ const fail=error=>console.warn('Archival image unavailable; museum label retained',url,error);
+ if(local){
+  imageLoader.load(local,present,undefined,()=>imageLoader.load(url,present,undefined,fail));
+ }else{
+  imageLoader.load(url,present,undefined,fail);
+ }
 }
 function loadMuseumWallPhoto(i){
  if(museumPhotoLoaded.has(i)||i<0||i>3)return;
