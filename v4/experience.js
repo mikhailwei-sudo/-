@@ -163,6 +163,90 @@ window.addEventListener('museum-phase2-room',e=>loadMuseumWallPhoto(e.detail));
 
 scene.add(new THREE.HemisphereLight(0xf6f5e9,0x434e43,2.2));const dl=new THREE.DirectionalLight(0xffe4b9,2.5);dl.position.set(-10,11,8);scene.add(dl);
 
+// Gallery finish: lightweight physically lit floor strips, wall vitrines and
+// detailed object labels. All geometry is static; no new model downloads.
+const galleryDetailPalette=[
+ {stone:'#beb4a0',timber:'#856746',accent:'#bca477',ink:'#314537'},
+ {stone:'#a99a83',timber:'#786247',accent:'#c4aa7b',ink:'#423829'},
+ {stone:'#a5b5ad',timber:'#625951',accent:'#b3c4b9',ink:'#25413d'},
+ {stone:'#b6a39a',timber:'#76574d',accent:'#dbb29b',ink:'#513731'}
+];
+const museumLabels={
+ ru:[['Кирпичный чай','Китайский чайный сервиз'],['Чайный караван','Торговые ящики'],['Пограничная лавка','Торговые ворота'],['Русский самовар','Купеческий стол']],
+ zh:[['砖茶','中国茶具'],['茶路驼队','贸易木箱'],['边境商铺','城门与界标'],['俄罗斯茶炊','商人桌案']],
+ en:[['Brick tea','Chinese teaware'],['Tea caravan','Trade crates'],['Merchant shop','Border gateway'],['Russian samovar','Merchant desk']]
+};
+const galleryLabelObjects=[];
+function labelCanvasTexture(title,subtitle){
+ const c=document.createElement('canvas');c.width=512;c.height=256;
+ const ctx=c.getContext('2d');if(!ctx)return null;
+ ctx.fillStyle='#ede3cb';ctx.fillRect(0,0,c.width,c.height);
+ ctx.fillStyle='#a68a59';ctx.fillRect(15,15,482,3);
+ ctx.fillStyle='#263a2f';ctx.font='bold 44px system-ui,"Noto Sans SC",sans-serif';ctx.textAlign='center';
+ ctx.fillText(title,256,118,470);
+ ctx.fillStyle='#607367';ctx.font='26px system-ui,sans-serif';
+ ctx.fillText(subtitle,256,175,470);
+ ctx.fillStyle='#a68a59';ctx.fillRect(15,235,482,3);
+ const texture=new THREE.CanvasTexture(c);texture.colorSpace=THREE.SRGBColorSpace;return texture;
+}
+for(let roomIndex=0;roomIndex<4;roomIndex++){
+ const room=rooms[roomIndex],theme=galleryDetailPalette[roomIndex];
+ const stone=C(theme.stone,.87),timber=C(theme.timber,.76),accent=C(theme.accent,.35,.32);
+ // Square cuts of polished stone with thin brass inlays only around the
+ // circulation area: keep the original central carpet and glass-case bases.
+ for(const x of [-5.88,5.88]){
+  for(let row=0;row<5;row++){
+   const z=-3.85+row*1.92;
+   box(room,1.35,.02,1.77,x,.045,z,stone);
+   box(room,1.35,.025,.026,x,.062,z+.86,accent);
+  }
+ }
+ for(const x of [-4.62,4.62]){
+  box(room,.025,.025,10.5,x,.063,0,accent);
+ }
+ // Three-dimensional panel frames and dado rails (no texture fetch).
+ for(const x of [-4.85,4.85]){
+  box(room,2.20,3.16,.08,x,2.72,-4.83,timber);
+  box(room,2.03,2.95,.09,x,2.72,-4.74,stone);
+  box(room,1.85,.045,.11,x,4.04,-4.66,accent);
+  box(room,1.85,.045,.11,x,1.42,-4.66,accent);
+ }
+ // Illuminated nameplates at the front of the authentic-model showcases.
+ for(let item=0;item<2;item++){
+  const x=item===0?-2.45:2.45;
+  const stand=new THREE.Group();stand.position.set(x,0,1.43);room.add(stand);
+  box(stand,1.84,.09,.08,0,.68,0,timber);
+  box(stand,1.78,.51,.07,0,.98,0,C('#eadcc0',.94));
+  box(stand,1.86,.045,.09,0,1.23,.04,accent);
+  const name=(museumLabels[document.documentElement.lang]||museumLabels.ru)[roomIndex][item];
+  const tex=labelCanvasTexture(name,'GREAT TEA ROAD · '+String(roomIndex*2+item+1).padStart(2,'0'));
+  if(tex){
+   const plate=mk(stand,new THREE.PlaneGeometry(1.64,.49),new THREE.MeshBasicMaterial({map:tex}),0,.99,.059);
+   galleryLabelObjects.push({plate,roomIndex,item});
+  }
+ }
+ // Room-specific material accents, not arbitrary unrelated architectural assets.
+ if(roomIndex===0){
+  for(const x of [-5.4,5.4])box(room,.29,4.5,.28,x,2.50,-4.35,timber);
+ }else if(roomIndex===1){
+  box(room,11.1,.15,.30,0,4.45,-4.70,timber);
+  for(const x of [-5.1,5.1])cy(room,.17,.20,1.7,x,1.01,3.7,timber,12);
+ }else if(roomIndex===2){
+  box(room,10.3,.15,.34,0,4.20,-4.64,accent);
+  for(const x of [-5.0,5.0])box(room,.40,2.18,.40,x,1.75,-4.43,timber);
+ }else{
+  box(room,11.4,.18,.35,0,4.52,-4.63,timber);
+  for(const x of [-5.1,5.1])cy(room,.16,.19,2.0,x,1.12,-4.10,timber,16);
+ }
+}
+window.addEventListener('museum-language-changed',()=>{
+ const chosen=museumLabels[document.documentElement.lang]||museumLabels.ru;
+ for(const {plate,roomIndex,item} of galleryLabelObjects){
+  const next=labelCanvasTexture(chosen[roomIndex][item],'GREAT TEA ROAD · '+String(roomIndex*2+item+1).padStart(2,'0'));
+  if(next){const prev=plate.material.map;plate.material.map=next;plate.material.needsUpdate=true;prev?.dispose();}
+ }
+});
+
 // Imported architecture and exhibits supplied by the project owner.
 // Local files: FBX Chinese hall, glTF tea set, Collada crate.
 let lobbyLoaded=false;
