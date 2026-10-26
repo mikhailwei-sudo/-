@@ -38,7 +38,7 @@ dialog{border:0;padding:0;background:var(--white);color:var(--ink);max-width:min
 @media(max-width:680px){.headerInner{min-height:76px;gap:9px}.brandIcon{font-size:37px}.brandText{font-size:10px}.brandText small{font-size:9px}.topnav{display:none}.lang button{padding:6px 8px}.hero{grid-template-columns:1fr}.heroText{padding:54px 20px 44px}.hero h1{font-size:clamp(51px,12vw,77px)}.heroArt{min-height:350px}.band{grid-template-columns:repeat(2,1fr)}.band div{padding:20px}.archive{padding-top:65px;padding-bottom:50px}.sectionHead{display:block}.sectionHead p{margin-top:17px}.grid{grid-template-columns:1fr;gap:33px}.thumb{aspect-ratio:1.33}.note{grid-template-columns:1fr;gap:0;margin-top:65px}.modal{grid-template-columns:1fr}.modalImage{max-height:290px}.modalCopy{padding:25px}.modalCopy h2{font-size:32px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.thumb img{transition:none}}
 
-/* ARCHIVE CONCEPT 02 — dense black-wall digital cabinet, inspired by Sées */
+/* ARCHIVE CONCEPT 03 — dense black-wall digital cabinet, inspired by Sées */
 :root{color-scheme:dark;--paper:#0c0d0d;--paper2:#141515;--ink:#f1efe8;--muted:#aeb0a9;--line:#777b776e;--forest:#f1efe8;--orange:#d7b98b;--white:#171918}
 body{background:#0c0d0d;color:#f1efe8}
 header{background:#0d0e0eeb;border-bottom:1px solid #777b776a;backdrop-filter:blur(14px);min-height:74px}
@@ -112,8 +112,51 @@ dialog::backdrop{background:#060706e9}
  .cardMeta{padding:9px}.cardMeta h3{font-size:13px;min-height:35px}.cardMeta .chapter{font-size:8px}
  .note{grid-template-columns:1fr;margin-top:45px;padding:25px}.modalImage{max-height:40vh}
 }
+
+/* Concept 03: true black museum gallery — restrained warm silver and antique brass. */
+:root{color-scheme:dark;--paper:#000000;--paper2:#080808;--ink:#f4f2ed;--muted:#bbb9b3;--line:#5d5b55;--forest:#e9e5da;--orange:#d7bb83;--white:#101010}
+html,body{background:#000!important;color:var(--ink)}
+header{background:#000000f5;border-color:#5c5a54}
+.concept{background:#0b0b0b;color:#c5ac7b;border-color:#34312c}
+.brandIcon{color:#d2b77d}
+.hero,.archive,.heroText{background:#000}
+.hero h1,.sectionHead h2,.cardMeta h3{color:#f7f5f1}
+.hero h1 em{color:#d7bb83}
+.hero .kicker,.kicker,.cardMeta .chapter{color:#d8bd89}
+.heroActions .solid{background:#f2efe6;color:#090909;border-color:#f2efe6}
+.heroActions .solid:hover{background:#d4bd90}
+.textLink{color:#efeee9}
+.band{background:#080808;border-color:#353535}
+.band div{border-color:#303030}
+.band b{color:#f3f0e7}
+.band span,.sectionHead p,.counter{color:#b3b1ac}
+.controls{border-color:#494741}
+.filters button{background:#050505;color:#e3e0da;border-color:#656057}
+.filters button:hover{border-color:#d7bb83}
+.filters button[aria-pressed=true]{background:#ece8dc;color:#0b0b0b;border-color:#ece8dc}
+.search{background:#000;color:#f5f3ee;border-color:#a8a399}
+.search::placeholder{color:#b3b0a8}
+.card{background:#050505;border-color:#494949}
+.card:hover{background:#101010;border-color:#dfc594}
+.thumb{background:#000;border-color:#343434}
+.thumb .number{background:#070707ed;color:#f0eee5;border-color:#848079}
+.thumb .type{background:#070707ef;color:#f1eddf;border-color:#807d73}
+.thumb .noimage{background:#111;color:#998b70}
+.cardMeta .chapter{color:#d1b37b}
+.cardMeta h3{color:#f5f2eb}
+.openItem{color:#e6dcc9}
+.note{background:#080808;border-color:#555046}
+.note h2{color:#f3f0e6}
+.note p,.modalCopy p,.modalCopy small{color:#c8c5bc}
+footer{border-color:#46443d;color:#bbb8ae}
+dialog{background:#090909;color:#f4f1e9;border-color:#777169}
+dialog::backdrop{background:#000000ed}
+.modalImage{background:#000}
+.modalCopy a{color:#e7c78b}
+.close{background:#f4efe3;color:#090909}
+:focus-visible{outline:2px solid #edcb85;outline-offset:3px}
 </style></head><body>
-<div class="concept" id="prototype">● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 02 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН</div>
+<div class="concept" id="prototype">● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 03 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН</div>
 <header><div class="container headerInner"><a class="brand" href="experience.html"><span class="brandIcon">茶</span><span class="brandText">GREAT TEA ROAD<small>万 里 茶 道 · DIGITAL HERITAGE</small></span></a><nav class="topnav"><a href="#collection" id="navCollection">Коллекция</a><a href="collection.html" id="navArchive">Архив</a><a href="experience.html" id="navMuseum">3D-музей ↗</a></nav><div class="lang"><button data-lang="ru" aria-pressed="true">RU</button><button data-lang="zh" aria-pressed="false">中</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
 <main><section class="hero"><div class="heroText"><span class="kicker" id="heroKicker">ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04</span><h1 id="heroTitle">История,<br>сохранённая<br><em>в деталях.</em></h1><p id="heroDesc">Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.</p><div class="heroActions"><a href="#collection" class="solid" id="explore">Исследовать архив ↘</a><a href="experience.html" class="textLink" id="enter3d">Войти в 3D-музей ↗</a></div></div><div class="heroArt"><img id="heroImage" src="https://iiif.wellcomecollection.org/image/V0018603/full/800,/0/default.jpg" alt="Historical painting of Chinese tea processing" loading="eager"><div class="heroNumber">FIG. 001 — THE TEA ROAD ARCHIVE</div><div class="heroCaption"><span id="featureLabel">ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ</span><b id="featureTitle">Путь одного<br>чайного листа</b></div></div></section>
 <section class="band"><div><b>12</b><span id="statOne">экспозиций</span></div><div><b>04</b><span id="statTwo">тематических раздела</span></div><div><b>03</b><span id="statThree">языка</span></div><div><b>∞</b><span id="statFour">возможностей исследования</span></div></section>
@@ -125,7 +168,7 @@ dialog::backdrop{background:#060706e9}
 <script>
 (()=>{
  const translations={
- ru:{prototype:'● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 02 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН',navCollection:'Коллекция',navArchive:'Архив',navMuseum:'3D-музей ↗',heroKicker:'ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04',heroTitle:'История,<br>сохранённая<br><em>в деталях.</em>',heroDesc:'Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.',explore:'Исследовать архив ↘',enter3d:'Войти в 3D-музей ↗',featureLabel:'ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ',featureTitle:'Путь одного<br>чайного листа',statOne:'экспозиций',statTwo:'тематических раздела',statThree:'языка',statFour:'возможностей исследования',sectionKicker:'КАТАЛОГ · ИСТОЧНИКИ И АРТЕФАКТЫ',sectionTitle:'Коллекция',sectionDesc:'Музейные изображения, исторические аналогии и сведения об источниках.',noteKicker:'ОТВЕТСТВЕННОЕ НАСЛЕДИЕ',noteTitle:'История требует источников.',noteText:'Исторические материалы и стилизованные цифровые модели показаны отдельно. Мы сохраняем ссылки на музейные коллекции и помечаем типологические аналогии. Материалы с неустановленными правами не публикуются.',footerText:'ЭКСПЕРИМЕНТАЛЬНЫЙ ДИЗАЙН · ИЗДАНИЕ 01',footerBack:'Вернуться в основной музей ↗',all:'Все',search:'Поиск по коллекции...',count:'Найдено',open:'Смотреть экспонат ↗',source:'Открыть музейный источник ↗',historical:'ИСТОРИЧЕСКИЙ МАТЕРИАЛ',type:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',pending:'БЕЗ ИЗОБРАЖЕНИЯ',missing:'Изображение не опубликовано'},
+ ru:{prototype:'● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 03 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН',navCollection:'Коллекция',navArchive:'Архив',navMuseum:'3D-музей ↗',heroKicker:'ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04',heroTitle:'История,<br>сохранённая<br><em>в деталях.</em>',heroDesc:'Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.',explore:'Исследовать архив ↘',enter3d:'Войти в 3D-музей ↗',featureLabel:'ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ',featureTitle:'Путь одного<br>чайного листа',statOne:'экспозиций',statTwo:'тематических раздела',statThree:'языка',statFour:'возможностей исследования',sectionKicker:'КАТАЛОГ · ИСТОЧНИКИ И АРТЕФАКТЫ',sectionTitle:'Коллекция',sectionDesc:'Музейные изображения, исторические аналогии и сведения об источниках.',noteKicker:'ОТВЕТСТВЕННОЕ НАСЛЕДИЕ',noteTitle:'История требует источников.',noteText:'Исторические материалы и стилизованные цифровые модели показаны отдельно. Мы сохраняем ссылки на музейные коллекции и помечаем типологические аналогии. Материалы с неустановленными правами не публикуются.',footerText:'ЭКСПЕРИМЕНТАЛЬНЫЙ ДИЗАЙН · ИЗДАНИЕ 01',footerBack:'Вернуться в основной музей ↗',all:'Все',search:'Поиск по коллекции...',count:'Найдено',open:'Смотреть экспонат ↗',source:'Открыть музейный источник ↗',historical:'ИСТОРИЧЕСКИЙ МАТЕРИАЛ',type:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',pending:'БЕЗ ИЗОБРАЖЕНИЯ',missing:'Изображение не опубликовано'},
  zh:{prototype:'● 设计试用版 / ARCHIVE CONCEPT 01 — 主网站保持不变',navCollection:'藏品目录',navArchive:'档案馆',navMuseum:'3D博物馆 ↗',heroKicker:'数字藏品 · 01 / 04',heroTitle:'在细节中<br><em>触摸历史。</em>',heroDesc:'探索中俄茶叶贸易的历史图像、器物与博物馆文献。',explore:'探索档案 ↘',enter3d:'进入3D展馆 ↗',featureLabel:'历史图像',featureTitle:'一片茶叶<br>的旅程',statOne:'组展品',statTwo:'个专题板块',statThree:'种语言',statFour:'种探索可能',sectionKicker:'目录 · 史料与器物',sectionTitle:'馆藏目录',sectionDesc:'博物馆图像、历史类比与可查证的来源资料。',noteKicker:'负责任的文化传承',noteTitle:'让史料有据可查。',noteText:'历史图像与数字复原明确区分。展品标明博物馆来源，类型参照也有明确说明。版权尚未核实的材料不公开。',footerText:'独立设计测试 · 第一版',footerBack:'返回原版博物馆 ↗',all:'全部',search:'搜索藏品...',count:'找到',open:'查看展品 ↗',source:'查看馆藏来源 ↗',historical:'历史资料',type:'类型参照',pending:'无公开图像',missing:'尚未公开图像'},
  en:{prototype:'● DESIGN PREVIEW / ARCHIVE CONCEPT 01 — MAIN WEBSITE UNCHANGED',navCollection:'Collection',navArchive:'Archive',navMuseum:'3D museum ↗',heroKicker:'DIGITAL COLLECTION · 01 / 04',heroTitle:'History,<br>preserved<br><em>in detail.</em>',heroDesc:'Explore museum objects, documents and historic images of the tea trade between China and Russia.',explore:'Explore archive ↘',enter3d:'Enter 3D museum ↗',featureLabel:'HISTORICAL IMAGE',featureTitle:'The journey<br>of a tea leaf',statOne:'exhibits',statTwo:'thematic sections',statThree:'languages',statFour:'ways to explore',sectionKicker:'CATALOGUE · SOURCES & OBJECTS',sectionTitle:'The collection',sectionDesc:'Museum images, historical comparisons and traceable source references.',noteKicker:'RESPONSIBLE HERITAGE',noteTitle:'History needs evidence.',noteText:'We distinguish historical imagery from reconstructed 3D models, link to original museum collections and flag comparisons. Material without confirmed rights is not shown.',footerText:'EXPERIMENTAL DESIGN · EDITION 01',footerBack:'Return to main museum ↗',all:'All',search:'Search the collection...',count:'Found',open:'View object ↗',source:'Open museum source ↗',historical:'HISTORICAL MATERIAL',type:'TYPE REFERENCE',pending:'NO IMAGE',missing:'Image not published'}
  };
