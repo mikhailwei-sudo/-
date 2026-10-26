@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#ede9dc"><title>Архив чайного пути · Концепт 01</title>
+<meta name="description" content="Экспериментальный редакционный дизайн цифрового исторического архива Великого чайного пути.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&family=Noto+Serif+SC:wght@400;600&display=swap');
+:root{--paper:#efede4;--paper2:#e4e0d3;--ink:#24261f;--muted:#74776c;--line:#c7c4b7;--forest:#1d342a;--orange:#b86340;--white:#faf8f1;font-family:'DM Sans',system-ui,'Noto Sans CJK SC',sans-serif;color:var(--ink)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper)}button,input{font:inherit}button{cursor:pointer}a{color:inherit}img{display:block;max-width:100%}
+.container{max-width:1500px;margin:0 auto;padding:0 clamp(19px,5vw,80px)}
+header{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--ink);min-height:85px}
+.headerInner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:85px}
+.brand{display:flex;align-items:center;gap:15px;text-decoration:none;min-width:0}.brandIcon{font:52px/1 'Noto Serif SC',serif;color:var(--forest)}.brandText{font:700 13px/1.5 'DM Sans',sans-serif;letter-spacing:.16em}.brandText small{display:block;font-size:10px;letter-spacing:.32em;color:var(--muted)}
+.topnav{display:flex;align-items:center;gap:27px}.topnav a{font-size:12px;font-weight:700;text-decoration:none;letter-spacing:.09em;text-transform:uppercase}.topnav a:hover{text-decoration:underline}
+.lang{display:flex;border:1px solid var(--line);padding:4px;gap:2px}.lang button{border:0;background:transparent;color:var(--muted);padding:7px 11px;font-size:12px}.lang button[aria-pressed=true]{background:var(--forest);color:white}
+.concept{background:var(--forest);color:#f8eacd;padding:9px clamp(19px,5vw,80px);font-size:11px;letter-spacing:.12em;text-align:center}
+.hero{display:grid;grid-template-columns:1.15fr .85fr;min-height:610px;border-bottom:1px solid var(--ink)}
+.heroText{padding:clamp(45px,6.5vw,110px) 5vw 68px clamp(19px,5vw,80px);display:flex;flex-direction:column;justify-content:center}
+.kicker{font:700 11px 'DM Sans',sans-serif;letter-spacing:.24em;color:var(--orange);text-transform:uppercase}
+.hero h1{font:500 clamp(52px,7.4vw,118px)/.99 'Playfair Display','Noto Serif SC',Georgia,serif;letter-spacing:-.055em;margin:25px 0 31px;max-width:900px}
+.hero p{font-size:16px;color:#616558;line-height:1.8;max-width:500px;margin:0 0 36px}
+.heroActions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}.solid{display:inline-flex;align-items:center;gap:25px;background:var(--forest);border:1px solid var(--forest);color:white;padding:15px 22px;font-size:12px;letter-spacing:.08em;text-decoration:none;font-weight:700}.textLink{font-size:12px;text-decoration:none;border-bottom:1px solid var(--ink);padding-bottom:5px;font-weight:700}
+.heroArt{min-height:490px;background:#283e32;position:relative;overflow:hidden;display:flex;align-items:stretch}
+.heroArt img{width:100%;height:100%;object-fit:cover;filter:sepia(.32) contrast(.89) brightness(.79);position:absolute;inset:0}
+.heroArt:after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,#1e302b00 40%,#14211cd6)}
+.heroNumber{position:absolute;top:35px;left:35px;z-index:1;color:#faf4df;font-size:12px;letter-spacing:.15em}
+.heroCaption{position:absolute;bottom:45px;left:38px;right:30px;z-index:1;color:#fff7e5}.heroCaption b{font:500 clamp(32px,4vw,62px)/1.1 'Playfair Display','Noto Serif SC',serif;display:block;margin-top:12px}.heroCaption span{font-size:12px;letter-spacing:.14em}
+.band{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--line)}.band div{padding:27px 5vw;border-right:1px solid var(--line)}.band div:last-child{border:0}.band b{font:500 30px 'Playfair Display',serif;display:block}.band span{font-size:11px;color:var(--muted);letter-spacing:.06em}
+.archive{padding-top:100px;padding-bottom:90px}.sectionHead{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:36px}.sectionHead h2{font:500 clamp(40px,5vw,74px)/1.04 'Playfair Display','Noto Serif SC',serif;letter-spacing:-.03em;margin:14px 0 0}.sectionHead p{max-width:330px;font-size:14px;color:var(--muted);line-height:1.7}
+.controls{display:flex;align-items:center;gap:18px;justify-content:space-between;flex-wrap:wrap;padding:20px 0;border-block:1px solid var(--ink);margin-bottom:28px}.filters{display:flex;flex-wrap:wrap;gap:8px}
+.filters button{border:1px solid var(--line);background:transparent;padding:10px 14px;color:var(--ink);font-size:12px}.filters button[aria-pressed=true]{background:var(--forest);color:white;border-color:var(--forest)}
+.search{background:transparent;border:0;border-bottom:1px solid var(--ink);border-radius:0;color:var(--ink);padding:11px 3px;min-width:215px;max-width:100%;outline-offset:4px;font-size:13px}.counter{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:45px 23px}.card{min-width:0}.thumb{aspect-ratio:1.18;background:#d4cebc;position:relative;overflow:hidden;display:block;width:100%;border:0;padding:0;text-align:left}.thumb img{width:100%;height:100%;object-fit:cover;filter:sepia(.12) saturate(.72);transition:transform .5s}.thumb:hover img{transform:scale(1.045)}.thumb .noimage{display:grid;place-items:center;height:100%;font:64px 'Noto Serif SC',serif;color:#a6a08d}.thumb .number{position:absolute;top:14px;left:15px;background:var(--paper);padding:8px 11px;font-size:11px;letter-spacing:.14em}.thumb .type{position:absolute;right:14px;bottom:14px;background:var(--forest);color:white;font-size:10px;padding:9px 11px;letter-spacing:.06em}
+.cardMeta{padding:18px 0 0}.cardMeta .chapter{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}.cardMeta h3{font:500 clamp(23px,2.7vw,33px)/1.2 'Playfair Display','Noto Serif SC',serif;margin:11px 0}.cardMeta p{font-size:13px;color:#6b6d62;line-height:1.6;margin:0 0 16px;min-height:40px}.openItem{border:0;background:none;padding:0 0 5px;border-bottom:1px solid var(--ink);font-size:12px;font-weight:700;color:var(--ink)}
+.note{margin-top:95px;background:var(--forest);color:#f7f4e9;display:grid;grid-template-columns:1fr 1fr;gap:45px;padding:clamp(30px,5vw,75px)}.note h2{font:500 clamp(34px,4vw,58px)/1.12 'Playfair Display','Noto Serif SC',serif;margin:15px 0}.note p{font-size:14px;color:#d2dbcc;line-height:1.9}
+footer{border-top:1px solid var(--ink);padding:33px 0 50px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:11px;letter-spacing:.12em}
+dialog{border:0;padding:0;background:var(--white);color:var(--ink);max-width:min(960px,94vw);width:100%;max-height:92vh;box-shadow:0 30px 100px #0007}dialog::backdrop{background:#111c17d9}.modal{display:grid;grid-template-columns:1fr 1fr;min-height:450px}.modalImage{background:#dcd4c3;min-height:300px;display:grid;place-items:center}.modalImage img{height:100%;width:100%;object-fit:contain;max-height:78vh}.modalCopy{padding:45px 40px;overflow:auto}.modalCopy h2{font:500 43px/1.1 'Playfair Display','Noto Serif SC',serif;margin:16px 0}.modalCopy p{font-size:14px;line-height:1.8}.modalCopy small{display:block;color:#666b60;line-height:1.7;margin-top:16px}.modalCopy a{display:inline-block;margin-top:20px;font-size:13px;color:var(--forest);font-weight:700}.close{position:absolute;right:12px;top:12px;background:var(--forest);color:white;border:0;width:38px;height:38px;font-size:21px}
+@media(max-width:1040px){.grid{grid-template-columns:repeat(2,1fr)}.topnav{gap:12px}.hero{min-height:520px}.heroText{padding-right:25px}}
+@media(max-width:680px){.headerInner{min-height:76px;gap:9px}.brandIcon{font-size:37px}.brandText{font-size:10px}.brandText small{font-size:9px}.topnav{display:none}.lang button{padding:6px 8px}.hero{grid-template-columns:1fr}.heroText{padding:54px 20px 44px}.hero h1{font-size:clamp(51px,12vw,77px)}.heroArt{min-height:350px}.band{grid-template-columns:repeat(2,1fr)}.band div{padding:20px}.archive{padding-top:65px;padding-bottom:50px}.sectionHead{display:block}.sectionHead p{margin-top:17px}.grid{grid-template-columns:1fr;gap:33px}.thumb{aspect-ratio:1.33}.note{grid-template-columns:1fr;gap:0;margin-top:65px}.modal{grid-template-columns:1fr}.modalImage{max-height:290px}.modalCopy{padding:25px}.modalCopy h2{font-size:32px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.thumb img{transition:none}}
+</style></head><body>
+<div class="concept" id="prototype">● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 01 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН</div>
+<header><div class="container headerInner"><a class="brand" href="experience.html"><span class="brandIcon">茶</span><span class="brandText">GREAT TEA ROAD<small>万 里 茶 道 · DIGITAL HERITAGE</small></span></a><nav class="topnav"><a href="#collection" id="navCollection">Коллекция</a><a href="collection.html" id="navArchive">Архив</a><a href="experience.html" id="navMuseum">3D-музей ↗</a></nav><div class="lang"><button data-lang="ru" aria-pressed="true">RU</button><button data-lang="zh" aria-pressed="false">中</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
+<main><section class="hero"><div class="heroText"><span class="kicker" id="heroKicker">ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04</span><h1 id="heroTitle">История,<br>сохранённая<br><em>в деталях.</em></h1><p id="heroDesc">Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.</p><div class="heroActions"><a href="#collection" class="solid" id="explore">Исследовать архив ↘</a><a href="experience.html" class="textLink" id="enter3d">Войти в 3D-музей ↗</a></div></div><div class="heroArt"><img id="heroImage" src="https://iiif.wellcomecollection.org/image/V0018603/full/800,/0/default.jpg" alt="Historical painting of Chinese tea processing" loading="eager"><div class="heroNumber">FIG. 001 — THE TEA ROAD ARCHIVE</div><div class="heroCaption"><span id="featureLabel">ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ</span><b id="featureTitle">Путь одного<br>чайного листа</b></div></div></section>
+<section class="band"><div><b>12</b><span id="statOne">экспозиций</span></div><div><b>04</b><span id="statTwo">тематических раздела</span></div><div><b>03</b><span id="statThree">языка</span></div><div><b>∞</b><span id="statFour">возможностей исследования</span></div></section>
+<section class="archive container" id="collection"><div class="sectionHead"><div><span class="kicker" id="sectionKicker">КАТАЛОГ · ИСТОЧНИКИ И АРТЕФАКТЫ</span><h2 id="sectionTitle">Коллекция</h2></div><p id="sectionDesc">Оригинальные музейные изображения, исторические аналогии и точные сведения об источниках.</p></div><div class="controls"><div id="filters" class="filters" aria-label="Collection filters"></div><input id="search" type="search" class="search" placeholder="Поиск по коллекции..." aria-label="Поиск по коллекции"></div><p id="count" class="counter"></p><div id="grid" class="grid"></div>
+<div class="note"><div><span class="kicker" id="noteKicker">ОТВЕТСТВЕННОЕ НАСЛЕДИЕ</span><h2 id="noteTitle">История требует источников.</h2></div><p id="noteText">Исторические материалы и стилизованные цифровые модели показаны отдельно. Мы сохраняем ссылки на музейные коллекции и помечаем типологические аналогии. Материалы с неустановленными правами не публикуются.</p></div></section></main>
+<footer class="container"><span>© GREAT TEA ROAD · 万里茶道</span><span id="footerText">ЭКСПЕРИМЕНТАЛЬНЫЙ ДИЗАЙН · ИЗДАНИЕ 01</span><a href="experience.html" id="footerBack">Вернуться в основной музей ↗</a></footer>
+<dialog id="detail"><div class="modal"><div class="modalImage" id="modalImage"></div><div class="modalCopy"><span class="kicker" id="modalCategory"></span><h2 id="modalTitle"></h2><p id="modalDescription"></p><small id="modalCredit"></small><a id="modalSource" href="#" target="_blank" rel="noopener noreferrer"></a></div></div><button class="close" id="closeModal" aria-label="Close">×</button></dialog>
+<script src="collection.js?v=1.0"></script>
+<script>
+(()=>{
+ const translations={
+ ru:{prototype:'● ПРОБНЫЙ ДИЗАЙН / ARCHIVE CONCEPT 01 — ОСНОВНОЙ САЙТ НЕ ИЗМЕНЁН',navCollection:'Коллекция',navArchive:'Архив',navMuseum:'3D-музей ↗',heroKicker:'ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04',heroTitle:'История,<br>сохранённая<br><em>в деталях.</em>',heroDesc:'Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.',explore:'Исследовать архив ↘',enter3d:'Войти в 3D-музей ↗',featureLabel:'ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ',featureTitle:'Путь одного<br>чайного листа',statOne:'экспозиций',statTwo:'тематических раздела',statThree:'языка',statFour:'возможностей исследования',sectionKicker:'КАТАЛОГ · ИСТОЧНИКИ И АРТЕФАКТЫ',sectionTitle:'Коллекция',sectionDesc:'Музейные изображения, исторические аналогии и сведения об источниках.',noteKicker:'ОТВЕТСТВЕННОЕ НАСЛЕДИЕ',noteTitle:'История требует источников.',noteText:'Исторические материалы и стилизованные цифровые модели показаны отдельно. Мы сохраняем ссылки на музейные коллекции и помечаем типологические аналогии. Материалы с неустановленными правами не публикуются.',footerText:'ЭКСПЕРИМЕНТАЛЬНЫЙ ДИЗАЙН · ИЗДАНИЕ 01',footerBack:'Вернуться в основной музей ↗',all:'Все',search:'Поиск по коллекции...',count:'Найдено',open:'Смотреть экспонат ↗',source:'Открыть музейный источник ↗',historical:'ИСТОРИЧЕСКИЙ МАТЕРИАЛ',type:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',pending:'БЕЗ ИЗОБРАЖЕНИЯ',missing:'Изображение не опубликовано'},
+ zh:{prototype:'● 设计试用版 / ARCHIVE CONCEPT 01 — 主网站保持不变',navCollection:'藏品目录',navArchive:'档案馆',navMuseum:'3D博物馆 ↗',heroKicker:'数字藏品 · 01 / 04',heroTitle:'在细节中<br><em>触摸历史。</em>',heroDesc:'探索中俄茶叶贸易的历史图像、器物与博物馆文献。',explore:'探索档案 ↘',enter3d:'进入3D展馆 ↗',featureLabel:'历史图像',featureTitle:'一片茶叶<br>的旅程',statOne:'组展品',statTwo:'个专题板块',statThree:'种语言',statFour:'种探索可能',sectionKicker:'目录 · 史料与器物',sectionTitle:'馆藏目录',sectionDesc:'博物馆图像、历史类比与可查证的来源资料。',noteKicker:'负责任的文化传承',noteTitle:'让史料有据可查。',noteText:'历史图像与数字复原明确区分。展品标明博物馆来源，类型参照也有明确说明。版权尚未核实的材料不公开。',footerText:'独立设计测试 · 第一版',footerBack:'返回原版博物馆 ↗',all:'全部',search:'搜索藏品...',count:'找到',open:'查看展品 ↗',source:'查看馆藏来源 ↗',historical:'历史资料',type:'类型参照',pending:'无公开图像',missing:'尚未公开图像'},
+ en:{prototype:'● DESIGN PREVIEW / ARCHIVE CONCEPT 01 — MAIN WEBSITE UNCHANGED',navCollection:'Collection',navArchive:'Archive',navMuseum:'3D museum ↗',heroKicker:'DIGITAL COLLECTION · 01 / 04',heroTitle:'History,<br>preserved<br><em>in detail.</em>',heroDesc:'Explore museum objects, documents and historic images of the tea trade between China and Russia.',explore:'Explore archive ↘',enter3d:'Enter 3D museum ↗',featureLabel:'HISTORICAL IMAGE',featureTitle:'The journey<br>of a tea leaf',statOne:'exhibits',statTwo:'thematic sections',statThree:'languages',statFour:'ways to explore',sectionKicker:'CATALOGUE · SOURCES & OBJECTS',sectionTitle:'The collection',sectionDesc:'Museum images, historical comparisons and traceable source references.',noteKicker:'RESPONSIBLE HERITAGE',noteTitle:'History needs evidence.',noteText:'We distinguish historical imagery from reconstructed 3D models, link to original museum collections and flag comparisons. Material without confirmed rights is not shown.',footerText:'EXPERIMENTAL DESIGN · EDITION 01',footerBack:'Return to main museum ↗',all:'All',search:'Search the collection...',count:'Found',open:'View object ↗',source:'Open museum source ↗',historical:'HISTORICAL MATERIAL',type:'TYPE REFERENCE',pending:'NO IMAGE',missing:'Image not published'}
+ };
+ let language='ru',category=-1,query='',current=null;
+ const $=id=>document.getElementById(id);
+ const typeName=item=>translations[language][item.qual==='historical'?'historical':item.qual==='type'?'type':'pending'];
+ function imageFor(item){return item.image||null}
+ function setLang(l){language=l;document.documentElement.lang=l;const t=translations[l];
+  for(const [key,value] of Object.entries(t)){const el=$(key);if(el){if(key==='heroTitle'||key==='featureTitle')el.innerHTML=value;else el.textContent=value;}}
+  $('search').placeholder=t.search;
+  document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
+  renderFilters();renderCards();if(current)showDetail(current);
+ }
+ function renderFilters(){const host=$('filters');host.replaceChildren();[null,0,1,2,3].forEach(n=>{
+  const b=document.createElement('button');b.type='button';b.textContent=n===null?translations[language].all:rooms[language][n];b.setAttribute('aria-pressed',String(category===(n===null?-1:n)));
+  b.onclick=()=>{category=n===null?-1:n;renderFilters();renderCards()};host.append(b);
+ });}
+ function renderCards(){
+  const t=translations[language];const filtered=items.filter(item=>(category===-1||item.room===category)&&((item.name[language]+' '+item.desc[language]).toLocaleLowerCase().includes(query.toLocaleLowerCase())));
+  $('count').textContent=t.count+': '+filtered.length+' / '+items.length;
+  const grid=$('grid');grid.replaceChildren();
+  filtered.forEach((item,i)=>{
+   const card=document.createElement('article');card.className='card';
+   const pic=document.createElement('button');pic.className='thumb';pic.type='button';pic.setAttribute('aria-label',item.name[language]);pic.onclick=()=>showDetail(item);
+   if(imageFor(item)){const img=document.createElement('img');img.src=imageFor(item);img.alt=item.name[language];img.loading='lazy';img.onerror=()=>{img.remove();const e=document.createElement('span');e.className='noimage';e.textContent='茶';pic.prepend(e)};pic.append(img)}
+   else{const e=document.createElement('span');e.className='noimage';e.textContent='茶';pic.append(e)}
+   const n=document.createElement('span');n.className='number';n.textContent=String(items.indexOf(item)+1).padStart(2,'0')+' / 12';pic.append(n);
+   const tag=document.createElement('span');tag.className='type';tag.textContent=typeName(item);pic.append(tag);
+   const meta=document.createElement('div');meta.className='cardMeta';
+   const chapter=document.createElement('div');chapter.className='chapter';chapter.textContent=rooms[language][item.room];meta.append(chapter);
+   const title=document.createElement('h3');title.textContent=item.name[language];meta.append(title);
+   const d=document.createElement('p');d.textContent=item.desc[language];meta.append(d);
+   const btn=document.createElement('button');btn.type='button';btn.className='openItem';btn.textContent=t.open;btn.onclick=()=>showDetail(item);meta.append(btn);
+   card.append(pic,meta);grid.append(card);
+  });
+ }
+ function showDetail(item){current=item;const t=translations[language];$('modalCategory').textContent=rooms[language][item.room]+' · '+typeName(item);$('modalTitle').textContent=item.name[language];$('modalDescription').textContent=item.desc[language];
+  $('modalCredit').textContent=[item.credit,item.license].filter(Boolean).join(' · ');
+  const source=$('modalSource');source.textContent=t.source;source.hidden=!item.source;if(item.source)source.href=item.source;
+  const picture=$('modalImage');picture.replaceChildren();if(imageFor(item)){const img=document.createElement('img');img.src=imageFor(item);img.alt=item.name[language];picture.append(img)}else{picture.textContent=t.missing;}
+  if(!$('detail').open)$('detail').showModal();
+ }
+ document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+ $('search').addEventListener('input',e=>{query=e.target.value.trim();renderCards()});
+ $('closeModal').onclick=()=>$('detail').close();
+ $('detail').addEventListener('click',e=>{if(e.target===$('detail'))$('detail').close()});
+ setLang('ru');
+})();
+</script></body></html>
