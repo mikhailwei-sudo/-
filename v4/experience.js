@@ -397,9 +397,9 @@ function loadMuseumImage(url,display){
  };
  const fail=error=>console.warn('Archival image unavailable; museum label retained',url,error);
  if(local&&LOCAL_ARCHIVE_READY){
-  imageLoader.load(local,present,undefined,()=>imageLoader.load(url,present,undefined,fail));
+  imageLoader.load(local,present,undefined,fail);
  }else{
-  imageLoader.load(url,present,undefined,fail);
+  console.warn('No local archive image registered:',url);
  }
 }
 function loadMuseumWallPhoto(i){
