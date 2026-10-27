@@ -851,7 +851,7 @@ document.getElementById('lobbyBegin')?.addEventListener('click',()=>{if(window.c
 window.museumChangeRoom=goRoom;window.museumSelectItem=goItem;
  // Honor route-map deep links only after the WebGL scene has been initialized.
  const linkedRoom=new URLSearchParams(window.location.search).get('room');
- if(linkedRoom!==null && /^\\d+$/.test(linkedRoom) && Number(linkedRoom)<rooms.length){
+ if(linkedRoom!==null && /^[0-6]$/.test(linkedRoom) && Number(linkedRoom)<rooms.length){
   const selected=Number(linkedRoom);
   goRoom(selected,selected*2);
  }
