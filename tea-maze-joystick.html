@@ -225,7 +225,7 @@ function makeMaze(){
  const end=far[0];maze[Math.floor(end/N)][end%N]='E';
  const eligible=open.filter(v=>v!==end);
  for(let i=eligible.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[eligible[i],eligible[j]]=[eligible[j],eligible[i]]}
- leaves=new Set(eligible.slice(0,Math.min(eligible.length,Math.ceil(LEAF_GOALS[difficulty]*1.65))));
+ leaves=new Set(eligible.slice(0,Math.min(eligible.length,Math.ceil(LEAF_GOALS[difficulty]*2.5))));
  return far
 }
 function bfs(x,y){const dist=Array(N*N).fill(Infinity),queue=[y*N+x];dist[y*N+x]=0;for(let k=0;k<queue.length;k++){const v=queue[k],cx=v%N,cy=Math.floor(v/N);for(const [dx,dy] of dirs){const nx=cx+dx,ny=cy+dy,n=ny*N+nx;if(nx<0||nx>=N||ny<0||ny>=N||maze[ny][nx]==='#'||dist[n]!==Infinity)continue;dist[n]=dist[v]+1;queue.push(n)}}return dist}
