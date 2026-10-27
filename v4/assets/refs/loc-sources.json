@@ -1,6 +1,6 @@
 {
   "collection": "Russian-Chinese Cross-Border Trade — Library of Congress",
-  "note": "Historical photographs; attribution per source item. Do not represent an image as a specific locality unless stated in original record. Each unique ID should be used once.",
+  "note": "15 separate photographic source records; unique LOC ID per display asset. Museum content labels must follow original titles. Sources recorded for attribution, not for image hotlinks.",
   "items": [
     {
       "name": "hero",
@@ -32,9 +32,9 @@
     },
     {
       "name": "route-04",
-      "locId": "2018687396",
-      "caption": "Дорога в слободу Кяхта",
-      "source": "https://www.loc.gov/item/2018687396/",
+      "locId": "2018687358",
+      "caption": "Склад чая в Урге",
+      "source": "https://www.loc.gov/item/2018687358/",
       "file": "v4/assets/refs/loc/route-04.jpg"
     },
     {
@@ -74,10 +74,38 @@
     },
     {
       "name": "museum-03",
-      "locId": "2018687366",
-      "caption": "Удунгуйский торговый тракт (для переноса в другой слот после расширения архива)",
-      "source": "https://www.loc.gov/item/2018687366/",
+      "locId": "2018687367",
+      "caption": "Удунгуйский торговый тракт, между Удунгоем и Гуджиркой",
+      "source": "https://www.loc.gov/item/2018687367/",
       "file": "v4/assets/refs/loc/museum-03.jpg"
+    },
+    {
+      "name": "museum-04",
+      "locId": "2018687396",
+      "caption": "Дорога в слободу Кяхта",
+      "source": "https://www.loc.gov/item/2018687396/",
+      "file": "v4/assets/refs/loc/museum-04.jpg"
+    },
+    {
+      "name": "museum-05",
+      "locId": "2018687378",
+      "caption": "Сортировка чая",
+      "source": "https://www.loc.gov/item/2018687378/",
+      "file": "v4/assets/refs/loc/museum-05.jpg"
+    },
+    {
+      "name": "museum-06",
+      "locId": "2018687354",
+      "caption": "Российское консульство в Урге",
+      "source": "https://www.loc.gov/item/2018687354/",
+      "file": "v4/assets/refs/loc/museum-06.jpg"
+    },
+    {
+      "name": "museum-07",
+      "locId": "2018687393",
+      "caption": "Вид Троицкосавска",
+      "source": "https://www.loc.gov/item/2018687393/",
+      "file": "v4/assets/refs/loc/museum-07.jpg"
     }
   ]
 }
