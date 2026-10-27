@@ -833,6 +833,13 @@ lobbyButton?.addEventListener('click',showLobby);
 document.getElementById('lobbyMini')?.addEventListener('click',showLobby);
 document.getElementById('lobbyBegin')?.addEventListener('click',()=>{if(window.changeRoom)window.changeRoom(0);else goRoom(0,0)});
 window.museumChangeRoom=goRoom;window.museumSelectItem=goItem;
+ // Honor route-map deep links only after the WebGL scene has been initialized.
+ const linkedRoom=new URLSearchParams(window.location.search).get('room');
+ if(linkedRoom!==null && /^\\d+$/.test(linkedRoom) && Number(linkedRoom)<rooms.length){
+  const selected=Number(linkedRoom);
+  goRoom(selected,selected*2);
+ }
+
 const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
 function resize(){const w=holder.clientWidth,h=holder.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)}new ResizeObserver(resize).observe(holder);resize();
 let isDown=false,changed=false,lastX=0,lastY=0,pinchDist=0;
