@@ -501,6 +501,22 @@ window.addEventListener('museum-language-changed',()=>{
 // Local files: FBX Chinese hall, glTF tea set, Collada crate.
 let lobbyLoaded=false;
 const lobbyGroup=new THREE.Group();lobbyGroup.position.x=-19;scene.add(lobbyGroup);
+// Mascot encounter: existing original Tea Maze character illustrations, presented as
+// freestanding cutout guides (not misleadingly advertised as full 3D characters).
+const mascotLoader=new THREE.TextureLoader();
+function mascotStand(parent,url,x,z,height=2.05){
+ mascotLoader.load(url,texture=>{
+  texture.colorSpace=THREE.SRGBColorSpace;
+  texture.anisotropy=Math.min(8,renderer.capabilities.getMaxAnisotropy());
+  const guide=new THREE.Sprite(new THREE.SpriteMaterial({map:texture,transparent:true,depthWrite:false}));
+  guide.scale.set(height*.77,height,1);
+  guide.position.set(x,height/2+.10,z);
+  parent.add(guide);
+ },undefined,err=>console.warn('Museum mascot illustration not loaded',url,err));
+}
+mascotStand(lobbyGroup,'../game-assets/nik.svg',-3.35,1.6,2.35);
+mascotStand(lobbyGroup,'../game-assets/chaer.svg',3.35,1.6,2.35);
+mascotStand(lobbyGroup,'../game-assets/tea-spirit.svg',1.95,2.05,.85);
 // Lobby lighting is local to this room, so it travels with the hall.
 const lobbyAmbient=new THREE.PointLight(0xffdba0,42,18);lobbyAmbient.position.set(0,5,2);lobbyGroup.add(lobbyAmbient);
 const lobbyFill=new THREE.PointLight(0xd4e3d1,20,16);lobbyFill.position.set(-4,4,-3);lobbyGroup.add(lobbyFill);
@@ -934,7 +950,11 @@ function draw(t){
  }else if(elapsed<=38)slowFrames=Math.max(0,slowFrames-2);
  // Time-based camera motion should advance by actual elapsed time even on slow GPUs.
 const dt=Math.min(.35,Math.max(0,(t-prev)/1000));prev=t;const k=1-Math.exp(-(reduced?14:3.8)*dt);camX+=(state.targetX-camX)*k;zoom+=(state.tzoom-zoom)*k;yaw+=(state.tyaw-yaw)*k;pitch+=(state.tpitch-pitch)*k;camera.position.set(camX+Math.sin(yaw)*zoom,3.1+pitch*3.6,Math.cos(yaw)*zoom+1.5);camera.lookAt(camX,1.70,-1);renderer.render(scene,camera)}requestAnimationFrame(draw);
-showLobby();
+if(window.__gtrInitialRoom){
+ const target=window.__gtrInitialRoom;
+ leaveLobby();
+ goRoom(target.room,target.item);
+}else showLobby();
 }catch(err){
  console.error('3D scene initialisation failed',err);
  const fallback=document.getElementById('renderFallback')||Object.assign(document.createElement('div'),{className:'renderFallback'});
