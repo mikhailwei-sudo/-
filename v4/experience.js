@@ -207,6 +207,35 @@ for(let ri=4;ri<7;ri++){
 // Physical arrangement follows the visitor narrative rather than internal room IDs.
 const roomSequence=[0,1,4,2,3,5,6];
 roomSequence.forEach((roomIndex,ordinal)=>{rooms[roomIndex].position.x=ordinal*regionSpacing;});
+ // Reuse the approved Tea Maze mascot artwork as freestanding 2D museum standees.
+ // These are flat illustrations inside the Three.js scene, not claimed 3D character models.
+ const museumMascots=[
+  {src:'../game-assets/chaer.svg',name:'茶儿 · Cha’er'},
+  {src:'../game-assets/nik.svg',name:'尼克 · Nik'},
+  {src:'../game-assets/tea-spirit.svg',name:'小茶灵 · Tea spirit'}
+ ];
+ const mascotTextureLoader=new THREE.TextureLoader();
+ museumMascots.forEach(m=>{
+  m.texture=mascotTextureLoader.load(m.src,tex=>{tex.colorSpace=THREE.SRGBColorSpace;tex.needsUpdate=true},undefined,err=>console.warn('Mascot texture unavailable',m.src,err));
+  m.texture.colorSpace=THREE.SRGBColorSpace;
+ });
+ rooms.forEach((room,i)=>{
+  const m=museumMascots[i%3];
+  const stand=new THREE.Group();
+  stand.name='Tea Road guide: '+m.name;
+  stand.position.set(i%2===0?-5.12:5.12,0,1.25);
+  room.add(stand);
+  box(stand,.84,.065,.50,0,.045,0,M.wood);
+  box(stand,.055,1.32,.055,0,.71,-.04,M.metal);
+  const sprite=new THREE.Mesh(
+   new THREE.PlaneGeometry(i%3===2?1.12:1.34,i%3===2?1.52:2.05),
+   new THREE.MeshBasicMaterial({map:m.texture,transparent:true,alphaTest:.08,side:THREE.DoubleSide,depthWrite:false})
+  );
+  sprite.position.set(0,i%3===2?1.05:1.23,.05);
+  sprite.renderOrder=2;
+  stand.add(sprite);
+ });
+
 
 // Phase II: museum interior architecture. Every addition is decorative and does
 // not move or replace the existing four galleries, showcases, or imported models.
