@@ -8,22 +8,29 @@ data=json.loads((ROOT/"v4/assets/refs/loc-sources.json").read_text())
 def load(url):
     req=urllib.request.Request(url,headers={"User-Agent":"GreatTeaRoadMuseum/1.0 (source: github.com/mikhailwei-sudo/-)","Accept":"application/json, image/jpeg, */*"})
     with urllib.request.urlopen(req,timeout=35) as r:return r.read(),r.headers.get("content-type","")
-def find_url(item):
+def find_urls(item):
+    """LOC API metadata stores image_url in item and resource; try several sizes."""
     data,_=load("https://www.loc.gov/item/"+item["locId"]+"/?fo=json")
     rec=json.loads(data)
-    arr=[]
-    for resource in rec.get("resources",[]):
-        if not isinstance(resource,dict):continue
-        for field in ("image","files"):
-            values=resource.get(field,[])
-            for v in values if isinstance(values,list) else [values]:
-                if isinstance(v,str):arr.append(v)
-                elif isinstance(v,dict):
-                    arr.extend(str(w) for w in v.values() if isinstance(w,str))
-    arr.extend(rec.get("item",{}).get("image_url",[]))
-    jpg=[u for u in arr if "http" in u and any(ext in u.lower() for ext in (".jpg",".jpeg"))]
-    if not jpg:raise ValueError("No downloadable JPEG in LOC record "+item["locId"])
-    return jpg[-1]
+    candidates=[]
+    def collect(value):
+        if isinstance(value,str):
+            if value.startswith("http") and (".jpg" in value.lower() or ".jpeg" in value.lower()):
+                candidates.append(value)
+        elif isinstance(value,list):
+            for v in value:collect(v)
+        elif isinstance(value,dict):
+            for key,v in value.items():
+                if key in ("image_url","url","href","image","files","resources"):collect(v)
+    collect(rec.get("item",{}).get("image_url",[]))
+    collect(rec.get("resources",[]))
+    collect(rec.get("image_url",[]))
+    # Select medium/high-res previews first, avoid iiif master TIFFs.
+    unique=list(dict.fromkeys(candidates))
+    unique.sort(key=lambda u:(0 if "service" not in u else 1, -len(u)))
+    if not unique:raise ValueError("No JPEG source in LOC record "+item["locId"])
+    return unique
+
 ok=0
 for item in data["items"]:
     target=ROOT/item["file"];target.parent.mkdir(parents=True,exist_ok=True)
