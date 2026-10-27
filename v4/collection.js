@@ -42,7 +42,7 @@ const items=[
   image:'https://iiif.wellcomecollection.org/image/V0040178/full/600,/0/default.jpg',source:'https://wellcomecollection.org/works/fffkc9mv',credit:'G. Hunt after M. Egerton, 19th c. · Wellcome Collection',license:'Public Domain Mark 1.0',qual:'type'},
  {id:'r4-threetea',room:3,name:{ru:'Традиции чаепития и культурный обмен',zh:'三种茶桌：中·俄·蒙',en:'Tea traditions across cultures'},
   desc:{ru:'Чай связывал разные способы приготовления и гостеприимства в Китае, Монголии и России. Здесь пока показан русский самовар; китайские и монгольские сопоставления добавим только после проверки соответствующих источников.',zh:'茶在中国、蒙古和俄罗斯形成了不同的饮用与待客传统。本展位暂以俄式茶炊作例，其余图像将待来源核实后补充。',en:'Tea acquired distinct traditions of preparation and hospitality in China, Mongolia and Russia. This display currently highlights the Russian samovar; further comparisons will follow source verification.'},
-  image:'https://commons.wikimedia.org/wiki/Special:FilePath/Maslenitza%20Tea%20Ceremony%20with%20a%20Samovar.jpg?width=800',source:'https://collections.smvk.se/carlotta-em/web/object/1208565',credit:'Pozdnyakova Anna, traditional Russian tea table, 2026 · Wikimedia Commons',license:'CC BY-SA 4.0',qual:'type'}
+  image:'https://commons.wikimedia.org/wiki/Special:FilePath/%D0%A1%D0%B0%D0%BC%D0%BE%D0%B2%D0%B0%D1%80%20%D0%B2%20%D0%B8%D0%BD%D1%82%D0%B5%D1%80%D1%8C%D0%B5%D1%80%D0%B5.jpg?width=800',source:'https://collections.smvk.se/carlotta-em/web/object/1208565',credit:'Samovar display at Vyatka Samovar Museum · Wikimedia Commons',license:'CC BY-SA 4.0',qual:'type'}
 ];
 // Only these items are confirmed as open-licence in the supplied source register.
 // Historical photographs marked internal-only are never included here.
