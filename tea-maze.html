@@ -120,9 +120,40 @@ const $=id=>document.getElementById(id),canvas=$('canvas'),ctx=canvas.getContext
 let lang='ru',hero=0,difficulty=1,state='menu',maze=[],leaves=new Set(),p={},enemies=[],particles=[],score=0,remaining=100,lives=3,time=0,elapsed=0,invincible=0,shield=0,dash=0,skillWait=0,last=0,enemyClock=0,frameHandle=0,notice='',noticeLeft=0,audio=null;
 function setLanguage(x){lang=x;ui();hud()}function choose(x){hero=x;ui();sound(740,.06)}function setDifficulty(x){difficulty=x;ui()}function ui(){const t=I[lang];document.documentElement.lang=lang;$('assetTitle').textContent=lang==='zh'?'像素角色贴图':lang==='en'?'Raster character sprites':'Растровые спрайты';$('assetHelp').textContent=lang==='zh'?'从素材包选择三个PNG：nik-atlas.png、chaer-atlas.png、bandit-atlas.png。':'Choose the five PNGs from the asset pack: three atlases and two portraits.';if(lang==='ru')$('assetHelp').textContent='Выбери пять PNG из архива: три атласа и два портрета. Простые SVG-персонажи больше не используются.';$('clearAssets').textContent=lang==='zh'?'重置贴图':lang==='en'?'Reset sprites':'Сбросить спрайты';$('title').textContent=t.title;$('intro').textContent=t.intro;$('pickTitle').textContent=t.pick;$('diffTitle').textContent=t.diff;$('start').textContent=t.start;$('soundText').textContent=t.sound;$('motionText').textContent=t.motion;const bios={ru:['Юный путешественник с севера. Быстрый исследователь чайного пути.','Хранительница чайных традиций. Умеет создавать защитный щит.'],zh:['来自北方的少年，擅长探索和加速。','热爱茶文化的少女，拥有茶之护盾。'],en:['A young northern explorer who excels at speed.','A tea-culture guardian with a protective shield.']};$('nikBio').textContent=bios[lang][0];$('chaerBio').textContent=bios[lang][1];$('nikPower').textContent=t.skill[1];$('chaerPower').textContent=t.skill[0];$('nikChoose').textContent=hero===1?'✓ '+(lang==='zh'?'已选择':lang==='en'?'Selected':'Выбран'):lang==='zh'?'选择尼克':lang==='en'?'Choose Nik':'Выбрать Ника';$('chaerChoose').textContent=hero===0?'✓ '+(lang==='zh'?'已选择':lang==='en'?'Selected':'Выбрана'):lang==='zh'?'选择茶儿':lang==='en'?'Choose Cha’er':'Выбрать Чаэр';$('spiritTitle').textContent=lang==='zh'?'小茶灵':lang==='en'?'Tea Spirit':'Чайный дух';$('spiritText').textContent=lang==='zh'?'你的忠实伙伴，陪你收集茶叶。':lang==='en'?'A loyal companion helping you gather tea.':'Верный спутник в поисках чайных листьев.';$('mapTitle').textContent=lang==='zh'?'第一关 · 茶园迷宫':lang==='en'?'Stage 1 · Tea Maze':'Уровень 1 · Чайный лабиринт';$('mapText').textContent=lang==='zh'?'收集100片茶叶并躲避敌人。':lang==='en'?'Collect 100 leaves and avoid enemies.':'Собери 100 листьев и избегай врагов.';drawSelectPreviews();$('portrait').src=hero===0?'game-assets/chaer-portrait.png':'game-assets/nik-portrait.png';$('mei').classList.toggle('selected',hero===0);$('nik').classList.toggle('selected',hero===1);$('diffs').innerHTML=t.levels.map((s,i)=>'<button class="'+(difficulty===i?'selected':'')+'" onclick="setDifficulty('+i+')">'+s+'</button>').join('');$('pause').textContent=t.pause;$('restart').textContent=t.restart;$('help').textContent=t.help;$('footer').textContent=t.footer}
 function drawSelectPreviews(){for(const [id,index] of [['chaerPreview',0],['nikPreview',1]]){const cv=$(id);if(!cv)continue;const c=cv.getContext('2d');c.clearRect(0,0,240,70);const im=runSheets[index];if(im&&im.complete&&im.naturalWidth){for(let k=0;k<5;k++)c.drawImage(im,(k%6)*64,0,64,64,k*47+5,7,42,52)}else{c.fillStyle='#f1c98d';c.font='12px sans-serif';c.fillText('PNG loading…',45,37)}}const map=$('selectMap');if(map){const c=map.getContext('2d');c.fillStyle='#15231f';c.fillRect(0,0,210,210);for(let y=0;y<15;y++)for(let x=0;x<15;x++){const wall=x===0||y===0||x===14||y===14||((x%4===0)&&(y%5!==0))||((y%4===0)&&(x%5!==0));c.fillStyle=wall?'#3c6945':'#968b71';c.fillRect(x*14,y*14,14,14);if(!wall&&(x*7+y*11)%3===0){c.fillStyle='#a5d45c';c.fillRect(x*14+5,y*14+5,5,5)}}c.fillStyle='#8bd4ff';c.fillRect(103,103,8,8)}}function sound(freq=620,dur=.045,type='sine'){if(!$('sound').checked)return;try{audio=audio||new (window.AudioContext||window.webkitAudioContext)();const osc=audio.createOscillator(),gain=audio.createGain();osc.type=type;osc.frequency.setValueAtTime(freq,audio.currentTime);gain.gain.setValueAtTime(.045,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+dur);osc.connect(gain);gain.connect(audio.destination);osc.start();osc.stop(audio.currentTime+dur)}catch{}}
-function makeMaze(){maze=Array.from({length:N},(_,y)=>Array.from({length:N},(_,x)=>x===0||y===0||x===20||y===20?'#':' '));const walls=[[3,1,3,5],[6,1,6,3],[9,1,9,5],[12,1,12,4],[15,1,15,5],[18,1,18,3],[1,7,5,7],[7,7,12,7],[14,7,19,7],[3,9,3,14],[6,9,6,12],[9,9,9,14],[12,9,12,12],[15,9,15,14],[18,9,18,12],[1,16,5,16],[7,16,12,16],[14,16,19,16],[4,4,7,4],[11,4,14,4],[4,12,7,12],[13,12,16,12]];for(const [x1,y1,x2,y2] of walls){for(let y=y1;y<=y2;y++)for(let x=x1;x<=x2;x++)maze[y][x]='#'}const open=[];for(let y=1;y<20;y++)for(let x=1;x<20;x++)if(maze[y][x]===' '&&(x!==1||y!==1))open.push(y*N+x);for(let i=open.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[open[i],open[j]]=[open[j],open[i]]}leaves=new Set(open.slice(0,100));const dist=bfs(1,1);const far=[...open].sort((a,b)=>dist[b]-dist[a]);const end=far[0];maze[Math.floor(end/N)][end%N]='E';leaves.delete(end);if(leaves.size<100)for(const v of open)if(v!==end&&!leaves.has(v)){leaves.add(v);break}return far}
+function makeMaze(){
+ // Connected maze carved from a spanning tree, then braided with shortcuts.
+ maze=Array.from({length:N},()=>Array(N).fill('#'));
+ const stack=[[1,1]];maze[1][1]=' ';
+ while(stack.length){
+  const [x,y]=stack[stack.length-1];
+  const candidates=dirs.map(([dx,dy])=>[x+dx*2,y+dy*2,dx,dy]).filter(([nx,ny])=>nx>0&&ny>0&&nx<N-1&&ny<N-1&&maze[ny][nx]==='#');
+  if(!candidates.length){stack.pop();continue}
+  const [nx,ny,dx,dy]=candidates[Math.floor(Math.random()*candidates.length)];
+  maze[y+dy][x+dx]=' ';maze[ny][nx]=' ';stack.push([nx,ny]);
+ }
+ // Open extra passages between existing corridors, forming alternative routes.
+ const bridges=[];
+ for(let y=1;y<N-1;y++)for(let x=1;x<N-1;x++){
+  if(maze[y][x]!=='#')continue;
+  const horizontal=pass(x-1,y)&&pass(x+1,y);
+  const vertical=pass(x,y-1)&&pass(x,y+1);
+  if(horizontal||vertical)bridges.push([x,y]);
+ }
+ for(let i=bridges.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[bridges[i],bridges[j]]=[bridges[j],bridges[i]]}
+ for(const [x,y] of bridges.slice(0,Math.max(38,Math.floor(bridges.length*.55))))maze[y][x]=' ';
+ // More than 100 reachable tiles are always available.
+ const dist=bfs(1,1);
+ const open=[];
+ for(let y=1;y<N-1;y++)for(let x=1;x<N-1;x++)if(maze[y][x]===' '&&Number.isFinite(dist[y*N+x])&&(x!==1||y!==1))open.push(y*N+x);
+ const far=[...open].sort((a,b)=>dist[b]-dist[a]);
+ const end=far[0];maze[Math.floor(end/N)][end%N]='E';
+ const eligible=open.filter(v=>v!==end);
+ for(let i=eligible.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[eligible[i],eligible[j]]=[eligible[j],eligible[i]]}
+ leaves=new Set(eligible.slice(0,100));
+ return far
+}
 function bfs(x,y){const dist=Array(N*N).fill(Infinity),queue=[y*N+x];dist[y*N+x]=0;for(let k=0;k<queue.length;k++){const v=queue[k],cx=v%N,cy=Math.floor(v/N);for(const [dx,dy] of dirs){const nx=cx+dx,ny=cy+dy,n=ny*N+nx;if(nx<0||nx>=N||ny<0||ny>=N||maze[ny][nx]==='#'||dist[n]!==Infinity)continue;dist[n]=dist[v]+1;queue.push(n)}}return dist}
-function init(){const far=makeMaze();p={x:1,y:1,renderX:1,renderY:1,dx:0,dy:0,wantX:0,wantY:0,angle:0,steps:0};enemies=far.slice(1,1+2+difficulty).map((v,i)=>({x:v%N,y:Math.floor(v/N),renderX:v%N,renderY:Math.floor(v/N),face:0,phase:i*1.6,step:0}));score=0;remaining=100;lives=3;time=[240,205,175][difficulty];elapsed=0;invincible=2;shield=0;dash=0;skillWait=0;particles=[];enemyClock=0;moveClock=0;notice='';$('portraitTitle').textContent=lang==='zh'?'茶园迷宫 · 1/3':lang==='en'?'Tea Garden Maze · 1/3':'Чайный лабиринт · 1/3';hud()}
+function init(){const far=makeMaze();p={x:1,y:1,renderX:1,renderY:1,dx:0,dy:0,wantX:0,wantY:0,angle:0,steps:0};enemies=far.slice(1,1+2+difficulty).map((v,i)=>({x:v%N,y:Math.floor(v/N),renderX:v%N,renderY:Math.floor(v/N),face:0,phase:i*1.6,step:0,prevX:null,prevY:null,lastDx:0,lastDy:0}));score=0;remaining=100;lives=3;time=[240,205,175][difficulty];elapsed=0;invincible=2;shield=0;dash=0;skillWait=0;particles=[];enemyClock=0;moveClock=0;notice='';$('portraitTitle').textContent=lang==='zh'?'茶园迷宫 · 1/3':lang==='en'?'Tea Garden Maze · 1/3':'Чайный лабиринт · 1/3';hud()}
 function pass(x,y){return x>=0&&x<N&&y>=0&&y<N&&maze[y][x]!=='#'}
 function hud(){if(state==='menu')return;const t=I[lang];$('leaves').textContent=t.leaf+': '+(100-remaining)+'/100';$('score').textContent=t.score+': '+score;$('lives').textContent=t.life+': '+'❤️'.repeat(Math.max(0,lives));$('time').textContent=t.time+': '+Math.ceil(time);$('skill').textContent=t.skill[hero]+(skillWait>0?' '+Math.ceil(skillWait)+'s':'');$('skill').disabled=skillWait>0||state!=='playing';$('cooldown').style.width=(100*(1-skillWait/16))+'%';$('tip').textContent=notice}
 function start(){cancelAnimationFrame(frameHandle);init();$('setup').classList.add('hidden');$('play').classList.remove('hidden');$('overlay').classList.add('hidden');state='playing';last=performance.now();frameHandle=requestAnimationFrame(tick)}
@@ -131,7 +162,33 @@ function useSkill(){if(state!=='playing'||skillWait>0)return;skillWait=16;if(her
 function burst(x,y,color,count=9){if($('motion').checked)return;for(let i=0;i<count;i++){const a=Math.random()*Math.PI*2,s=25+Math.random()*75;particles.push({x:x*S+16,y:y*S+16,vx:Math.cos(a)*s,vy:Math.sin(a)*s,life:.35+Math.random()*.4,max:.75,color,r:2+Math.random()*3})}}
 function damage(){if(invincible>0||shield>0||state!=='playing')return;lives--;invincible=2.2;burst(p.x,p.y,'#ef7d65',20);sound(170,.3,'sawtooth');if(lives<=0)finish(false);hud()}
 function movePlayer(){if(pass(p.x+p.wantX,p.y+p.wantY)){p.dx=p.wantX;p.dy=p.wantY}if(pass(p.x+p.dx,p.y+p.dy)){p.x+=p.dx;p.y+=p.dy;p.steps++;p.angle=p.dx>0?0:p.dx<0?Math.PI:p.dy>0?Math.PI/2:-Math.PI/2;const key=p.y*N+p.x;if(leaves.delete(key)){remaining--;score+=10*(difficulty+1);burst(p.x,p.y,'#b8e789',4);sound(540+(100-remaining)%6*65,.035);if(remaining===0){notice=I[lang].open;noticeLeft=2;sound(1000,.35)}}}const exit=maze[p.y][p.x]==='E';if(exit){if(remaining===0){score+=Math.ceil(time)*3;finish(true)}else if(noticeLeft<=0){notice=I[lang].blocked;noticeLeft=1.2}}for(const e of enemies)if(e.x===p.x&&e.y===p.y)damage()}
-function moveEnemies(){const distances=bfs(p.x,p.y);for(const e of enemies){const options=dirs.map(([dx,dy])=>[e.x+dx,e.y+dy,dx,dy]).filter(([x,y])=>pass(x,y));if(!options.length)continue;const chase=Math.random()<[.38,.6,.77][difficulty];if(chase)options.sort((a,b)=>distances[a[1]*N+a[0]]-distances[b[1]*N+b[0]]);const v=chase?options[0]:options[Math.floor(Math.random()*options.length)];e.x=v[0];e.y=v[1];e.face=v[2]!==0?(v[2]<0?2:3):(v[3]<0?1:0);e.step++;if(e.x===p.x&&e.y===p.y)damage()}}
+function moveEnemies(){
+ const distances=bfs(p.x,p.y);
+ for(const e of enemies){
+  // Repair invalid positions defensively (e.g. after map changes).
+  if(!pass(e.x,e.y)){const valid=[];for(let y=1;y<N-1;y++)for(let x=1;x<N-1;x++)if(pass(x,y))valid.push([x,y]);valid.sort((a,b)=>Math.abs(a[0]-e.x)+Math.abs(a[1]-e.y)-Math.abs(b[0]-e.x)-Math.abs(b[1]-e.y));if(!valid.length)continue;[e.x,e.y]=valid[0];e.renderX=e.x;e.renderY=e.y}
+  const options=dirs.map(([dx,dy])=>({x:e.x+dx,y:e.y+dy,dx,dy})).filter(v=>pass(v.x,v.y));
+  if(!options.length)continue;
+  // Avoid oscillating between two cells; reverse only at a dead end.
+  const forward=options.filter(v=>v.x!==e.prevX||v.y!==e.prevY);
+  const choices=forward.length?forward:options;
+  const chase=Math.random()<[.52,.72,.86][difficulty];
+  let v;
+  if(chase){
+   const best=Math.min(...choices.map(o=>distances[o.y*N+o.x]));
+   const shortest=choices.filter(o=>distances[o.y*N+o.x]===best);
+   v=shortest[Math.floor(Math.random()*shortest.length)]
+  }else{
+   const straight=choices.find(o=>o.dx===e.lastDx&&o.dy===e.lastDy);
+   v=straight&&Math.random()<.68?straight:choices[Math.floor(Math.random()*choices.length)]
+  }
+  e.prevX=e.x;e.prevY=e.y;e.x=v.x;e.y=v.y;
+  e.lastDx=v.dx;e.lastDy=v.dy;
+  e.face=v.dx!==0?(v.dx<0?2:3):(v.dy<0?1:0);
+  e.step++;
+  if(e.x===p.x&&e.y===p.y)damage()
+ }
+}
 function finish(win){state='finished';$('result').textContent=win?I[lang].win:I[lang].lose;$('details').textContent=I[lang].score+': '+score;$('continue').textContent=I[lang].again;$('overlay').classList.remove('hidden');sound(win?920:240,.25)}
 function resume(){if(state==='finished'){start();return}if(state==='paused'){state='playing';$('overlay').classList.add('hidden');last=performance.now();frameHandle=requestAnimationFrame(tick)}}
 function togglePause(){if(state==='playing'){state='paused';$('result').textContent=I[lang].pause;$('details').textContent='';$('continue').textContent=I[lang].resume;$('overlay').classList.remove('hidden')}else if(state==='paused')resume()}
