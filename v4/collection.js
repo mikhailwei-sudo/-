@@ -52,7 +52,7 @@ const LOCAL_IMAGES={
  'r2-packsaddle':'r2-packsaddle-01.jpg','r3-shop':'r3-shop-01.jpg',
  'r3-gate':'r3-gate-01.jpg','r3-documents':'r3-documents-01.jpg',
  'r4-samovar':'r4-samovar-01.jpg','r4-desk':'r4-desk-01.jpg',
- 'r4-threetea':null
+ 'r4-threetea':'r4-desk-01.jpg'
 };
 const COPY={
  ru:{eyebrow:'ИСТОРИЧЕСКИЙ АРХИВ · ЦИФРОВАЯ ЭКСПОЗИЦИЯ',heading:'История, за которой стоят источники.',intro:'Двенадцать экспозиций: от технологии изготовления чая до караванных маршрутов, Кяхты и русских чайных традиций. Здесь исторические музейные изображения отделены от современных 3D-реконструкций.',m1:'экспозиций',m2:'исторических раздела',m3:'три языка',notice:'Мы публикуем только изображения с указанными открытыми лицензиями. Материалы с неподтверждённым происхождением и ограниченными правами исключены. Исторические аналогии не доказывают происхождения наших 3D-моделей.',all:'Все',search:'Поиск по экспозиции…',count:'Найдено экспозиций: ',source:'Открыть источник',empty:'Иллюстрация пока не опубликована',analogy:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',history:'ИСТОРИЧЕСКИЙ ИСТОЧНИК',pending:'ИСТОЧНИК ПРОВЕРЯЕТСЯ',methodHeading:'О достоверности',method:'Все 3D-модели нашего проекта — художественные реконструкции или типовые модели, а не сканы коллекционных предметов. Иллюстрации снабжены ссылками, лицензиями и авторством. Неподтверждённые материалы остаются за пределами публичной экспозиции.',footer:'Историческая коллекция · первый этап расширения музея',home:'Главная',museum:'3D-музей'},
@@ -85,10 +85,10 @@ function display(){
   if(e.image){
    const img=document.createElement('img');img.loading='lazy';img.decoding='async';img.alt=e.name[lang];img.referrerPolicy='no-referrer';
    const local=LOCAL_IMAGES[e.id];
-   img.src=local?'./assets/refs/'+local:e.image;
+   img.src=local?'./assets/refs/'+local:'';
    let usedRemote=false;
    img.onerror=()=>{
-    if(!usedRemote&&local){usedRemote=true;img.src=e.image;return;}
+    if(false&&usedRemote){return;}
     img.remove();const fallback=document.createElement('span');fallback.className='empty';fallback.textContent='文';image.append(fallback);
    };
    image.append(img);
