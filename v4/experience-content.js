@@ -101,6 +101,20 @@ el('audioPause').onclick=pauseAudio;
 el('audioStop').onclick=stopTour;
 el('prevRoom').onclick=()=>changeRoom(VISIT_ORDER[(VISIT_ORDER.indexOf(currentRoom)+VISIT_ORDER.length-1)%VISIT_ORDER.length]);el('nextRoom').onclick=()=>changeRoom(VISIT_ORDER[(VISIT_ORDER.indexOf(currentRoom)+1)%VISIT_ORDER.length]);document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{stopAudio();lang=b.dataset.lang;words();window.dispatchEvent(new CustomEvent('museum-language-changed',{detail:{lang}}));museumNarrator.refreshVoices()});window.addEventListener('pagehide',stopTour);
 words();
+// Deep links from the Tea Road route: ?room=0..6&item=0..13
+(function(){
+ const params=new URLSearchParams(location.search);
+ if(!params.has('room'))return;
+ const room=Number(params.get('room')),item=Number(params.get('item'));
+ if(!Number.isInteger(room)||room<0||room>=ROOMS.length)return;
+ currentRoom=room;
+ currentItem=Number.isInteger(item)&&ROOMS[room].items.includes(item)?item:ROOMS[room].items[0];
+ roomWords();
+ window.__gtrInitialRoom={room:currentRoom,item:currentItem};
+ window.addEventListener('load',()=>{
+  document.getElementById('museum')?.scrollIntoView({behavior:'instant',block:'start'});
+ },{once:true});
+})();
 
 // Original 3D meshes are not museum scans. Imported assets are credited in ASSET_CREDITS.md.
 window.changeRoom=changeRoom;
