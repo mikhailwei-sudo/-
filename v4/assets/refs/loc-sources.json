@@ -1,0 +1,83 @@
+{
+  "collection": "Russian-Chinese Cross-Border Trade — Library of Congress",
+  "note": "Historical photographs; attribution per source item. Do not represent an image as a specific locality unless stated in original record. Each unique ID should be used once.",
+  "items": [
+    {
+      "name": "hero",
+      "locId": "2018687376",
+      "caption": "Чайная плантация в Китае",
+      "source": "https://www.loc.gov/item/2018687376/",
+      "file": "v4/assets/refs/loc/hero.jpg"
+    },
+    {
+      "name": "route-01",
+      "locId": "2018687359",
+      "caption": "Чайные плантации",
+      "source": "https://www.loc.gov/item/2018687359/",
+      "file": "v4/assets/refs/loc/route-01.jpg"
+    },
+    {
+      "name": "route-02",
+      "locId": "2018687398",
+      "caption": "Приём чайного листа",
+      "source": "https://www.loc.gov/item/2018687398/",
+      "file": "v4/assets/refs/loc/route-02.jpg"
+    },
+    {
+      "name": "route-03",
+      "locId": "2018687366",
+      "caption": "Удунгуйский торговый тракт",
+      "source": "https://www.loc.gov/item/2018687366/",
+      "file": "v4/assets/refs/loc/route-03.jpg"
+    },
+    {
+      "name": "route-04",
+      "locId": "2018687396",
+      "caption": "Дорога в слободу Кяхта",
+      "source": "https://www.loc.gov/item/2018687396/",
+      "file": "v4/assets/refs/loc/route-04.jpg"
+    },
+    {
+      "name": "route-05",
+      "locId": "2018687390",
+      "caption": "Торговая слобода Кяхта",
+      "source": "https://www.loc.gov/item/2018687390/",
+      "file": "v4/assets/refs/loc/route-05.jpg"
+    },
+    {
+      "name": "route-06",
+      "locId": "2018687389",
+      "caption": "Купеческие усадьбы Кяхты",
+      "source": "https://www.loc.gov/item/2018687389/",
+      "file": "v4/assets/refs/loc/route-06.jpg"
+    },
+    {
+      "name": "route-07",
+      "locId": "2018687379",
+      "caption": "Дегустация чая",
+      "source": "https://www.loc.gov/item/2018687379/",
+      "file": "v4/assets/refs/loc/route-07.jpg"
+    },
+    {
+      "name": "museum-01",
+      "locId": "2018687399",
+      "caption": "Сдача чая в Ханье",
+      "source": "https://www.loc.gov/item/2018687399/",
+      "file": "v4/assets/refs/loc/museum-01.jpg"
+    },
+    {
+      "name": "museum-02",
+      "locId": "2018687391",
+      "caption": "Чайная плантация",
+      "source": "https://www.loc.gov/item/2018687391/",
+      "file": "v4/assets/refs/loc/museum-02.jpg"
+    },
+    {
+      "name": "museum-03",
+      "locId": "2018687366",
+      "caption": "Удунгуйский торговый тракт (для переноса в другой слот после расширения архива)",
+      "source": "https://www.loc.gov/item/2018687366/",
+      "file": "v4/assets/refs/loc/museum-03.jpg"
+    }
+  ]
+}
