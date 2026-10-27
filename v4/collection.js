@@ -42,7 +42,7 @@ const items=[
   image:'https://iiif.wellcomecollection.org/image/V0040178/full/600,/0/default.jpg',source:'https://wellcomecollection.org/works/fffkc9mv',credit:'G. Hunt after M. Egerton, 19th c. · Wellcome Collection',license:'Public Domain Mark 1.0',qual:'type'},
  {id:'r4-threetea',room:3,name:{ru:'Традиции чаепития и культурный обмен',zh:'三种茶桌：中·俄·蒙',en:'Tea traditions across cultures'},
   desc:{ru:'Чай связывал разные способы приготовления и гостеприимства в Китае, Монголии и России. Здесь пока показан русский самовар; китайские и монгольские сопоставления добавим только после проверки соответствующих источников.',zh:'茶在中国、蒙古和俄罗斯形成了不同的饮用与待客传统。本展位暂以俄式茶炊作例，其余图像将待来源核实后补充。',en:'Tea acquired distinct traditions of preparation and hospitality in China, Mongolia and Russia. This display currently highlights the Russian samovar; further comparisons will follow source verification.'},
-  image:'https://collections.smvk.se/carlotta-em/web/image/zoom/1208586/2005.02.0015.A-C.jpg',source:'https://collections.smvk.se/carlotta-em/web/object/1208565',credit:'Samovar · Museum of Ethnography, Sweden',license:'CC0 1.0',qual:'historical'}
+  image:'https://commons.wikimedia.org/wiki/Special:FilePath/Maslenitza%20Tea%20Ceremony%20with%20a%20Samovar.jpg?width=800',source:'https://collections.smvk.se/carlotta-em/web/object/1208565',credit:'Pozdnyakova Anna, traditional Russian tea table, 2026 · Wikimedia Commons',license:'CC BY-SA 4.0',qual:'type'}
 ];
 // Only these items are confirmed as open-licence in the supplied source register.
 // Historical photographs marked internal-only are never included here.
@@ -52,7 +52,7 @@ const LOCAL_IMAGES={
  'r2-packsaddle':'r2-packsaddle-01.jpg','r3-shop':'r3-shop-01.jpg',
  'r3-gate':'r3-gate-01.jpg','r3-documents':'r3-documents-01.jpg',
  'r4-samovar':'r4-samovar-01.jpg','r4-desk':'r4-desk-01.jpg',
- 'r4-threetea':'r4-samovar-01.jpg'
+ 'r4-threetea':null
 };
 const COPY={
  ru:{eyebrow:'ИСТОРИЧЕСКИЙ АРХИВ · ЦИФРОВАЯ ЭКСПОЗИЦИЯ',heading:'История, за которой стоят источники.',intro:'Двенадцать экспозиций: от технологии изготовления чая до караванных маршрутов, Кяхты и русских чайных традиций. Здесь исторические музейные изображения отделены от современных 3D-реконструкций.',m1:'экспозиций',m2:'исторических раздела',m3:'три языка',notice:'Мы публикуем только изображения с указанными открытыми лицензиями. Материалы с неподтверждённым происхождением и ограниченными правами исключены. Исторические аналогии не доказывают происхождения наших 3D-моделей.',all:'Все',search:'Поиск по экспозиции…',count:'Найдено экспозиций: ',source:'Открыть источник',empty:'Иллюстрация пока не опубликована',analogy:'ТИПОЛОГИЧЕСКИЙ АНАЛОГ',history:'ИСТОРИЧЕСКИЙ ИСТОЧНИК',pending:'ИСТОЧНИК ПРОВЕРЯЕТСЯ',methodHeading:'О достоверности',method:'Все 3D-модели нашего проекта — художественные реконструкции или типовые модели, а не сканы коллекционных предметов. Иллюстрации снабжены ссылками, лицензиями и авторством. Неподтверждённые материалы остаются за пределами публичной экспозиции.',footer:'Историческая коллекция · первый этап расширения музея',home:'Главная',museum:'3D-музей'},
