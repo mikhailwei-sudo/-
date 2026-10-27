@@ -1,0 +1,30 @@
+name: Download local historic tea photographs
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'v4/assets/refs/loc-sources.json'
+      - 'scripts/download-loc-photos.py'
+permissions:
+  contents: write
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Download historical images and validate JPEG bytes
+        run: python scripts/download-loc-photos.py
+      - name: Commit verified local JPEG files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v4/assets/refs/loc
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive distinct LOC tea route photographs locally"
+            git push
+          fi
