@@ -369,7 +369,7 @@ const museumPhotoFiles={
 // 404 requests; keep the collection URLs as non-blocking fallbacks.
 const LOCAL_ARCHIVE_READY=true;
 const imageLoader=new THREE.TextureLoader();
-function loadMuseumImage(url,display){
+function loadMuseumImage(url,display,uniqueLocal){
  if(!url||!display)return;
  const code=Object.keys(museumPhotoFiles).find(key=>url.includes(key));
  const local=code?'./assets/refs/'+museumPhotoFiles[code]:null;
@@ -396,7 +396,9 @@ function loadMuseumImage(url,display){
   previous?.dispose();
  };
  const fail=error=>console.warn('Archival image unavailable; museum label retained',url,error);
- if(local&&LOCAL_ARCHIVE_READY){
+ if(uniqueLocal){
+  imageLoader.load('./assets/refs/loc/'+uniqueLocal+'.jpg',present,undefined,()=>{if(local)imageLoader.load(local,present,undefined,fail);else fail('Local photo not found');});
+ }else if(local&&LOCAL_ARCHIVE_READY){
   imageLoader.load(local,present,undefined,fail);
  }else{
   console.warn('No local archive image registered:',url);
@@ -405,8 +407,8 @@ function loadMuseumImage(url,display){
 function loadMuseumWallPhoto(i){
  if(museumPhotoLoaded.has(i)||i<0||i>3)return;
  museumPhotoLoaded.add(i);
- loadMuseumImage(INTERIOR_EXHIBITS[i].image,museumPanels[i]);
- loadMuseumImage(extraArchiveImages[i].image,museumSecondaryPanels[i]);
+ loadMuseumImage(INTERIOR_EXHIBITS[i].image,museumPanels[i],'museum-0'+(i*2+1));
+ loadMuseumImage(extraArchiveImages[i].image,museumSecondaryPanels[i],i<3?'museum-0'+(i*2+2):null);
 }
 document.addEventListener('museum-room-enter',e=>loadMuseumWallPhoto(e.detail));
 window.addEventListener('museum-phase2-room',e=>loadMuseumWallPhoto(e.detail));
