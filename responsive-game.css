@@ -1,0 +1,5 @@
+/* Responsive sizing for the Great Tea Road games */
+html,body{max-width:100%;overflow-x:hidden}
+canvas{max-width:100%;height:auto}
+@media(max-width:700px){.panel{padding:10px}.controls{gap:6px}}
+@media(max-height:550px) and (orientation:landscape){.panel{padding:6px}}
