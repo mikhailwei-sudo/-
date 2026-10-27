@@ -5,6 +5,7 @@ on:
     paths:
       - 'v4/assets/refs/loc-sources.json'
       - 'scripts/download-loc-photos.py'
+      - '.github/workflows/download-tea-photos.yml'
 permissions:
   contents: write
 jobs:
