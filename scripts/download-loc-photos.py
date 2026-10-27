@@ -37,12 +37,20 @@ for item in data["items"]:
     if target.exists() and target.stat().st_size>4096:
         print("Existing",target);ok+=1;continue
     try:
-        url=find_url(item)
-        raw,ct=load(url)
-        if len(raw)<4096 or raw[:3]!=b"\xff\xd8\xff":raise ValueError("Image response is not JPEG")
-        target.write_bytes(raw)
-        ok+=1
-        print("Saved",target,len(raw),"from",item["source"])
+        errors=[]
+        for url in find_urls(item):
+            try:
+                raw,ct=load(url)
+                if len(raw)<4096 or raw[:3]!=b"\xff\xd8\xff":
+                    raise ValueError("Response was not a usable JPEG")
+                target.write_bytes(raw)
+                ok+=1
+                print("Saved",target,len(raw),"from",item["source"])
+                break
+            except Exception as image_error:
+                errors.append(str(image_error))
+        else:
+            raise ValueError("No usable JPEG: "+"; ".join(errors[:3]))
     except Exception as exc:
         print("FAILED",item["name"],item["source"],str(exc),file=sys.stderr)
     time.sleep(.25)
