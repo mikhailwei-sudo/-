@@ -1,5 +1,77 @@
-/* Responsive sizing for the Great Tea Road games */
+/* Responsive Great Tea Road layout — viewport-aware at 100% zoom */
 html,body{max-width:100%;overflow-x:hidden}
-canvas{max-width:100%;height:auto}
-@media(max-width:700px){.panel{padding:10px}.controls{gap:6px}}
-@media(max-height:550px) and (orientation:landscape){.panel{padding:6px}}
+canvas{display:block;max-width:100%;height:auto}
+button,select{touch-action:manipulation}
+@media(pointer:coarse){button,select{min-height:40px}}
+/* All game pages: keep headings and menus inside narrow viewports */
+header,main{min-width:0}
+header h1{overflow-wrap:anywhere}
+.hud{min-width:0}
+.hud>*{min-width:0}
+/* Maze */
+body:has(.game canvas) .layout{min-width:0}
+body:has(.game canvas) .layout>*{min-width:0}
+body:has(.game canvas) .game{max-width:100%}
+body:has(.game canvas) .game canvas{width:100%;height:auto}
+body:has(.game canvas) .overlay{overflow-y:auto}
+@media(max-width:900px){
+body:has(.game canvas) .layout{grid-template-columns:minmax(0,1fr)}
+body:has(.game canvas) header{padding:7px 10px}
+body:has(.game canvas) main{padding:4px 8px 15px}
+body:has(.game canvas) .game{border-width:3px}
+body:has(.game canvas) .hud{gap:4px;margin:5px 0}
+body:has(.game canvas) .hud span{font-size:12px;padding:5px 7px}
+body:has(.game canvas) .panel{padding:9px;margin:6px 0}
+}
+/* Tea packing */
+body:has(.board canvas) .board{max-width:100%}
+body:has(.board canvas) .board canvas{width:100%;height:auto}
+body:has(.board canvas) .overlay{overflow-y:auto}
+@media(max-width:700px){
+body:has(.board canvas) header{padding:6px 9px;flex-wrap:wrap}
+body:has(.board canvas) main{padding:0 6px 10px}
+body:has(.board canvas) .board{border-width:2px}
+body:has(.board canvas) .chip{flex:1 1 28%;min-width:0;padding:5px 7px}
+body:has(.board canvas) .chip strong{font-size:16px}
+body:has(.board canvas) .notice{padding:6px;min-height:30px;margin:5px 0}
+body:has(.board canvas) .stick{width:clamp(75px,22vw,112px);height:clamp(75px,22vw,112px)}
+body:has(.board canvas) .act{width:clamp(75px,22vw,112px);height:clamp(75px,22vw,112px)}
+}
+/* Caravan */
+body:has(#languageToolbar) #stage{width:100%;max-width:min(800px,100%)}
+body:has(#languageToolbar) #stage canvas{width:100%;height:auto}
+body:has(#languageToolbar) #overlay{overflow-y:auto}
+body:has(#languageToolbar) .panel{max-height:100%;overflow-y:auto}
+@media(max-width:700px){
+body:has(#languageToolbar) main{padding:3px 6px}
+body:has(#languageToolbar) .panel{padding:clamp(7px,2vw,14px)}
+body:has(#languageToolbar) .panel h2{font-size:clamp(17px,4vw,23px);margin:5px 0}
+body:has(#languageToolbar) .panel p{font-size:clamp(11px,2.8vw,14px);line-height:1.3;margin:6px 0}
+body:has(#languageToolbar) .controls{gap:5px;margin:5px auto}
+body:has(#languageToolbar) .controls button{min-height:46px;padding:6px}
+}
+/* Adventure wrapper: flexible viewport height instead of fixed desktop height */
+body:has(iframe#stage){min-height:100dvh;display:flex;flex-direction:column}
+body:has(iframe#stage)>main{width:100%;max-width:1250px;flex:1;display:flex;flex-direction:column;min-height:0}
+body:has(iframe#stage) iframe#stage{flex:1 1 auto;min-height:350px;height:calc(100dvh - 165px)}
+body:has(iframe#stage) .cutsceneCard{max-height:94dvh;overflow-y:auto}
+body:has(iframe#stage) #cutVideo{width:100%;height:auto;max-height:55dvh;object-fit:contain}
+@media(max-width:700px){
+body:has(iframe#stage) header{padding:6px 8px}
+body:has(iframe#stage)>main{padding:3px 5px}
+body:has(iframe#stage) .bar{gap:4px}
+body:has(iframe#stage) .bar #status{flex:1 1 100%;font-size:11px}
+body:has(iframe#stage) .bar button,body:has(iframe#stage) .bar select{font-size:12px;padding:6px}
+body:has(iframe#stage) iframe#stage{height:calc(100dvh - 160px);min-height:350px}
+body:has(iframe#stage) .cutsceneDialog{min-height:0;padding:10px 12px}
+}
+@media(max-height:550px) and (orientation:landscape){
+body:has(.game canvas) header,body:has(.board canvas) header{padding:3px 8px}
+body:has(.game canvas) main,body:has(.board canvas) main{padding:2px 7px}
+body:has(#languageToolbar) #stage{max-width:min(620px,75vw)}
+body:has(#languageToolbar) .panel{padding:5px}
+body:has(#languageToolbar) .panel h2{font-size:18px}
+body:has(#languageToolbar) .panel p{font-size:12px;margin:4px}
+body:has(iframe#stage) iframe#stage{height:calc(100dvh - 95px);min-height:210px}
+body:has(iframe#stage) .bar #status{display:none}
+}
