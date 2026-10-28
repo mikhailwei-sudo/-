@@ -4,6 +4,7 @@ const lobbyOverlay=document.getElementById('lobbyOverlay');
 const lobbyButton=document.getElementById('enterLobby');
 let THREE;
 for(const source of [
+ './vendor/three.module.js',
  'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js',
  'https://unpkg.com/three@0.170.0/build/three.module.js',
  'https://esm.sh/three@0.170.0'
