@@ -1,0 +1,30 @@
+name: Vendor Three.js locally for China
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/vendor-three.yml'
+permissions:
+  contents: write
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Fetch verified upstream Three.js ES module
+        run: |
+          mkdir -p v4/vendor
+          curl --fail --location --retry 3 --connect-timeout 15 --max-time 90 \
+            'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js' \
+            -o v4/vendor/three.module.js
+          test $(wc -c < v4/vendor/three.module.js) -gt 400000
+          grep -q 'WebGLRenderer' v4/vendor/three.module.js
+      - name: Commit local 3D dependency
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add v4/vendor/three.module.js
+          if ! git diff --cached --quiet; then
+            git commit -m "Host Three.js locally for China-compatible 3D museum"
+            git push
+          fi
