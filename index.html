@@ -281,4 +281,4 @@ dialog::backdrop{background:#000000ed}
  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>sync(b.dataset.lang)));
  sync('ru');
 })();
-</script><script id="tea-local-photo-fallback">document.addEventListener('error',function(event){const el=event.target;if(el.tagName!=='IMG'||!el.dataset.fallback)return;const fallback=el.dataset.fallback;delete el.dataset.fallback;el.src=fallback;el.closest('.waypointPicture')?.classList.remove('photoUnavailable')},true);</script></body></html>
+</script><script id="tea-local-photo-fallback">document.addEventListener('error',function(event){const el=event.target;if(el.tagName!=='IMG'||!el.dataset.fallback)return;const fallback=el.dataset.fallback;delete el.dataset.fallback;el.src=fallback;el.closest('.waypointPicture')?.classList.remove('photoUnavailable')},true);</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}),{once:true});}</script></body></html>
