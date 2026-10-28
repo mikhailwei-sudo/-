@@ -28,11 +28,29 @@ jobs:
                   image.save(dest,"WEBP",quality=76,method=6)
               print(source,source.stat().st_size,"=>",dest,dest.stat().st_size)
           PY
+      - name: Switch homepage to lightweight photos with JPG fallback
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          page=Path("index.html")
+          text=page.read_text()
+          for key in ["hero"]+[f"route-{i:02d}" for i in range(1,8)]:
+              jpg=f"v4/assets/refs/loc/{key}.jpg"
+              webp=f"v4/assets/refs/loc/{key}.webp"
+              if not Path(webp).exists():
+                  continue
+              text=text.replace(f'src="{jpg}"',f'src="{webp}"')
+              text=text.replace(f'data-fallback="v4/assets/refs/r1-teaset-01.jpg"',f'data-fallback="{jpg}"') if key=="hero" else text
+              if key!="hero":
+                  text=re.sub(r'(src="'+re.escape(webp)+r'" data-fallback=")[^"]+',r'\\g<1>'+jpg,text,count=1)
+          page.write_text(text)
+          PY
       - name: Publish local WebP files
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add v4/assets/refs/loc/*.webp
+          git add v4/assets/refs/loc/*.webp index.html
           if ! git diff --cached --quiet; then
             git commit -m "Add lightweight WebP photos for Chinese mobile visitors"
             git push
