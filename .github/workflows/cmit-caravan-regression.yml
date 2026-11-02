@@ -40,3 +40,5 @@ jobs:
             git commit -m "Save passing caravan handoff and language test evidence"
             git push
           fi
+
+# Regression fix verification 1: scene index + synchronous language propagation + mobile cutscene skip
