@@ -94,3 +94,5 @@ jobs:
             git commit -m "Record verified CMIT2026 refreshed archive manifest and screenshots preview"
             git push
           fi
+
+# Refresh 2026-11-03: latest real museum exhibition screenshot and 15-slide visual QA preview
