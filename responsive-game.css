@@ -75,3 +75,45 @@ body:has(#languageToolbar) .panel p{font-size:12px;margin:4px}
 body:has(iframe#stage) iframe#stage{height:calc(100dvh - 95px);min-height:210px}
 body:has(iframe#stage) .bar #status{display:none}
 }
+
+/* v3 — responsive sizing across phones, tablets, desktop and landscape */
+:root{--game-safe-bottom:env(safe-area-inset-bottom,0px)}
+html{width:100%;-webkit-text-size-adjust:100%}
+body{width:100%;min-width:0}
+button,select,a{max-width:100%}
+@media(pointer:coarse){button,select{min-height:44px}button{user-select:none;-webkit-user-select:none}}
+/* Keep controls reachable instead of shrinking the playfield to illegibility */
+body:has(.board canvas) .board,body:has(.game canvas) .game,body:has(#languageToolbar) #stage{width:100%;min-width:0;margin-inline:auto}
+body:has(.board canvas) .board canvas{aspect-ratio:3/2;object-fit:contain}
+body:has(#languageToolbar) #stage canvas{aspect-ratio:4/3;object-fit:contain}
+body:has(.game canvas) .game canvas{aspect-ratio:1;object-fit:contain}
+@media(max-width:1024px){
+ body:has(.board canvas) header,body:has(#languageToolbar) header{flex-wrap:wrap;gap:5px}
+ body:has(.board canvas) .hud,body:has(#languageToolbar) .hud{width:100%;min-width:0}
+ body:has(.board canvas) .chip{flex:1 1 145px}
+ body:has(.board canvas) .toolbar{display:flex;flex-wrap:wrap;gap:6px}
+ body:has(.board canvas) .toolbar>*{min-width:0}
+ body:has(#languageToolbar) .hud span{flex:1 1 105px}
+}
+@media(max-width:600px){
+ body:has(.board canvas) .hud{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ body:has(.board canvas) .chip{padding:5px 8px}
+ body:has(.board canvas) .chip strong{font-size:clamp(15px,4vw,20px)}
+ body:has(.board canvas) .controls{position:sticky;bottom:var(--game-safe-bottom);z-index:25;padding:6px;background:#102b27f2;border-radius:12px}
+ body:has(#languageToolbar) .controls{position:sticky;bottom:var(--game-safe-bottom);z-index:25;background:#102b27ed;padding:5px;border-radius:12px}
+ body:has(#languageToolbar) .controls button{min-width:0;min-height:48px}
+ body:has(iframe#stage) nav{width:100%;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:thin}
+ body:has(iframe#stage) nav .step{white-space:nowrap;flex:0 0 auto;font-size:11px;padding:7px 9px}
+ body:has(iframe#stage) iframe#stage{min-height:calc(100dvh - 150px);border-radius:6px}
+}
+@media(max-width:400px){
+ body:has(.board canvas) .chip{min-width:0}
+ body:has(#languageToolbar) .hud{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+ body:has(#languageToolbar) .hud span{min-width:0;font-size:11px;overflow-wrap:anywhere}
+}
+@media(max-height:600px) and (orientation:landscape){
+ body:has(.board canvas) .board{max-width:min(82vw,calc((100dvh - 100px)*1.5))}
+ body:has(#languageToolbar) #stage{max-width:min(80vw,calc((100dvh - 100px)*4/3))}
+ body:has(.game canvas) .game{max-width:min(80vw,calc(100dvh - 105px))}
+ body:has(iframe#stage) iframe#stage{min-height:calc(100dvh - 95px)}
+}
