@@ -135,3 +135,28 @@ body:has(.game canvas) .game canvas{aspect-ratio:1;object-fit:contain}
  body:has(.board #game) .board{width:min(76vw,calc((100dvh - 90px)*1.5))!important}
  body:has(#languageToolbar) #stage{width:min(76vw,calc((100dvh - 90px)*4/3))!important}
 }
+
+/* v5: use all available mobile screen WIDTH for the actual game surface.
+   Previous height-based caps reduced the playable canvas to a tiny square. */
+@media(max-width:900px){
+ body:has(.game #canvas) .game,
+ body:has(.board #game) .board,
+ body:has(#languageToolbar) #stage{
+   width:100%!important;max-width:100%!important;
+   height:auto!important;max-height:none!important;
+   min-width:0!important;margin-inline:auto!important;
+ }
+ body:has(.game #canvas) .game{aspect-ratio:1!important}
+ body:has(.board #game) .board{aspect-ratio:3/2!important}
+ body:has(#languageToolbar) #stage{aspect-ratio:4/3!important}
+ body:has(.game #canvas) .game #canvas,
+ body:has(.board #game) .board #game,
+ body:has(#languageToolbar) #stage #game{
+   display:block!important;width:100%!important;height:100%!important;
+   max-width:none!important;max-height:none!important;
+   object-fit:fill!important;
+ }
+ body:has(.game #canvas) .game #canvas{aspect-ratio:1!important}
+ body:has(.board #game) .board #game{aspect-ratio:3/2!important}
+ body:has(#languageToolbar) #stage #game{aspect-ratio:4/3!important}
+}
