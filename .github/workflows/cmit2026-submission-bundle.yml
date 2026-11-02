@@ -1,0 +1,96 @@
+name: Build and publish CMIT2026 refreshed competition archive
+on:
+  push:
+    paths:
+      - '.github/workflows/cmit2026-submission-bundle.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: cmit2026-submission-bundle
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install fonts and PowerPoint PDF renderer
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libreoffice-impress fonts-noto-cjk poppler-utils
+      - name: Install browser and document creation tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install playwright==1.56.0 python-pptx==1.0.2 python-docx==1.2.0 Pillow
+          python -m playwright install --with-deps chromium
+      - name: Run site and game regression QA on current source
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/cmit2026-http.log 2>&1 &
+          python scripts/cmit2026-site-qa.py
+          python scripts/cmit2026-caravan-handoff-probe.py
+      - name: Build checked-source competition archive and new 15-page PPTX
+        run: |
+          python scripts/build_cmit2026_release.py
+          ls -lh .cmit2026-build/
+          pdfinfo .cmit2026-build/万里茶道_CMIT2026_正式材料待签章/02_作品汇报PPT/*.pdf | grep Pages
+      - name: Upload full archive as workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CMIT2026-full-updated-submission-2026-11-03
+          path: |
+            .cmit2026-build/Wanli_Tea_Road_CMIT2026_Updated_2026-11-03.zip
+            .cmit2026-build/Wanli_Tea_Road_CMIT2026_Updated_15slides.pptx
+          if-no-files-found: error
+          retention-days: 90
+      - name: Publish publicly downloadable release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+        run: |
+          TAG=cmit2026-submission-updated-2026-11-03
+          ZIP=.cmit2026-build/Wanli_Tea_Road_CMIT2026_Updated_2026-11-03.zip
+          PPT=.cmit2026-build/Wanli_Tea_Road_CMIT2026_Updated_15slides.pptx
+          cat > /tmp/cmit-release-notes.md <<'NOTES'
+          ## CMIT 2026 — updated Great Tea Road competition submission materials
+          Rebuilt **directly from the latest working GitHub Pages source**.
+          Includes 10 real Chromium screenshots; new 15-slide Chinese PPTX and PDF;
+          100% of site code and local assets; up-to-date Chinese documents;
+          i18n and provenance notes; two automated test reports.
+
+          ### Recent corrections
+          - Chinese-Russian cultural-dialogue feature and professional museum presentation
+          - Reliable skip from the second cinematic into the caravan (stage 3)
+          - Correct caravan background rendering and Chinese/Russian/English language synchronization
+          - Characters Nik and Chaer and their sprites **unchanged**
+          - Source provenance and use-of-AI disclosure drafts included
+
+          ### Important: human steps still required
+          Sign and, where required, stamp the **official** competition pledge downloaded from the organizer.
+          Verify team/university/supervisor details and all third-party image/model licenses.
+          The editable templates in the ZIP do not substitute official signed documents.
+          NOTES
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" "$PPT" --clobber
+            gh release edit "$TAG" --notes-file /tmp/cmit-release-notes.md
+          else
+            gh release create "$TAG" "$ZIP" "$PPT" \
+              --target "$GITHUB_SHA" \
+              --title "CMIT 2026 | 万里茶道 | 2026-11-03 full updated archive" \
+              --notes-file /tmp/cmit-release-notes.md
+          fi
+          gh release view "$TAG" --json url,assets
+      - name: Save preview and verified manifest in repository
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMIT2026_submission/2026-refresh/
+          if ! git diff --cached --quiet; then
+            git commit -m "Record verified CMIT2026 refreshed archive manifest and screenshots preview"
+            git push
+          fi
