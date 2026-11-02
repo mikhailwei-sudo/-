@@ -47,3 +47,5 @@ jobs:
 # QA iteration 2: per-page JavaScript error attribution
 
 # QA iteration 3: shared museum object data guarded on home vs archive
+
+# QA iteration 4: mobile museum/archive back-link no longer overlays content
