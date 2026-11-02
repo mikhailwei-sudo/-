@@ -87,4 +87,49 @@ function tick(now){if(state!=='playing')return;const dt=Math.min(.045,(now-last)
 $('play').onclick=start;$('restart').onclick=start;$('action').addEventListener('pointerdown',e=>{e.preventDefault();action()});$('lang').onchange=()=>{lang=$('lang').value;translate();msg(t().steps[step])};$('hero').onchange=()=>hero=$('hero').value;
 document.addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','e','w','a','s','d'].includes(k)){if(e.target.tagName==='SELECT')return;e.preventDefault();if((k==='e'||k===' ')&&!e.repeat)action();else keys.add(k)}});document.addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));window.addEventListener('blur',()=>{keys.clear();stick={x:0,y:0};$('nub').style.transform='translate(-50%,-50%)'});
 const pad=$('stick'),nub=$('nub');function padMove(e){const r=pad.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2),m=Math.hypot(x,y),max=r.width*.29;stick={x:m?x/Math.max(max,m):0,y:m?y/Math.max(max,m):0};nub.style.transform='translate(calc(-50% + '+stick.x*max+'px),calc(-50% + '+stick.y*max+'px))'}pad.addEventListener('pointerdown',e=>{e.preventDefault();pad.setPointerCapture(e.pointerId);padMove(e)});pad.addEventListener('pointermove',e=>{if(pad.hasPointerCapture(e.pointerId))padMove(e)});for(const event of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(event,()=>{stick={x:0,y:0};nub.style.transform='translate(-50%,-50%)'});try{const savedLang=sessionStorage.getItem('teaAdventureLanguage');if(savedLang&&dict[savedLang]){$('lang').value=savedLang;lang=savedLang}const savedHero=sessionStorage.getItem('teaAdventureHero');if(savedHero==='0')$('hero').value='cha';else if(savedHero==='1')$('hero').value='nik'}catch(e){}translate();draw();if(new URLSearchParams(location.search).get('from')==='adventure'){start()}
+</script><script id="adaptive-viewport-engine-v2">
+(()=>{
+const fieldSelector="#board",controlsSelector=".controls",hudSelector=".hud",ratio=1.5;
+const style=document.createElement('style');style.textContent=`
+html,body{scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}
+@media(max-width:900px){body:has(#play:not(.hidden)) #play .game,body #board,body #stage{max-height:var(--tea-field-height,100dvh)!important}}
+`;document.head.appendChild(style);
+let pending=false;
+function fit(){
+ pending=false;
+ const field=document.querySelector(fieldSelector);
+ if(!field||field.getClientRects().length===0)return;
+ const view=window.visualViewport;
+ const vw=Math.max(240,Math.floor(view?.width||innerWidth));
+ const vh=Math.max(240,Math.floor(view?.height||innerHeight));
+ const mobile=vw<=900||matchMedia('(pointer:coarse)').matches;
+ const isMaze="packing"==='maze';
+ if(isMaze&&document.querySelector('#play')?.classList.contains('hidden'))return;
+ const control=document.querySelector(controlsSelector);
+ const hud=document.querySelector(hudSelector);
+ const top=field.getBoundingClientRect().top;
+ const controlsHeight=mobile&&control?Math.min(165,Math.ceil(control.getBoundingClientRect().height||110)):0;
+ const bottomReserve=mobile?Math.max(controlsHeight+14,90):30;
+ const available=Math.max(150,vh-top-bottomReserve);
+ const widthBudget=Math.max(180,vw-(mobile?10:36));
+ const w=Math.max(180,Math.floor(Math.min(widthBudget,available*ratio,960)));
+ const h=Math.floor(w/ratio);
+ field.style.setProperty('width',w+'px','important');
+ field.style.setProperty('height',h+'px','important');
+ field.style.setProperty('max-width','100%','important');
+ field.style.setProperty('max-height',h+'px','important');
+ field.style.setProperty('flex','0 0 auto','important');
+ field.style.setProperty('aspect-ratio',ratio+'','important');
+ const canvas=field.querySelector('canvas#game');
+ if(canvas){canvas.style.setProperty('width','100%','important');canvas.style.setProperty('height','100%','important')}
+ document.documentElement.style.setProperty('--tea-field-height',h+'px');
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(fit)}}
+addEventListener('resize',schedule,{passive:true});
+addEventListener('orientationchange',schedule,{passive:true});
+window.visualViewport?.addEventListener('resize',schedule,{passive:true});
+document.addEventListener('click',()=>requestAnimationFrame(schedule),{passive:true});
+if("packing"==='maze'){const m=document.querySelector('#play');if(m)new MutationObserver(schedule).observe(m,{attributes:true,attributeFilter:['class']})}
+addEventListener('load',schedule);schedule();
+})();
 </script></body></html>
