@@ -554,4 +554,49 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture'])dpad.a
 // Abilities have independent pointer events and never cancel the D-pad's held pointer.
 for(const [id,action] of [['skillMobile',useSkill],['secondaryMobile',useSecondary]]){const btn=$(id);btn.addEventListener('pointerdown',e=>{if(state!=='playing'||btn.disabled)return;e.preventDefault();action()});btn.addEventListener('click',e=>{if(e.detail!==0)e.preventDefault()})}
 let startTouch=null;canvas.addEventListener('pointerdown',e=>{startTouch={x:e.clientX,y:e.clientY}});canvas.addEventListener('pointerup',e=>{if(!startTouch)return;const dx=e.clientX-startTouch.x,dy=e.clientY-startTouch.y;if(Math.hypot(dx,dy)>15)direction(...(Math.abs(dx)>Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)]));startTouch=null});try{ui()}catch(err){console.error('Tea maze UI initialization:',err);const info=document.getElementById('bootError');if(info){info.hidden=false;info.textContent='Ошибка интерфейса: '+err.message}}window.addEventListener('load',drawSelectPreviews);
-</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script></body></html>
+</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script><script id="adaptive-viewport-engine-v2">
+(()=>{
+const fieldSelector="#play .game",controlsSelector="#play .mobileControls",hudSelector="#play .hud",ratio=1;
+const style=document.createElement('style');style.textContent=`
+html,body{scrollbar-width:none!important}html::-webkit-scrollbar,body::-webkit-scrollbar{display:none!important}
+@media(max-width:900px){body:has(#play:not(.hidden)) #play .game,body #board,body #stage{max-height:var(--tea-field-height,100dvh)!important}}
+`;document.head.appendChild(style);
+let pending=false;
+function fit(){
+ pending=false;
+ const field=document.querySelector(fieldSelector);
+ if(!field||field.getClientRects().length===0)return;
+ const view=window.visualViewport;
+ const vw=Math.max(240,Math.floor(view?.width||innerWidth));
+ const vh=Math.max(240,Math.floor(view?.height||innerHeight));
+ const mobile=vw<=900||matchMedia('(pointer:coarse)').matches;
+ const isMaze="maze"==='maze';
+ if(isMaze&&document.querySelector('#play')?.classList.contains('hidden'))return;
+ const control=document.querySelector(controlsSelector);
+ const hud=document.querySelector(hudSelector);
+ const top=field.getBoundingClientRect().top;
+ const controlsHeight=mobile&&control?Math.min(165,Math.ceil(control.getBoundingClientRect().height||110)):0;
+ const bottomReserve=mobile?Math.max(controlsHeight+14,90):30;
+ const available=Math.max(150,vh-top-bottomReserve);
+ const widthBudget=Math.max(180,vw-(mobile?10:36));
+ const w=Math.max(180,Math.floor(Math.min(widthBudget,available*ratio,672)));
+ const h=Math.floor(w/ratio);
+ field.style.setProperty('width',w+'px','important');
+ field.style.setProperty('height',h+'px','important');
+ field.style.setProperty('max-width','100%','important');
+ field.style.setProperty('max-height',h+'px','important');
+ field.style.setProperty('flex','0 0 auto','important');
+ field.style.setProperty('aspect-ratio',ratio+'','important');
+ const canvas=field.querySelector('canvas#canvas');
+ if(canvas){canvas.style.setProperty('width','100%','important');canvas.style.setProperty('height','100%','important')}
+ document.documentElement.style.setProperty('--tea-field-height',h+'px');
+}
+function schedule(){if(!pending){pending=true;requestAnimationFrame(fit)}}
+addEventListener('resize',schedule,{passive:true});
+addEventListener('orientationchange',schedule,{passive:true});
+window.visualViewport?.addEventListener('resize',schedule,{passive:true});
+document.addEventListener('click',()=>requestAnimationFrame(schedule),{passive:true});
+if("maze"==='maze'){const m=document.querySelector('#play');if(m)new MutationObserver(schedule).observe(m,{attributes:true,attributeFilter:['class']})}
+addEventListener('load',schedule);schedule();
+})();
+</script></body></html>
