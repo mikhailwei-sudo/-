@@ -268,6 +268,17 @@ def build():
 
     ppt=folders[1]/"万里茶道_CMIT2026_更新版_15页_中文PPT.pptx"
     create_pptx(ppt,sc)
+    # Reproducible PowerPoint-to-PDF rendering; include a read-only judge preview.
+    soffice=shutil.which("libreoffice") or shutil.which("soffice")
+    if soffice:
+        command=[soffice,"-env:UserInstallation=file:///tmp/cmit2026-lo-profile","--headless",
+                 "--convert-to","pdf","--outdir",str(ppt.parent),str(ppt)]
+        output=subprocess.run(command,capture_output=True,text=True,timeout=180)
+        if output.returncode!=0 or not ppt.with_suffix(".pdf").is_file():
+            raise RuntimeError("PPT PDF export failed: "+output.stderr[-600:])
+        info=subprocess.run(["pdfinfo",str(ppt.with_suffix(".pdf"))],capture_output=True,text=True)
+        if info.returncode!=0 or not any(line.lstrip().startswith("Pages:") and line.split(":")[1].strip()=="15" for line in info.stdout.splitlines()):
+            raise RuntimeError("Exported PPT PDF is not 15 pages")
     docx_file(folders[2]/"作品介绍_中文.docx","《万里茶道》作品介绍（2026年11月更新）",[
       ("作品定位",["本项目围绕数字文旅、虚拟展陈、跨文化交际与游戏化学习，构建中、俄、英三语互动网站。以中国—蒙古—俄罗斯的茶叶贸易故事为线索，将文献、路线、展品、小游戏与语言学习融于一体。"]),
       ("网页使用顺序",["打开首页 → 探索历史路线 → 进入“中俄茶文化对话” → 参观3D博物馆与史料档案 → 体验茶园迷宫、包装工坊、商队远行 → 通过词卡复习。"]),
