@@ -1,0 +1,75 @@
+{
+  "checks": [
+    {
+      "ok": true,
+      "test": "Second cutscene opens"
+    },
+    {
+      "ok": true,
+      "test": "Skip switches iframe to caravan"
+    },
+    {
+      "ok": true,
+      "test": "Caravan is running, splash overlay hidden"
+    },
+    {
+      "ok": true,
+      "test": "Cutscene overlay dismissed"
+    },
+    {
+      "ok": true,
+      "test": "Caravan internal state is playing"
+    },
+    {
+      "ok": true,
+      "test": "Caravan never encounters a rendering exception"
+    },
+    {
+      "ok": true,
+      "test": "Caravan game clock advances"
+    },
+    {
+      "ok": true,
+      "test": "Parent RU selector changes caravan UI"
+    },
+    {
+      "ok": true,
+      "test": "Parent Chinese selector changes caravan UI"
+    },
+    {
+      "ok": true,
+      "test": "Caravan EN selector changes caravan UI"
+    },
+    {
+      "ok": true,
+      "test": "In-game language switch syncs parent selector"
+    },
+    {
+      "ok": true,
+      "test": "Parent page also displays English after in-game switch"
+    },
+    {
+      "ok": true,
+      "test": "No carousel frame exceptions: []"
+    },
+    {
+      "ok": true,
+      "test": "No uncaught page JS errors: []"
+    },
+    {
+      "ok": true,
+      "test": "Mobile skip video button visible"
+    },
+    {
+      "ok": true,
+      "test": "Mobile skip transitions into third game"
+    },
+    {
+      "ok": true,
+      "test": "Mobile caravan renders without a frame crash"
+    }
+  ],
+  "issues": [],
+  "pageErrors": [],
+  "consoleErrors": []
+}
