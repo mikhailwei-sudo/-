@@ -485,4 +485,33 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture'])dpad.a
 // Abilities have independent pointer events and never cancel the D-pad's held pointer.
 for(const [id,action] of [['skillMobile',useSkill],['secondaryMobile',useSecondary]]){const btn=$(id);btn.addEventListener('pointerdown',e=>{if(state!=='playing'||btn.disabled)return;e.preventDefault();action()});btn.addEventListener('click',e=>{if(e.detail!==0)e.preventDefault()})}
 let startTouch=null;canvas.addEventListener('pointerdown',e=>{startTouch={x:e.clientX,y:e.clientY}});canvas.addEventListener('pointerup',e=>{if(!startTouch)return;const dx=e.clientX-startTouch.x,dy=e.clientY-startTouch.y;if(Math.hypot(dx,dy)>15)direction(...(Math.abs(dx)>Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)]));startTouch=null});try{ui()}catch(err){console.error('Tea maze UI initialization:',err);const info=document.getElementById('bootError');if(info){info.hidden=false;info.textContent='Ошибка интерфейса: '+err.message}}window.addEventListener('load',drawSelectPreviews);
-</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script></body></html>
+</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script><script id="mobile-field-fit">
+/* Fit the whole logical canvas and keep it in view on mobile, including inside the adventure iframe. */
+(()=>{const coarse=()=>matchMedia('(pointer:coarse)').matches||innerWidth<=900;
+const board=()=>document.querySelector('.game:has(#canvas)')||document.querySelector('.board:has(#game)')||document.querySelector('#languageToolbar ~ header ~ main #stage');
+function fit(){const el=board();if(!el||!coarse())return;const canvas=el.querySelector('canvas');if(!canvas)return;
+const ratio=canvas.width/canvas.height;
+const viewH=window.visualViewport?.height||innerHeight;
+const parent=el.parentElement;
+const availableW=Math.min(parent?.clientWidth||innerWidth,innerWidth-12);
+const isMaze=canvas.id==='canvas';
+const reserve=isMaze?125:canvas.width===960?170:135;
+const h=Math.max(165,viewH-reserve);
+const target=Math.max(150,Math.min(availableW,h*ratio));
+el.style.setProperty('width',target+'px','important');
+el.style.setProperty('max-width','100%','important');
+el.style.setProperty('height','auto','important');
+el.style.setProperty('aspect-ratio',ratio,'important');
+canvas.style.setProperty('width','100%','important');
+canvas.style.setProperty('height','auto','important');
+canvas.style.setProperty('aspect-ratio',ratio,'important');
+canvas.style.setProperty('object-fit','contain','important');
+}
+let lastPlaying=false;
+function tick(){fit();const el=board();if(!el)return;const maze=document.querySelector('#play');const packing=document.querySelector('#board');const caravan=document.querySelector('#stage');
+const active=maze?!maze.classList.contains('hidden'):packing?!document.querySelector('#overlay')?.contains(document.querySelector('#play')):!!caravan;
+if(active&&!lastPlaying&&coarse()){setTimeout(()=>el.scrollIntoView({block:'start',behavior:'instant'}),180)}lastPlaying=active}
+addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);
+document.addEventListener('DOMContentLoaded',()=>{fit();document.addEventListener('click',e=>{if(e.target.closest('#start,#play'))setTimeout(()=>{fit();board()?.scrollIntoView({block:'start',behavior:'smooth'})},220)});setInterval(tick,900)});
+})();
+</script></body></html>
