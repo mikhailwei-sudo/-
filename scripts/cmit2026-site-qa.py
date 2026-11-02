@@ -57,6 +57,7 @@ with sync_playwright() as play:
         check(page.locator("html").get_attribute("lang") == "zh", "First-visit language Chinese on homepage")
         check("culture-dialogue.html" in page.locator("#navCulture").get_attribute("href"), "Homepage link points to culture dialogue")
         capture(page, "02_home_culture_section", "index.html", scroll="#culture-exchange")
+        capture(page, "04b_route_map", "index.html", scroll="#route-map")
 
     if capture(page, "03_culture_dialogue", "culture-dialogue.html"):
         check(page.locator("#title").count() == 1 and "茶叶" in page.locator("#title").inner_text(), "Cultural dialogue displays Chinese content")
