@@ -65,7 +65,7 @@ jobs:
                     if hit.count():
                       options=hit.locator('option').evaluate_all("(nodes)=>nodes.map(x=>x.value)")
                       if "zh" in options:
-                        hit.select_option("zh")
+                        page.evaluate("""(selector) => { const el=document.querySelector(selector); if(el){el.value='zh'; el.dispatchEvent(new Event('change',{bubbles:true}));} }""",sel)
                         page.wait_for_timeout(500)
                         break
                 if detail and detail.startswith("#"):
@@ -81,12 +81,15 @@ jobs:
                 if label=="06_3d_museum":
                   page.wait_for_timeout(8500)
                   if page.locator("#lobbyBegin").count() and page.locator("#lobbyBegin").is_visible():
-                    page.locator("#lobbyBegin").click(timeout=3000)
+                    page.evaluate("document.querySelector('#lobbyBegin')?.click()")
                     page.wait_for_timeout(2500)
                 # Enter the playable state rather than screenshotting a splash overlay.
                 for selected,button in [("07_tea_maze","#start"),("08_tea_packing","#play"),("09_tea_caravan","#start")]:
                   if label==selected and page.locator(button).count() and page.locator(button).is_visible():
-                    page.locator(button).click(timeout=4000)
+                    try:
+                      page.locator(button).click(timeout=3500)
+                    except Exception:
+                      page.evaluate("(sel)=>document.querySelector(sel)?.click()", button)
                     page.wait_for_timeout(1800)
                 filename=str(out/(label+".png"))
                 page.screenshot(path=filename, full_page=False, animations="disabled", timeout=30000)
