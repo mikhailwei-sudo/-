@@ -45,3 +45,5 @@ jobs:
           fi
 
 # QA iteration 2: per-page JavaScript error attribution
+
+# QA iteration 3: shared museum object data guarded on home vs archive
