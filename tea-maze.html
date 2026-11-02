@@ -606,4 +606,37 @@ for(const eventName of ['pointerup','pointercancel','lostpointercapture'])dpad.a
 // Abilities have independent pointer events and never cancel the D-pad's held pointer.
 for(const [id,action] of [['skillMobile',useSkill],['secondaryMobile',useSecondary]]){const btn=$(id);btn.addEventListener('pointerdown',e=>{if(state!=='playing'||btn.disabled)return;e.preventDefault();action()});btn.addEventListener('click',e=>{if(e.detail!==0)e.preventDefault()})}
 let startTouch=null;canvas.addEventListener('pointerdown',e=>{startTouch={x:e.clientX,y:e.clientY}});canvas.addEventListener('pointerup',e=>{if(!startTouch)return;const dx=e.clientX-startTouch.x,dy=e.clientY-startTouch.y;if(Math.hypot(dx,dy)>15)direction(...(Math.abs(dx)>Math.abs(dy)?[Math.sign(dx),0]:[0,Math.sign(dy)]));startTouch=null});try{ui()}catch(err){console.error('Tea maze UI initialization:',err);const info=document.getElementById('bootError');if(info){info.hidden=false;info.textContent='Ошибка интерфейса: '+err.message}}window.addEventListener('load',drawSelectPreviews);
-</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script><script src="site-navigation.js?v=53572272" defer></script></body></html>
+</script><a class="siteBackNavigation" id="siteBackNavigation" href="index.html#guides" target="_top" aria-label="Вернуться на главный сайт">← <span>Назад на сайт</span></a><script>(function(){const a=document.getElementById('siteBackNavigation');if(!a)return;const lang=localStorage.getItem('gtr-lang')||'ru';const text={ru:'Назад на сайт',zh:'返回主网站',en:'Back to website'};a.querySelector('span').textContent=text[lang]||text.ru;document.querySelectorAll('[data-lang]').forEach(el=>el.addEventListener('click',()=>{const l=el.dataset.lang;a.querySelector('span').textContent=text[l]||text.ru}))})();</script><script src="site-navigation.js?v=53572272" defer></script><script id="maze-mobile-dom-layout-v3">
+(function(){
+function compact(){
+ if(window.innerWidth>900)return;
+ const q=x=>document.querySelector(x),set=(el,props)=>{if(!el)return;for(const [k,v] of Object.entries(props))el.style.setProperty(k,v,'important')};
+ const setup=q('#setup'),grid=q('#setup .selectGrid'),extra=q('#setup .selectExtra'),bottom=q('#setup .selectionBottom'),start=q('#setup #start');
+ if(!setup||!grid||!bottom||!start)return;
+ set(q('body>header'),{display:'none'});set(q('main>h1'),{display:'none'});set(q('main>.sub'),{display:'none'});
+ set(q('#siteBackNavigation'),{display:'none'});
+ set(q('main'),{width:'100%',maxWidth:'100%',padding:'6px 8px 50px',margin:'0'});
+ set(setup,{padding:'8px',margin:'0',height:'auto',minHeight:'0',overflow:'visible'});
+ set(extra,{display:'none',height:'0',visibility:'hidden'});
+ set(grid,{display:'grid',gridTemplateColumns:'repeat(2,minmax(0,1fr))',gap:'7px',width:'100%',alignItems:'start'});
+ grid.querySelectorAll('.heroCard').forEach(card=>{
+   set(card,{display:'flex',flexDirection:'column',width:'100%',minWidth:'0',maxWidth:'100%',height:'auto',minHeight:'0',padding:'5px',gap:'2px'});
+   set(card.querySelector('.heroPortrait'),{height:'110px',minHeight:'0',maxHeight:'110px',overflow:'hidden',width:'100%'});
+   set(card.querySelector('.heroPortrait img'),{width:'100%',height:'100%',objectFit:'contain'});
+   for(const selector of ['.heroDescription','.heroPower','.previewSprite'])set(card.querySelector(selector),{display:'none'});
+   set(card.querySelector('.heroName'),{fontSize:'12px',margin:'0',padding:'0'});
+   set(card.querySelector('.heroChoose'),{fontSize:'11px',padding:'3px',margin:'0'});
+ });
+ // Place difficulty and start directly below portraits, before any decorative content.
+ if(bottom.parentElement!==setup)setup.appendChild(bottom);
+ set(bottom,{display:'flex',flexDirection:'column',position:'static',height:'auto',minHeight:'0',visibility:'visible',opacity:'1',margin:'8px 0 0',padding:'0',gap:'6px',transform:'none'});
+ set(q('#setup .settings'),{display:'none'});
+ set(q('#setup .spriteImport'),{display:'none'});
+ set(q('#setup #diffs'),{display:'flex',flexWrap:'nowrap',gap:'4px'});
+ q('#setup #diffs')?.querySelectorAll('button').forEach(btn=>set(btn,{minWidth:'0',flex:'1',padding:'7px 2px',fontSize:'12px'}));
+ set(start,{display:'block',position:'static',visibility:'visible',opacity:'1',pointerEvents:'auto',width:'100%',height:'auto',minHeight:'50px',margin:'5px 0',padding:'10px',transform:'none',zIndex:'10'});
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',compact);else compact();
+window.addEventListener('resize',compact);
+})();
+</script></body></html>
