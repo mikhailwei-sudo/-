@@ -1,0 +1,102 @@
+name: CMIT2026 authentic website screenshots
+on:
+  push:
+    paths:
+      - '.github/workflows/cmit2026-screenshots.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Capture actual site pages from local checkout
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/cmit-http.log 2>&1 &
+          python - <<'PY'
+          from playwright.sync_api import sync_playwright
+          from pathlib import Path
+          import time, json
+          out=Path("CMIT2026_submission/screenshots")
+          out.mkdir(parents=True, exist_ok=True)
+          base="http://127.0.0.1:8765/"
+          items=[
+            ("01_home","index.html",None),
+            ("02_home_zh","index.html","zh"),
+            ("03_route","index.html","#route-map"),
+            ("04_characters","index.html","#guides"),
+            ("05_archive","v4/collection.html",None),
+            ("06_3d_museum","v4/experience.html","#museum"),
+            ("07_tea_maze","tea-maze.html",None),
+            ("08_tea_packing","tea-packing.html",None),
+            ("09_tea_caravan","tea-caravan.html",None),
+            ("10_dictionary_cards","tea-dictionary.html",None),
+          ]
+          results=[]
+          with sync_playwright() as p:
+            browser=p.chromium.launch(headless=True,args=["--no-sandbox","--disable-dev-shm-usage"])
+            page=browser.new_page(viewport={"width":1440,"height":900}, device_scale_factor=1)
+            page.on("pageerror",lambda e: print("PAGE ERROR:",str(e)[:180]))
+            for label,path,detail in items:
+              url=base+path
+              try:
+                page.goto(url,wait_until="domcontentloaded",timeout=40000)
+                page.wait_for_timeout(2300)
+                if label=="02_home_zh":
+                  for sel in ['button[data-lang="zh"]','[data-lang="zh"]','#lang-zh']:
+                    hit=page.locator(sel).first
+                    if hit.count() and hit.is_visible():
+                      hit.click(timeout=2000)
+                      page.wait_for_timeout(400)
+                      break
+                if detail and detail.startswith("#"):
+                  loc=page.locator(detail)
+                  if loc.count():
+                    loc.first.scroll_into_view_if_needed(timeout=3000)
+                    page.wait_for_timeout(500)
+                if label=="10_dictionary_cards":
+                  loc=page.locator(".flash-game")
+                  if loc.count():
+                    loc.first.scroll_into_view_if_needed(timeout=3000)
+                    page.wait_for_timeout(500)
+                if label=="06_3d_museum":
+                  page.wait_for_timeout(4000)
+                filename=str(out/(label+".png"))
+                page.screenshot(path=filename, full_page=False, animations="disabled", timeout=30000)
+                results.append({"file":label+".png","page":path,"source":"local checkout","status":"captured"})
+                print("CAPTURED:",label)
+              except Exception as e:
+                print("FAILED:",label,str(e)[:400])
+                results.append({"file":label+".png","page":path,"status":"failed","reason":str(e)[:200]})
+            browser.close()
+          (out/"manifest.json").write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding="utf8")
+          PY
+      - name: Upload screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CMIT2026-real-website-screenshots
+          path: CMIT2026_submission/screenshots/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Commit screenshots for competition submission
+        if: success()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMIT2026_submission/screenshots
+          if ! git diff --cached --quiet; then
+            git commit -m 'Add authentic CMIT2026 screenshot evidence'
+            git push
+          fi
