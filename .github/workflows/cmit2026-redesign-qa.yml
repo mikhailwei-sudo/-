@@ -1,0 +1,45 @@
+name: CMIT2026 professional site QA (desktop mobile)
+on:
+  push:
+    paths:
+      - '.github/workflows/cmit2026-redesign-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  visual-and-interaction:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium automation
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Start local server and inspect desktop/mobile pages
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/cmit-site.log 2>&1 &
+          python scripts/cmit2026-site-qa.py
+      - name: Upload all QA evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: CMIT2026-redesign-qa
+          path: CMIT2026_submission/site-design-qa/
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Save verified screenshots into repository
+        if: success()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMIT2026_submission/site-design-qa
+          if ! git diff --cached --quiet; then
+            git commit -m 'Save CMIT2026 professional site QA evidence'
+            git push
+          fi
