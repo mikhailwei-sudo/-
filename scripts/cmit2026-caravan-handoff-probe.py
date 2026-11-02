@@ -78,7 +78,7 @@ with sync_playwright() as p:
         en=diagnostic(page,"caravan-switched-en")
         logcheck(en["gameLang"]=="en" and "Caravan" in (en["header"] or ""),"Caravan EN selector changes caravan UI")
         logcheck(page.locator("#adventureLang").input_value()=="en","In-game language switch syncs parent selector")
-    logcheck(en["parentLang"]=="en","Parent page also displays English after in-game switch")
+        logcheck(en["parentLang"]=="en","Parent page also displays English after in-game switch")
     except Exception as ex:
         issues.append("Game language button exception: "+str(ex))
     logcheck(not any("Caravan frame error" in entry["message"] for entry in consoleErrors),
