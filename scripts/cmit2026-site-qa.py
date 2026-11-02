@@ -52,6 +52,7 @@ with sync_playwright() as play:
 
     if capture(page, "01_home", "index.html"):
         check(page.locator("#culture-exchange").count() == 1, "Homepage has cultural-exchange section")
+        check(page.locator("#grid .card").count() >= 8, "Homepage historical museum collection renders with shared data")
         check(page.locator("#navCulture").count() == 1, "Homepage cultural dialogue navigation exists")
         check(page.locator("html").get_attribute("lang") == "zh", "First-visit language Chinese on homepage")
         check("culture-dialogue.html" in page.locator("#navCulture").get_attribute("href"), "Homepage link points to culture dialogue")
@@ -72,6 +73,10 @@ with sync_playwright() as play:
         check(page.locator("#museum-cultural-dialogue").count() == 1, "Museum includes cultural exchange continuation")
         check("史料" in page.locator(".museumArchiveHeader h2").inner_text() or "来源" in page.locator(".museumArchiveHeader h2").inner_text(), "Museum provenance section localized to Chinese")
         capture(page, "06_museum_sources", "v4/experience.html", scroll=".museumArchiveRail")
+
+    if capture(page, "06b_archive", "v4/collection.html"):
+        check(page.locator("#entries .entry").count() >= 8, "Archive catalogue renders with its own source cards")
+        check(page.locator("html").get_attribute("lang").startswith("zh"), "Archive follows Chinese selection")
 
     if capture(page, "07_maze", "tea-maze.html", click="#start"):
         check(page.locator("html").get_attribute("lang").startswith("zh"), "Maze respects Chinese initial language")
