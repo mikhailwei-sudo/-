@@ -48,7 +48,7 @@ with sync_playwright() as play:
     context = browser.new_context(viewport={"width": 1440, "height": 900}, device_scale_factor=1)
     page = context.new_page()
     script_errors = []
-    page.on("pageerror", lambda exc: script_errors.append(str(exc)[:200]))
+    page.on("pageerror", lambda exc: script_errors.append({"url": page.url, "error": str(exc)[:600]}))
 
     if capture(page, "01_home", "index.html"):
         check(page.locator("#culture-exchange").count() == 1, "Homepage has cultural-exchange section")
