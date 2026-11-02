@@ -85,4 +85,33 @@ function tick(now){if(state!=='playing')return;const dt=Math.min(.045,(now-last)
 $('play').onclick=start;$('restart').onclick=start;$('action').addEventListener('pointerdown',e=>{e.preventDefault();action()});$('lang').onchange=()=>{lang=$('lang').value;translate();msg(t().steps[step])};$('hero').onchange=()=>hero=$('hero').value;
 document.addEventListener('keydown',e=>{const k=e.key.length===1?e.key.toLowerCase():e.key;if(['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',' ','e','w','a','s','d'].includes(k)){if(e.target.tagName==='SELECT')return;e.preventDefault();if((k==='e'||k===' ')&&!e.repeat)action();else keys.add(k)}});document.addEventListener('keyup',e=>keys.delete(e.key.length===1?e.key.toLowerCase():e.key));window.addEventListener('blur',()=>{keys.clear();stick={x:0,y:0};$('nub').style.transform='translate(-50%,-50%)'});
 const pad=$('stick'),nub=$('nub');function padMove(e){const r=pad.getBoundingClientRect(),x=e.clientX-(r.left+r.width/2),y=e.clientY-(r.top+r.height/2),m=Math.hypot(x,y),max=r.width*.29;stick={x:m?x/Math.max(max,m):0,y:m?y/Math.max(max,m):0};nub.style.transform='translate(calc(-50% + '+stick.x*max+'px),calc(-50% + '+stick.y*max+'px))'}pad.addEventListener('pointerdown',e=>{e.preventDefault();pad.setPointerCapture(e.pointerId);padMove(e)});pad.addEventListener('pointermove',e=>{if(pad.hasPointerCapture(e.pointerId))padMove(e)});for(const event of ['pointerup','pointercancel','lostpointercapture'])pad.addEventListener(event,()=>{stick={x:0,y:0};nub.style.transform='translate(-50%,-50%)'});try{const savedLang=sessionStorage.getItem('teaAdventureLanguage');if(savedLang&&dict[savedLang]){$('lang').value=savedLang;lang=savedLang}const savedHero=sessionStorage.getItem('teaAdventureHero');if(savedHero==='0')$('hero').value='cha';else if(savedHero==='1')$('hero').value='nik'}catch(e){}translate();draw();if(new URLSearchParams(location.search).get('from')==='adventure'){start()}
+</script><script id="mobile-field-fit">
+/* Fit the whole logical canvas and keep it in view on mobile, including inside the adventure iframe. */
+(()=>{const coarse=()=>matchMedia('(pointer:coarse)').matches||innerWidth<=900;
+const board=()=>document.querySelector('.game:has(#canvas)')||document.querySelector('.board:has(#game)')||document.querySelector('#languageToolbar ~ header ~ main #stage');
+function fit(){const el=board();if(!el||!coarse())return;const canvas=el.querySelector('canvas');if(!canvas)return;
+const ratio=canvas.width/canvas.height;
+const viewH=window.visualViewport?.height||innerHeight;
+const parent=el.parentElement;
+const availableW=Math.min(parent?.clientWidth||innerWidth,innerWidth-12);
+const isMaze=canvas.id==='canvas';
+const reserve=isMaze?125:canvas.width===960?170:135;
+const h=Math.max(165,viewH-reserve);
+const target=Math.max(150,Math.min(availableW,h*ratio));
+el.style.setProperty('width',target+'px','important');
+el.style.setProperty('max-width','100%','important');
+el.style.setProperty('height','auto','important');
+el.style.setProperty('aspect-ratio',ratio,'important');
+canvas.style.setProperty('width','100%','important');
+canvas.style.setProperty('height','auto','important');
+canvas.style.setProperty('aspect-ratio',ratio,'important');
+canvas.style.setProperty('object-fit','contain','important');
+}
+let lastPlaying=false;
+function tick(){fit();const el=board();if(!el)return;const maze=document.querySelector('#play');const packing=document.querySelector('#board');const caravan=document.querySelector('#stage');
+const active=maze?!maze.classList.contains('hidden'):packing?!document.querySelector('#overlay')?.contains(document.querySelector('#play')):!!caravan;
+if(active&&!lastPlaying&&coarse()){setTimeout(()=>el.scrollIntoView({block:'start',behavior:'instant'}),180)}lastPlaying=active}
+addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);
+document.addEventListener('DOMContentLoaded',()=>{fit();document.addEventListener('click',e=>{if(e.target.closest('#start,#play'))setTimeout(()=>{fit();board()?.scrollIntoView({block:'start',behavior:'smooth'})},220)});setInterval(tick,900)});
+})();
 </script></body></html>
