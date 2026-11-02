@@ -3,6 +3,10 @@ on:
   push:
     paths:
       - '.github/workflows/cmit-caravan-regression.yml'
+      - 'tea-adventure.html'
+      - 'tea-caravan.html'
+      - 'tea-packing.html'
+      - 'scripts/cmit2026-caravan-handoff-probe.py'
   workflow_dispatch:
 permissions:
   contents: write
