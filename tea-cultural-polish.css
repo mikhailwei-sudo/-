@@ -30,3 +30,9 @@ body .journey :is(h2,h3),body .archive :is(h2,h3){text-wrap:balance}
 @media(max-width:1050px){.topnav{gap:12px!important}.topnav a{font-size:11px!important}}
 @media(max-width:760px){.cultureBridge{padding:50px 18px}.cultureObjects{grid-template-columns:1fr}.cultureObject .cultureImg{height:180px}.cultureHeading{font-size:32px}.cultureLead{font-size:15px}.cultureBridgeActions a{width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
+
+/* Keep the museum's Back to website control in normal document flow on phones:
+   fixed positioning used to obscure exhibition and source captions. */
+@media(max-width:760px){
+ .siteBackNavigation{position:static!important;inset:auto!important;left:auto!important;bottom:auto!important;display:inline-flex!important;margin:14px 12px!important;box-shadow:none!important}
+}
