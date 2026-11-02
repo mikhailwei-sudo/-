@@ -1,0 +1,69 @@
+{
+  "project": "万里茶道",
+  "date": "2026-11-03",
+  "repository": "mikhailwei-sudo/-",
+  "commit": "f46549a4dcfa63cc4cfad522f8a612455a43f2d0",
+  "screenshot_count": 10,
+  "screenshots": [
+    {
+      "name": "01_网站首页.png",
+      "origin": "site-design-qa/01_home.png",
+      "sha256": "e67aad33ee7d8bbc39b28419d3a27d9b5efd21a50c7974c0c3ed1f228339043d"
+    },
+    {
+      "name": "02_万里茶道路线.png",
+      "origin": "site-design-qa/04b_route_map.png",
+      "sha256": "6b2d5b058cc66b2b4ee54126d3461173c88eed9b495a4ccb181a296e0375fb57"
+    },
+    {
+      "name": "03_跨文化对话.png",
+      "origin": "site-design-qa/03_culture_dialogue.png",
+      "sha256": "ffa0b7d1dde0b27186b99b930f6165a13ea4eb7bd5a5a56417c4cb0966189b5a"
+    },
+    {
+      "name": "04_3D数字博物馆.png",
+      "origin": "site-design-qa/05_museum.png",
+      "sha256": "35ea09725351cbed9a0e40a0d990096332c903c1d56a2d316747d4c1015a45e3"
+    },
+    {
+      "name": "05_展品与历史来源.png",
+      "origin": "site-design-qa/06_museum_sources.png",
+      "sha256": "d3742eaf12bee156950a53910b6c946dea8d8fe1b1a4781d112bb330466fef80"
+    },
+    {
+      "name": "06_第一关茶园迷宫.png",
+      "origin": "site-design-qa/07_maze.png",
+      "sha256": "c282e2e81f7ab6dbcd0624318b0a88f830fe0a3e3c6f890e967ac3b21bc0b4b8"
+    },
+    {
+      "name": "07_第二关包装工坊.png",
+      "origin": "site-design-qa/08_packing.png",
+      "sha256": "e2014c393a3bba712a1ee7015c93f7d35b3b981a7c1aea0f1ee53c5a94f290d0"
+    },
+    {
+      "name": "08_第三关商队远行.png",
+      "origin": "caravan-qa/02_third_game_after_skip.png",
+      "sha256": "a9da0acd6002a3f62c221e919e0407396de7ce2b82b4e114b38ecff29dabfbce"
+    },
+    {
+      "name": "09_三语词典与卡片.png",
+      "origin": "site-design-qa/10_dictionary.png",
+      "sha256": "0c5cb032817e8ab0aa335e5aa8c31166e4c1d9ff57c98563b26c931927227f4c"
+    },
+    {
+      "name": "10_历史数字档案.png",
+      "origin": "site-design-qa/06b_archive.png",
+      "sha256": "9dc9f0d1b215e5d5d4b57dd7cb73c3ddbdff6b97226710cf3e2b3151b39fa16a"
+    }
+  ],
+  "source_files": 191,
+  "source_bytes": 109330212,
+  "pptx_pages": 15,
+  "pptx_sha256": "6415f49e9bfcc70aca3517330adf39aff24c8e0b05db7eb7f576d8e20a8ceb9f",
+  "qa_site_passed": 24,
+  "qa_caravan_passed": 17,
+  "notes": "Official original signed pledge and personal registration must be supplied by entrant.",
+  "archive_name": "Wanli_Tea_Road_CMIT2026_Updated_2026-11-03.zip",
+  "archive_bytes": 113756630,
+  "archive_sha256": "6bceffff68b0316f5e0dd9bda542fd73374bb67f2a82c2fe65d7a5af08f6fc30"
+}
