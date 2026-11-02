@@ -56,8 +56,8 @@ frame.addEventListener('load',()=>{
 });
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||!e.data||e.data.type!=='tea-stage-complete')return;const stage=Number(e.data.stage);if(stage===current&&!cutStage){startCut(stage)}});
 document.getElementById('enterWorkshop').onclick=finishCut;document.getElementById('reset').onclick=reset;document.getElementById('again').onclick=reset;
-try{setAdventureLang(sessionStorage.getItem('teaAdventureLanguage')||'ru');const n=Number(sessionStorage.getItem('teaAdventureStage')||1);if(n===2)showStage(2);else if(n>=3)showStage(3)}catch(e){}
+try{setAdventureLang(sessionStorage.getItem('teaAdventureLanguage')||'ru');sessionStorage.removeItem('teaAdventureStage')}catch(e){}showStage(1);
 </script><script src="site-navigation.js?v=53572272" defer></script><style id="adventure-emergency-controls">
 #adventureEmergency{position:fixed!important;z-index:2147483646!important;left:max(8px,env(safe-area-inset-left));top:max(8px,env(safe-area-inset-top));display:flex;gap:5px;pointer-events:auto!important}
 #adventureEmergency a,#adventureEmergency button{font:600 12px system-ui!important;min-height:38px!important;padding:7px 10px!important;border:1px solid #d7b77e!important;border-radius:9px!important;color:#ffe8bd!important;background:#18332e!important;box-shadow:0 3px 14px #0009!important;cursor:pointer!important}
-</style><div id="adventureEmergency"><a href="index.html">⌂ Главная</a><button type="button" onclick="document.getElementById('transition').classList.remove('show');document.getElementById('ending').classList.remove('show');showStage(3)">↻ Караван</button></div></body></html>
+</style><div id="adventureEmergency"><a href="index.html">⌂ Главная</a><button type="button" onclick="document.getElementById('transition').classList.remove('show');document.getElementById('ending').classList.remove('show');showStage(3)">↻ Караван</button><button type="button" onclick="reset()">↺ Сначала</button></div></body></html>
