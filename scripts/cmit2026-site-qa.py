@@ -70,7 +70,7 @@ with sync_playwright() as play:
         page.locator('.lang [data-lang="zh"]').click()
         capture(page, "04_culture_comparison", "culture-dialogue.html", scroll="#compareTitle")
 
-    if capture(page, "05_museum", "v4/experience.html", scroll="#museum"):
+    if capture(page, "05_museum", "v4/experience.html", click="#lobbyBegin", scroll="#museum", pause=3000):
         check(page.locator("#museum-cultural-dialogue").count() == 1, "Museum includes cultural exchange continuation")
         check("史料" in page.locator(".museumArchiveHeader h2").inner_text() or "来源" in page.locator(".museumArchiveHeader h2").inner_text(), "Museum provenance section localized to Chinese")
         capture(page, "06_museum_sources", "v4/experience.html", scroll=".museumArchiveRail")
