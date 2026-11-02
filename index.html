@@ -1,6 +1,6 @@
 <!doctype html>
-<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ede9dc"><title>Великий чайный путь · 万里茶道 — цифровое наследие</title>
+<html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0e2422"><title>Великий чайный путь · 万里茶道 — цифровое наследие</title>
 <meta name="description" content="Исторический архив, интерактивный маршрут и 3D-музей Великого чайного пути.">
 <style>
 /* Use installed fonts; Google Fonts may stall without VPN in mainland China. */
@@ -250,9 +250,9 @@ html body header .lang button{background:#241b10!important;color:#f2d8a0!importa
 html body header .lang button[aria-pressed="true"]{background:#dbb66c!important;color:#1a1308!important;border:2px solid #f5d898!important}
 .waypointCopy strong{font-family:system-ui,'Noto Sans CJK SC',sans-serif;letter-spacing:0!important;overflow-wrap:anywhere}
 .waypointCopy small{letter-spacing:.02em!important;line-height:1.45}
-</style></head><body>
+</style><link rel="stylesheet" href="tea-cultural-polish.css?v=cmit2026-1"></head><body>
 <div class="concept" id="prototype">● 万里茶道 / GREAT TEA ROAD — ИСТОРИЯ · МАРШРУТ · МУЗЕЙ</div>
-<header><div class="container headerInner"><a class="brand" href="index.html"><span class="brandIcon">茶</span><span class="brandText">GREAT TEA ROAD<small>万 里 茶 道 · DIGITAL HERITAGE</small></span></a><nav class="topnav"><a href="#route-map" id="navRouteMain">Маршрут</a><a href="#guides" id="navGuidesMain">Герои</a><a href="tea-adventure.html" id="navGameMain">Игра</a><a href="tea-dictionary.html" id="navDictionary">Словарик</a><a href="#collection" id="navCollection">Коллекция</a><a href="v4/collection.html" id="navArchive">Архив</a><a href="v4/experience.html" id="navMuseum">3D-музей ↗</a></nav><div class="lang"><button data-lang="ru" aria-pressed="true">RU</button><button data-lang="zh" aria-pressed="false">中</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
+<header><div class="container headerInner"><a class="brand" href="index.html"><span class="brandIcon">茶</span><span class="brandText">GREAT TEA ROAD<small>万 里 茶 道 · DIGITAL HERITAGE</small></span></a><nav class="topnav"><a href="#route-map" id="navRouteMain">Маршрут</a><a href="#guides" id="navGuidesMain">Герои</a><a href="tea-adventure.html" id="navGameMain">Игра</a><a href="tea-dictionary.html" id="navDictionary">Словарик</a><a href="#collection" id="navCollection">Коллекция</a><a href="v4/collection.html" id="navArchive">Архив</a><a href="v4/experience.html" id="navMuseum">3D-музей ↗</a><a href="culture-dialogue.html" id="navCulture" data-culture-key="navCulture">文化对话</a></nav><div class="lang"><button data-lang="ru" aria-pressed="false">RU</button><button data-lang="zh" aria-pressed="true">中</button><button data-lang="en" aria-pressed="false">EN</button></div></div></header>
 <main><section class="hero"><div class="heroText"><span class="kicker" id="heroKicker">ЦИФРОВАЯ КОЛЛЕКЦИЯ · 01 / 04</span><h1 id="heroTitle">История,<br>сохранённая<br><em>в деталях.</em></h1><p id="heroDesc">Документы, предметы и музейные изображения, рассказывающие о чайной торговле между Китаем и Россией.</p><div class="heroActions"><a href="#collection" class="solid" id="explore">Исследовать архив ↘</a><a href="v4/experience.html" class="textLink" id="enter3d">Войти в 3D-музей ↗</a></div></div><div class="heroArt"><img id="heroImage" src="v4/assets/refs/loc/hero.webp" data-fallback="v4/assets/refs/loc/hero.jpg" alt="Historical painting of Chinese tea processing" loading="eager"><div class="heroNumber">FIG. 001 — THE TEA ROAD ARCHIVE</div><div class="heroCaption"><span id="featureLabel">ИСТОРИЧЕСКОЕ ИЗОБРАЖЕНИЕ</span><b id="featureTitle">Путь одного<br>чайного листа</b></div></div></section>
 <section class="band"><div><b>12</b><span id="statOne">экспозиций</span></div><div><b>04</b><span id="statTwo">тематических раздела</span></div><div><b>03</b><span id="statThree">языка</span></div><div><b>∞</b><span id="statFour">возможностей исследования</span></div></section>
 <section class="journey container" id="route-map">
@@ -269,6 +269,18 @@ html body header .lang button[aria-pressed="true"]{background:#dbb66c!important;
 </div><details class="photoCredits"><summary>Об изображениях · 关于图片 · About the images</summary><p>Иллюстрации загружаются из локального музейного архива сайта. Это исторические источники и типологические аналоги, а не обязательно виды указанных городов. Авторство и ссылки на музейные источники приведены в каталоге ниже.</p></details>
 <a class="journeyLink" href="v4/experience.html#museum" id="journeyCta">Исследовать 3D-музей ↗</a>
 </section>
+<section class="cultureBridge" id="culture-exchange" aria-labelledby="cultureHeading">
+<div class="cultureInner"><span class="cultureEyebrow" data-culture-key="cultureEyebrow">跨文化交际 · 以器物连接不同生活方式</span>
+<h2 class="cultureHeading" id="cultureHeading" data-culture-key="cultureHeading">一片茶叶，连接中俄两种文化。</h2>
+<p class="cultureLead" data-culture-key="cultureLead">从中国的砖茶，到草原上的商队，再到俄罗斯家庭中的茶炊——用三件代表性器物解释贸易如何推动文化交流。</p>
+<div class="cultureObjects">
+<article class="cultureObject"><div class="cultureImg"><img src="v4/assets/refs/r1-brick-01.jpg" alt="茶砖历史器物参考图" loading="lazy"></div><strong data-culture-key="culture1">中国 · 制茶与砖茶</strong><p data-culture-key="culture1Text">认识茶砖的制作与运输特点：物品的形态如何适应跨境贸易？</p></article>
+<article class="cultureObject"><div class="cultureImg"><img src="v4/assets/refs/r2-camel-01.jpg" alt="商队历史资料图像" loading="lazy"></div><strong data-culture-key="culture2">蒙古 · 商队与道路</strong><p data-culture-key="culture2Text">从交通路线看语言、商品和习俗如何在不同地区之间相遇。</p></article>
+<article class="cultureObject"><div class="cultureImg"><img src="v4/assets/refs/r4-samovar-01.jpg" alt="俄式茶炊器物参考图" loading="lazy"></div><strong data-culture-key="culture3">俄罗斯 · 茶炊与生活</strong><p data-culture-key="culture3Text">理解中国茶进入俄罗斯后，怎样融入当地待客与家庭生活。</p></article>
+</div>
+<div class="cultureBridgeActions"><a href="culture-dialogue.html" data-culture-key="cultureEnter">体验跨文化对话 ↗</a><a href="v4/experience.html#museum" data-culture-key="cultureMuseum">在3D展馆查看展品 ↗</a></div>
+<p class="cultureBridgeNote" data-culture-key="cultureNote">历史照片、典型器物与数字复原分别说明，并保留来源信息。</p>
+</div></section>
 <section class="journey container" id="guides"><span class="kicker" id="guideKicker">НАШИ ПРОВОДНИКИ · 茶道伙伴</span><h2 id="guideTitle">Герои чайного пути</h2><p id="guideIntro">Наши маскоты встречают гостей в музее и появляются в интерактивной игре.</p>
 <div class="guideGrid">
 <div class="guideCard"><img src="game-assets/nik-portrait.png" alt="Ник — путешественник" loading="lazy"><h3>Ник · 尼克</h3><p id="guideNik">Исследователь с севера</p></div>
@@ -290,7 +302,7 @@ html body header .lang button[aria-pressed="true"]{background:#dbb66c!important;
  const $=id=>document.getElementById(id);
  const typeName=item=>translations[language][item.qual==='historical'?'historical':item.qual==='type'?'type':'pending'];
  const localArchiveImage={'r1-brick':'v4/assets/refs/r1-brick-01.jpg','r1-teaset':'v4/assets/refs/r1-teaset-01.jpg','r1-chest':'v4/assets/refs/r1-chest-01.jpg','r2-camel':'v4/assets/refs/r2-camel-01.jpg','r2-packsaddle':'v4/assets/refs/r2-packsaddle-01.jpg','r2-poststation':'v4/assets/refs/loc/route-04.webp','r3-shop':'v4/assets/refs/r3-shop-01.jpg','r3-gate':'v4/assets/refs/r3-gate-01.jpg','r3-documents':'v4/assets/refs/r3-documents-01.jpg','r4-samovar':'v4/assets/refs/r4-samovar-01.jpg','r4-desk':'v4/assets/refs/r4-desk-01.jpg','r4-threetea':'v4/assets/refs/loc/route-07.webp'};function imageFor(item){return localArchiveImage[item.id]||null}
- function setLang(l){language=l;document.documentElement.lang=l;const t=translations[l];
+ function setLang(l){if(!translations[l])l='zh';language=l;document.documentElement.lang=l;try{localStorage.setItem('gtr-lang',l);sessionStorage.setItem('teaAdventureLanguage',l)}catch(e){}const t=translations[l];
   for(const [key,value] of Object.entries(t)){const el=$(key);if(el){if(key==='heroTitle'||key==='featureTitle')el.innerHTML=value;else el.textContent=value;}}
   $('search').placeholder=t.search;
   document.querySelectorAll('[data-lang]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.lang===l)));
@@ -329,7 +341,7 @@ html body header .lang button[aria-pressed="true"]{background:#dbb66c!important;
  $('search').addEventListener('input',e=>{query=e.target.value.trim();renderCards()});
  $('closeModal').onclick=()=>$('detail').close();
  $('detail').addEventListener('click',e=>{if(e.target===$('detail'))$('detail').close()});
- setLang('ru');
+ setLang((()=>{try{return localStorage.getItem('gtr-lang')||'zh'}catch(e){return 'zh'}})());
 })();
 </script><script>
 (function(){
@@ -343,6 +355,6 @@ html body header .lang button[aria-pressed="true"]{background:#dbb66c!important;
  const nodes={ru:['География пути','Купцы и торговля','Диалог культур'],zh:['茶道地理','商人与贸易','跨文化交流'],en:['Route geography','Merchants and trade','Cultural exchange']};
  function sync(lang){const l=text[lang]?lang:'ru';ids.forEach((id,i)=>{const e=document.getElementById(id);if(e)e.textContent=text[l][i]});document.querySelectorAll('[data-route-title]').forEach((e,i)=>e.textContent=stop[l][i]);document.querySelectorAll('[data-route-node]').forEach((e,i)=>e.textContent=nodes[l][i]);document.querySelectorAll('[data-place-name]').forEach((e,i)=>e.textContent=places[l][i]);}
  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>sync(b.dataset.lang)));
- sync('ru');
+ sync((()=>{try{return localStorage.getItem('gtr-lang')||'zh'}catch(e){return 'zh'}})());
 })();
-</script><script id="tea-local-photo-fallback">document.addEventListener('error',function(event){const el=event.target;if(el.tagName!=='IMG'||!el.dataset.fallback)return;const fallback=el.dataset.fallback;delete el.dataset.fallback;el.src=fallback;el.closest('.waypointPicture')?.classList.remove('photoUnavailable')},true);</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}),{once:true});}</script><script src="site-navigation.js?v=529c368f" defer></script><script>document.querySelectorAll('.lang [data-lang]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('navDictionary').textContent=({ru:'Словарик',zh:'词典',en:'Dictionary'})[b.dataset.lang]||'Словарик'}));</script></body></html>
+</script><script id="tea-local-photo-fallback">document.addEventListener('error',function(event){const el=event.target;if(el.tagName!=='IMG'||!el.dataset.fallback)return;const fallback=el.dataset.fallback;delete el.dataset.fallback;el.src=fallback;el.closest('.waypointPicture')?.classList.remove('photoUnavailable')},true);</script><script>if('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}),{once:true});}</script><script src="site-navigation.js?v=529c368f" defer></script><script>document.querySelectorAll('.lang [data-lang]').forEach(b=>b.addEventListener('click',()=>{document.getElementById('navDictionary').textContent=({ru:'Словарик',zh:'词典',en:'Dictionary'})[b.dataset.lang]||'Словарик'}));</script><script src="tea-cultural-polish.js?v=cmit2026-1" defer></script></body></html>
