@@ -409,6 +409,21 @@ CMIT2026 · 《万里茶道》国际专项赛材料包（更新于2026-11-03）
     sheet=Image.new("RGB",(570*2,380*5),"#0e2422")
     for i,im in enumerate(thumbs):sheet.paste(im,((i%2)*570,(i//2)*380))
     sheet.save(PREVIEW/"all-ten-screenshots.jpg",quality=83,optimize=True)
+    # Render every PowerPoint page to a small overview so we can inspect slide layout.
+    if shutil.which("pdftoppm") and ppt.with_suffix(".pdf").is_file():
+        slide_tmp=BUILD/"ppt-thumbs"
+        slide_tmp.mkdir(exist_ok=True)
+        cp=subprocess.run(["pdftoppm","-png","-scale-to","430",str(ppt.with_suffix(".pdf")),str(slide_tmp/"s")],capture_output=True,text=True,timeout=150)
+        shots=sorted(slide_tmp.glob("s-*.png"))
+        if cp.returncode!=0 or len(shots)!=15:
+            raise RuntimeError("PPT visual QA render failed: "+cp.stderr[-500:])
+        thumb_contact=Image.new("RGB",(460*3,285*5),"#0e2422")
+        for idx,fn in enumerate(shots):
+            im=Image.open(fn).convert("RGB")
+            im.thumbnail((438,248))
+            thumb_contact.paste(im,((idx%3)*460+(460-im.width)//2,(idx//3)*285+7))
+        thumb_contact.save(PREVIEW/"15-slides-preview.jpg",quality=88,optimize=True)
+        shutil.rmtree(slide_tmp)
     # copies of generated editable artifacts for GitHub Actions release upload
     shutil.copy2(ppt,BUILD/"Wanli_Tea_Road_CMIT2026_Updated_15slides.pptx")
     print("BUILD_OK",dest,"bytes",dest.stat().st_size,"sources",mani["source_files"],flush=True)
