@@ -1,0 +1,62 @@
+[
+  {
+    "file": "01_home.png",
+    "page": "index.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "02_home_zh.png",
+    "page": "index.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "03_route.png",
+    "page": "index.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "04_characters.png",
+    "page": "index.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "05_archive.png",
+    "page": "v4/collection.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "06_3d_museum.png",
+    "page": "v4/experience.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "07_tea_maze.png",
+    "page": "tea-maze.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "08_tea_packing.png",
+    "page": "tea-packing.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "09_tea_caravan.png",
+    "page": "tea-caravan.html",
+    "source": "local checkout",
+    "status": "captured"
+  },
+  {
+    "file": "10_dictionary_cards.png",
+    "page": "tea-dictionary.html",
+    "source": "local checkout",
+    "status": "captured"
+  }
+]
