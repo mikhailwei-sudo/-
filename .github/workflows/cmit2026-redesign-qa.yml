@@ -43,3 +43,5 @@ jobs:
             git commit -m 'Save CMIT2026 professional site QA evidence'
             git push
           fi
+
+# QA iteration 2: per-page JavaScript error attribution
