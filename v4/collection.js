@@ -59,8 +59,8 @@ const COPY={
  zh:{eyebrow:'历史文献 · 数字展陈',heading:'让每一个展品都有据可查。',intro:'十二个主题展位，涵盖茶叶制作、草原商队、恰克图边贸以及俄罗斯茶文化。历史图像与现代三维复原明确区分。',m1:'个展位',m2:'个主题展厅',m3:'三种语言',notice:'公开页面仅使用标注开放许可的图片。出处不明或版权受限的材料不公开。历史类型参照不等于三维模型的原件证明。',all:'全部',search:'搜索展品…',count:'展位数量：',source:'查看馆藏来源',empty:'图像尚未公开',analogy:'类型参照',history:'历史图像',pending:'来源待核实',methodHeading:'真实性与来源说明',method:'项目中的三维模型均为示意复原或类型模型，并非馆藏实物的三维扫描。历史图片附有来源页、许可与署名。出处不明的资料仅供内部研究。',footer:'史料图版馆 · 第一阶段扩展',home:'首页',museum:'三维展馆'},
  en:{eyebrow:'HISTORICAL ARCHIVE · DIGITAL EXHIBITION',heading:'Every exhibit has a story and a source.',intro:'Twelve curated displays trace tea production, overland caravans, the Kyakhta border trade and Russian tea culture. Original historical images are clearly distinguished from modern 3D reconstructions.',m1:'displays',m2:'historical galleries',m3:'languages',notice:'Only material with stated open reuse rights appears in this public gallery. Images with uncertain provenance or restricted rights are omitted. Type references are not evidence that our 3D models represent specific museum objects.',all:'All',search:'Search the collection…',count:'Displays: ',source:'View collection source',empty:'Image not published',analogy:'TYPE REFERENCE',history:'HISTORICAL IMAGE',pending:'SOURCE UNDER REVIEW',methodHeading:'Provenance and accuracy',method:'All 3D exhibits are illustrative reconstructions or supplied type models, not scans of museum collections. Images carry source links, licence and credits. Unverified items are excluded from this public exhibition.',footer:'Historical collections · first expansion phase',home:'Home',museum:'3D museum'}
 };
-let lang=localStorage.getItem('gtr-collection-lang')||'ru',room=-1,query='';
-if(!rooms[lang])lang='ru';
+let lang=localStorage.getItem('gtr-collection-lang')||localStorage.getItem('gtr-lang')||'zh',room=-1,query='';
+if(!rooms[lang])lang='zh';
 const $=id=>document.getElementById(id);
 const srcLink=(e,t)=>e.source?'<a href="'+e.source+'" target="_blank" rel="noopener noreferrer">'+t.source+'</a>':'';
 const escapeHTML=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -102,6 +102,6 @@ function display(){
   meta.append(chapter,h,description,bottom);card.append(image,meta);section.append(card);
  }
 }
-document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem('gtr-collection-lang',lang);display()});
+document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem('gtr-collection-lang',lang);localStorage.setItem('gtr-lang',lang);display()});
 $('search').addEventListener('input',e=>{query=e.target.value;display();$('search').focus();});
 display();
