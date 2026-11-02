@@ -1,0 +1,32 @@
+/* CMIT 2026: scholarly digital heritage visual standards.
+   Keeps all existing mascot art, animation and sprite files untouched. */
+:root{--gtr-museum-green:#0e2422;--gtr-surface:#183630;--gtr-cream:#f6f0e5;--gtr-brass:#d6b57d;--gtr-quiet:#bbcbc2}
+html{scroll-padding-top:95px}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--gtr-brass)!important;outline-offset:3px}
+a,button{transition:background-color .22s ease,color .22s ease,border-color .22s ease}
+#tea-site-nav a{transition:background-color .2s ease}
+body :is(.waypointPicture,.card .thumb) img{object-fit:contain!important;background:#172923}
+body .heroArt>img{object-position:center!important}
+body :is(.waypoint,.card,.guideCard){transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+body :is(.waypoint,.card,.guideCard):hover{box-shadow:0 12px 30px #0003}
+body .journey :is(h2,h3),body .archive :is(h2,h3){text-wrap:balance}
+.cultureBridge{padding:76px clamp(18px,5vw,80px);background:linear-gradient(135deg,#0f2823,#1d3f35);border-top:1px solid #927c5270;border-bottom:1px solid #927c5270;color:var(--gtr-cream)}
+.cultureInner{max-width:1330px;margin:0 auto}
+.cultureEyebrow{color:var(--gtr-brass);font-size:12px;font-weight:800;letter-spacing:.13em}
+.cultureHeading{max-width:900px;font-size:clamp(32px,5vw,56px);letter-spacing:-.04em;line-height:1.2;margin:16px 0}
+.cultureLead{color:var(--gtr-quiet);line-height:1.85;font-size:16px;max-width:850px}
+.cultureObjects{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:29px}
+.cultureObject{background:#102b25;border:1px solid #71816f88;border-radius:14px;overflow:hidden;min-width:0;display:flex;flex-direction:column}
+.cultureObject .cultureImg{height:202px;display:flex;align-items:center;justify-content:center;background:#0a1b18;padding:12px}
+.cultureObject img{width:100%;height:100%;object-fit:contain;max-height:190px}
+.cultureObject strong{font-size:20px;display:block;padding:18px 20px 0;color:#fff1cd}
+.cultureObject p{font-size:14px;padding:0 20px 20px;margin:10px 0 0;color:#c4d4cc;line-height:1.75}
+.cultureBridgeActions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+.cultureBridgeActions a{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 22px;border-radius:9px;text-decoration:none;font-weight:700;border:1px solid #d6b57d;color:#f6f0e5;background:transparent}
+.cultureBridgeActions a:first-child{background:#d6b57d;color:#172721}
+.cultureBridgeActions a:hover{filter:brightness(1.1)}
+.cultureBridgeNote{margin:17px 0 0;color:#b9ccc2;font-size:12px}
+.topnav a,#tea-site-nav a{white-space:nowrap}
+@media(max-width:1050px){.topnav{gap:12px!important}.topnav a{font-size:11px!important}}
+@media(max-width:760px){.cultureBridge{padding:50px 18px}.cultureObjects{grid-template-columns:1fr}.cultureObject .cultureImg{height:180px}.cultureHeading{font-size:32px}.cultureLead{font-size:15px}.cultureBridgeActions a{width:100%}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*:before,*:after{transition-duration:.01ms!important;animation-duration:.01ms!important}}
