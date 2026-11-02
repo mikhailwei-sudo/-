@@ -155,6 +155,32 @@ dialog::backdrop{background:#000000ed}
 .modalCopy a{color:#e7c78b}
 .close{background:#f4efe3;color:#090909}
 :focus-visible{outline:2px solid #edcb85;outline-offset:3px}
+
+/* 2026 visual refinement: retain the editorial museum identity */
+:root{--paper:#f1efe7;--paper2:#e8e4d9;--forest:#203a30;--orange:#ad6947;--line:#d3cec1}
+header{background:rgba(241,239,231,.94);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom-color:var(--line);transition:box-shadow .2s}
+.headerInner{min-height:78px}
+header{min-height:78px}
+.topnav a{position:relative;text-underline-offset:6px;transition:color .2s}
+.topnav a:hover{color:var(--orange);text-decoration:none}
+.topnav a:focus-visible,.heroActions a:focus-visible,.filters button:focus-visible,.lang button:focus-visible{outline:2px solid var(--orange);outline-offset:4px}
+.lang{border-radius:10px;background:#ffffff55}
+.lang button{border-radius:7px;transition:background .2s,color .2s}
+.heroArt img{transition:transform 1s ease,filter .5s}
+@media(hover:hover){.heroArt:hover img{transform:scale(1.025)}}
+.solid{border-radius:9px;transition:background .2s,transform .2s,box-shadow .2s}
+.solid:hover{background:#2d4b3d;transform:translateY(-2px);box-shadow:0 10px 24px #18362c24}
+.filters button{border-radius:8px;transition:background .2s,border-color .2s}
+.filters button:hover{border-color:var(--forest)}
+.thumb{border-radius:12px;isolation:isolate}
+.thumb img{transition:transform .55s ease,filter .4s ease}
+@media(hover:hover){.card:hover .thumb img{transform:scale(1.045);filter:sepia(.08) saturate(.85)}}
+.cardMeta h3{letter-spacing:-.015em}
+.note{border-radius:15px}
+dialog{border-radius:16px;overflow:hidden}
+.close{border-radius:9px}
+@media(max-width:680px){.headerInner{min-height:72px}header{min-height:72px}.heroArt{min-height:320px}.note{border-radius:10px}}
+@media(prefers-reduced-motion:reduce){.solid,.thumb img,.heroArt img,.topnav a,.lang button{transition:none!important;transform:none!important}}
 </style><style>
 /* Unified archive editorial layout: route and character modules */
 .journey{padding-top:68px;padding-bottom:60px;border-top:1px solid #686c684b}
