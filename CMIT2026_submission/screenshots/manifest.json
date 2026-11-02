@@ -32,8 +32,8 @@
   {
     "file": "06_3d_museum.png",
     "page": "v4/experience.html",
-    "status": "failed",
-    "reason": "Locator.click: Timeout 3000ms exceeded.\nCall log:\n  - waiting for locator(\"#lobbyBegin\")\n"
+    "source": "local checkout",
+    "status": "captured"
   },
   {
     "file": "07_tea_maze.png",
@@ -50,8 +50,8 @@
   {
     "file": "09_tea_caravan.png",
     "page": "tea-caravan.html",
-    "status": "failed",
-    "reason": "Locator.select_option: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator(\"select#language\").first\n    - locator resolved to <select id=\"language\">…</select>\n  - attempting select option acti"
+    "source": "local checkout",
+    "status": "captured"
   },
   {
     "file": "10_dictionary_cards.png",
