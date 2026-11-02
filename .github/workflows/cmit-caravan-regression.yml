@@ -42,3 +42,5 @@ jobs:
           fi
 
 # Regression fix verification 1: scene index + synchronous language propagation + mobile cutscene skip
+
+# Regression fix verification 2: corrected Python test indentation
