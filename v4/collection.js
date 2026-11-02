@@ -102,6 +102,10 @@ function display(){
   meta.append(chapter,h,description,bottom);card.append(image,meta);section.append(card);
  }
 }
-document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem('gtr-collection-lang',lang);localStorage.setItem('gtr-lang',lang);display()});
-$('search').addEventListener('input',e=>{query=e.target.value;display();$('search').focus();});
-display();
+// Only render the archive-specific UI on collection.html.
+ // index.html reuses the shared 'rooms' and 'items' data declarations above.
+if(document.getElementById('entries')){
+ document.querySelectorAll('[data-lang]').forEach(b=>b.onclick=()=>{lang=b.dataset.lang;localStorage.setItem('gtr-collection-lang',lang);localStorage.setItem('gtr-lang',lang);display()});
+ $('search').addEventListener('input',e=>{query=e.target.value;display();$('search').focus();});
+ display();
+}
