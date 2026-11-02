@@ -57,4 +57,4 @@ frame.addEventListener('load',()=>{
 window.addEventListener('message',e=>{if(e.origin!==location.origin||e.source!==frame.contentWindow||!e.data||e.data.type!=='tea-stage-complete')return;const stage=Number(e.data.stage);if(stage===current&&!cutStage){startCut(stage)}});
 document.getElementById('enterWorkshop').onclick=finishCut;document.getElementById('reset').onclick=reset;document.getElementById('again').onclick=reset;
 try{setAdventureLang(sessionStorage.getItem('teaAdventureLanguage')||'ru');const n=Number(sessionStorage.getItem('teaAdventureStage')||1);if(n===2)showStage(2);else if(n>=3)showStage(3)}catch(e){}
-</script><script src="site-navigation.js?v=64aeaf2f" defer></script></body></html>
+</script><script src="site-navigation.js?v=53572272" defer></script></body></html>
