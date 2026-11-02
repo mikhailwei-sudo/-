@@ -1,0 +1,171 @@
+{
+  "checks": [
+    {
+      "screenshot": "01_home.png",
+      "source": "index.html",
+      "status": "captured"
+    },
+    {
+      "check": "Homepage has cultural-exchange section",
+      "passed": true
+    },
+    {
+      "check": "Homepage historical museum collection renders with shared data",
+      "passed": true
+    },
+    {
+      "check": "Homepage cultural dialogue navigation exists",
+      "passed": true
+    },
+    {
+      "check": "First-visit language Chinese on homepage",
+      "passed": true
+    },
+    {
+      "check": "Homepage link points to culture dialogue",
+      "passed": true
+    },
+    {
+      "screenshot": "02_home_culture_section.png",
+      "source": "index.html",
+      "status": "captured"
+    },
+    {
+      "screenshot": "03_culture_dialogue.png",
+      "source": "culture-dialogue.html",
+      "status": "captured"
+    },
+    {
+      "check": "Cultural dialogue displays Chinese content",
+      "passed": true
+    },
+    {
+      "check": "Three cross-cultural historical objects present",
+      "passed": true
+    },
+    {
+      "check": "All cross-cultural object images load",
+      "passed": true
+    },
+    {
+      "check": "Cultural interaction shows explanation after correct answer",
+      "passed": true
+    },
+    {
+      "check": "Culture dialogue switches to Russian",
+      "passed": true
+    },
+    {
+      "screenshot": "04_culture_comparison.png",
+      "source": "culture-dialogue.html",
+      "status": "captured"
+    },
+    {
+      "screenshot": "05_museum.png",
+      "source": "v4/experience.html",
+      "status": "captured"
+    },
+    {
+      "check": "Museum includes cultural exchange continuation",
+      "passed": true
+    },
+    {
+      "check": "Museum provenance section localized to Chinese",
+      "passed": true
+    },
+    {
+      "screenshot": "06_museum_sources.png",
+      "source": "v4/experience.html",
+      "status": "captured"
+    },
+    {
+      "screenshot": "06b_archive.png",
+      "source": "v4/collection.html",
+      "status": "captured"
+    },
+    {
+      "check": "Archive catalogue renders with its own source cards",
+      "passed": true
+    },
+    {
+      "check": "Archive follows Chinese selection",
+      "passed": true
+    },
+    {
+      "screenshot": "07_maze.png",
+      "source": "tea-maze.html",
+      "status": "captured"
+    },
+    {
+      "check": "Maze respects Chinese initial language",
+      "passed": true
+    },
+    {
+      "screenshot": "08_packing.png",
+      "source": "tea-packing.html",
+      "status": "captured"
+    },
+    {
+      "check": "Packaging respects Chinese initial language",
+      "passed": true
+    },
+    {
+      "check": "Packaging enters game after Play",
+      "passed": true
+    },
+    {
+      "screenshot": "09_caravan.png",
+      "source": "tea-caravan.html",
+      "status": "captured"
+    },
+    {
+      "check": "Caravan respects Chinese initial language",
+      "passed": true
+    },
+    {
+      "screenshot": "10_dictionary.png",
+      "source": "tea-dictionary.html",
+      "status": "captured"
+    },
+    {
+      "check": "Dictionary respects Chinese initial language",
+      "passed": true
+    },
+    {
+      "check": "Dictionary memory-game section is available",
+      "passed": true
+    },
+    {
+      "screenshot": "11_mobile_home.png",
+      "source": "index.html",
+      "status": "captured"
+    },
+    {
+      "check": "11_mobile_home: page has no horizontal overflow ({'viewport': 390, 'document': 390, 'body': 390})",
+      "passed": true
+    },
+    {
+      "screenshot": "12_mobile_culture.png",
+      "source": "culture-dialogue.html",
+      "status": "captured"
+    },
+    {
+      "check": "12_mobile_culture: page has no horizontal overflow ({'viewport': 390, 'document': 390, 'body': 390})",
+      "passed": true
+    },
+    {
+      "screenshot": "13_mobile_museum.png",
+      "source": "v4/experience.html",
+      "status": "captured"
+    },
+    {
+      "check": "13_mobile_museum: page has no horizontal overflow ({'viewport': 390, 'document': 390, 'body': 390})",
+      "passed": true
+    },
+    {
+      "check": "Desktop pages have no uncaught JS errors ([])",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
