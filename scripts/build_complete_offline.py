@@ -36,8 +36,8 @@ REQUIRED = ["index.html","tea-home-editorial.js","tea-home-editorial.css",
  "v4/assets/models/crate/model.dae",
  "v4/assets/refs/loc/museum-01.webp","v4/audio/ru/0.mp3",
  "v4/audio/zh/0.mp3","v4/audio/en/0.mp3"]
-SW_INLINE = re.compile(r"<script\\b[^>]*>\\s*if\\s*\\(\\s*['\\\"]serviceWorker['\\\"]\\s+in\\s+navigator\\s*\\)[\\s\\S]*?</script>",re.I)
-REMOTE_FONT_IMPORT = re.compile(r"@import\\s+(?:url\\()?['\\\"]?https?://(?:fonts\\.googleapis\\.com|fonts\\.gstatic\\.com)[^;]+;",re.I)
+SW_INLINE = re.compile(r"""<script\b[^>]*>\s*if\s*\(\s*['"]serviceWorker['"]\s+in\s+navigator\s*\)[\s\S]*?</script>""",re.I)
+REMOTE_FONT_IMPORT = re.compile(r"""@import\s+(?:url\()?['"]?https?://(?:fonts\.googleapis\.com|fonts\.gstatic\.com)[^;]+;""",re.I)
 
 def sha256(p:Path)->str:
  h=hashlib.sha256()
@@ -70,7 +70,7 @@ def main():
  sources=[FOLDER/"v4/experience.js",FOLDER/"museum3d.js",
           FOLDER/"artifact-lab.js",FOLDER/"experience.js",FOLDER/"museum.js"]
  for f in sources:
-  if re.search(r"import\\s*\\(\\s*['\\\"]https?://", f.read_text(encoding="utf-8")):
+  if re.search(r"""import\s*\(\s*['"]https?://""", f.read_text(encoding="utf-8")):
    raise RuntimeError("Runtime still imports network code: "+str(f))
  # Local manifests and hard assertions.
  audio=list((FOLDER/"v4/audio").glob("*/*.mp3"))
