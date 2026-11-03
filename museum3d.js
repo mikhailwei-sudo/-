@@ -2,7 +2,7 @@
 // Modern schematic reconstructions only; no historical imagery is synthesized.
 const host=document.getElementById("stage");
 let T;
-try{T=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js")}catch(e){console.warn(e);window.onMuseumError?.()}
+try{T=await import("./v4/vendor/three.module.js")}catch(e){console.warn(e);window.onMuseumError?.()}
 if(T){
 try{
 const scene=new T.Scene();scene.background=new T.Color("#33433b");scene.fog=new T.Fog("#33433b",13,29);
