@@ -1,0 +1,61 @@
+{
+  "source": "live Chromium/Playwright; current checkout",
+  "screenshots": [
+    "home-zh-1440.png",
+    "home-ru-1440.png",
+    "home-en-1440.png",
+    "home-zh-mobile-390.png",
+    "dictionary-en-1440.png",
+    "dictionary-zh-1440.png",
+    "dictionary-ru-1440.png"
+  ],
+  "checks": {
+    "home_cards_zh": [
+      "茶道路线",
+      "3D博物馆",
+      "文化对话",
+      "互动游戏",
+      "茶路词典"
+    ],
+    "home_cards_ru": [
+      "Маршрут",
+      "3D-музей",
+      "Диалог культур",
+      "Игры",
+      "Словарь"
+    ],
+    "home_cards_en": [
+      "Tea Route",
+      "3D Museum",
+      "Cultural Dialogue",
+      "Games",
+      "Dictionary"
+    ],
+    "homepage_images_loaded": 5,
+    "unique_historical_cover_photos": [
+      "v4/assets/refs/loc/museum-03.webp",
+      "v4/assets/refs/loc/museum-05.webp",
+      "v4/assets/refs/loc/museum-07.webp"
+    ],
+    "approved_mascot_assets": [
+      "game-assets/nik-portrait.png",
+      "game-assets/chaer-portrait.png"
+    ],
+    "mobile_horizontal_overflow": false,
+    "dictionary_en": {
+      "front": "teapot",
+      "direction": "en-zh",
+      "score": "Points"
+    },
+    "dictionary_zh": {
+      "front": "茶壶",
+      "direction": "zh-ru",
+      "score": "积分"
+    },
+    "dictionary_ru": {
+      "front": "чайник",
+      "direction": "ru-zh",
+      "score": "Очки"
+    }
+  }
+}
