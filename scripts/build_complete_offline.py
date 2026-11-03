@@ -93,6 +93,8 @@ def main():
  (FOLDER/"OFFLINE_MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
  if (DEST/"offline-qa-report.json").is_file():
   shutil.copy2(DEST/"offline-qa-report.json",FOLDER/"OFFLINE_QA_REPORT.json")
+ if (DEST/"offline-caravan-report.json").is_file():
+  shutil.copy2(DEST/"offline-caravan-report.json",FOLDER/"OFFLINE_GAME_TRANSITION_QA.json")
  runner='''#!/usr/bin/env python3
 """Serve local files only. No internet connection; random port prevents stale browser caches."""
 from __future__ import annotations
