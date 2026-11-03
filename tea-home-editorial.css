@@ -170,3 +170,33 @@ html body > #tea-site-nav,html body > #tea-site-nav.tn-flow{display:none!importa
 @media(prefers-reduced-motion:reduce){
  #teaEditorialHome *{transition:none!important;animation:none!important}
 }
+
+/* Feature covers: editorial archival photographs, original game mascots and a
+   typographic language illustration. Never embed website/QA screenshots here. */
+#teaEditorialHome .eh-image{height:154px;isolation:isolate}
+#teaEditorialHome .eh-image-photo{background:#9c8c70}
+#teaEditorialHome .eh-image-photo img{filter:sepia(.25) saturate(.73) contrast(1.05);object-position:center 46%}
+#teaEditorialHome .eh-image-photo:after{background:linear-gradient(0deg,#0b251b55,transparent 48%);box-shadow:none}
+#teaEditorialHome .eh-photo-index{position:absolute;z-index:2;left:14px;bottom:11px;color:#fff2d4;font:700 11px/1 Georgia,serif;letter-spacing:.17em;text-shadow:0 1px 4px #0009}
+#teaEditorialHome .eh-image-games{background:radial-gradient(circle at 77% 25%,#fce3a9 0 7%,transparent 8%),linear-gradient(#eac58e 0%,#d5ac78 58%,#9aab77 59%,#657c5d 100%)}
+#teaEditorialHome .eh-image-games:before{content:"";position:absolute;inset:16% 0 25%;background:#a77b58;clip-path:polygon(0 95%,15% 25%,32% 84%,50% 0%,67% 81%,81% 30%,100% 95%,100% 100%,0 100%);opacity:.78}
+#teaEditorialHome .eh-game-hill{position:absolute;inset:auto -10% 0;height:34%;background:#4a6749;clip-path:polygon(0 63%,20% 34%,39% 67%,65% 23%,80% 44%,100% 10%,100% 100%,0 100%);z-index:1}
+#teaEditorialHome .eh-game-trail{position:absolute;width:52%;height:75%;bottom:-49%;left:29%;border-radius:50%;background:#dfc291;transform:rotate(-12deg);z-index:2}
+#teaEditorialHome .eh-image-games .eh-game-mascot{position:absolute;z-index:4;width:clamp(65px,32%,106px);height:95%;object-fit:contain;object-position:center bottom;bottom:-8px;filter:drop-shadow(0 5px 3px #142c244f);transition:transform .25s ease}
+#teaEditorialHome .eh-image-games .eh-game-nik{left:24%;transform:rotate(-6deg)}
+#teaEditorialHome .eh-image-games .eh-game-chaer{left:53%;transform:rotate(7deg)}
+#teaEditorialHome .eh-feature:hover .eh-game-nik{transform:translateY(-4px) rotate(-6deg)}
+#teaEditorialHome .eh-feature:hover .eh-game-chaer{transform:translateY(-6px) rotate(7deg)}
+#teaEditorialHome .eh-game-leaf{position:absolute;z-index:3;color:#275e39;text-shadow:0 1px #eee0a9;font:32px Georgia,serif}
+#teaEditorialHome .eh-game-leaf-1{left:13%;top:19%;transform:rotate(-28deg)}
+#teaEditorialHome .eh-game-leaf-2{right:9%;top:42%;transform:rotate(22deg)}
+#teaEditorialHome .eh-image-dictionary{background:radial-gradient(circle at 23% 50%,#315949,#14372f 64%,#0c2924);color:#f2d6a4}
+#teaEditorialHome .eh-image-dictionary:before{content:"";position:absolute;inset:12px;border:1px solid #c5a5756b;border-radius:2px}
+#teaEditorialHome .eh-dict-hanzi{position:absolute;left:13%;top:2%;font:500 99px/1.42 "Noto Serif CJK SC","Songti SC",serif;color:#f6e8c9;text-shadow:0 4px 12px #0004}
+#teaEditorialHome .eh-dict-russian{position:absolute;right:11%;top:22%;font:700 clamp(17px,1.5vw,27px)/1.2 Georgia,serif;letter-spacing:.10em;color:#e3c18d}
+#teaEditorialHome .eh-dict-english{position:absolute;right:13%;bottom:21%;font:500 clamp(19px,1.8vw,33px)/1 Georgia,serif;letter-spacing:.19em;color:#f3e3c6}
+#teaEditorialHome .eh-dict-ornament{position:absolute;right:42%;bottom:15%;font:36px Georgia,serif;color:#a4b98b;transform:rotate(-36deg)}
+#teaEditorialHome .eh-dict-line{position:absolute;right:13%;top:55%;width:30%;height:1px;background:#e2bd8188}
+@media(max-width:1100px){#teaEditorialHome .eh-image{height:158px}}
+@media(max-width:620px){#teaEditorialHome .eh-image{height:119px}#teaEditorialHome .eh-dict-hanzi{font-size:74px}#teaEditorialHome .eh-dict-russian{font-size:17px}#teaEditorialHome .eh-dict-english{font-size:20px}#teaEditorialHome .eh-image-games .eh-game-mascot{width:37%}}
+@media(max-width:400px){#teaEditorialHome .eh-image{height:auto;min-height:124px}#teaEditorialHome .eh-dict-hanzi{font-size:65px;left:9%;top:16%}#teaEditorialHome .eh-dict-russian{font-size:13px;right:8%}#teaEditorialHome .eh-dict-english{font-size:15px;right:10%}#teaEditorialHome .eh-game-leaf{font-size:21px}#teaEditorialHome .eh-image-games .eh-game-mascot{width:46%;height:89%}#teaEditorialHome .eh-image-games .eh-game-nik{left:6%}#teaEditorialHome .eh-image-games .eh-game-chaer{left:49%}}
