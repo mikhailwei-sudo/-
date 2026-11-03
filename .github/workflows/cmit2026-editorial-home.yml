@@ -1,0 +1,47 @@
+name: CMIT2026 editorial homepage visual QA
+on:
+  push:
+    paths:
+      - '.github/workflows/cmit2026-editorial-home.yml'
+      - 'index.html'
+      - 'tea-home-editorial.css'
+      - 'tea-home-editorial.js'
+      - 'scripts/cmit2026-editorial-home-qa.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  visual-qa:
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium and Playwright
+        run: |
+          python -m pip install playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Run homepage in Chromium at twelve screen widths and three languages
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 > /tmp/cmit-editorial.log 2>&1 &
+          python scripts/cmit2026-editorial-home-qa.py
+      - name: Keep visual proof even if checks fail
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tea-home-editorial-visuals
+          path: CMIT2026_submission/editorial-home-qa
+          retention-days: 30
+      - name: Commit passing browser screenshots
+        if: success()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add CMIT2026_submission/editorial-home-qa
+          if ! git diff --cached --quiet; then
+            git commit -m "Save tested editorial Tea Road desktop tablet phone screenshots"
+            git push
+          fi
