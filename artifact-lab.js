@@ -1,6 +1,6 @@
 // Great Tea Road 2.0: original, historically inspired models (not artifact scans).
 const host=document.getElementById("view");let T;
-try{T=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js")}catch(e){document.getElementById("loading").textContent="Three.js / WebGL unavailable. Object descriptions remain accessible.";console.warn(e)}
+try{T=await import("./v4/vendor/three.module.js")}catch(e){document.getElementById("loading").textContent="Three.js / WebGL unavailable. Object descriptions remain accessible.";console.warn(e)}
 if(T){try{
 const scene=new T.Scene();scene.background=new T.Color("#25332b");
 const camera=new T.PerspectiveCamera(42,1,.01,120);
