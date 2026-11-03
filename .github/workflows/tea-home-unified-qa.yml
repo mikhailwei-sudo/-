@@ -1,0 +1,54 @@
+name: Unified first-concept homepage — responsive QA
+on:
+  push:
+    paths:
+      - '.github/workflows/tea-home-unified-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify-all-screens:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install browser and original-art cropping dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install 'Pillow>=11.3.0' playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Build optimized decorative art from the approved first concept
+        run: |
+          python scripts/build_home_art.py
+          ls -lh assets/home-luxe-hero-* assets/home-luxe-card-* assets/home-luxe-border.webp
+      - name: Test responsive homepage on desktop tablet phone in three languages
+        shell: bash
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 >/tmp/home-http.log 2>&1 &
+          python scripts/qa_home_unified.py
+      - name: Test game cutscene transition was not affected
+        run: python scripts/cmit2026-caravan-handoff-probe.py
+      - name: Save QA images and report even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tea-Road-Unified-Home-ZH-RU-EN-Desktop-Tablet-Mobile
+          path: |
+            CMIT2026_submission/unified-home-qa/
+            CMIT2026_submission/caravan-qa/probe-report.json
+          retention-days: 60
+          if-no-files-found: warn
+      - name: Commit approved concept artwork crops and verified screenshots
+        if: success()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/home-luxe-hero-*.webp assets/home-luxe-card-*.webp assets/home-luxe-border.webp CMIT2026_submission/unified-home-qa/
+          if ! git diff --cached --quiet; then
+            git commit -m "Deliver responsive first-concept art and verified 3-language screenshots"
+            git push
+          fi
