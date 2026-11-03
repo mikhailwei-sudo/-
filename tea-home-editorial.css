@@ -47,7 +47,7 @@ html body > #tea-site-nav,html body > #tea-site-nav.tn-flow{display:none!importa
 #teaEditorialHome .eh-hero-art{position:relative;min-height:410px;overflow:hidden;background:#223b33}
 #teaEditorialHome .eh-hero-art:before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0f3029 0%,transparent 29%,transparent 85%,#152a2354 100%),linear-gradient(0deg,#0d2a25 2%,transparent 26%)}
 #teaEditorialHome .eh-map-illustration{position:absolute;inset:0;overflow:hidden;background-color:#a18b6a;background-image:linear-gradient(90deg,transparent 40%,#172c2352),linear-gradient(0deg,#152a26a1 1%,transparent 35%),radial-gradient(ellipse at 39% 47%,#d2bc93 0%,#c4a97f 20%,#a18c6b 64%,#625741 100%);opacity:.88}
-#teaEditorialHome .eh-map-illustration:before{content:"";position:absolute;inset:0;opacity:.26;background:url("v4/assets/refs/loc/route-05.webp") center/cover no-repeat;mix-blend-mode:multiply;filter:sepia(1)}
+#teaEditorialHome .eh-map-illustration:before{content:"";position:absolute;inset:0;opacity:.26;background:repeating-linear-gradient(42deg,#433b2c15 0 1px,transparent 1px 24px);mix-blend-mode:multiply}
 #teaEditorialHome .eh-map-illustration:after{content:"";position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(38deg,#38291c08 0px,#38291c08 1px,transparent 1px,transparent 13px)}
 #teaEditorialHome .eh-map-illustration svg{position:absolute;inset:0;width:100%;height:100%;z-index:2;filter:drop-shadow(0 2px 3px #3c2818aa)}
 #teaEditorialHome .eh-map-label{position:absolute;z-index:3;color:#f1dfb5;background:#4c3e2bd9;border:1px solid #d7b9837a;border-radius:4px;padding:4px 10px;font:600 clamp(12px,1vw,15px)/1.2 "Noto Serif CJK SC",serif;white-space:nowrap}
@@ -200,3 +200,54 @@ html body > #tea-site-nav,html body > #tea-site-nav.tn-flow{display:none!importa
 @media(max-width:1100px){#teaEditorialHome .eh-image{height:158px}}
 @media(max-width:620px){#teaEditorialHome .eh-image{height:119px}#teaEditorialHome .eh-dict-hanzi{font-size:74px}#teaEditorialHome .eh-dict-russian{font-size:17px}#teaEditorialHome .eh-dict-english{font-size:20px}#teaEditorialHome .eh-image-games .eh-game-mascot{width:37%}}
 @media(max-width:400px){#teaEditorialHome .eh-image{height:auto;min-height:124px}#teaEditorialHome .eh-dict-hanzi{font-size:65px;left:9%;top:16%}#teaEditorialHome .eh-dict-russian{font-size:13px;right:8%}#teaEditorialHome .eh-dict-english{font-size:15px;right:10%}#teaEditorialHome .eh-game-leaf{font-size:21px}#teaEditorialHome .eh-image-games .eh-game-mascot{width:46%;height:89%}#teaEditorialHome .eh-image-games .eh-game-nik{left:6%}#teaEditorialHome .eh-image-games .eh-game-chaer{left:49%}}
+
+/* 2026-11-03: game cover uses the approved high-quality Nik/Chaer artwork.
+   The simplified SVG mascots and polygon mountain placeholder are NOT displayed. */
+#teaEditorialHome .eh-image-games{
+  background:radial-gradient(ellipse at 50% 14%,#314d48 0,#142e32 52%,#111928 100%);
+  overflow:hidden;isolation:isolate;
+}
+#teaEditorialHome .eh-image-games:before{
+  position:absolute;inset:0;content:"";z-index:0;clip-path:none;opacity:1;
+  background:radial-gradient(circle at 50% 46%,#d0a76450,transparent 41%),repeating-linear-gradient(45deg,#dbb87a0a 0 1px,transparent 1px 13px);
+}
+#teaEditorialHome .eh-image-games:after{
+  content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  box-shadow:inset 0 0 0 1px #dcc08861,inset 0 -47px 33px #0a141de6,inset 0 18px 20px #0c15237d;
+  background:linear-gradient(90deg,#101b2b44,transparent 29%,transparent 71%,#2d131d4d);
+}
+#teaEditorialHome .eh-game-portrait-slot{
+  position:absolute;top:0;bottom:0;width:57%;z-index:1;overflow:hidden;
+}
+#teaEditorialHome .eh-game-portrait-nik{
+  left:0;-webkit-mask-image:linear-gradient(to right,#000 66%,#000c 82%,transparent);
+  mask-image:linear-gradient(to right,#000 66%,#000c 82%,transparent);
+}
+#teaEditorialHome .eh-game-portrait-chaer{
+  right:0;-webkit-mask-image:linear-gradient(to left,#000 66%,#000c 82%,transparent);
+  mask-image:linear-gradient(to left,#000 66%,#000c 82%,transparent);
+}
+#teaEditorialHome .eh-image-games .eh-game-portrait-slot img{
+  width:100%;height:100%;position:absolute;inset:0;object-fit:cover;object-position:center 24%;
+  filter:none;transition:transform .35s ease;
+}
+#teaEditorialHome .eh-feature:hover .eh-game-portrait-nik img{transform:scale(1.055) translateX(-2px)}
+#teaEditorialHome .eh-feature:hover .eh-game-portrait-chaer img{transform:scale(1.055) translateX(2px)}
+#teaEditorialHome .eh-game-seal{
+  position:absolute;z-index:3;left:50%;top:15%;transform:translateX(-50%);
+  display:grid;place-items:center;width:36px;height:36px;border:1px solid #f4d59bba;border-radius:50%;
+  color:#f2d59b;background:#142c2da6;font:28px/1 Georgia,serif;box-shadow:0 2px 14px #0a1219aa;
+}
+#teaEditorialHome .eh-game-caption{
+  position:absolute;left:8px;right:8px;bottom:9px;z-index:3;display:block;
+  text-align:center;font:700 clamp(9px,.77vw,12px)/1.4 "Noto Sans CJK SC",system-ui,sans-serif;
+  letter-spacing:.065em;color:#f5dbad;text-shadow:0 1px 5px #000;
+}
+@media(max-width:620px){
+ #teaEditorialHome .eh-game-caption{font-size:9px;bottom:6px}
+ #teaEditorialHome .eh-game-seal{width:27px;height:27px;font-size:20px;top:12%}
+}
+@media(max-width:400px){
+ #teaEditorialHome .eh-game-caption{font-size:8px;bottom:6px}
+ #teaEditorialHome .eh-game-portrait-slot{width:60%}
+}
