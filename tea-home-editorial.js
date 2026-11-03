@@ -56,7 +56,7 @@ cultureIntro:'Как движение товаров меняет привычк
 step1:'Китай · Производство',step1Desc:'Чай, его обработка и дальняя торговля.',
 step2:'Монголия · Караваны',step2Desc:'Транспорт, торговые контакты и языки.',
 step3:'Россия · Традиции',step3Desc:'Чай, гостеприимство и домашняя культура.',
-cultureCta:'Сравнить чайные традиции',source:'Исторические изображения и цифровые модели имеют отдельные сведения об источниках',menu:'Открыть меню',closeMenu:'Закрыть меню',imageFallback:'Изображение недоступно'
+gameScene:'ЧАЙНЫЙ КВЕСТ · ТРИ ИСПЫТАНИЯ',cultureCta:'Сравнить чайные традиции',source:'Исторические изображения и цифровые модели имеют отдельные сведения об источниках',menu:'Открыть меню',closeMenu:'Закрыть меню',imageFallback:'Изображение недоступно'
 },
 en:{
 brand:'Great Tea Road',brandSub:'Cross-cultural digital heritage',
@@ -196,7 +196,15 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape')closeMenu()}
 document.addEventListener('click',event=>{if(!event.target.closest('#teaEditorialHome .eh-topbar'))closeMenu()});
 document.querySelectorAll('body > header .lang [data-lang]').forEach(b=>b.addEventListener('click',()=>{if(current!==b.dataset.lang)setLanguage(b.dataset.lang,false)}));
 el.querySelectorAll('.eh-image img,.eh-artwork img,.eh-culture-step img').forEach(img=>{
- img.addEventListener('error',()=>{img.closest('.eh-image,.eh-artwork,.eh-culture-step')?.classList.add('eh-image-missing')},{once:true});
+ img.addEventListener('error',()=>{
+  // WebP is an optimization; the archived JPEG is also stored locally for offline use.
+  if(img.currentSrc && img.getAttribute('src')?.endsWith('.webp') && !img.dataset.jpegTried){
+   img.dataset.jpegTried='true';
+   img.src=img.getAttribute('src').replace(/\.webp$/,'.jpg');
+   return;
+  }
+  img.closest('.eh-image,.eh-artwork,.eh-culture-step')?.classList.add('eh-image-missing');
+ });
 });
 let lang='zh';
 try{lang=localStorage.getItem('gtr-lang')||'zh'}catch(_e){}
