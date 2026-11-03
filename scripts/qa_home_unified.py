@@ -77,6 +77,11 @@ with sync_playwright() as p:
     if width in (390,1366):
        route=page.locator("#route-map")
        route.scroll_into_view_if_needed(timeout=5000)
+       # Route uses lazy images: wait until historical pictures have decoded.
+       page.wait_for_timeout(2200)
+       imgStatus=page.locator("#route-map .waypointPicture img").evaluate_all("(imgs)=>imgs.map(x=>({src:x.currentSrc.split('/').pop(),loaded:x.complete&&x.naturalWidth>0}))")
+       verify(len(imgStatus)==7 and all(v["loaded"] for v in imgStatus),
+              f"{key}: all seven route illustrations load",imgStatus)
        page.screenshot(path=str(OUT/f"route-content-{width}.png"),full_page=False,animations="disabled")
        verify(route.is_visible(),f"{key}: route remains accessible below redesigned header")
     verify(not script_errors,f"{key}: no JS exceptions",script_errors)
