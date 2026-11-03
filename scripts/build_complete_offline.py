@@ -91,6 +91,8 @@ def main():
    "files":{p.relative_to(FOLDER).as_posix():{"sha256":sha256(p),"size":p.stat().st_size}
             for p in sorted(files)}}
  (FOLDER/"OFFLINE_MANIFEST.json").write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding="utf-8")
+ if (DEST/"offline-qa-report.json").is_file():
+  shutil.copy2(DEST/"offline-qa-report.json",FOLDER/"OFFLINE_QA_REPORT.json")
  runner='''#!/usr/bin/env python3
 """Serve local files only. No internet connection; random port prevents stale browser caches."""
 from __future__ import annotations
