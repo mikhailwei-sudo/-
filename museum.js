@@ -3,7 +3,7 @@
 // Modern interpretive models, not photogrammetric replicas.
 const host=document.getElementById("scene"), note=document.getElementById("sceneNote");
 let T;
-try {T=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js")}
+try {T=await import("./v4/vendor/three.module.js")}
 catch(e){console.warn("Three.js unavailable",e);note.style.display="block"}
 if(T){
 try{
