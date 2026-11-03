@@ -1,0 +1,161 @@
+{
+  "checks": [
+    {
+      "test": "desktop-zh: actual first-concept AVIF artwork loaded",
+      "ok": true
+    },
+    {
+      "test": "desktop-zh: five functional modules and interactive poster zones",
+      "ok": true
+    },
+    {
+      "test": "desktop-zh: no sideways scrolling",
+      "ok": true
+    },
+    {
+      "test": "desktop-zh: language selection respected",
+      "ok": true
+    },
+    {
+      "test": "desktop-zh: original route and cultural sections still exist",
+      "ok": true
+    },
+    {
+      "test": "desktop-zh: no JavaScript errors: []",
+      "ok": true
+    },
+    {
+      "test": "Desktop Chinese displays image-identical first concept",
+      "ok": true
+    },
+    {
+      "test": "Game card goes to existing game",
+      "ok": true
+    },
+    {
+      "test": "Museum main button goes to 3D museum",
+      "ok": true
+    },
+    {
+      "test": "Language dropdown opens",
+      "ok": true
+    },
+    {
+      "test": "RU choice activates live translated interface",
+      "ok": true
+    },
+    {
+      "test": "Switching back to Chinese restores exact concept",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: actual first-concept AVIF artwork loaded",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: five functional modules and interactive poster zones",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: no sideways scrolling",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: language selection respected",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: original route and cultural sections still exist",
+      "ok": true
+    },
+    {
+      "test": "desktop-ru: no JavaScript errors: []",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: actual first-concept AVIF artwork loaded",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: five functional modules and interactive poster zones",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: no sideways scrolling",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: language selection respected",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: original route and cultural sections still exist",
+      "ok": true
+    },
+    {
+      "test": "mobile-zh: no JavaScript errors: []",
+      "ok": true
+    },
+    {
+      "test": "Mobile gets legible responsive layout",
+      "ok": true
+    },
+    {
+      "test": "Mobile nav opens",
+      "ok": true
+    },
+    {
+      "test": "Mobile language switch works",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: actual first-concept AVIF artwork loaded",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: five functional modules and interactive poster zones",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: no sideways scrolling",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: language selection respected",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: original route and cultural sections still exist",
+      "ok": true
+    },
+    {
+      "test": "mobile-en: no JavaScript errors: []",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: actual first-concept AVIF artwork loaded",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: five functional modules and interactive poster zones",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: no sideways scrolling",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: language selection respected",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: original route and cultural sections still exist",
+      "ok": true
+    },
+    {
+      "test": "tablet-zh: no JavaScript errors: []",
+      "ok": true
+    }
+  ],
+  "issues": []
+}
