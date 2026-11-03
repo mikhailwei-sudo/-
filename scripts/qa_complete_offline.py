@@ -119,5 +119,5 @@ try:
   browser.close()
 finally:
  server.shutdown();server.server_close()
-ROOT.joinpath("OFFLINE_QA_REPORT.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
+ROOT.parent.joinpath("offline-qa-report.json").write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding="utf-8")
 print("COMPLETE_OFFLINE_QA_PASS",len(report["checks"]),"checks; external calls",len(report["remote_requests"]),flush=True)
