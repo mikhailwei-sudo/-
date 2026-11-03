@@ -1,7 +1,7 @@
 // Great Tea Road immersive museum. Entirely original, schematic 3D reconstructions.
 const holder=document.getElementById('renderStage');
 let THREE;
-try{THREE=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js')}catch(err){document.getElementById('fallbackText').textContent=UI[lang].unavailable;console.warn('Three.js library could not be loaded',err)}
+try{THREE=await import('./v4/vendor/three.module.js')}catch(err){document.getElementById('fallbackText').textContent=UI[lang].unavailable;console.warn('Three.js library could not be loaded',err)}
 if(THREE){try{
 const scene=new THREE.Scene();scene.background=new THREE.Color('#0c1711');scene.fog=new THREE.Fog('#17271e',12,65);
 const camera=new THREE.PerspectiveCamera(54,1,.1,120);
@@ -47,7 +47,7 @@ scene.add(new THREE.HemisphereLight(0xf6f5e9,0x434e43,2.2));const dl=new THREE.D
 // Source: Poly Pizza, model by jeremy, republished in billcookie/Pax-Atlas.
 (async()=>{
  try{
-  const {GLTFLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js');
+  const {GLTFLoader}=await import('./v4/vendor/addons/loaders/GLTFLoader.js');
   const loader=new GLTFLoader();
   loader.load('./assets/models/camel-poly-pizza.glb',gltf=>{
    if(!gltf.scene)return;
