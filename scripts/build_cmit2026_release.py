@@ -25,7 +25,7 @@ PACK = BUILD / "万里茶道_CMIT2026_正式材料待签章"
 PREVIEW = REPO / "CMIT2026_submission" / "2026-refresh"
 OUTNAME = "Wanli_Tea_Road_CMIT2026_Updated_2026-11-03.zip"
 SCREENSHOT_SOURCES = [
-    ("01_网站首页.png",       "site-design-qa/01_home.png"),
+    ("01_网站首页.png",       "2026-refresh/live-qa/home-zh-1440.png"),
     ("02_万里茶道路线.png",   "site-design-qa/04b_route_map.png"),
     ("03_跨文化对话.png",     "site-design-qa/03_culture_dialogue.png"),
     ("04_3D数字博物馆.png",  "site-design-qa/05_museum.png"),
@@ -33,7 +33,7 @@ SCREENSHOT_SOURCES = [
     ("06_第一关茶园迷宫.png", "site-design-qa/07_maze.png"),
     ("07_第二关包装工坊.png", "site-design-qa/08_packing.png"),
     ("08_第三关商队远行.png", "caravan-qa/02_third_game_after_skip.png"),
-    ("09_三语词典与卡片.png", "site-design-qa/10_dictionary.png"),
+    ("09_三语词典与卡片.png", "2026-refresh/live-qa/dictionary-en-1440.png"),
     ("10_历史数字档案.png",   "site-design-qa/06b_archive.png"),
 ]
 JADE = RGBColor(14,36,34)
@@ -257,6 +257,8 @@ def build():
     PACK.mkdir(parents=True)
     folders=[PACK/x for x in ["01_作品截图","02_作品汇报PPT","03_作品说明","04_参赛打包文件","05_报名信息与承诺书","06_测试证据","07_解说稿"]]
     for p in folders:p.mkdir(exist_ok=True)
+    new_evidence=PACK/"08_最新首页与英语词卡验证"
+    new_evidence.mkdir(exist_ok=True)
     sc={}
     for name,reference in SCREENSHOT_SOURCES:
         orig=REPO/"CMIT2026_submission"/reference
@@ -285,9 +287,9 @@ def build():
       ("国际赛道与跨文化创新",["茶砖（中国生产及外销）→ 商队（跨地域运输与接触）→ 茶炊（俄罗斯家庭及社交生活）：三件代表性器物构成从生产到文化本土化的解释链。中文、俄文和英文信息独立呈现，并配合交互问答，展示共性与差异。"]),
       ("沉浸式展陈",["采用浏览器端三维展示，用户可浏览展区、观察茶砖与茶具等展品，了解历史背景、器物功能及来源。历史图像与现代数字复原以不同方式注明，避免混淆。"]),
       ("玩法创新",["第一关：茶园迷宫——收集茶叶与规划路径。第二关：茶叶包装——按订单完成加工和发货。第三关：商队运输——穿越多区域景观并应对障碍。三关以过场视频连接，支持跳过视频进入下一关。"]),
-      ("语言学习",["词汇模块支持中文、俄文、英语学习与独立发音。记忆卡片采用三轮各十五题的结构，并结合积分与反馈。"]),
-      ("技术与性能",["网站采用HTML、CSS、JavaScript、Canvas与Three.js/WebGL等浏览器技术。针对中国网络环境尽量使用本地静态资源，并对电脑与手机端分别优化布局与控制。"]),
-      ("版本与测试",["本次更新保留尼克与茶儿的原始素材与游戏动画；修复第三关场景索引越界引起的渲染异常，完善过场视频跳过逻辑及三语言同步。提交前通过桌面、移动端自动测试与复核。"])
+      ("语言学习",["词汇模块支持中文、俄文、英语学习与独立发音。记忆卡片采用三轮各十五题的结构，并结合积分与反馈。最新版本已修复英文模式的卡片方向：选择EN时显示英文正面，翻面可查看另外两种语言；三语切换同时更新分数与界面文字。"]),
+      ("技术与性能",["网站采用HTML、CSS、JavaScript、Canvas与Three.js/WebGL等浏览器技术。新版首页的专题卡片不再嵌入网站截图；改用不同的历史影像、原创角色尼克与茶儿的高清本地素材和三语词汇排版。主页面九处历史配图采用不重复的本地文件，并为WebP图片配备JPEG回退。针对中国网络环境优先使用本地静态资源，并优化电脑与手机端布局。"]),
+      ("版本与测试",["本次更新保留尼克与茶儿的原始素材与游戏动画；修复第三关场景索引越界引起的渲染异常与过场视频跳过逻辑。11月3日进一步替换首页卡片中的网站截图与简化角色占位图，修复英语词卡显示方向和界面刷新。新版提交包新增中文、俄文、英文的首页和词卡真实浏览器截图，并保留桌面与移动端测试记录。"])
     ])
     docx_file(folders[2]/"素材来源与AI使用说明_待核对.docx","素材来源与人工智能使用说明（供申报核对）",[
       ("声明原则",["本文件用于协助填写赛事要求，不代表已经获得所有第三方素材的使用许可。请根据最终实际采用的素材逐项核对出处、署名、授权范围与许可协议。"]),
@@ -308,14 +310,14 @@ def build():
     ])
     docx_file(folders[6]/"视频讲解台词_中文_更新版.docx","《万里茶道》作品展示视频中文解说稿（约4分50秒）",[
       ("00:00–00:25 进入首页",["大家好，欢迎来到《万里茶道》跨文化数字文旅体验平台。今天我们将以一名真实用户的视角，探索这条连接中国、蒙古与俄罗斯的历史贸易道路。"]),
-      ("00:25–00:55 首页与设计",["首页采用深绿色与金色的博物馆式视觉语言，导航清晰呈现地图、展馆、游戏、词典与文化对话。网站提供中、俄、英三种语言入口。"]),
+      ("00:25–00:55 首页与设计",["新版首页使用墨绿、米白与金色构成数字文博风格，五张专题入口卡片均为独立设计，不再使用网页截图作为缩略图。历史资料图像各不重复，游戏区展示尼克与茶儿的原有精细角色形象。网站提供中、俄、英三语切换。"]),
       ("00:55–01:20 互动地图",["用户可以通过交互地图理解茶叶从中国出发、经蒙古草原、进入俄罗斯的贸易网络；沿线城市、物品和史料可进一步探索。"]),
       ("01:20–01:55 跨文化对话",["这里是新增的核心模块：从中国砖茶的生产和包装，经商队运输，到俄式茶炊所代表的家庭饮茶生活，观察同一种商品如何在不同文化中获得新的意义。页面还提供小问题，让知识转化为理解。"]),
       ("01:55–02:35 三维博物馆",["进入3D数字博物馆，我们可以查看茶砖、运输器具、俄式茶器等展品，阅读来源说明。历史照片、参考器物与现代数字模型有不同的性质，所以分别标明，增强内容的可信度。"]),
       ("02:35–03:00 第一关游戏",["在茶园迷宫中，玩家收集茶叶、避开障碍、完成探索，了解茶叶贸易的起点。"]),
       ("03:00–03:25 第二关游戏",["在包装工坊中，玩家根据订单完成分拣、称重、包装与发货，让知识融入实际操作。"]),
       ("03:25–03:50 第三关游戏",["茶叶装箱后，商队穿过中国、蒙古和俄罗斯，玩家躲避路障与天气风险。三关之间的视频支持跳过，不会阻断进度。"]),
-      ("03:50–04:20 词典与卡片",["学习区提供三语词汇、独立语音和记忆卡片，围绕茶砖、茶炊和路线等主题进行三轮学习与积分反馈。"]),
+      ("03:50–04:20 词典与卡片",["学习区提供中、俄、英三语词汇、独立语音和十五题三轮记忆卡片。选择EN后，词卡正面将显示英语，翻面展示另外两种语言，界面、积分与语言方向同步更新。"]),
       ("04:20–04:50 创新与价值",["我们希望通过专业的数字展陈、历史依据、游戏机制和跨语言文化对照，推动万里茶道文化传播。它不仅可以被看见，也可以被体验、理解与分享。感谢观看！"])
     ])
     # Include current source of the working site, not just a link or placeholder.
@@ -327,6 +329,17 @@ def build():
     for check in ("index.html","culture-dialogue.html","tea-adventure.html","tea-packing.html","tea-caravan.html","tea-maze.html","tea-dictionary.html","v4/experience.html","game-assets/tea-cutscene-3-new.mp4"):
         if not (source/check).is_file(): raise RuntimeError("Missing actual site source file "+check)
 
+    # Capture-based evidence is taken from the currently running GitHub checkout.
+    live_dir=REPO/"CMIT2026_submission/2026-refresh/live-qa"
+    evidence_names=["home-zh-1440.png","home-ru-1440.png","home-en-1440.png",
+                    "home-zh-mobile-390.png","dictionary-zh-1440.png",
+                    "dictionary-ru-1440.png","dictionary-en-1440.png","live-qa-report.json"]
+    for evidence in evidence_names:
+        src=live_dir/evidence
+        if not src.is_file(): raise FileNotFoundError(f"Missing new live competition evidence: {src}")
+        shutil.copy2(src,new_evidence/evidence)
+    live_report=json.loads((live_dir/"live-qa-report.json").read_text(encoding="utf8"))
+    if len(live_report.get("screenshots",[]))!=7:raise RuntimeError("Current UI evidence incomplete")
     # QA reports, desktop and mobile proof and screenshot provenance.
     shutil.copy2(qa1,folders[5]/"网站桌面手机质量验证.json")
     shutil.copy2(qa2,folders[5]/"第三关视频跳过及语言回归测试.json")
@@ -359,7 +372,11 @@ CMIT2026 · 《万里茶道》国际专项赛材料包（更新于2026-11-03）
 【2026-11-03 新版变更】
 新增中俄茶文化对话；完善主页面与博物馆的历史来源/多语说明；
 修复第三关跳过第二段视频后的场景背景渲染错误；保持语言在主游戏和子游戏间一致；
-保留尼克和茶儿的原有素材和动画，不修改角色设计。
+保留尼克和茶儿的原有素材和动画，不修改角色设计；
+首页五张专题卡片已取消网站截图和简化角色占位图，替换为独立历史照片、原角色高清素材和三语设计；
+首页九处历史配图不重复且均为本地文件，WebP图片带本地JPEG回退；
+三语词卡修复英文模式（EN）不显示英文的问题，语言切换同步更新正面、翻译及积分；
+08_最新首页与英语词卡验证 文件夹包含真正由最新版 Chromium 采集的中俄英桌面与移动截图。
 
 【提交提醒】
 1. 必须按赛事要求从官方报名系统下载承诺书，并用真实签名及盖章完成。
@@ -377,6 +394,8 @@ CMIT2026 · 《万里茶道》国际专项赛材料包（更新于2026-11-03）
          "source_bytes":sum(f.stat().st_size for f in source.rglob("*") if f.is_file()),
          "pptx_pages":15,"pptx_sha256":sha256(ppt),
          "qa_site_passed":n1,"qa_caravan_passed":n2,
+         "live_ui_proof_count":len(live_report["screenshots"]),
+         "live_ui_checks":live_report["checks"],
          "notes":"Official original signed pledge and personal registration must be supplied by entrant."}
     write_utf8(PACK/"manifest.json",json.dumps(mani,ensure_ascii=False,indent=2))
     BUILD.mkdir(exist_ok=True)
