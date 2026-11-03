@@ -1,12 +1,12 @@
-/* Great Tea Road | editorial museum homepage. No character/game assets changed. */
+/* Great Tea Road | editorial museum homepage. Original mascot artwork and distinct archival imagery. */
 (() => {
 'use strict';
 if (document.getElementById('teaEditorialHome')) return;
 const entries = [
   // Real historic photographs (LOC catalogue), not screenshots of this website.
-  {key:'route',url:'#route-map',img:'v4/assets/refs/loc/route-03.webp',icon:'⌁'},
+  {key:'route',url:'#route-map',img:'v4/assets/refs/loc/museum-03.webp',icon:'⌁'},
   {key:'museum',url:'v4/experience.html#museum',img:'v4/assets/refs/loc/museum-05.webp',icon:'▤'},
-  {key:'culture',url:'culture-dialogue.html',img:'v4/assets/refs/loc/route-07.webp',icon:'◎'},
+  {key:'culture',url:'culture-dialogue.html',img:'v4/assets/refs/loc/museum-07.webp',icon:'◎'},
   // Original Tea Road characters + typography; no UI capture assets.
   {key:'games',url:'tea-adventure.html',icon:'◇'},
   {key:'dictionary',url:'tea-dictionary.html',icon:'▣'}
@@ -36,7 +36,7 @@ cultureIntro:'一个商品在跨境流动中，如何连接不同的生活方式
 step1:'中国 · 制茶与贸易',step1Desc:'从茶叶生产到压制与外销。',
 step2:'蒙古 · 商队与道路',step2Desc:'跨越草原的运输与语言接触。',
 step3:'俄罗斯 · 饮茶与生活',step3Desc:'融入家庭、社交与地方习惯。',
-cultureCta:'体验跨文化对话',source:'历史图片与数字复原在各展品中分别标注来源',menu:'打开菜单',closeMenu:'关闭菜单',imageFallback:'图片暂时无法显示'
+gameScene:'寻茶之旅 · 三重挑战',cultureCta:'体验跨文化对话',source:'历史图片与数字复原在各展品中分别标注来源',menu:'打开菜单',closeMenu:'关闭菜单',imageFallback:'图片暂时无法显示'
 },
 ru:{
 brand:'Великий чайный путь',brandSub:'Цифровое культурное наследие',
@@ -76,7 +76,7 @@ cultureIntro:'How does trade influence everyday traditions?',
 step1:'China · Tea Trade',step1Desc:'Tea processing, preparation and export.',
 step2:'Mongolia · Caravans',step2Desc:'Travel, trade and contact across the steppe.',
 step3:'Russia · Tea Culture',step3Desc:'Tea, hospitality and domestic traditions.',
-cultureCta:'Explore the Cultural Dialogue',source:'Historical photographs and digital reconstructions are credited separately',menu:'Open navigation',closeMenu:'Close navigation',imageFallback:'Image unavailable'
+gameScene:'TEA QUEST · THREE CHALLENGES',cultureCta:'Explore the Cultural Dialogue',source:'Historical photographs and digital reconstructions are credited separately',menu:'Open navigation',closeMenu:'Close navigation',imageFallback:'Image unavailable'
 }
 };
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
@@ -84,10 +84,10 @@ const menuHtml=nav.map(n=>'<a href="'+n.url+'" data-editorial-text="'+n.key+'">'
 const featureVisual = (c,i) => {
  const num=String(i+1).padStart(2,'0');
  if(c.key==='games')return '<div class="eh-image eh-image-games" aria-hidden="true">'+
-   '<span class="eh-game-hill"></span><span class="eh-game-trail"></span>'+
-   '<span class="eh-game-leaf eh-game-leaf-1">❧</span><span class="eh-game-leaf eh-game-leaf-2">❧</span>'+
-   '<img class="eh-game-mascot eh-game-nik" src="game-assets/nik.svg" alt="" loading="lazy" decoding="async">'+
-   '<img class="eh-game-mascot eh-game-chaer" src="game-assets/chaer.svg" alt="" loading="lazy" decoding="async"></div>';
+   '<div class="eh-game-portrait-slot eh-game-portrait-nik"><img src="game-assets/nik-portrait.png" alt="" loading="lazy" decoding="async"></div>'+
+   '<div class="eh-game-portrait-slot eh-game-portrait-chaer"><img src="game-assets/chaer-portrait.png" alt="" loading="lazy" decoding="async"></div>'+
+   '<span class="eh-game-seal" aria-hidden="true">❧</span>'+
+   '<span class="eh-game-caption" data-editorial-text="gameScene">寻茶之旅 · 三重挑战</span></div>';
  if(c.key==='dictionary')return '<div class="eh-image eh-image-dictionary" aria-hidden="true">'+
    '<span class="eh-dict-hanzi">茶</span><span class="eh-dict-russian">ЧАЙ</span>'+
    '<span class="eh-dict-english">TEA</span><span class="eh-dict-ornament">❧</span>'+
@@ -103,9 +103,9 @@ const featureHtml=entries.map((c,i)=>
  '<p data-editorial-text="'+c.key+'Desc">'+copy.zh[c.key+'Desc']+'</p></div>'+
  '<span class="eh-chevron" aria-hidden="true">›</span></div></a>').join('');
 const stageHtml=[
- ['step1','v4/assets/refs/r1-teaset-01.jpg'],
- ['step2','v4/assets/refs/loc/route-04.webp'],
- ['step3','v4/assets/refs/r4-samovar-01.jpg']
+ ['step1','v4/assets/refs/loc/museum-01.webp'],
+ ['step2','v4/assets/refs/r2-packsaddle-01.jpg'],
+ ['step3','v4/assets/refs/r4-desk-01.jpg']
 ].map(([key,src],i)=>
 '<article class="eh-culture-step"><img src="'+src+'" alt="" loading="lazy">'+
  '<div><h3 data-editorial-text="'+key+'">'+copy.zh[key]+'</h3>'+
@@ -144,9 +144,9 @@ el.innerHTML=
   '<span class="eh-map-label eh-map-mongolia" data-editorial-text="country2">蒙古</span>'+
   '<span class="eh-map-label eh-map-russia" data-editorial-text="country3">俄罗斯</span>'+
   '</div>'+
-  '<figure class="eh-artwork eh-artwork-archive"><img src="v4/assets/refs/loc/route-04.webp" alt="" fetchpriority="high" decoding="async"><figcaption>万里茶道 · 历史影像</figcaption></figure>'+
-  '<figure class="eh-artwork eh-artwork-tea"><img src="v4/assets/refs/r1-teaset-01.jpg" alt="" decoding="async"></figure>'+
-  '<figure class="eh-artwork eh-artwork-vessel"><img src="v4/assets/refs/r4-samovar-01.jpg" alt="" decoding="async"></figure>'+
+  '<figure class="eh-artwork eh-artwork-archive"><img src="v4/assets/refs/loc/museum-04.webp" alt="" fetchpriority="high" decoding="async"><figcaption>万里茶道 · 历史影像</figcaption></figure>'+
+  '<figure class="eh-artwork eh-artwork-tea"><img src="v4/assets/refs/loc/museum-02.webp" alt="" decoding="async"></figure>'+
+  '<figure class="eh-artwork eh-artwork-vessel"><img src="v4/assets/refs/loc/museum-06.webp" alt="" decoding="async"></figure>'+
   '<div class="eh-map-note" data-editorial-text="mapNote">文化交流示意 · 非精确历史路线</div>'+
  '</div></section>'+
 '<section class="eh-feature-band" aria-label="Explore Great Tea Road"><div class="eh-feature-grid">'+featureHtml+'</div></section>'+
