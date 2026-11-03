@@ -105,7 +105,7 @@ const featureHtml=entries.map((c,i)=>
 const stageHtml=[
  ['step1','v4/assets/refs/loc/museum-01.webp'],
  ['step2','v4/assets/refs/r2-packsaddle-01.jpg'],
- ['step3','v4/assets/refs/r4-desk-01.jpg']
+ ['step3','v4/assets/refs/r4-samovar-01.jpg']
 ].map(([key,src],i)=>
 '<article class="eh-culture-step"><img src="'+src+'" alt="" loading="lazy">'+
  '<div><h3 data-editorial-text="'+key+'">'+copy.zh[key]+'</h3>'+
