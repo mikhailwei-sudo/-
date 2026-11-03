@@ -3,12 +3,7 @@ const holder=document.getElementById('renderStage');
 const lobbyOverlay=document.getElementById('lobbyOverlay');
 const lobbyButton=document.getElementById('enterLobby');
 let THREE;
-for(const source of [
- './vendor/three.module.js',
- 'https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js',
- 'https://unpkg.com/three@0.170.0/build/three.module.js',
- 'https://esm.sh/three@0.170.0'
-]){
+for(const source of ['./vendor/three.module.js']){
  try{THREE=await import(source);break}
  catch(err){console.warn('3D engine source unavailable:',source,err)}
 }
@@ -628,10 +623,7 @@ function modelProgress(key,event){
 }
 reportLoad();
 // Start downloading original assets immediately; room entry must never wait for a click.
-const loaderRetrySources=[
- 'https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/GLTFLoader.js',
- 'https://unpkg.com/three@0.170.0/examples/jsm/loaders/GLTFLoader.js'
-];
+const loaderRetrySources=['./vendor/addons/loaders/GLTFLoader.js'];
 let commonGLTFLoaderPromise;
 async function obtainGLTFLoader(){
  if(!commonGLTFLoaderPromise)commonGLTFLoaderPromise=(async()=>{
@@ -646,7 +638,7 @@ async function obtainGLTFLoader(){
 
 (async()=>{
  try{
-  const {FBXLoader}=await import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/FBXLoader.js');
+  const {FBXLoader}=await import('./vendor/addons/loaders/FBXLoader.js');
   const manager=new THREE.LoadingManager();manager.setURLModifier(url=>{
    const filename=url.split('/').pop().split('\\').pop().replace(/\.tga$/i,'.tga');
    const match=filename.match(/HZ[A-Za-z0-9_]+(?:_Color|_Normal|_Metallic|_N)?\.tga/i);
@@ -691,7 +683,7 @@ async function loadCrates(){
  assetStatus.crate='loading';reportLoad();
  try{
   const [{ColladaLoader},timber]=await Promise.all([
-   import('https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/loaders/ColladaLoader.js'),
+   import('./vendor/addons/loaders/ColladaLoader.js'),
    new THREE.TextureLoader().loadAsync('./assets/models/crate/textures/DefaultMaterial_albedo.jpg')
   ]);
   timber.colorSpace=THREE.SRGBColorSpace;
