@@ -1,0 +1,148 @@
+/* 万里茶道 · single adaptive heritage design (ZH/RU/EN, desktop/tablet/mobile).
+ * No visible UI text or buttons are baked into the background artwork.
+ */
+:root{--tuh-night:#071a18;--tuh-ink:#0a2723;--tuh-jade:#10362f;--tuh-gold:#d8af70;--tuh-goldlight:#f4d49c;--tuh-paper:#f5e8c9}
+body{background:#081f1d!important;overflow-x:clip}
+body>.prototype,body>header,body>main>.hero,body>main>.band{display:none!important}
+body>main{margin-top:0!important;padding-top:12px!important;background:#0e2822!important}
+body>footer{background:#0d2722!important;color:#dbcaac!important}
+html body>#tea-site-nav{display:none!important;visibility:hidden!important}
+html{scroll-padding-top:110px}
+#teaUnifiedHome{color:var(--tuh-paper);background:#071a18;position:relative;isolation:isolate;font-family:"Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif;overflow:clip}
+#teaUnifiedHome *,#teaUnifiedHome *::before,#teaUnifiedHome *::after{box-sizing:border-box}
+#teaUnifiedHome a{color:inherit;text-decoration:none}
+#teaUnifiedHome a:focus-visible,#teaUnifiedHome button:focus-visible{outline:3px solid #ffe9a6;outline-offset:3px}
+#teaUnifiedHome .tuh-skip{position:absolute;z-index:210;top:-100px;left:12px;padding:12px 18px;color:#17352b;background:#ffe2a0;border-radius:8px;font-weight:700}
+#teaUnifiedHome .tuh-skip:focus{top:12px}
+#teaUnifiedHome .tuh-header{position:relative;z-index:60;background:linear-gradient(105deg,#08211e,#102d28 50%,#081e1b);border-bottom:1px solid #d5ad70;box-shadow:0 4px 24px #0009}
+#teaUnifiedHome .tuh-header::after{content:"";position:absolute;inset:auto 0 0;height:4px;background:linear-gradient(90deg,transparent,#f3d4978f,transparent);pointer-events:none}
+#teaUnifiedHome .tuh-header-inner{margin:auto;max-width:1920px;min-height:75px;padding:9px clamp(15px,3vw,54px);display:flex;gap:clamp(12px,2.2vw,36px);align-items:center;justify-content:space-between}
+#teaUnifiedHome .tuh-logo{display:flex;align-items:center;gap:11px;flex:0 0 auto;min-width:0}
+#teaUnifiedHome .tuh-logo-mark{color:var(--tuh-goldlight);font-size:39px;line-height:.8;text-shadow:0 1px 7px #ffc87168}
+#teaUnifiedHome .tuh-logo-type{display:flex;flex-direction:column;min-width:0}
+#teaUnifiedHome .tuh-logo strong{font:700 clamp(16px,1.48vw,24px)/1.1 "Noto Serif CJK SC","SimSun",serif;color:#f2d399;white-space:nowrap}
+#teaUnifiedHome .tuh-logo small{margin-top:4px;font-size:9px;letter-spacing:.09em;color:#d8bea0;white-space:nowrap}
+#teaUnifiedHome .tuh-menu{display:flex;justify-content:center;align-items:center;gap:clamp(8px,1.35vw,23px);flex:1 1 auto;min-width:0}
+#teaUnifiedHome .tuh-menu a{position:relative;white-space:nowrap;font-size:clamp(11px,.86vw,15px);font-weight:650;padding:10px 2px;min-height:44px;display:inline-flex;align-items:center;color:#f5e9ce}
+#teaUnifiedHome .tuh-menu a:first-child{color:#fbd799}
+#teaUnifiedHome .tuh-menu a::after{content:"";height:2px;position:absolute;bottom:5px;left:0;right:100%;background:#e4b76e;transition:right .2s ease}
+#teaUnifiedHome .tuh-menu a:hover,#teaUnifiedHome .tuh-menu a:focus-visible{color:#ffeab4}
+#teaUnifiedHome .tuh-menu a:hover::after,#teaUnifiedHome .tuh-menu a:focus-visible::after{right:0}
+#teaUnifiedHome .tuh-controls{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+#teaUnifiedHome .tuh-languages{display:flex;align-items:center;gap:3px;padding:4px;background:#0a2823;border:1px solid #ae925b;border-radius:23px}
+#teaUnifiedHome .tuh-languages button{min-width:38px;min-height:40px;padding:5px 6px;border:0;border-radius:20px;font:700 12px "Noto Sans CJK SC",system-ui,sans-serif;background:transparent;color:#f2d8ab;cursor:pointer}
+#teaUnifiedHome .tuh-languages button[aria-pressed="true"]{background:linear-gradient(#ffdb99,#ceaa6d);color:#103027}
+#teaUnifiedHome .tuh-languages button:hover{box-shadow:inset 0 0 0 1px #e4c290}
+#teaUnifiedHome .tuh-menu-toggle{display:none;align-items:center;justify-content:center;min-width:46px;min-height:46px;padding:10px;border:1px solid #c4a171;border-radius:10px;color:#f4d292;background:#133d32;cursor:pointer}
+#teaUnifiedHome .tuh-bars{display:flex;flex-direction:column;gap:5px}
+#teaUnifiedHome .tuh-bars i{display:block;height:2px;width:22px;border-radius:2px;background:#f5d395}
+#teaUnifiedHome .tuh-hero{position:relative;min-height:460px;display:grid;place-items:center;overflow:hidden;background:linear-gradient(95deg,#081e1c,#154036 42%,#102f2a 60%,#0a201e);border-bottom:3px solid #9e814a}
+#teaUnifiedHome .tuh-hero::before{content:"";position:absolute;inset:13px 17px 12px;border:1px solid #dab16f88;box-shadow:inset 0 0 35px #f0bc6730,0 0 20px #0003;pointer-events:none;z-index:3}
+#teaUnifiedHome .tuh-hero::after{content:"❦";position:absolute;top:9px;left:50%;transform:translateX(-50%);font-size:23px;color:#edca8b;opacity:.85;pointer-events:none}
+#teaUnifiedHome .tuh-art{position:absolute;inset:0;pointer-events:none;z-index:0;overflow:hidden;background:radial-gradient(ellipse 60% 80% at 50% 60%,#1a4a3e 0%,transparent 75%),url("v4/assets/refs/loc/route-03.webp") center 45%/cover}
+#teaUnifiedHome .tuh-art::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#071e1b1a 0%,#071c19bc 31%,#0b2a24c9 52%,#071c19c0 69%,#071c1930 100%),linear-gradient(0deg,#06201de5 0%,transparent 32%,#10261ba0 100%);z-index:2}
+#teaUnifiedHome .tuh-art-left,#teaUnifiedHome .tuh-art-right{position:absolute;z-index:1;top:0;bottom:0;width:min(37%,500px);background-repeat:no-repeat;background-size:contain;filter:saturate(.94) contrast(1.07);opacity:.93}
+#teaUnifiedHome .tuh-art-left{left:0;background-image:url("assets/home-luxe-hero-left.webp");background-position:left bottom}
+#teaUnifiedHome .tuh-art-right{right:0;background-image:url("assets/home-luxe-hero-right.webp");background-position:right bottom}
+#teaUnifiedHome .tuh-route-path{position:absolute;z-index:3;width:80%;height:190px;left:10%;top:25%;opacity:.58;overflow:visible}
+#teaUnifiedHome .tuh-route-dash{fill:none;stroke:#efd090;stroke-width:2.5;stroke-dasharray:7 11;filter:drop-shadow(0 0 4px #e3b363)}
+#teaUnifiedHome .tuh-route-path circle{fill:#e3ba76;stroke:#0b3029;stroke-width:4}
+#teaUnifiedHome .tuh-hero-inner{position:relative;z-index:4;width:min(100%,960px);padding:80px 28px 82px;text-align:center;text-shadow:0 3px 12px #000b}
+#teaUnifiedHome .tuh-hero-eyebrow{display:block;color:#f4ddad;font-size:clamp(11px,.98vw,15px);font-weight:700;letter-spacing:.08em}
+#teaUnifiedHome .tuh-hero h1{font-family:"Noto Serif CJK SC","SimSun",serif;color:#f7d18b;margin:14px 0 12px;line-height:1.23;font-size:clamp(39px,5.5vw,77px);font-weight:750;letter-spacing:.02em}
+#teaUnifiedHome .tuh-hero h1 span,#teaUnifiedHome .tuh-hero h1 small{display:block}
+#teaUnifiedHome .tuh-hero h1 small{font-size:clamp(20px,2.65vw,38px);font-weight:650;color:#f4e3c3;letter-spacing:.03em;margin-top:10px}
+#teaUnifiedHome .tuh-hero-lead{font-size:clamp(13px,1.2vw,18px);margin:18px auto 28px;color:#f9e8c5;max-width:730px}
+#teaUnifiedHome .tuh-actions{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+#teaUnifiedHome .tuh-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;min-height:55px;min-width:190px;padding:12px 26px;border:1px solid #edc789;font-size:clamp(14px,1.15vw,18px);font-weight:750;line-height:1.35;box-shadow:0 6px 23px #0008;transition:transform .18s ease,filter .18s ease}
+#teaUnifiedHome .tuh-button:hover{transform:translateY(-2px);filter:brightness(1.09)}
+#teaUnifiedHome .tuh-button-main{color:#193027;background:linear-gradient(165deg,#ffe6ac,#dfb272);border-radius:11px}
+#teaUnifiedHome .tuh-button-museum{color:#ffe5b1;background:linear-gradient(160deg,#0d392f,#145344);border-radius:11px}
+#teaUnifiedHome .tuh-cards{margin:0 auto;padding:17px clamp(15px,3vw,48px) 20px;max-width:1920px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(9px,1.15vw,19px);background:#082320}
+#teaUnifiedHome .tuh-card{min-width:0;min-height:300px;display:flex;flex-direction:column;position:relative;overflow:hidden;border:1.5px solid #c29a5d;border-radius:8px;background:linear-gradient(#18483b,#082b25);box-shadow:inset 0 0 0 4px #0a2923,0 8px 22px #0008;transition:transform .2s ease,box-shadow .2s ease}
+#teaUnifiedHome .tuh-card::before{content:"";position:absolute;inset:6px;z-index:3;border:1px solid #c9a26255;border-radius:4px;pointer-events:none}
+#teaUnifiedHome .tuh-card:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 4px #12392f,0 14px 30px #0009}
+#teaUnifiedHome .tuh-card-art{height:170px;display:block;overflow:hidden;background:linear-gradient(#214538,#13342e);position:relative}
+#teaUnifiedHome .tuh-card-art::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#0f332cd0 0%,transparent 44%);pointer-events:none}
+#teaUnifiedHome .tuh-card-art img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;filter:saturate(.85);transition:transform .25s ease}
+#teaUnifiedHome .tuh-card:hover img{transform:scale(1.025)}
+#teaUnifiedHome .tuh-card-copy{display:flex;flex-direction:column;gap:10px;padding:18px 18px 25px;flex:1;min-width:0}
+#teaUnifiedHome .tuh-card-title{display:flex;align-items:center;gap:10px;font-family:"Noto Serif CJK SC","SimSun",serif;font-size:clamp(16px,1.3vw,22px);line-height:1.3;color:#f6d18d}
+#teaUnifiedHome .tuh-card-title strong{min-width:0;overflow-wrap:anywhere}
+#teaUnifiedHome .tuh-card-symbol{font:700 24px/1 Georgia,serif;color:#f1d298;flex:0 0 auto}
+#teaUnifiedHome .tuh-card-desc{color:#f1e3c6;font-size:clamp(12px,.95vw,15px);line-height:1.6;overflow-wrap:break-word;padding-right:13px}
+#teaUnifiedHome .tuh-card-arrow{position:absolute;right:12px;bottom:10px;font-size:20px;color:#edc58c;pointer-events:none}
+#teaUnifiedHome .tuh-values{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:10px 28px;margin:auto;padding:18px 25px;border-block:1px solid #b2935c8c;background:linear-gradient(90deg,#0c2824,#234739 48%,#0c2824);color:#ebd3a8;font-size:clamp(11px,1vw,14px);letter-spacing:.03em}
+#teaUnifiedHome .tuh-values span{display:inline-flex;align-items:center;gap:7px}
+#teaUnifiedHome .tuh-values span::before{content:"✦";font-size:11px;color:#f5d79a}
+#teaUnifiedHome .tuh-ornament{height:73px;background:url("assets/home-luxe-border.webp") center bottom/cover no-repeat,linear-gradient(#092720,#0c211f);border-top:1px solid #bea36f3b}
+#teaUnifiedHome .tuh-more{display:block;text-align:center;min-height:50px;padding:12px 20px;font-size:13px;color:#f0cf8d;background:#0a221d}
+@media(max-width:1360px){
+ #teaUnifiedHome .tuh-header-inner{gap:10px}
+ #teaUnifiedHome .tuh-menu{gap:9px}
+ #teaUnifiedHome .tuh-menu a{font-size:11px}
+ #teaUnifiedHome .tuh-logo strong{font-size:19px}
+ #teaUnifiedHome .tuh-logo small{font-size:8px}
+}
+@media(max-width:1120px){
+ #teaUnifiedHome .tuh-header-inner{position:relative;min-height:68px;padding:10px 20px}
+ #teaUnifiedHome .tuh-menu-toggle{display:flex}
+ #teaUnifiedHome .tuh-menu{display:none;position:absolute;left:10px;right:10px;top:calc(100% + 2px);z-index:100;flex-direction:column;align-items:stretch;gap:2px;padding:12px;background:#092b24;border:1px solid #d2ab71;border-radius:10px;box-shadow:0 15px 28px #000b;max-height:min(75vh,570px);overflow-y:auto}
+ #teaUnifiedHome.tuh-open .tuh-menu{display:flex}
+ #teaUnifiedHome .tuh-menu a{display:flex;font-size:16px;min-height:46px;padding:10px 16px}
+ #teaUnifiedHome .tuh-card{min-height:285px}
+ #teaUnifiedHome .tuh-cards{grid-template-columns:repeat(3,minmax(0,1fr));padding-inline:24px}
+ #teaUnifiedHome .tuh-art-left,#teaUnifiedHome .tuh-art-right{opacity:.68;width:min(36%,340px)}
+}
+@media(max-width:780px){
+ #teaUnifiedHome .tuh-header-inner{gap:10px}
+ #teaUnifiedHome .tuh-logo strong{font-size:17px}
+ #teaUnifiedHome .tuh-logo small{font-size:8px;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+ #teaUnifiedHome .tuh-logo-mark{font-size:28px}
+ #teaUnifiedHome .tuh-hero{min-height:450px}
+ #teaUnifiedHome .tuh-hero-inner{padding:72px 32px 67px}
+ #teaUnifiedHome .tuh-art-left,#teaUnifiedHome .tuh-art-right{opacity:.45}
+ #teaUnifiedHome .tuh-cards{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:16px}
+ #teaUnifiedHome .tuh-card{min-height:275px}
+ #teaUnifiedHome .tuh-ornament{height:52px}
+}
+@media(max-width:520px){
+ #teaUnifiedHome .tuh-header-inner{padding:8px 11px;gap:7px;min-height:63px}
+ #teaUnifiedHome .tuh-logo-mark{font-size:25px}
+ #teaUnifiedHome .tuh-logo{gap:6px}
+ #teaUnifiedHome .tuh-logo strong{font-size:15px}
+ #teaUnifiedHome .tuh-logo small{font-size:7px;max-width:122px;letter-spacing:0}
+ #teaUnifiedHome .tuh-controls{gap:5px}
+ #teaUnifiedHome .tuh-languages{gap:1px;padding:2px}
+ #teaUnifiedHome .tuh-languages button{min-height:37px;min-width:29px;padding:3px;font-size:10px}
+ #teaUnifiedHome .tuh-menu-toggle{min-height:43px;min-width:42px;padding:8px}
+ #teaUnifiedHome .tuh-hero{min-height:460px}
+ #teaUnifiedHome .tuh-hero::before{inset:7px}
+ #teaUnifiedHome .tuh-hero-inner{padding:72px 17px 66px}
+ #teaUnifiedHome .tuh-hero h1{font-size:clamp(34px,9vw,47px)}
+ #teaUnifiedHome .tuh-hero h1 small{font-size:clamp(19px,5.4vw,27px);margin-top:12px}
+ #teaUnifiedHome .tuh-hero-eyebrow{font-size:10px;letter-spacing:.01em}
+ #teaUnifiedHome .tuh-hero-lead{font-size:13px;max-width:345px}
+ #teaUnifiedHome .tuh-actions{gap:10px}
+ #teaUnifiedHome .tuh-button{min-height:49px;min-width:0;flex:1 1 170px;max-width:290px;padding:9px 15px;font-size:13px}
+ #teaUnifiedHome .tuh-art-left,#teaUnifiedHome .tuh-art-right{width:45%;opacity:.25;top:0;bottom:0;background-size:contain;background-position:bottom}
+ #teaUnifiedHome .tuh-route-path{width:90%;left:5%;opacity:.35}
+ #teaUnifiedHome .tuh-cards{grid-template-columns:1fr;gap:12px;padding:14px 13px}
+ #teaUnifiedHome .tuh-card{display:grid;grid-template-columns:36% 64%;min-height:155px}
+ #teaUnifiedHome .tuh-card-art{height:100%;min-height:155px}
+ #teaUnifiedHome .tuh-card-copy{padding:22px 17px 17px;gap:8px}
+ #teaUnifiedHome .tuh-card-title{font-size:19px}
+ #teaUnifiedHome .tuh-card-desc{font-size:12px;line-height:1.5}
+ #teaUnifiedHome .tuh-card-arrow{right:8px;bottom:6px;font-size:17px}
+ #teaUnifiedHome .tuh-values{font-size:11px;gap:9px 14px;padding:14px}
+}
+@media(max-width:360px){
+ #teaUnifiedHome .tuh-logo small{display:none}
+ #teaUnifiedHome .tuh-logo strong{font-size:13px}
+ #teaUnifiedHome .tuh-languages button{min-width:27px}
+ #teaUnifiedHome .tuh-hero-inner{padding-inline:13px}
+ #teaUnifiedHome .tuh-card-copy{padding:18px 13px}
+}
+@media(prefers-reduced-motion:reduce){
+ #teaUnifiedHome *,#teaUnifiedHome *::before,#teaUnifiedHome *::after{transition-duration:0s!important;animation-duration:0s!important;scroll-behavior:auto!important}
+}
