@@ -3,11 +3,13 @@
 'use strict';
 if (document.getElementById('teaEditorialHome')) return;
 const entries = [
-  {key:'route',url:'#route-map',img:'v4/assets/refs/loc/route-04.webp',icon:'⌁'},
-  {key:'museum',url:'v4/experience.html#museum',img:'CMIT2026_submission/site-design-qa/05_museum.png',icon:'▤'},
-  {key:'culture',url:'culture-dialogue.html',img:'v4/assets/refs/r1-chest-01.jpg',icon:'◎'},
-  {key:'games',url:'tea-adventure.html',img:'CMIT2026_submission/caravan-qa/02_third_game_after_skip.png',icon:'◇'},
-  {key:'dictionary',url:'tea-dictionary.html',img:'CMIT2026_submission/site-design-qa/10_dictionary.png',icon:'▣'}
+  // Real historic photographs (LOC catalogue), not screenshots of this website.
+  {key:'route',url:'#route-map',img:'v4/assets/refs/loc/route-03.webp',icon:'⌁'},
+  {key:'museum',url:'v4/experience.html#museum',img:'v4/assets/refs/loc/museum-05.webp',icon:'▤'},
+  {key:'culture',url:'culture-dialogue.html',img:'v4/assets/refs/loc/route-07.webp',icon:'◎'},
+  // Original Tea Road characters + typography; no UI capture assets.
+  {key:'games',url:'tea-adventure.html',icon:'◇'},
+  {key:'dictionary',url:'tea-dictionary.html',icon:'▣'}
 ];
 const nav = [
  {key:'home',url:'index.html'}, {key:'route',url:'#route-map'},
@@ -79,9 +81,23 @@ cultureCta:'Explore the Cultural Dialogue',source:'Historical photographs and di
 };
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
 const menuHtml=nav.map(n=>'<a href="'+n.url+'" data-editorial-text="'+n.key+'">'+copy.zh[n.key]+'</a>').join('');
+const featureVisual = (c,i) => {
+ const num=String(i+1).padStart(2,'0');
+ if(c.key==='games')return '<div class="eh-image eh-image-games" aria-hidden="true">'+
+   '<span class="eh-game-hill"></span><span class="eh-game-trail"></span>'+
+   '<span class="eh-game-leaf eh-game-leaf-1">❧</span><span class="eh-game-leaf eh-game-leaf-2">❧</span>'+
+   '<img class="eh-game-mascot eh-game-nik" src="game-assets/nik.svg" alt="" loading="lazy" decoding="async">'+
+   '<img class="eh-game-mascot eh-game-chaer" src="game-assets/chaer.svg" alt="" loading="lazy" decoding="async"></div>';
+ if(c.key==='dictionary')return '<div class="eh-image eh-image-dictionary" aria-hidden="true">'+
+   '<span class="eh-dict-hanzi">茶</span><span class="eh-dict-russian">ЧАЙ</span>'+
+   '<span class="eh-dict-english">TEA</span><span class="eh-dict-ornament">❧</span>'+
+   '<span class="eh-dict-line"></span></div>';
+ return '<div class="eh-image eh-image-photo"><img src="'+c.img+'" loading="lazy" alt="" decoding="async">'+
+   '<span class="eh-photo-index" aria-hidden="true">'+num+'</span></div>';
+};
 const featureHtml=entries.map((c,i)=>
 '<a class="eh-feature" href="'+c.url+'" data-e-feature="'+c.key+'">'+
- '<div class="eh-image"><img src="'+c.img+'" loading="lazy" alt="" decoding="async"></div>'+
+ featureVisual(c,i)+
  '<div class="eh-feature-copy"><span class="eh-feature-icon" aria-hidden="true">'+c.icon+'</span>'+
  '<div class="eh-feature-words"><h3 data-editorial-text="'+c.key+'">'+copy.zh[c.key]+'</h3>'+
  '<p data-editorial-text="'+c.key+'Desc">'+copy.zh[c.key+'Desc']+'</p></div>'+
