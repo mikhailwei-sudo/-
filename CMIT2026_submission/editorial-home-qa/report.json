@@ -1,0 +1,4291 @@
+{
+  "summary": {
+    "passed": 609,
+    "tests": 609,
+    "errors": 0
+  },
+  "results": [
+    {
+      "passed": true,
+      "check": "zh 320: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: no document horizontal overflow",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 320: header buttons fit",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 320: hero copy fits",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 320: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 320: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 320: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: no document horizontal overflow",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 360: header buttons fit",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 360: hero copy fits",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 360: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 360: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 360: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: no document horizontal overflow",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 375: header buttons fit",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 375: hero copy fits",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 375: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 375: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 375: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: no document horizontal overflow",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 390: header buttons fit",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 390: hero copy fits",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 390: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 390: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-zh-390.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "zh 390: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 390: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: no document horizontal overflow",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 414: header buttons fit",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 414: hero copy fits",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 414: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 414: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 414: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: no document horizontal overflow",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 600: header buttons fit",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 600: hero copy fits",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 600: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 600: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 600: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: no document horizontal overflow",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 768: header buttons fit",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 768: hero copy fits",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 768: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 768: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-zh-768.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "zh 768: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 768: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: no document horizontal overflow",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 820: header buttons fit",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 820: hero copy fits",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 820: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 820: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 820: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: header buttons fit",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: hero copy fits",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1024: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: header buttons fit",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: hero copy fits",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1280: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: header buttons fit",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: hero copy fits",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-zh-1440.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: click language -> zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: translated hero zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: click language -> ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: translated hero ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: click language -> en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: translated hero en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1440: card destinations correct",
+      "metadata": {
+        "links": [
+          "#route-map",
+          "v4/experience.html#museum",
+          "culture-dialogue.html",
+          "tea-adventure.html",
+          "tea-dictionary.html"
+        ]
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: header buttons fit",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: hero copy fits",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "zh 1920: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-zh-1920.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "ru 320: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: no document horizontal overflow",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 320: header buttons fit",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 320: hero copy fits",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 320: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 320: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 320: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: no document horizontal overflow",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 360: header buttons fit",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 360: hero copy fits",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 360: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 360: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 360: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: no document horizontal overflow",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 375: header buttons fit",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 375: hero copy fits",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 375: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 375: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 375: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: no document horizontal overflow",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 390: header buttons fit",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 390: hero copy fits",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 390: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 390: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-ru-390.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "ru 390: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 390: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: no document horizontal overflow",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 414: header buttons fit",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 414: hero copy fits",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 414: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 414: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 414: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: no document horizontal overflow",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 600: header buttons fit",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 600: hero copy fits",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 600: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 600: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 600: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: no document horizontal overflow",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 768: header buttons fit",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 768: hero copy fits",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 768: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 768: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-ru-768.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "ru 768: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 768: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: no document horizontal overflow",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 820: header buttons fit",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 820: hero copy fits",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 820: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 820: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 820: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: header buttons fit",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: hero copy fits",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1024: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: header buttons fit",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: hero copy fits",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1280: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: header buttons fit",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: hero copy fits",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-ru-1440.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: click language -> zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: translated hero zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: click language -> ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: translated hero ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: click language -> en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: translated hero en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1440: card destinations correct",
+      "metadata": {
+        "links": [
+          "#route-map",
+          "v4/experience.html#museum",
+          "culture-dialogue.html",
+          "tea-adventure.html",
+          "tea-dictionary.html"
+        ]
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: header buttons fit",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: hero copy fits",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "ru 1920: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-ru-1920.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "en 320: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: no document horizontal overflow",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 320: header buttons fit",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 320: hero copy fits",
+      "metadata": {
+        "viewport": 320,
+        "doc": 320,
+        "heroWidth": 320,
+        "heroScroll": 320,
+        "topbarWidth": 320,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 320: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 320: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 320: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: no document horizontal overflow",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 360: header buttons fit",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 360: hero copy fits",
+      "metadata": {
+        "viewport": 360,
+        "doc": 360,
+        "heroWidth": 360,
+        "heroScroll": 360,
+        "topbarWidth": 360,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 360: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 360: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 360: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: no document horizontal overflow",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 375: header buttons fit",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 375: hero copy fits",
+      "metadata": {
+        "viewport": 375,
+        "doc": 375,
+        "heroWidth": 375,
+        "heroScroll": 375,
+        "topbarWidth": 375,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 375: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 375: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 375: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: no document horizontal overflow",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 390: header buttons fit",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 390: hero copy fits",
+      "metadata": {
+        "viewport": 390,
+        "doc": 390,
+        "heroWidth": 390,
+        "heroScroll": 390,
+        "topbarWidth": 390,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 390: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 390: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-en-390.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "en 390: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 390: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: no document horizontal overflow",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 414: header buttons fit",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 414: hero copy fits",
+      "metadata": {
+        "viewport": 414,
+        "doc": 414,
+        "heroWidth": 414,
+        "heroScroll": 414,
+        "topbarWidth": 414,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 414: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 414: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 414: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: no document horizontal overflow",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 600: header buttons fit",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 600: hero copy fits",
+      "metadata": {
+        "viewport": 600,
+        "doc": 600,
+        "heroWidth": 600,
+        "heroScroll": 600,
+        "topbarWidth": 600,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 600: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 600: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 600: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: no document horizontal overflow",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 768: header buttons fit",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 768: hero copy fits",
+      "metadata": {
+        "viewport": 768,
+        "doc": 768,
+        "heroWidth": 768,
+        "heroScroll": 768,
+        "topbarWidth": 768,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 768: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 768: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-en-768.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "en 768: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 768: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: no document horizontal overflow",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 820: header buttons fit",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 820: hero copy fits",
+      "metadata": {
+        "viewport": 820,
+        "doc": 820,
+        "heroWidth": 820,
+        "heroScroll": 820,
+        "topbarWidth": 820,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 820: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 820: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 820: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1024: header buttons fit",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1024: hero copy fits",
+      "metadata": {
+        "viewport": 1024,
+        "doc": 1024,
+        "heroWidth": 440.3125,
+        "heroScroll": 440,
+        "topbarWidth": 1024,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1024: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1024: mobile/tablet menu visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: mobile/tablet menu opens",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: menu accessible expanded state",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1024: Escape closes menu",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1280: header buttons fit",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1280: hero copy fits",
+      "metadata": {
+        "viewport": 1280,
+        "doc": 1280,
+        "heroWidth": 550.390625,
+        "heroScroll": 550,
+        "topbarWidth": 1280,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1280: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1280: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1440: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1440: header buttons fit",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1440: hero copy fits",
+      "metadata": {
+        "viewport": 1440,
+        "doc": 1440,
+        "heroWidth": 619.1875,
+        "heroScroll": 619,
+        "topbarWidth": 1440,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1440: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1440: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-en-1440.png",
+      "passed": true
+    },
+    {
+      "passed": true,
+      "check": "en 1440: click language -> zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: translated hero zh",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: click language -> ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: translated hero ru",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: click language -> en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: translated hero en",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1440: card destinations correct",
+      "metadata": {
+        "links": [
+          "#route-map",
+          "v4/experience.html#museum",
+          "culture-dialogue.html",
+          "tea-adventure.html",
+          "tea-dictionary.html"
+        ]
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1920: selected language",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: five interactive cards",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: two primary calls to action",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: old header hidden",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: new homepage visible",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: real CSS/SVG map",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: no old image hotspots",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: no duplicate floating navigation",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: no document horizontal overflow",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1920: header buttons fit",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1920: hero copy fits",
+      "metadata": {
+        "viewport": 1920,
+        "doc": 1920,
+        "heroWidth": 825.59375,
+        "heroScroll": 826,
+        "topbarWidth": 1920,
+        "headerHasOverflow": false
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1920: heading present",
+      "metadata": {}
+    },
+    {
+      "passed": true,
+      "check": "en 1920: no page JavaScript errors",
+      "metadata": {
+        "errors": []
+      }
+    },
+    {
+      "passed": true,
+      "check": "en 1920: five real images loaded",
+      "metadata": {
+        "images": [
+          {
+            "url": "v4/assets/refs/loc/route-04.webp",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/05_museum.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "v4/assets/refs/r1-chest-01.jpg",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/caravan-qa/02_third_game_after_skip.png",
+            "complete": true,
+            "loaded": true
+          },
+          {
+            "url": "CMIT2026_submission/site-design-qa/10_dictionary.png",
+            "complete": true,
+            "loaded": true
+          }
+        ]
+      }
+    },
+    {
+      "screenshot": "homepage-en-1920.png",
+      "passed": true
+    }
+  ],
+  "errors": []
+}
