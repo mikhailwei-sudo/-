@@ -3,7 +3,7 @@
  */
 :root{--tuh-night:#071a18;--tuh-ink:#0a2723;--tuh-jade:#10362f;--tuh-gold:#d8af70;--tuh-goldlight:#f4d49c;--tuh-paper:#f5e8c9}
 body{background:#081f1d!important;overflow-x:clip}
-body>.prototype,body>header,body>main>.hero,body>main>.band{display:none!important}
+body>#prototype,body>.prototype,body>header,body>main>.hero,body>main>.band{display:none!important}
 body>main{margin-top:0!important;padding-top:12px!important;background:#0e2822!important}
 body>footer{background:#0d2722!important;color:#dbcaac!important}
 html body>#tea-site-nav{display:none!important;visibility:hidden!important}
