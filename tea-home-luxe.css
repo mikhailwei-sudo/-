@@ -71,3 +71,9 @@ body>#prototype,body>.concept,body>#tea-site-nav,body>.site-nav{display:none!imp
 #teaLuxeLanding .tl-language-toggle{color:transparent;background:transparent;border:1px solid transparent;box-shadow:none;min-width:60px;min-height:37px;font-size:0;cursor:pointer}
 #teaLuxeLanding .tl-language-toggle:hover,#teaLuxeLanding .tl-language-toggle:focus-visible{background:#fbd89015;border-color:#eaca8b}
 #teaLuxeLanding .tl-lead{background:linear-gradient(100deg,#071f1ce6,#0c322bdf,#092520e8),url("assets/home-luxe-first-design.avif") center/cover no-repeat}
+
+/* Source navigation installs .tn-flow with !important: hide it more specifically on the landing. */
+html body>#tea-site-nav.tn-flow{display:none!important;visibility:hidden!important;height:0!important;min-height:0!important;padding:0!important}
+@media(max-width:1000px){
+ #teaLuxeLanding .tl-lead{background:linear-gradient(105deg,#071f1cf1,#0a2e28f2,#081f1bf1),url("assets/home-luxe-first-design.avif") right center/cover no-repeat}
+}
