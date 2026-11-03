@@ -65,3 +65,5 @@ jobs:
           else
             gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title 'Great Tea Road — COMPLETE fully offline site (2026-11-03)' --notes-file /tmp/offline-release-notes.md
           fi
+
+# Rebuild after persisted-language flashcard correction 2026-11-03.
