@@ -29,6 +29,19 @@ jobs:
       - name: Verify navigation and three games with all external networks blocked
         run: |
           python scripts/qa_complete_offline.py
+      - name: Verify second-cutscene skip starts the third game inside offline bundle
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory .offline-build/Tea_Road_2026_COMPLETE_OFFLINE > /tmp/tea-offline-game-http.log 2>&1 &
+          python scripts/cmit2026-caravan-handoff-probe.py
+          python - <<'PY'
+          import json,shutil
+          from pathlib import Path
+          src=Path('CMIT2026_submission/caravan-qa/probe-report.json')
+          report=json.loads(src.read_text(encoding='utf-8'))
+          assert not report['issues'] and all(v['ok'] for v in report['checks'])
+          shutil.copy2(src,'.offline-build/offline-caravan-report.json')
+          print('OFFLINE_GAME_HANDOFF_PASS',len(report['checks']))
+          PY
       - name: Include network-blocked Chromium verification report in ZIP
         run: |
           python scripts/build_complete_offline.py
@@ -42,6 +55,8 @@ jobs:
               assert len(data['checks'])>=24
               assert all(x['ok'] for x in data['checks'])
               assert not data['remote_requests'] and not data['pageerrors'] and not data['missing_local']
+              handoff=json.loads(z.read('Tea_Road_2026_COMPLETE_OFFLINE/OFFLINE_GAME_TRANSITION_QA.json'))
+              assert not handoff['issues'] and all(x['ok'] for x in handoff['checks'])
               print('CONFIRMED',len(z.namelist()),'files',len(data['checks']),'tests, no internet requests',flush=True)
           PY
       - name: Upload complete standalone offline website
