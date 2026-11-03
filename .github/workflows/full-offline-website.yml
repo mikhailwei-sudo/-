@@ -1,0 +1,67 @@
+name: Build full genuinely offline Great Tea Road website
+on:
+  push:
+    paths:
+      - '.github/workflows/full-offline-website.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: great-tea-road-full-offline
+  cancel-in-progress: false
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Chromium and Playwright
+        run: |
+          python -m pip install 'playwright==1.56.0'
+          python -m playwright install --with-deps chromium
+      - name: Assemble exact current website with all local assets
+        run: |
+          python scripts/build_complete_offline.py
+          ls -lh .offline-build/*.zip
+      - name: Verify navigation and three games with all external networks blocked
+        run: |
+          python scripts/qa_complete_offline.py
+      - name: Include network-blocked Chromium verification report in ZIP
+        run: |
+          python scripts/build_complete_offline.py
+          python - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          p=Path('.offline-build/Tea_Road_2026_COMPLETE_OFFLINE.zip')
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              data=json.loads(z.read('Tea_Road_2026_COMPLETE_OFFLINE/OFFLINE_QA_REPORT.json'))
+              assert len(data['checks'])>=24
+              assert all(x['ok'] for x in data['checks'])
+              assert not data['remote_requests'] and not data['pageerrors'] and not data['missing_local']
+              print('CONFIRMED',len(z.namelist()),'files',len(data['checks']),'tests, no internet requests',flush=True)
+          PY
+      - name: Upload complete standalone offline website
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tea_Road_2026_COMPLETE_OFFLINE
+          path: .offline-build/Tea_Road_2026_COMPLETE_OFFLINE.zip
+          retention-days: 90
+          if-no-files-found: error
+          compression-level: 0
+      - name: Publish direct-download release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ZIP=.offline-build/Tea_Road_2026_COMPLETE_OFFLINE.zip
+          TAG=great-tea-road-complete-offline-2026-11-03
+          printf '%s\n'             '# Complete Great Tea Road offline website'             'Built from the latest main branch, including original character artwork, three games, cinematic cutscenes, 3D museum with locally vendored model loaders, historical archive, Chinese/Russian/English dictionary and 42 MP3 recordings.'             ''             'This bundle was tested in Chromium with all non-local network requests blocked. The QA report is embedded inside the ZIP.'             ''             '**IMPORTANT:** Extract the ZIP and launch START_WINDOWS.bat or START_LINUX_MAC.command (Python 3 required). Do not open index.html with file:// — local ES modules require localhost. External source/citation websites are reference-only and cannot be visited offline.'             > /tmp/offline-release-notes.md
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+            gh release edit "$TAG" --notes-file /tmp/offline-release-notes.md
+          else
+            gh release create "$TAG" "$ZIP" --target "$GITHUB_SHA" --title 'Great Tea Road — COMPLETE fully offline site (2026-11-03)' --notes-file /tmp/offline-release-notes.md
+          fi
