@@ -1,6 +1,6 @@
 {
-  "passed": 230,
-  "checks": 230,
+  "passed": 232,
+  "checks": 232,
   "issues": [],
   "tests": [
     {
@@ -685,6 +685,40 @@
       "check": "390x844: Escape closes menu",
       "passed": true,
       "details": null
+    },
+    {
+      "check": "390x844: all seven route illustrations load",
+      "passed": true,
+      "details": [
+        {
+          "src": "route-01.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-02.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-03.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-04.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-05.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-06.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-07.webp",
+          "loaded": true
+        }
+      ]
     },
     {
       "check": "390x844: route remains accessible below redesigned header",
@@ -1712,6 +1746,40 @@
       "check": "1366x900: desktop links visible",
       "passed": true,
       "details": null
+    },
+    {
+      "check": "1366x900: all seven route illustrations load",
+      "passed": true,
+      "details": [
+        {
+          "src": "route-01.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-02.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-03.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-04.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-05.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-06.webp",
+          "loaded": true
+        },
+        {
+          "src": "route-07.webp",
+          "loaded": true
+        }
+      ]
     },
     {
       "check": "1366x900: route remains accessible below redesigned header",
