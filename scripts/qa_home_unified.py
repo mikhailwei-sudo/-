@@ -17,7 +17,7 @@ def verify(ok,description,details=None):
 
 with sync_playwright() as p:
   browser=p.chromium.launch(headless=True,args=["--no-sandbox","--disable-dev-shm-usage"])
-  for width,height in [(360,780),(390,844),(430,932),(768,1024),(1024,768),(1366,900),(1920,1080)]:
+  for width,height in [(320,700),(360,780),(375,812),(390,844),(430,932),(768,1024),(844,390),(1024,768),(1280,800),(1366,900),(1920,1080)]:
     context=browser.new_context(viewport={"width":width,"height":height},device_scale_factor=1,has_touch=width<=768,is_mobile=width<=430)
     page=context.new_page()
     script_errors=[]
@@ -74,6 +74,11 @@ with sync_playwright() as p:
        page.screenshot(path=str(OUT/f"home-ru-{width}.png"),full_page=False,animations="disabled")
        page.locator('[data-tuh-lang="en"]').click()
        page.screenshot(path=str(OUT/f"home-en-{width}.png"),full_page=False,animations="disabled")
+    if width in (390,1366):
+       route=page.locator("#route-map")
+       route.scroll_into_view_if_needed(timeout=5000)
+       page.screenshot(path=str(OUT/f"route-content-{width}.png"),full_page=False,animations="disabled")
+       verify(route.is_visible(),f"{key}: route remains accessible below redesigned header")
     verify(not script_errors,f"{key}: no JS exceptions",script_errors)
     context.close()
   browser.close()
