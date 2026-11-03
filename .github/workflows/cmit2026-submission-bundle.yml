@@ -33,6 +33,18 @@ jobs:
           python -m http.server 8765 --bind 127.0.0.1 > /tmp/cmit2026-http.log 2>&1 &
           python scripts/cmit2026-site-qa.py
           python scripts/cmit2026-caravan-handoff-probe.py
+      - name: Capture real current homepage and trilingual dictionary screenshots
+        run: |
+          python scripts/cmit2026-refresh-captures.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('CMIT2026_submission/2026-refresh/live-qa/live-qa-report.json')
+          j=json.loads(f.read_text(encoding='utf8'))
+          assert len(j['screenshots'])==7
+          assert j['checks']['dictionary_en']['direction']=='en-zh'
+          print('LATEST_HOMEPAGE_AND_ENGLISH_DICTIONARY_VERIFIED')
+          PY
       - name: Build checked-source competition archive and new 15-page PPTX
         run: |
           python scripts/build_cmit2026_release.py
@@ -58,14 +70,21 @@ jobs:
           cat > /tmp/cmit-release-notes.md <<'NOTES'
           ## CMIT 2026 — updated Great Tea Road competition submission materials
           Rebuilt **directly from the latest working GitHub Pages source**.
-          Includes 10 real Chromium screenshots; new 15-slide Chinese PPTX and PDF;
-          100% of site code and local assets; up-to-date Chinese documents;
-          i18n and provenance notes; two automated test reports.
+          Includes 10 principal live Chromium screenshots, plus seven up-to-date
+          desktop/mobile Chinese, Russian and English UI screenshots;
+          new 15-slide Chinese PPTX and PDF, complete deployable website source,
+          local image/model/video assets, registration templates and AI/source notes.
+          The screenshots and HTML are captured from the same checked-out revision.
 
           ### Recent corrections
           - Chinese-Russian cultural-dialogue feature and professional museum presentation
           - Reliable skip from the second cinematic into the caravan (stage 3)
           - Correct caravan background rendering and Chinese/Russian/English language synchronization
+          - Home navigation cards no longer display screenshots of this website
+          - Historic cover photos are distinct and stored locally (WebP/JPEG fallback)
+          - Replaced simplified game mascots with existing high-resolution Nik/Chaer portraits
+          - Fixed English flashcard selection: EN shows English cards and translations
+          - Current RU / ZH / EN screenshots and mobile layout proof
           - Characters Nik and Chaer and their sprites **unchanged**
           - Source provenance and use-of-AI disclosure drafts included
 
@@ -95,4 +114,4 @@ jobs:
             git push
           fi
 
-# Refresh 2026-11-03: latest real museum exhibition screenshot and 15-slide visual QA preview
+# Refresh 2026-11-03: regenerates the latest homepage/English dictionary screenshots before building.
