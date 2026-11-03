@@ -1,0 +1,1201 @@
+{
+  "passed": 145,
+  "checks": 145,
+  "issues": [],
+  "tests": [
+    {
+      "check": "360x780: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 360,
+        "htmlWidth": 360,
+        "viewport": 360,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": true,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "360x780: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 360,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 11,
+          "right": 89.953125,
+          "scrollHeight": 24,
+          "clientHeight": 20,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 213,
+          "right": 302,
+          "scrollHeight": 41,
+          "clientHeight": 41,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 0,
+          "right": 360,
+          "scrollHeight": 416,
+          "clientHeight": 416,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 13,
+          "right": 347,
+          "scrollHeight": 78,
+          "clientHeight": 78,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 13,
+          "right": 347,
+          "scrollHeight": 108,
+          "clientHeight": 108,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 360,
+          "scrollHeight": 861,
+          "clientHeight": 861,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "360x780: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: hamburger available",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: mobile/tablet menu opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: Escape closes menu",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "360x780: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "390x844: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 390,
+        "htmlWidth": 390,
+        "viewport": 390,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": true,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "390x844: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 390,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 11,
+          "right": 129.78125,
+          "scrollHeight": 31,
+          "clientHeight": 31,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 237,
+          "right": 332,
+          "scrollHeight": 41,
+          "clientHeight": 41,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 0,
+          "right": 390,
+          "scrollHeight": 360,
+          "clientHeight": 360,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 17,
+          "right": 373,
+          "scrollHeight": 81,
+          "clientHeight": 81,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 17,
+          "right": 373,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 390,
+          "scrollHeight": 861,
+          "clientHeight": 861,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "390x844: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: hamburger available",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: mobile/tablet menu opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: Escape closes menu",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "390x844: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "430x932: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 430,
+        "htmlWidth": 430,
+        "viewport": 430,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": true,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "430x932: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 430,
+          "scrollHeight": 70,
+          "clientHeight": 70,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 11,
+          "right": 129.78125,
+          "scrollHeight": 31,
+          "clientHeight": 31,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 277,
+          "right": 372,
+          "scrollHeight": 41,
+          "clientHeight": 41,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 0,
+          "right": 430,
+          "scrollHeight": 367,
+          "clientHeight": 367,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 17,
+          "right": 413,
+          "scrollHeight": 88,
+          "clientHeight": 88,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 17,
+          "right": 413,
+          "scrollHeight": 49,
+          "clientHeight": 49,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 430,
+          "scrollHeight": 861,
+          "clientHeight": 861,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "430x932: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: hamburger available",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: mobile/tablet menu opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: Escape closes menu",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "430x932: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "768x1024: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 768,
+        "htmlWidth": 768,
+        "viewport": 768,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": true,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "768x1024: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 768,
+          "scrollHeight": 76,
+          "clientHeight": 76,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 20,
+          "right": 172.375,
+          "scrollHeight": 34,
+          "clientHeight": 34,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 564,
+          "right": 694,
+          "scrollHeight": 48,
+          "clientHeight": 48,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 0,
+          "right": 768,
+          "scrollHeight": 374,
+          "clientHeight": 374,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 32,
+          "right": 736,
+          "scrollHeight": 87,
+          "clientHeight": 87,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 32,
+          "right": 736,
+          "scrollHeight": 55,
+          "clientHeight": 55,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 768,
+          "scrollHeight": 885,
+          "clientHeight": 885,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "768x1024: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: hamburger available",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: mobile/tablet menu opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: Escape closes menu",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "768x1024: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "1024x768: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 1024,
+        "htmlWidth": 1024,
+        "viewport": 1024,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": true,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "1024x768: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 1024,
+          "scrollHeight": 76,
+          "clientHeight": 76,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 20,
+          "right": 181.59375,
+          "scrollHeight": 40,
+          "clientHeight": 36,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 820,
+          "right": 950,
+          "scrollHeight": 48,
+          "clientHeight": 48,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 32,
+          "right": 992,
+          "scrollHeight": 423,
+          "clientHeight": 423,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 60,
+          "right": 964,
+          "scrollHeight": 113,
+          "clientHeight": 113,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 60,
+          "right": 964,
+          "scrollHeight": 55,
+          "clientHeight": 55,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 1024,
+          "scrollHeight": 619,
+          "clientHeight": 619,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "1024x768: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: hamburger available",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: mobile/tablet menu opens",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: Escape closes menu",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1024x768: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "1366x900: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 1366,
+        "htmlWidth": 1366,
+        "viewport": 1366,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": false,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "1366x900: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 1366,
+          "scrollHeight": 76,
+          "clientHeight": 76,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 40.96875,
+          "right": 217.296875,
+          "scrollHeight": 42,
+          "clientHeight": 39,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 1195.03125,
+          "right": 1325.03125,
+          "scrollHeight": 48,
+          "clientHeight": 48,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 203,
+          "right": 1163,
+          "scrollHeight": 464,
+          "clientHeight": 464,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 231,
+          "right": 1135,
+          "scrollHeight": 147,
+          "clientHeight": 147,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 231,
+          "right": 1135,
+          "scrollHeight": 55,
+          "clientHeight": 55,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 1366,
+          "scrollHeight": 337,
+          "clientHeight": 337,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "1366x900: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: desktop navigation replaces hamburger",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: desktop links visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1366x900: no JS exceptions",
+      "passed": true,
+      "details": []
+    },
+    {
+      "check": "1920x1080: no horizontal overflow",
+      "passed": true,
+      "details": {
+        "bodyWidth": 1920,
+        "htmlWidth": 1920,
+        "viewport": 1920,
+        "naturalCards": 5,
+        "visibleHeaders": 1,
+        "artVisible": true,
+        "oldPoster": false,
+        "menuToggleVisible": false,
+        "buttonHref": "#route-map"
+      }
+    },
+    {
+      "check": "1920x1080: one real header and five cards (no image hotspots)",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: Chinese content is real DOM",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: route button targets a real section",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: five unique first-concept illustration crops load",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: hero CTAs visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: header, title, buttons and cards fit viewport",
+      "passed": true,
+      "details": [
+        {
+          "selector": ".tuh-header",
+          "left": 0,
+          "right": 1920,
+          "scrollHeight": 76,
+          "clientHeight": 76,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-logo",
+          "left": 54,
+          "right": 230.328125,
+          "scrollHeight": 44,
+          "clientHeight": 43,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-languages",
+          "left": 1736,
+          "right": 1866,
+          "scrollHeight": 48,
+          "clientHeight": 48,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero-inner",
+          "left": 480,
+          "right": 1440,
+          "scrollHeight": 471,
+          "clientHeight": 471,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-hero h1",
+          "left": 508,
+          "right": 1412,
+          "scrollHeight": 151,
+          "clientHeight": 151,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-actions",
+          "left": 508,
+          "right": 1412,
+          "scrollHeight": 55,
+          "clientHeight": 55,
+          "overflowY": "visible"
+        },
+        {
+          "selector": ".tuh-cards",
+          "left": 0,
+          "right": 1920,
+          "scrollHeight": 337,
+          "clientHeight": 337,
+          "overflowY": "visible"
+        }
+      ]
+    },
+    {
+      "check": "1920x1080: switch to ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: ru selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: museum action remains real link in ru",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: switch to en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: en selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: museum action remains real link in en",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: switch to zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: zh selected state",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: museum action remains real link in zh",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: chosen language persists on reload",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: desktop navigation replaces hamburger",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: desktop links visible",
+      "passed": true,
+      "details": null
+    },
+    {
+      "check": "1920x1080: no JS exceptions",
+      "passed": true,
+      "details": []
+    }
+  ]
+}
