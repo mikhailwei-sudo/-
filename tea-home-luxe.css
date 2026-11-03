@@ -1,0 +1,66 @@
+
+/* CMIT2026 — FIRST CONCEPT: exact Chinese desktop art + accessible mobile rendition */
+:root{--lg-bg:#091e1c;--lg-panel:#103831;--lg-gold:#e1b878;--lg-cream:#faefd8}
+body{background:#091e1c!important;overflow-x:hidden}
+body>header,body>.prototype,body>main>.hero,body>main>.band{display:none!important}
+body>main{margin-top:0!important;padding-top:35px!important;background:#0d2622!important}
+#teaLuxeLanding{width:100%;position:relative;color:var(--lg-cream);background:#091e1c;font-family:"Noto Sans CJK SC","Microsoft YaHei",system-ui,sans-serif}
+#teaLuxeLanding *,#teaLuxeLanding *::before,#teaLuxeLanding *::after{box-sizing:border-box}
+#teaLuxeLanding a{color:inherit;text-decoration:none}
+#teaLuxeLanding a:focus-visible,#teaLuxeLanding button:focus-visible{outline:3px solid #ffeeb2;outline-offset:3px}
+#teaLuxeLanding .tl-skip{position:absolute;top:-120px;left:12px;z-index:200;background:#e9bf7d;color:#1b3228;padding:12px 20px;border-radius:8px}
+#teaLuxeLanding .tl-skip:focus{top:10px}
+#teaLuxeLanding .tl-poster{position:relative;margin:0 auto;max-width:1920px;line-height:0}
+#teaLuxeLanding .tl-poster-art{display:block;width:100%;height:auto;aspect-ratio:1672/941;object-fit:contain;background:#112f2c}
+#teaLuxeLanding .tl-clickzones{position:absolute;inset:0;pointer-events:none}
+#teaLuxeLanding .tl-zone{position:absolute;left:var(--x);top:var(--y);width:var(--w);height:var(--h);z-index:3;pointer-events:auto;border:1px solid transparent;border-radius:8px;transition:background .2s,border .2s;line-height:normal}
+#teaLuxeLanding .tl-zone:hover,#teaLuxeLanding .tl-zone:focus-visible{background:#f9cd7c24;border-color:#fff1ae}
+#teaLuxeLanding .tl-poster-language{position:absolute;z-index:10;top:1%;right:1%;font:13px/1.4 system-ui,sans-serif}
+#teaLuxeLanding .tl-language-toggle{border:1px solid #b5986b;border-radius:25px;padding:6px 12px;min-width:57px;min-height:38px;color:#f9e2b2;background:#13352fdc;cursor:pointer}
+#teaLuxeLanding .tl-language-options{position:absolute;top:44px;right:0;display:flex;flex-direction:column;min-width:105px;padding:8px;gap:4px;border-radius:9px;background:#0d2c27;border:1px solid #c79e6b;box-shadow:0 9px 30px #000a}
+#teaLuxeLanding .tl-language-options[hidden]{display:none!important}
+#teaLuxeLanding .tl-language-options button{color:#ffdf9e;border:0;background:transparent;min-height:40px;border-radius:5px;cursor:pointer}
+#teaLuxeLanding .tl-language-options button:hover{background:#33564a}
+#teaLuxeLanding .tl-responsive{display:none}
+#teaLuxeLanding.tl-alt .tl-poster{display:none}
+#teaLuxeLanding.tl-alt .tl-responsive{display:block}
+#teaLuxeLanding .tl-responsive{background:radial-gradient(circle at 50% 0%,#2c5145,transparent 40%),#0c2a24;border-top:5px solid #caa36d}
+#teaLuxeLanding .tl-nav{min-height:76px;padding:8px 3.7vw;display:flex;justify-content:space-between;align-items:center;gap:18px;border-bottom:1px solid #b98c5880;background:#092621}
+#teaLuxeLanding .tl-brand{display:flex;align-items:center;gap:12px;flex:0 0 auto}
+#teaLuxeLanding .tl-brand-mark{font-size:42px;color:#e9bb76}
+#teaLuxeLanding .tl-brand b{display:block;font:700 23px/1.3 "Noto Serif CJK SC",serif;color:#efc995}
+#teaLuxeLanding .tl-brand small{display:block;font-size:9px;letter-spacing:.1em;color:#bdb8a8}
+#teaLuxeLanding .tl-nav-links{display:flex;gap:clamp(8px,1.35vw,25px);align-items:center;flex-wrap:wrap}
+#teaLuxeLanding .tl-nav-links a{white-space:nowrap;font-size:clamp(11px,.9vw,14px);font-weight:650}
+#teaLuxeLanding .tl-nav-links a:hover{color:#f1c787}
+#teaLuxeLanding .tl-languages{display:flex;gap:4px;border:1px solid #a08f71;border-radius:30px;padding:4px}
+#teaLuxeLanding .tl-languages button{min-height:29px;min-width:29px;border-radius:30px;color:#f3d6a7;border:0;background:none;cursor:pointer}
+#teaLuxeLanding .tl-languages button[aria-pressed=true]{color:#122a22;background:#e2bd82}
+#teaLuxeLanding .tl-menu-toggle{display:none;min-width:44px;min-height:44px;background:#153b32;border:1px solid #c49c61;color:#ffdea3;border-radius:7px;font-size:22px}
+#teaLuxeLanding .tl-lead{position:relative;overflow:hidden;min-height:510px;padding:62px 15px 58px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(90deg,#0a2421ed,#0d302acc,#0a2421ed),url("v4/assets/refs/loc/route-03.webp") center/cover}
+#teaLuxeLanding .tl-lead:before{content:"";position:absolute;inset:13px;border:2px solid #c8a36c80;pointer-events:none;box-shadow:inset 0 0 25px #cfa56733}
+#teaLuxeLanding .tl-lead:after{content:"❧";position:absolute;left:50%;bottom:4px;color:#d9b078;font-size:28px}
+#teaLuxeLanding .tl-lead >*{position:relative;z-index:2}
+#teaLuxeLanding .tl-eyebrow{color:#e1c496;font-size:12px;letter-spacing:.12em}
+#teaLuxeLanding .tl-lead h1{margin:12px 0;font:700 clamp(38px,5.6vw,76px)/1.18 "Noto Serif CJK SC","SimSun",serif;color:#f5dca1;text-shadow:0 2px 15px #000b}
+#teaLuxeLanding .tl-lead h1 small{display:block;font-size:clamp(23px,3vw,41px);margin-top:15px;color:#ffedd2}
+#teaLuxeLanding .tl-lead-copy{color:#f3dec0;font-size:clamp(14px,1.3vw,19px);max-width:730px;line-height:1.8}
+#teaLuxeLanding .tl-actions{display:flex;gap:15px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+#teaLuxeLanding .tl-actions a{border:1px solid #e3b575;border-radius:35px;min-height:52px;padding:10px 25px;font-size:16px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+#teaLuxeLanding .tl-primary{background:linear-gradient(110deg,#ffe4b0,#cf995e);color:#213428!important}
+#teaLuxeLanding .tl-secondary{background:#0a4038;color:#ffe3ac!important}
+#teaLuxeLanding .tl-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;padding:14px clamp(12px,2.8vw,50px) 24px}
+#teaLuxeLanding .tl-card{border:2px solid #b3905e;border-radius:6px;overflow:hidden;min-height:275px;background:#12352e;box-shadow:inset 0 0 0 3px #214238,0 12px 20px #0006;position:relative;transition:transform .2s}
+#teaLuxeLanding .tl-card:before{content:"";position:absolute;z-index:2;inset:6px;border:1px solid #ffdba163;pointer-events:none}
+#teaLuxeLanding .tl-card:hover{transform:translateY(-4px)}
+#teaLuxeLanding .tl-card img{display:block;width:100%;height:145px;object-fit:cover;filter:sepia(.2) saturate(.9)}
+#teaLuxeLanding .tl-card-details{padding:14px 18px 20px}
+#teaLuxeLanding .tl-card h3{font:650 clamp(16px,1.4vw,22px)/1.3 "Noto Serif CJK SC","SimSun",serif;color:#edc48c;margin:0 0 9px}
+#teaLuxeLanding .tl-card p{font-size:13px;line-height:1.6;color:#ddd3b9;margin:0}
+#teaLuxeLanding .tl-card .tl-arrow{position:absolute;bottom:8px;right:10px;color:#e6c88b;font-size:22px}
+#teaLuxeLanding .tl-values{display:flex;gap:10px 25px;justify-content:center;flex-wrap:wrap;border-top:1px solid #b18b566c;border-bottom:1px solid #b18b566c;padding:20px;background:#12392e;color:#e1ca9d;font-size:13px}
+#teaLuxeLanding .tl-more{display:block;text-align:center;padding:20px;color:#eac88a!important;font-size:13px}
+@media(max-width:1000px){#teaLuxeLanding .tl-poster{display:none!important}#teaLuxeLanding .tl-responsive{display:block!important}#teaLuxeLanding .tl-cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:820px){#teaLuxeLanding .tl-nav{flex-wrap:wrap;gap:8px;padding:9px 14px}#teaLuxeLanding .tl-nav-links{display:none;order:5;flex-basis:100%;width:100%;flex-direction:column;align-items:stretch;padding-top:12px;border-top:1px solid #c19760}#teaLuxeLanding.tl-menu-open .tl-nav-links{display:flex}#teaLuxeLanding .tl-nav-links a{padding:10px 5px;font-size:15px;min-height:44px}#teaLuxeLanding .tl-menu-toggle{display:block;margin-left:auto}#teaLuxeLanding .tl-lead{min-height:460px}#teaLuxeLanding .tl-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:540px){#teaLuxeLanding .tl-brand-mark{font-size:29px}#teaLuxeLanding .tl-brand b{font-size:17px}#teaLuxeLanding .tl-brand small{font-size:7px;letter-spacing:0}#teaLuxeLanding .tl-nav{gap:7px}#teaLuxeLanding .tl-languages button{min-width:26px;min-height:28px;font-size:11px}#teaLuxeLanding .tl-lead{min-height:425px;padding:48px 20px}#teaLuxeLanding .tl-lead h1{font-size:clamp(33px,9vw,45px)}#teaLuxeLanding .tl-lead h1 small{font-size:clamp(21px,6vw,28px)}#teaLuxeLanding .tl-actions a{font-size:13px;min-height:46px;padding:10px 14px}#teaLuxeLanding .tl-cards{grid-template-columns:1fr;gap:12px}#teaLuxeLanding .tl-card{min-height:145px;display:grid;grid-template-columns:125px 1fr}#teaLuxeLanding .tl-card img{height:100%;min-height:145px}#teaLuxeLanding .tl-card-details{padding:20px 16px}#teaLuxeLanding .tl-card h3{font-size:19px}#teaLuxeLanding .tl-card p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){#teaLuxeLanding *{transition:none!important}}
