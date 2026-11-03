@@ -3,6 +3,11 @@ on:
   push:
     paths:
       - '.github/workflows/tea-home-unified-qa.yml'
+      - 'tea-home-unified.js'
+      - 'tea-home-unified.css'
+      - 'scripts/qa_home_unified.py'
+      - 'scripts/build_home_art.py'
+      - 'index.html'
   workflow_dispatch:
 permissions:
   contents: write
