@@ -186,5 +186,5 @@ let lang='zh';
 try{lang=localStorage.getItem('gtr-lang')||'zh'}catch(_e){}
 const query=new URLSearchParams(location.search);
 if(copy[query.get('lang')])lang=query.get('lang');
-setLanguage(lang,false);
+setLanguage(lang,true);
 })();
